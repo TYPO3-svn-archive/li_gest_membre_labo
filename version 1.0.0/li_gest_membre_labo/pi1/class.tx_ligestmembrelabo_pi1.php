@@ -89,6 +89,35 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			$test = $test.$row['champ1'].' ';
 		}
 		----------------------------------------------------------------------------------------*/
+		$nom = '';
+		//Récupération de toutes les membres de l'équipe demandée
+		$select_fields = 'tx_ligestmembrelabo_MembreDuLabo.idMembreLabo, tx_ligestmembrelabo_MembreDuLabo.NomDUsage, tx_ligestmembrelabo_MembreDuLabo.Prenom, tx_ligestmembrelabo_MembreDuLabo.PageWeb';
+		$from_table = 'tx_ligestmembrelabo_MembreDuLabo, tx_ligestmembrelabo_EstMembreDe, tx_ligestmembrelabo_Equipe';
+		$where_clause = 'tx_ligestmembrelabo_MembreDuLabo.idMembreLabo = tx_ligestmembrelabo_EstMembreDe.idMembreLabo AND tx_ligestmembrelabo_EstMembreDe.idEquipe = tx_ligestmembrelabo_Equipe.idEquipe AND (tx_ligestmembrelabo_Equipe.Nom = "'.$this->lConf['labo'].'" OR tx_ligestmembrelabo_Equipe.Abreviation = "'.$this->lConf['labo'].'")';
+		$groupBy = '';
+		$orderBy = 'tx_ligestmembrelabo_MembreDuLabo.NomDUsage, tx_ligestmembrelabo_MembreDuLabo.Prenom';
+		$limit = '';
+		$tryMemcached = '';
+		
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select_fields, $from_table, $where_clause, $groupBy, $orderBy, $tryMemcached);
+		
+		while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))
+		{
+			if ($row['PageWeb']=='' || is_null($row['PageWeb']))
+			{
+				$nom = $nom.'<p>'.$row['NomDUsage'].' '.$row['Prenom'].'</p>
+				';
+			}
+			else
+			{
+				$nom = $nom.'<p><a href="'.$row['PageWeb'].'">'.$row['NomDUsage'].' '.$row['Prenom'].'</a></p>
+				';
+			}
+			
+		}
+		
+		
+		
 		
 		
 		
@@ -98,10 +127,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 		
 		
 	
-		$content='
-			<strong>Le nom du Labo est:</strong><br />
-			<p>'.$this->lConf['labo'].'</p>
-		';
+		$content=$nom;
 	
 		return $this->pi_wrapInBaseClass($content);
 	}
