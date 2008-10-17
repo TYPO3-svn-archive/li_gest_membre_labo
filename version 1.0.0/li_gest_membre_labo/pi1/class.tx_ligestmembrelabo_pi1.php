@@ -89,6 +89,15 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			$test = $test.$row['champ1'].' ';
 		}
 		----------------------------------------------------------------------------------------*/
+		
+		
+		
+		$nom_poste = array ("Enseignants-chercheurs", "Autres chercheurs", "Docteurs", "Doctorants");
+		
+		
+		
+		
+		
 		$nom = '';
 		//Récupération de toutes les membres de l'équipe demandée
 		$select_fields = 'tx_ligestmembrelabo_MembreDuLabo.idMembreLabo, tx_ligestmembrelabo_MembreDuLabo.NomDUsage, tx_ligestmembrelabo_MembreDuLabo.Prenom, tx_ligestmembrelabo_MembreDuLabo.PageWeb';
