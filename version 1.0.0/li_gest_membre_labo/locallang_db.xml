@@ -75,6 +75,12 @@
 			<label index="tt_content.list_type_pi1">Managing Member</label>
 			<label index="tt_content.pi_flexform.sheet_general">Properties</label>
 			<label index="tt_content.pi_flexform.labo">Laboratory Name</label>
+			<label index="tt_content.pi_flexform.poste">Showing the type of job (Master Conferences, Professor, Doctor,...)</label>
+			<label index="tt_content.pi_flexform.professeur">Professors</label>
+			<label index="tt_content.pi_flexform.maitre">Masters Conferences</label>
+			<label index="tt_content.pi_flexform.docteur">Doctors</label>
+			<label index="tt_content.pi_flexform.doctorant">Graduate Students</label>
+			<label index="tt_content.pi_flexform.autre">Others Researchers</label>
 		</languageKey>
 		<languageKey index="fr" type="array">
 			<label index="tx_ligestmembrelabo_MembreDuLabo">Membre du labo</label>
@@ -146,6 +152,14 @@
 			<label index="tt_content.list_type_pi1">Gestion de membres</label>
 			<label index="tt_content.pi_flexform.sheet_general">Propriétés</label>
 			<label index="tt_content.pi_flexform.labo">Nom du Laboratoire</label>
+			<label index="tt_content.pi_flexform.poste">Afficher le type de poste (Maître de Conférences, Professeur, Docteur,...)</label>
+			<label index="tt_content.pi_flexform.sheet_display">Affichage</label>
+			<label index="tt_content.pi_flexform.professeur">Professeurs</label>
+			<label index="tt_content.pi_flexform.maitre">Maîtres de Conférences</label>
+			<label index="tt_content.pi_flexform.docteur">Docteurs</label>
+			<label index="tt_content.pi_flexform.doctorant">Doctorants</label>
+			<label index="tt_content.pi_flexform.autre">Autres Chercheurs</label>
+
 		</languageKey>
 	</data>
 </T3locallang>

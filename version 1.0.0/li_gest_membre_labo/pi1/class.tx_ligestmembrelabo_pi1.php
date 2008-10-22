@@ -91,18 +91,87 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 		----------------------------------------------------------------------------------------*/
 		
 		
-		
-		$nom_poste = array ("Enseignants-chercheurs", "Autres chercheurs", "Docteurs", "Doctorants");
-		
-		
-		
-		
-		
+		$code = '';
+		//Récupération de toutes les membres de l'équipe demandée ayant les postes sélectionnés
 		$nom = '';
-		//Récupération de toutes les membres de l'équipe demandée
-		$select_fields = 'tx_ligestmembrelabo_MembreDuLabo.idMembreLabo, tx_ligestmembrelabo_MembreDuLabo.NomDUsage, tx_ligestmembrelabo_MembreDuLabo.Prenom, tx_ligestmembrelabo_MembreDuLabo.PageWeb';
-		$from_table = 'tx_ligestmembrelabo_MembreDuLabo, tx_ligestmembrelabo_EstMembreDe, tx_ligestmembrelabo_Equipe';
-		$where_clause = 'tx_ligestmembrelabo_MembreDuLabo.idMembreLabo = tx_ligestmembrelabo_EstMembreDe.idMembreLabo AND tx_ligestmembrelabo_EstMembreDe.idEquipe = tx_ligestmembrelabo_Equipe.idEquipe AND (tx_ligestmembrelabo_Equipe.Nom = "'.$this->lConf['labo'].'" OR tx_ligestmembrelabo_Equipe.Abreviation = "'.$this->lConf['labo'].'")';
+		
+		$premier = true;
+		
+		$postes = '';
+		if(($this->lConf['professeur'])==true)
+		{
+			if ($premier == true)
+			{
+				$postes = 'AND ( ';
+				$premier = false;
+			}
+			else
+			{
+				$postes = $postes.' OR ';
+			}
+			$postes=$postes.'tx_ligestmembrelabo_TypePosteWeb.LibelleWeb LIKE "%Professeur%"';
+		}
+		if(($this->lConf['maitre'])==true)
+		{
+			if ($premier == true)
+			{
+				$postes = 'AND ( ';
+				$premier = false;
+			}
+			else
+			{
+				$postes = $postes.' OR ';
+			}
+			$postes=$postes.'tx_ligestmembrelabo_TypePosteWeb.LibelleWeb LIKE "%Maitre de Conferences%"';
+		}
+		if(($this->lConf['docteur'])==true)
+		{
+			if ($premier == true)
+			{
+				$postes = 'AND ( ';
+				$premier = false;
+			}
+			else
+			{
+				$postes = $postes.' OR ';
+			}
+			$postes=$postes.'tx_ligestmembrelabo_TypePosteWeb.LibelleWeb LIKE "%Docteur%"';
+		}
+		if(($this->lConf['doctorant'])==true)
+		{
+			if ($premier == true)
+			{
+				$postes = 'AND ( ';
+				$premier = false;
+			}
+			else
+			{
+				$postes = $postes.' OR ';
+			}
+			$postes=$postes.'tx_ligestmembrelabo_TypePosteWeb.LibelleWeb LIKE "%Doctorant%"';
+		}
+		if(($this->lConf['autre'])==true)
+		{
+			if ($premier == true)
+			{
+				$postes = 'AND ( ';
+				$premier = false;
+			}
+			else
+			{
+				$postes = $postes.' OR ';
+			}
+			$postes=$postes.'tx_ligestmembrelabo_TypePosteWeb.LibelleWeb LIKE "%Autre Chercheur%"';
+		}
+		if ($postes <> '')
+		{
+			$postes = $postes.' )';
+		}
+		
+		
+		$select_fields = 'tx_ligestmembrelabo_MembreDuLabo.idMembreLabo, tx_ligestmembrelabo_MembreDuLabo.NomDUsage, tx_ligestmembrelabo_MembreDuLabo.Prenom, tx_ligestmembrelabo_MembreDuLabo.PageWeb, tx_ligestmembrelabo_TypePosteWeb.LibelleWeb';
+		$from_table = 'tx_ligestmembrelabo_MembreDuLabo, tx_ligestmembrelabo_EstMembreDe, tx_ligestmembrelabo_Equipe, tx_ligestmembrelabo_Possede, tx_ligestmembrelabo_TypePoste, tx_ligestmembrelabo_TypePosteWeb';
+		$where_clause = 'tx_ligestmembrelabo_MembreDuLabo.idMembreLabo = tx_ligestmembrelabo_EstMembreDe.idMembreLabo AND tx_ligestmembrelabo_EstMembreDe.idEquipe = tx_ligestmembrelabo_Equipe.idEquipe AND (tx_ligestmembrelabo_Equipe.Nom = "'.$this->lConf['labo'].'" OR tx_ligestmembrelabo_Equipe.Abreviation = "'.$this->lConf['labo'].'") AND tx_ligestmembrelabo_Possede.idMembreLabo = tx_ligestmembrelabo_MembreDuLabo.idMembreLabo AND tx_ligestmembrelabo_Possede.idTypePoste = tx_ligestmembrelabo_TypePoste.idTypePoste AND tx_ligestmembrelabo_TypePoste.idTypePosteWeb = tx_ligestmembrelabo_TypePosteWeb.idTypePosteWeb '.$postes;
 		$groupBy = '';
 		$orderBy = 'tx_ligestmembrelabo_MembreDuLabo.NomDUsage, tx_ligestmembrelabo_MembreDuLabo.Prenom';
 		$limit = '';
@@ -112,16 +181,39 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 		
 		while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))
 		{
-			if ($row['PageWeb']=='' || is_null($row['PageWeb']))
+			//if ($row['PageWeb']=='' || is_null($row['PageWeb']))
+			//{
+			//	$nom = $nom.'<p>'.$row['NomDUsage'].' '.$row['Prenom'].'</p>
+			//	';
+			//}
+			//else
+			//{
+			//	$nom = $nom.'<p><a href="'.$row['PageWeb'].'">'.$row['NomDUsage'].' '.$row['Prenom'].'</a></p>
+			//	';
+			//}
+			
+			$pageWeb = false;
+			$nom = $nom.'<p>';
+			
+			if ($row['PageWeb']<>'' && !(is_null($row['PageWeb'])))
 			{
-				$nom = $nom.'<p>'.$row['NomDUsage'].' '.$row['Prenom'].'</p>
-				';
+				$nom = $nom.'<a href="'.$row['PageWeb'].'">';
+				$pageWeb=true;
 			}
-			else
+			$nom = $nom.$row['NomDUsage'].' '.$row['Prenom'];
+			if ($pageWeb=true)
 			{
-				$nom = $nom.'<p><a href="'.$row['PageWeb'].'">'.$row['NomDUsage'].' '.$row['Prenom'].'</a></p>
-				';
+				$nom = $nom.'</a>';			
 			}
+
+			if ($this->lConf['poste']==true)
+			{
+				$nom = $nom.', '.$row['LibelleWeb'];
+			}
+			
+			
+			$nom = $nom.'</p>
+			';
 			
 		}
 		

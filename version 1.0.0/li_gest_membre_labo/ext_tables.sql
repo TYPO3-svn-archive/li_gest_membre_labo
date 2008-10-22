@@ -148,7 +148,7 @@ CREATE TABLE tx_ligestmembrelabo_Possede (
 	idTypePoste varchar(5) DEFAULT '0' NOT NULL,
 	idMembreLabo int(11) DEFAULT '0' NOT NULL,
 	DateDebut date DEFAULT '0000-00-00' NOT NULL,
-	DateDin date DEFAULT '0000-00-00' NOT NULL,
+	DateFin date DEFAULT '0000-00-00' NOT NULL,
 	
 	PRIMARY KEY (idTypePoste, idMembreLabo),
 	KEY parent (pid)

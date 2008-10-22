@@ -20,8 +20,66 @@
         </config>
        </TCEforms>
       </labo>
+	  <poste>
+       <TCEforms>
+        <label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.poste</label>
+        <config>
+         <type>check</type>
+        </config>
+       </TCEforms>
+      </poste>
      </el>
     </ROOT>
    </sDEF>
+   <display>
+    <ROOT>
+     <TCEforms>
+      <sheetTitle>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.sheet_display</sheetTitle>
+     </TCEforms>
+     <type>array</type>
+     <el>
+      <professeur>
+       <TCEforms>
+        <label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.professeur</label>
+        <config>
+         <type>check</type>
+        </config>
+       </TCEforms>
+      </professeur>
+      <maitre>
+       <TCEforms>
+        <label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.maitre</label>
+        <config>
+         <type>check</type>
+        </config>
+       </TCEforms>
+      </maitre>
+	  <docteur>
+       <TCEforms>
+        <label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.docteur</label>
+        <config>
+         <type>check</type>
+        </config>
+       </TCEforms>
+      </docteur>
+	  <doctorant>
+       <TCEforms>
+        <label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.doctorant</label>
+        <config>
+         <type>check</type>
+        </config>
+       </TCEforms>
+      </doctorant>
+	  <autre>
+       <TCEforms>
+        <label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.autre</label>
+        <config>
+         <type>check</type>
+        </config>
+       </TCEforms>
+      </autre>
+     </el>
+    </ROOT>
+   </display>
   </sheets>
 </T3DataStructure>
