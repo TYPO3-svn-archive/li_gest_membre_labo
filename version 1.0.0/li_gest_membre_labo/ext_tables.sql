@@ -2,7 +2,7 @@
 # Table structure for table 'tx_ligestmembrelabo_MembreDuLabo'
 #
 CREATE TABLE tx_ligestmembrelabo_MembreDuLabo (
-	idMembreLabo int(11) NOT NULL auto_increment,
+	uid int(11) DEFAULT '0' NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 	tstamp int(11) DEFAULT '0' NOT NULL,
 	crdate int(11) DEFAULT '0' NOT NULL,
@@ -21,12 +21,12 @@ CREATE TABLE tx_ligestmembrelabo_MembreDuLabo (
 	NumINE varchar(255) DEFAULT '' NOT NULL,
 	SectionCNU varchar(255) DEFAULT '' NOT NULL,
 	CoordonneesRecherche varchar(255) DEFAULT '' NOT NULL,
-	CoordonneeseEnseignement varchar(255) DEFAULT '' NOT NULL,
+	CoordonneesEnseignement varchar(255) DEFAULT '' NOT NULL,
 	email varchar(255) DEFAULT '' NOT NULL,
 	CoordonneesPersonnelles varchar(255) DEFAULT '' NOT NULL,
 	PageWeb varchar(255) DEFAULT '',
 	
-	PRIMARY KEY (idMembreLabo),
+	PRIMARY KEY (uid),
 	KEY parent (pid)
 );
 
@@ -36,6 +36,7 @@ CREATE TABLE tx_ligestmembrelabo_MembreDuLabo (
 # Table structure for table 'tx_ligestmembrelabo_Exerce'
 #
 CREATE TABLE tx_ligestmembrelabo_Exerce (
+	uid int(11) DEFAULT '0' NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 	tstamp int(11) DEFAULT '0' NOT NULL,
 	crdate int(11) DEFAULT '0' NOT NULL,
@@ -48,7 +49,8 @@ CREATE TABLE tx_ligestmembrelabo_Exerce (
 	DateDebut date DEFAULT '0000-00-00' NOT NULL,
 	DateFin date DEFAULT '0000-00-00' NOT NULL,
 	
-	PRIMARY KEY (idMembreLabo, idStructure, idFonction),
+	#PRIMARY KEY (idMembreLabo, idStructure, idFonction),
+	PRIMARY KEY (uid),
 	KEY parent (pid)
 );
 
@@ -58,7 +60,7 @@ CREATE TABLE tx_ligestmembrelabo_Exerce (
 # Table structure for table 'tx_ligestmembrelabo_Structure'
 #
 CREATE TABLE tx_ligestmembrelabo_Structure (
-	idStructure int(11) NOT NULL auto_increment,
+	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 	tstamp int(11) DEFAULT '0' NOT NULL,
 	crdate int(11) DEFAULT '0' NOT NULL,
@@ -71,7 +73,7 @@ CREATE TABLE tx_ligestmembrelabo_Structure (
 	Type char(1) DEFAULT '' NOT NULL,
 	idStructureParente int(11) DEFAULT NULL,
 	
-	PRIMARY KEY (idStructure),
+	PRIMARY KEY (uid),
 	KEY parent (pid)
 );
 
@@ -81,7 +83,7 @@ CREATE TABLE tx_ligestmembrelabo_Structure (
 # Table structure for table 'tx_ligestmembrelabo_Fonction'
 #
 CREATE TABLE tx_ligestmembrelabo_Fonction (
-	idFonction int(11) NOT NULL auto_increment,
+	uid int(11) DEFAULT '0' NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 	tstamp int(11) DEFAULT '0' NOT NULL,
 	crdate int(11) DEFAULT '0' NOT NULL,
@@ -90,7 +92,7 @@ CREATE TABLE tx_ligestmembrelabo_Fonction (
 	hidden tinyint(4) DEFAULT '0' NOT NULL,
 	Libelle varchar(255) DEFAULT '' NOT NULL,
 	
-	PRIMARY KEY (idFonction),
+	PRIMARY KEY (uid),
 	KEY parent (pid)
 );
 
@@ -100,16 +102,17 @@ CREATE TABLE tx_ligestmembrelabo_Fonction (
 # Table structure for table 'tx_ligestmembrelabo_TypePosteWeb'
 #
 CREATE TABLE tx_ligestmembrelabo_TypePosteWeb (
-	idTypePosteWeb varchar(5) NOT NULL,
+	uid int(11) DEFAULT '0' NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 	tstamp int(11) DEFAULT '0' NOT NULL,
 	crdate int(11) DEFAULT '0' NOT NULL,
 	cruser_id int(11) DEFAULT '0' NOT NULL,
 	deleted tinyint(4) DEFAULT '0' NOT NULL,
 	hidden tinyint(4) DEFAULT '0' NOT NULL,
+	idTypePosteWeb varchar(5) NOT NULL,
 	LibelleWeb varchar(255) DEFAULT '',
 	
-	PRIMARY KEY (idTypePosteWeb),
+	PRIMARY KEY (uid),
 	KEY parent (pid)
 );
 
@@ -119,17 +122,18 @@ CREATE TABLE tx_ligestmembrelabo_TypePosteWeb (
 # Table structure for table 'tx_ligestmembrelabo_TypePoste'
 #
 CREATE TABLE tx_ligestmembrelabo_TypePoste (
-	idTypePoste varchar(5) NOT NULL,
+	uid int(11) DEFAULT '0' NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 	tstamp int(11) DEFAULT '0' NOT NULL,
 	crdate int(11) DEFAULT '0' NOT NULL,
 	cruser_id int(11) DEFAULT '0' NOT NULL,
 	deleted tinyint(4) DEFAULT '0' NOT NULL,
 	hidden tinyint(4) DEFAULT '0' NOT NULL,
+	idTypePoste varchar(5) NOT NULL,
 	Libelle varchar(255) DEFAULT '' NOT NULL,
 	idTypePosteWeb varchar(5) DEFAULT '0' NOT NULL,
 	
-	PRIMARY KEY (idTypePoste),
+	PRIMARY KEY (uid),
 	KEY parent (pid)
 );
 
@@ -139,6 +143,7 @@ CREATE TABLE tx_ligestmembrelabo_TypePoste (
 # Table structure for table 'tx_ligestmembrelabo_Possede'
 #
 CREATE TABLE tx_ligestmembrelabo_Possede (
+	uid int(11) DEFAULT '0' NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 	tstamp int(11) DEFAULT '0' NOT NULL,
 	crdate int(11) DEFAULT '0' NOT NULL,
@@ -150,7 +155,7 @@ CREATE TABLE tx_ligestmembrelabo_Possede (
 	DateDebut date DEFAULT '0000-00-00' NOT NULL,
 	DateFin date DEFAULT '0000-00-00' NOT NULL,
 	
-	PRIMARY KEY (idTypePoste, idMembreLabo),
+	PRIMARY KEY (uid),
 	KEY parent (pid)
 );
 
@@ -160,16 +165,17 @@ CREATE TABLE tx_ligestmembrelabo_Possede (
 # Table structure for table 'tx_ligestmembrelabo_Categorie'
 #
 CREATE TABLE tx_ligestmembrelabo_Categorie (
-	idCategorie varchar(5) DEFAULT '' NOT NULL,
+	uid int(11) DEFAULT '0' NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 	tstamp int(11) DEFAULT '0' NOT NULL,
 	crdate int(11) DEFAULT '0' NOT NULL,
 	cruser_id int(11) DEFAULT '0' NOT NULL,
 	deleted tinyint(4) DEFAULT '0' NOT NULL,
 	hidden tinyint(4) DEFAULT '0' NOT NULL,
+	idCategorie varchar(5) DEFAULT '' NOT NULL,
 	libelle varchar(255) DEFAULT '' NOT NULL,
 	
-	PRIMARY KEY (idCategorie),
+	PRIMARY KEY (uid),
 	KEY parent (pid)
 );
 
@@ -179,6 +185,7 @@ CREATE TABLE tx_ligestmembrelabo_Categorie (
 # Table structure for table 'tx_ligestmembrelabo_Categorie_MembreDuLabo'
 #
 CREATE TABLE tx_ligestmembrelabo_Categorie_MembreDuLabo (
+	uid int(11) DEFAULT '0' NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 	tstamp int(11) DEFAULT '0' NOT NULL,
 	crdate int(11) DEFAULT '0' NOT NULL,
@@ -190,7 +197,7 @@ CREATE TABLE tx_ligestmembrelabo_Categorie_MembreDuLabo (
 	DateDebut date DEFAULT '0000-00-00' NOT NULL,
 	DateFin date DEFAULT '0000-00-00' NOT NULL,
 	
-	PRIMARY KEY (idCategorie, idMembreLabo),
+	PRIMARY KEY (uid),
 	KEY parent (pid)
 );
 
@@ -200,7 +207,7 @@ CREATE TABLE tx_ligestmembrelabo_Categorie_MembreDuLabo (
 # Table structure for table 'tx_ligestmembrelabo_Equipe'
 #
 CREATE TABLE tx_ligestmembrelabo_Equipe (
-	idEquipe int(11) NOT NULL auto_increment,
+	uid int(11) DEFAULT '0' NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 	tstamp int(11) DEFAULT '0' NOT NULL,
 	crdate int(11) DEFAULT '0' NOT NULL,
@@ -209,8 +216,8 @@ CREATE TABLE tx_ligestmembrelabo_Equipe (
 	hidden tinyint(4) DEFAULT '0' NOT NULL,
 	Nom varchar(255) DEFAULT '' NOT NULL,
 	Abreviation varchar(255) DEFAULT '' NOT NULL,
-	
-	PRIMARY KEY (idEquipe),
+
+	PRIMARY KEY (uid),
 	KEY parent (pid)
 );
 
@@ -220,6 +227,7 @@ CREATE TABLE tx_ligestmembrelabo_Equipe (
 # Table structure for table 'tx_ligestmembrelabo_EstMembreDe'
 #
 CREATE TABLE tx_ligestmembrelabo_EstMembreDe (
+	uid int(11) DEFAULT '0' NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 	tstamp int(11) DEFAULT '0' NOT NULL,
 	crdate int(11) DEFAULT '0' NOT NULL,
@@ -230,7 +238,7 @@ CREATE TABLE tx_ligestmembrelabo_EstMembreDe (
 	idEquipe int(11) DEFAULT '0' NOT NULL,
 	Rang varchar(255) DEFAULT '' NOT NULL,
 	
-	PRIMARY KEY (idMembreLabo,idEquipe),
+	PRIMARY KEY (uid),
 	KEY parent (pid)
 );
 
@@ -240,6 +248,7 @@ CREATE TABLE tx_ligestmembrelabo_EstMembreDe (
 # Table structure for table 'tx_ligestmembrelabo_TypeDiplome'
 #
 CREATE TABLE tx_ligestmembrelabo_TypeDiplome (
+	uid int(11) DEFAULT '0' NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 	tstamp int(11) DEFAULT '0' NOT NULL,
 	crdate int(11) DEFAULT '0' NOT NULL,
@@ -249,7 +258,7 @@ CREATE TABLE tx_ligestmembrelabo_TypeDiplome (
 	Code varchar(5) DEFAULT '' NOT NULL,
 	Libelle varchar(255) DEFAULT '' NOT NULL,
 	
-	PRIMARY KEY (Code),
+	PRIMARY KEY (uid),
 	KEY parent (pid)
 );
 
@@ -259,6 +268,7 @@ CREATE TABLE tx_ligestmembrelabo_TypeDiplome (
 # Table structure for table 'tx_ligestmembrelabo_AObtenu'
 #
 CREATE TABLE tx_ligestmembrelabo_AObtenu (
+	uid int(11) DEFAULT '0' NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 	tstamp int(11) DEFAULT '0' NOT NULL,
 	crdate int(11) DEFAULT '0' NOT NULL,
@@ -271,6 +281,6 @@ CREATE TABLE tx_ligestmembrelabo_AObtenu (
 	Intitule varchar(255) DEFAULT '' NOT NULL,
 	LieuDObtention varchar(255) DEFAULT '' NOT NULL,
 	
-	PRIMARY KEY (idMembreLabo, CodeDiplome),
+	PRIMARY KEY (uid),
 	KEY parent (pid)
 );

@@ -3,11 +3,13 @@ if (!defined ('TYPO3_MODE')) 	die ('Access denied.');
 $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 	"ctrl" => array (
 		'title'     => 'LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo',		
-		'label'     => 'idMembreLabo',	
+		'label'     => 'uid',
+		'label_alt' => 'NomDUsage,Prenom',
+		'label_alt_force' => '1',		
 		'tstamp'    => 'tstamp',
 		'crdate'    => 'crdate',
 		'cruser_id' => 'cruser_id',
-		'default_sortby' => "ORDER BY crdate",	
+		'default_sortby' => "ORDER BY NomDUsage,Prenom",	
 		'delete' => 'deleted',	
 		'enablecolumns' => array (		
 			'disabled' => 'hidden',
@@ -16,11 +18,58 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 		'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_ligestmembrelabo_MembreDuLabo.gif',
 	),
 	"feInterface" => array (
-		"fe_admin_fieldList" => "hidden, nomdusage, nommaritale, nompremarital, prenom, genre, datenaissance, nationalite, datearrivee, datesortie, numine, sectioncnu, coordonneesrecherche, coordonneesenseignement, email, coordonneespersonnelles, pageweb",
+		"fe_admin_fieldList" => "hidden, NomDUsage, NomMaritale, NomPreMarital, Prenom, Genre, DateNaissance, Nationalite, DateArrivee, DateSortie, NumINE, SectionCNU, CoordonneesRecherche, CoordonneesEnseignement, email, CoordonneesPersonnelles, PageWeb",
 	)
 );
 
-$TCA["tx_ligestmembrelabo_Exerce"] = array (
+$TCA["tx_ligestmembrelabo_Fonction"] = array (
+	"ctrl" => array (
+		'title'     => 'LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Fonction',		
+		'label'     => 'uid',
+		'label_alt' => 'Libelle',
+		'label_alt_force' => '1',
+		'tstamp'    => 'tstamp',
+		'crdate'    => 'crdate',
+		'cruser_id' => 'cruser_id',
+		'default_sortby' => "ORDER BY Libelle",	
+		'delete' => 'deleted',	
+		'enablecolumns' => array (		
+			'disabled' => 'hidden',
+		),
+		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
+		'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_ligestmembrelabo_Fonction.gif',
+	),
+	"feInterface" => array (
+		"fe_admin_fieldList" => "hidden, Libelle",
+	)
+);
+
+$TCA["tx_ligestmembrelabo_Structure"] = array (
+	"ctrl" => array (
+		'title'     => 'LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Structure',		
+		'label'     => 'uid',
+		'label_alt' => 'LibelleDesSaisies',
+		'label_alt_force' => '1',
+		'tstamp'    => 'tstamp',
+		'crdate'    => 'crdate',
+		'cruser_id' => 'cruser_id',
+		'default_sortby' => "ORDER BY LibelleDesSaisies",	
+		'delete' => 'deleted',	
+		'enablecolumns' => array (		
+			'disabled' => 'hidden',
+		),
+		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
+		'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_ligestmembrelabo_Structure.gif',
+	),
+	"feInterface" => array (
+		"fe_admin_fieldList" => "hidden, LibelleDesSaisies, Nom, Adresse, Type, IdStructureParente",
+	)
+);
+
+
+
+
+/*$TCA["tx_ligestmembrelabo_Exerce"] = array (
 	"ctrl" => array (
 		'title'     => 'LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Exerce',		
 		'label'     => 'idMembreLabo',
@@ -40,45 +89,6 @@ $TCA["tx_ligestmembrelabo_Exerce"] = array (
 	)
 );
 
-$TCA["tx_ligestmembrelabo_Structure"] = array (
-	"ctrl" => array (
-		'title'     => 'LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Structure',		
-		'label'     => 'idStructure',	
-		'tstamp'    => 'tstamp',
-		'crdate'    => 'crdate',
-		'cruser_id' => 'cruser_id',
-		'default_sortby' => "ORDER BY crdate",	
-		'delete' => 'deleted',	
-		'enablecolumns' => array (		
-			'disabled' => 'hidden',
-		),
-		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
-		'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_ligestmembrelabo_Structure.gif',
-	),
-	"feInterface" => array (
-		"fe_admin_fieldList" => "hidden, libelledessaisies, nom, adresse, type, idstructureparente",
-	)
-);
-
-$TCA["tx_ligestmembrelabo_Fonction"] = array (
-	"ctrl" => array (
-		'title'     => 'LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Fonction',		
-		'label'     => 'idFonction',	
-		'tstamp'    => 'tstamp',
-		'crdate'    => 'crdate',
-		'cruser_id' => 'cruser_id',
-		'default_sortby' => "ORDER BY crdate",	
-		'delete' => 'deleted',	
-		'enablecolumns' => array (		
-			'disabled' => 'hidden',
-		),
-		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
-		'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_ligestmembrelabo_Fonction.gif',
-	),
-	"feInterface" => array (
-		"fe_admin_fieldList" => "hidden, libelle",
-	)
-);
 
 $TCA["tx_ligestmembrelabo_TypePosteWeb"] = array (
 	"ctrl" => array (
@@ -258,7 +268,7 @@ $TCA["tx_ligestmembrelabo_AObtenu"] = array (
 	"feInterface" => array (
 		"fe_admin_fieldList" => "hidden, idmembrelabo, codediplome, dateobtention, intitule, lieudobtention",
 	)
-);
+);*/
 
 
 t3lib_div::loadTCA('tt_content');
