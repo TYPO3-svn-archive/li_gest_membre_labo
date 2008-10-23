@@ -8,7 +8,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 	),
 	"feInterface" => $TCA["tx_ligestmembrelabo_MembreDuLabo"]["feInterface"],
 	"columns" => array (
-		'hidden' => array (		
+		"hidden" => array (		
 			'exclude' => 1,
 			'label'   => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
 			'config'  => array (
@@ -18,7 +18,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 		),
 		"nomdusage" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.Nomdusage",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.nomdusage",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "48",	
@@ -28,27 +28,27 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 		),
 		"nommaritale" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.NomMaritale",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.nommaritale",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "48",	
 				"max" => "255",	
-				"eval" => "required,trim",
+				"eval" => "trim",
 			)
 		),
 		"nompremarital" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.NomPreMarital",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.nompremarital",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "48",	
 				"max" => "255",	
-				"eval" => "required,trim",
+				"eval" => "trim",
 			)
 		),
 		"prenom" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.Prenom",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.prenom",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "48",	
@@ -58,17 +58,17 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 		),
 		"genre" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.Genre",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.genre",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "5",	
 				"max" => "1",	
-				"eval" => "required,trim",
+				"eval" => "trim",
 			)
 		),
 		"datenaissance" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.DateNaissance",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.datenaissance",		
 			"config" => Array (
 				"type"     => "input",
 				"size"     => "8",
@@ -80,17 +80,17 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 		),
 		"nationalite" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.Nationalite",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.nationalite",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "48",	
 				"max" => "255",	
-				"eval" => "required,trim",
+				"eval" => "trim",
 			)
 		),
 		"datearrivee" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.DateArrivee",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.datearrivee",		
 			"config" => Array (
 				"type"     => "input",
 				"size"     => "8",
@@ -102,7 +102,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 		),
 		"datesortie" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.DateSortie",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.datesortie",		
 			"config" => Array (
 				"type"     => "input",
 				"size"     => "8",
@@ -114,7 +114,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 		),
 		"numine" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.NumINE",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.numine",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "48",	
@@ -124,7 +124,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 		),
 		"sectioncnu" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.SectionCNU",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.sectioncnu",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "48",	
@@ -134,7 +134,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 		),
 		"coordonneesrecherche" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.CoordonneesRecherche",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.coordonneesrecherche",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "48",	
@@ -144,7 +144,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 		),
 		"coordonneesenseignement" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.CoordonneesEnseignement",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.coordonneesenseignement",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "48",	
@@ -164,7 +164,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 		),
 		"coordonneespersonnelles" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.CoordonneesPersonnelles",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.coordonneespersonnelles",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "48",	
@@ -174,7 +174,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 		),
 		"pageweb" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.PageWeb",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.pageweb",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "48",	
@@ -210,11 +210,11 @@ $TCA["tx_ligestmembrelabo_Exerce"] = array (
 		),
 		"idmembrelabo" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Exerce.idMembreLabo",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Exerce.idmembrelabo",		
 			"config" => Array (
 				"type" => "select",	
 				"foreign_table" => "tx_ligestmembrelabo_MembreDuLabo",	
-				"foreign_table_where" => "ORDER BY tx_ligestmembrelabo_MembreDuLabo.uid",	
+				"foreign_table_where" => "ORDER BY tx_ligestmembrelabo_MembreDuLabo.idMembreLabo",	
 				"size" => 30,	
 				"minitems" => 0,
 				"maxitems" => 1,
@@ -222,11 +222,11 @@ $TCA["tx_ligestmembrelabo_Exerce"] = array (
 		),
 		"idstructure" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Exerce.idStructure",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Exerce.idstructure",		
 			"config" => Array (
 				"type" => "select",	
 				"foreign_table" => "tx_ligestmembrelabo_Structure",	
-				"foreign_table_where" => "ORDER BY tx_ligestmembrelabo_Structure.uid",	
+				"foreign_table_where" => "ORDER BY tx_ligestmembrelabo_Structure.idStructure",	
 				"size" => 30,	
 				"minitems" => 0,
 				"maxitems" => 1,
@@ -234,11 +234,11 @@ $TCA["tx_ligestmembrelabo_Exerce"] = array (
 		),
 		"idfonction" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Exerce.idFonction",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Exerce.idfonction",		
 			"config" => Array (
 				"type" => "select",	
 				"foreign_table" => "tx_ligestmembrelabo_Fonction",	
-				"foreign_table_where" => "ORDER BY tx_ligestmembrelabo_Fonction.uid",	
+				"foreign_table_where" => "ORDER BY tx_ligestmembrelabo_Fonction.idFonction",	
 				"size" => 30,	
 				"minitems" => 0,
 				"maxitems" => 1,
@@ -246,7 +246,7 @@ $TCA["tx_ligestmembrelabo_Exerce"] = array (
 		),
 		"datedebut" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Exerce.DateDebut",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Exerce.datedebut",		
 			"config" => Array (
 				"type"     => "input",
 				"size"     => "8",
@@ -258,7 +258,7 @@ $TCA["tx_ligestmembrelabo_Exerce"] = array (
 		),
 		"datefin" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Exerce.DateFin",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Exerce.datefin",		
 			"config" => Array (
 				"type"     => "input",
 				"size"     => "8",
@@ -296,7 +296,7 @@ $TCA["tx_ligestmembrelabo_Structure"] = array (
 		),
 		"libelledessaisies" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Structure.LibelleDesSaisies",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Structure.libelledessaisies",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "48",	
@@ -306,7 +306,7 @@ $TCA["tx_ligestmembrelabo_Structure"] = array (
 		),
 		"nom" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Structure.Nom",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Structure.nom",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "48",	
@@ -316,7 +316,7 @@ $TCA["tx_ligestmembrelabo_Structure"] = array (
 		),
 		"adresse" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Structure.Adresse",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Structure.adresse",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "48",	
@@ -326,7 +326,7 @@ $TCA["tx_ligestmembrelabo_Structure"] = array (
 		),
 		"type" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Structure.Type",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Structure.type",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "5",	
@@ -336,7 +336,7 @@ $TCA["tx_ligestmembrelabo_Structure"] = array (
 		),
 		"idstructureparente" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Structure.idDtructureParente",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Structure.idstructureparente",		
 			"config" => Array (
 				"type"     => "input",
 				"size"     => "4",
@@ -378,7 +378,7 @@ $TCA["tx_ligestmembrelabo_Fonction"] = array (
 		),
 		"libelle" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Fonction.Libelle",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Fonction.libelle",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "48",	
@@ -414,7 +414,7 @@ $TCA["tx_ligestmembrelabo_TypePosteWeb"] = array (
 		),
 		"idtypeposteweb" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_TypePoste.idTypePosteWeb",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_TypePoste.idtypeposteweb",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "5",	
@@ -424,7 +424,7 @@ $TCA["tx_ligestmembrelabo_TypePosteWeb"] = array (
 		),
 		"libelleweb" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_TypePosteWeb.LibelleWeb",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_TypePosteWeb.libelleweb",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "48",	
@@ -460,7 +460,7 @@ $TCA["tx_ligestmembrelabo_TypePoste"] = array (
 		),
 		"idtypeposte" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_TypePoste.idTypePoste",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_TypePoste.idtypeposte",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "5",	
@@ -470,7 +470,7 @@ $TCA["tx_ligestmembrelabo_TypePoste"] = array (
 		),
 		"libelle" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_TypePoste.Libelle",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_TypePoste.libelle",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "48",	
@@ -480,14 +480,14 @@ $TCA["tx_ligestmembrelabo_TypePoste"] = array (
 		),
 		"idtypeposteweb" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_TypePoste.idTypePosteWeb",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_TypePoste.idtypeposteweb",		
 			"config" => Array (
 				"type" => "select",	
 				"items" => Array (
 					Array("",0),
 				),
 				"foreign_table" => "tx_ligestmembrelabo_TypePosteWeb",	
-				"foreign_table_where" => "ORDER BY tx_ligestmembrelabo_TypePosteWeb.idTypePosteWeb",	
+				"foreign_table_where" => "ORDER BY tx_ligestmembrelabo_TypePosteWeb.idtypeposteweb",	
 				"size" => 30,	
 				"minitems" => 0,
 				"maxitems" => 1,
@@ -521,7 +521,7 @@ $TCA["tx_ligestmembrelabo_Possede"] = array (
 		),
 		"idtypeposte" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Possede.idTypePoste",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Possede.idtypeposte",		
 			"config" => Array (
 				"type" => "select",	
 				"foreign_table" => "tx_ligestmembrelabo_TypePoste",	
@@ -533,7 +533,7 @@ $TCA["tx_ligestmembrelabo_Possede"] = array (
 		),
 		"idmembrelabo" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Possede.idMembreMabo",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Possede.idmembremabo",		
 			"config" => Array (
 				"type" => "group",	
 				"internal_type" => "db",	
@@ -545,7 +545,7 @@ $TCA["tx_ligestmembrelabo_Possede"] = array (
 		),
 		"datedebut" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Possede.DateDebut",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Possede.datedebut",		
 			"config" => Array (
 				"type"     => "input",
 				"size"     => "8",
@@ -557,7 +557,7 @@ $TCA["tx_ligestmembrelabo_Possede"] = array (
 		),
 		"datefin" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Possede.DateFin",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Possede.datefin",		
 			"config" => Array (
 				"type"     => "input",
 				"size"     => "8",
@@ -595,7 +595,7 @@ $TCA["tx_ligestmembrelabo_Categorie"] = array (
 		),
 		"idcategorie" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Categorie.idCategorie",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Categorie.idcategorie",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "5",	
@@ -605,7 +605,7 @@ $TCA["tx_ligestmembrelabo_Categorie"] = array (
 		),
 		"libelle" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Categorie.Libelle",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Categorie.libelle",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "48",	
@@ -641,7 +641,7 @@ $TCA["tx_ligestmembrelabo_Categorie_MembreDuLabo"] = array (
 		),
 		"idcategorie" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Categorie_MembreDuLabo.idCategorie",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Categorie_MembreDuLabo.idcategorie",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "5",	
@@ -651,7 +651,7 @@ $TCA["tx_ligestmembrelabo_Categorie_MembreDuLabo"] = array (
 		),
 		"idmembrelabo" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Categorie_MembreDuLabo.idMembreLabo",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Categorie_MembreDuLabo.idmembrelabo",		
 			"config" => Array (
 				"type" => "select",	
 				"foreign_table" => "tx_ligestmembrelabo_MembreDuLabo",	
@@ -663,7 +663,7 @@ $TCA["tx_ligestmembrelabo_Categorie_MembreDuLabo"] = array (
 		),
 		"datedebut" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Categorie_MembreDuLabo.DateDebut",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Categorie_MembreDuLabo.datedebut",		
 			"config" => Array (
 				"type"     => "input",
 				"size"     => "8",
@@ -675,7 +675,7 @@ $TCA["tx_ligestmembrelabo_Categorie_MembreDuLabo"] = array (
 		),
 		"datefin" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Categorie_MembreDuLabo.DateFin",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Categorie_MembreDuLabo.datefin",		
 			"config" => Array (
 				"type"     => "input",
 				"size"     => "8",
@@ -713,7 +713,7 @@ $TCA["tx_ligestmembrelabo_Equipe"] = array (
 		),
 		"nom" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Equipe.Nom",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Equipe.nom",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "48",	
@@ -723,7 +723,7 @@ $TCA["tx_ligestmembrelabo_Equipe"] = array (
 		),
 		"abreviation" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Equipe.Abreviation",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Equipe.abreviation",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "48",	
@@ -759,7 +759,7 @@ $TCA["tx_ligestmembrelabo_EstMembreDe"] = array (
 		),
 		"idmembrelabo" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_EstMembreDe.idMembreLabo",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_EstMembreDe.idmembrelabo",		
 			"config" => Array (
 				"type" => "select",	
 				"foreign_table" => "tx_ligestmembrelabo_MembreDuLabo",	
@@ -771,7 +771,7 @@ $TCA["tx_ligestmembrelabo_EstMembreDe"] = array (
 		),
 		"idequipe" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_EstMembreDe.idEquipe",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_EstMembreDe.idequipe",		
 			"config" => Array (
 				"type" => "select",	
 				"foreign_table" => "tx_ligestmembrelabo_Equipe",	
@@ -783,7 +783,7 @@ $TCA["tx_ligestmembrelabo_EstMembreDe"] = array (
 		),
 		"rang" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_EstMembreDe.Rang",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_EstMembreDe.rang",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "48",	
@@ -819,7 +819,7 @@ $TCA["tx_ligestmembrelabo_TypeDiplome"] = array (
 		),
 		"code" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_TypeDiplome.Code",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_TypeDiplome.code",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "48",	
@@ -829,7 +829,7 @@ $TCA["tx_ligestmembrelabo_TypeDiplome"] = array (
 		),
 		"libelle" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_TypeDiplome.Libelle",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_TypeDiplome.libelle",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "48",	
@@ -865,7 +865,7 @@ $TCA["tx_ligestmembrelabo_AObtenu"] = array (
 		),
 		"idmembrelabo" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_AObtenu.idMembreLabo",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_AObtenu.idmembrelabo",		
 			"config" => Array (
 				"type" => "select",	
 				"foreign_table" => "tx_ligestmembrelabo_MembreDuLabo",	
@@ -877,7 +877,7 @@ $TCA["tx_ligestmembrelabo_AObtenu"] = array (
 		),
 		"codediplome" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_AObtenu.CodeDiplome",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_AObtenu.codediplome",		
 			"config" => Array (
 				"type" => "select",	
 				"foreign_table" => "tx_ligestmembrelabo_TypeDiplome",	
@@ -889,7 +889,7 @@ $TCA["tx_ligestmembrelabo_AObtenu"] = array (
 		),
 		"dateobtention" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_AObtenu.DateObtention",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_AObtenu.dateobtention",		
 			"config" => Array (
 				"type"     => "input",
 				"size"     => "8",
@@ -901,7 +901,7 @@ $TCA["tx_ligestmembrelabo_AObtenu"] = array (
 		),
 		"intitule" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_AObtenu.Intitule",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_AObtenu.intitule",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "48",	
@@ -911,7 +911,7 @@ $TCA["tx_ligestmembrelabo_AObtenu"] = array (
 		),
 		"lieudobtention" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_AObtenu.LieuDObtention",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_AObtenu.lieudobtention",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "48",	
