@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 ########################################################################
 # Extension Manager/Repository config file for ext: "li_gest_membre_labo"

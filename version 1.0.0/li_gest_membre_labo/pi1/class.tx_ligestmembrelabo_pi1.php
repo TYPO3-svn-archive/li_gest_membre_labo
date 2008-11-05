@@ -1,4 +1,4 @@
-<?php
+ï»¿<?php
 /***************************************************************
 *  Copyright notice
 *
@@ -55,6 +55,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 		$piFlexForm = $this->cObj->data['pi_flexform'];
 		 // Traverse the entire array based on the language...
 		 // and assign each configuration option to $this->lConf array...
+
 		foreach ( $piFlexForm['data'] as $sheet => $data )
 		{
 			foreach ( $data as $lang => $value )
@@ -66,14 +67,10 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			}
 		}
 		$this->pi_loadLL();
-		
-		
-		
-		
-		
+
 		
 		/*----------------------------------------------------------------------------------------
-		//Création de requête
+		//CrÃ©ation de requÃªte
 		$select_fields = '*';
 		$from_table = 'test';
 		$where_clause = '';
@@ -91,10 +88,14 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 		----------------------------------------------------------------------------------------*/
 		
 		
-		$code = '';
-		//Récupération de toutes les membres de l'équipe demandée ayant les postes sélectionnés
-		$nom = '';
 		
+		
+		
+		//RÃ©cupÃ©ration de toutes les membres de l'Ã©quipe demandÃ©e ayant les postes sÃ©lectionnÃ©s
+		$code = ''; //Variable contenant le code Ã  afficher
+		
+		
+		//CrÃ©atio nde la clause permettant l'affichage que de certains types de poste...
 		$premier = true;
 		
 		$postes = '';
@@ -167,68 +168,82 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 		{
 			$postes = $postes.' )';
 		}
+
+
+		//CrÃ©ation de la clause permettant de ne choisir que certains membres selon les dossiers sÃ©lectionnÃ©s
+		$dossiers = '';	
+		
+		$pid = array();
+		
+		$chaine = $this->lConf['pid'];
+		
+		if ($chaine<>'')
+		{
+			$dossiers = $dossiers.' AND (';
+			$pid = Explode(",",$chaine);
+			
+			$premier = true;
+			
+			while (list($key, $value) = each($pid)) {
+				if ($premier == true)
+				{
+					$dossiers = $dossiers.'tx_ligestmembrelabo_MembreDuLabo.pid='.$value;
+					$premier = false;
+				}
+				else
+				{
+				$dossiers = $dossiers.' OR tx_ligestmembrelabo_MembreDuLabo.pid='.$value;
+				}
+			}
+			$dossiers = $dossiers.')';
+		}
 		
 		
-		$select_fields = 'tx_ligestmembrelabo_MembreDuLabo.idMembreLabo, tx_ligestmembrelabo_MembreDuLabo.NomDUsage, tx_ligestmembrelabo_MembreDuLabo.Prenom, tx_ligestmembrelabo_MembreDuLabo.PageWeb, tx_ligestmembrelabo_TypePosteWeb.LibelleWeb';
+		
+
+
+		$select_fields = 'tx_ligestmembrelabo_MembreDuLabo.uid, tx_ligestmembrelabo_MembreDuLabo.NomDUsage, tx_ligestmembrelabo_MembreDuLabo.Prenom, tx_ligestmembrelabo_MembreDuLabo.PageWeb, tx_ligestmembrelabo_TypePosteWeb.LibelleWeb';
 		$from_table = 'tx_ligestmembrelabo_MembreDuLabo, tx_ligestmembrelabo_EstMembreDe, tx_ligestmembrelabo_Equipe, tx_ligestmembrelabo_Possede, tx_ligestmembrelabo_TypePoste, tx_ligestmembrelabo_TypePosteWeb';
-		$where_clause = 'tx_ligestmembrelabo_MembreDuLabo.idMembreLabo = tx_ligestmembrelabo_EstMembreDe.idMembreLabo AND tx_ligestmembrelabo_EstMembreDe.idEquipe = tx_ligestmembrelabo_Equipe.idEquipe AND (tx_ligestmembrelabo_Equipe.Nom = "'.$this->lConf['labo'].'" OR tx_ligestmembrelabo_Equipe.Abreviation = "'.$this->lConf['labo'].'") AND tx_ligestmembrelabo_Possede.idMembreLabo = tx_ligestmembrelabo_MembreDuLabo.idMembreLabo AND tx_ligestmembrelabo_Possede.idTypePoste = tx_ligestmembrelabo_TypePoste.idTypePoste AND tx_ligestmembrelabo_TypePoste.idTypePosteWeb = tx_ligestmembrelabo_TypePosteWeb.idTypePosteWeb '.$postes;
+		$where_clause = 'tx_ligestmembrelabo_MembreDuLabo.uid = tx_ligestmembrelabo_EstMembreDe.idMembreLabo AND tx_ligestmembrelabo_EstMembreDe.idEquipe = tx_ligestmembrelabo_Equipe.uid AND (tx_ligestmembrelabo_Equipe.Nom = "'.$this->lConf['labo'].'" OR tx_ligestmembrelabo_Equipe.Abreviation = "'.$this->lConf['labo'].'") AND tx_ligestmembrelabo_Possede.idMembreLabo = tx_ligestmembrelabo_MembreDuLabo.uid AND tx_ligestmembrelabo_Possede.idTypePoste = tx_ligestmembrelabo_TypePoste.idTypePoste AND tx_ligestmembrelabo_TypePoste.idTypePosteWeb = tx_ligestmembrelabo_TypePosteWeb.idTypePosteWeb '.$postes.$dossiers;
 		$groupBy = '';
 		$orderBy = 'tx_ligestmembrelabo_MembreDuLabo.NomDUsage, tx_ligestmembrelabo_MembreDuLabo.Prenom';
 		$limit = '';
 		$tryMemcached = '';
-		
+
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select_fields, $from_table, $where_clause, $groupBy, $orderBy, $tryMemcached);
-		
+
 		while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))
 		{
-			//if ($row['PageWeb']=='' || is_null($row['PageWeb']))
-			//{
-			//	$nom = $nom.'<p>'.$row['NomDUsage'].' '.$row['Prenom'].'</p>
-			//	';
-			//}
-			//else
-			//{
-			//	$nom = $nom.'<p><a href="'.$row['PageWeb'].'">'.$row['NomDUsage'].' '.$row['Prenom'].'</a></p>
-			//	';
-			//}
-			
+
 			$pageWeb = false;
-			$nom = $nom.'<p>';
+			$code = $code.'<p>';
 			
 			if ($row['PageWeb']<>'' && !(is_null($row['PageWeb'])))
 			{
-				$nom = $nom.'<a href="'.$row['PageWeb'].'">';
+				$code = $code.'<a href="'.$row['PageWeb'].'">';
 				$pageWeb=true;
 			}
-			$nom = $nom.$row['NomDUsage'].' '.$row['Prenom'];
+			$code = $code.$row['NomDUsage'].' '.$row['Prenom'];
 			if ($pageWeb=true)
 			{
-				$nom = $nom.'</a>';			
+				$code = $code.'</a>';			
 			}
 
 			if ($this->lConf['poste']==true)
 			{
-				$nom = $nom.', '.$row['LibelleWeb'];
+				$code= $code.', '.$row['LibelleWeb'];
 			}
 			
 			
-			$nom = $nom.'</p>
+			$code = $code.'</p>
 			';
 			
 		}
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 	
-		$content=$nom;
+		$content=$code;
 	
 		return $this->pi_wrapInBaseClass($content);
 	}

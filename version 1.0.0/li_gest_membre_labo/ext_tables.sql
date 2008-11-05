@@ -1,4 +1,4 @@
-#
+﻿#
 # Table structure for table 'tx_ligestmembrelabo_MembreDuLabo'
 #
 CREATE TABLE tx_ligestmembrelabo_MembreDuLabo (
@@ -173,7 +173,7 @@ CREATE TABLE tx_ligestmembrelabo_Categorie (
 	deleted tinyint(4) DEFAULT '0' NOT NULL,
 	hidden tinyint(4) DEFAULT '0' NOT NULL,
 	idCategorie varchar(5) DEFAULT '' NOT NULL,
-	libelle varchar(255) DEFAULT '' NOT NULL,
+	Libelle varchar(255) DEFAULT '' NOT NULL,
 	
 	PRIMARY KEY (uid),
 	KEY parent (pid)

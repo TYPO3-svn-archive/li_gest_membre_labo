@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <T3locallang>
 	<meta type="array">
 		<type>database</type>
@@ -68,6 +68,7 @@
 			<label index="tx_ligestmembrelabo_EstMembreDe.idequipe">id Team</label>
 			<label index="tx_ligestmembrelabo_EstMembreDe.rang">The rank of the person in the team (0=none, 1=team leader, 2=Assistant Head)</label>
 			<label index="tx_ligestmembrelabo_TypeDiplome">Diplome Type</label>
+			<label index="tx_ligestmembrelabo_TypeDiplome.code">Code</label>
 			<label index="tx_ligestmembrelabo_TypeDiplome.libelle">Label</label>
 			<label index="tx_ligestmembrelabo_AObtenu">Obtained</label>
 			<label index="tx_ligestmembrelabo_AObtenu.idmembrelabo">id Member Lab</label>
@@ -79,11 +80,22 @@
 			<label index="tt_content.pi_flexform.sheet_general">Properties</label>
 			<label index="tt_content.pi_flexform.labo">Laboratory Name</label>
 			<label index="tt_content.pi_flexform.poste">Showing the type of job (Master Conferences, Professor, Doctor,...)</label>
+			<label index="tt_content.pi_flexform.sheet_display">Display</label>
 			<label index="tt_content.pi_flexform.professeur">Professors</label>
 			<label index="tt_content.pi_flexform.maitre">Masters Conferences</label>
 			<label index="tt_content.pi_flexform.docteur">Doctors</label>
 			<label index="tt_content.pi_flexform.doctorant">Graduate Students</label>
 			<label index="tt_content.pi_flexform.autre">Others Researchers</label>
+			<label index="tt_content.pi_flexform.pid">Data</label>
+			<label index="tt_content.pi_flexform.sheet_request">Request</label>
+			<label index="tt_content.pi_flexform.requete">Use a request for display members</label>
+			<label index="tt_content.pi_flexform.select">select</label>
+			<label index="tt_content.pi_flexform.from_table">from_table</label>
+			<label index="tt_content.pi_flexform.where_clause">where_clause</label>
+			<label index="tt_content.pi_flexform.groupBy">groupBy</label>
+			<label index="tt_content.pi_flexform.orderBy">orderBy</label>
+			<label index="tt_content.pi_flexform.limit">limit</label>
+			<label index="tt_content.pi_flexform.tryMemcached">tryMemcached</label>
 		</languageKey>
 		<languageKey index="fr" type="array">
 			<label index="tx_ligestmembrelabo_MembreDuLabo">Membre du labo</label>
@@ -148,6 +160,7 @@
 			<label index="tx_ligestmembrelabo_EstMembreDe.idequipe">id Equipe</label>
 			<label index="tx_ligestmembrelabo_EstMembreDe.rang">Le rang de la personne dans l'équipe (0=rien, 1=responsable d'équipe, 2=responsable adjoint)</label>
 			<label index="tx_ligestmembrelabo_TypeDiplome">Type Diplome</label>
+			<label index="tx_ligestmembrelabo_TypeDiplome.code">Code</label>
 			<label index="tx_ligestmembrelabo_TypeDiplome.libelle">Libelle</label>
 			<label index="tx_ligestmembrelabo_AObtenu">A Obtenu</label>
 			<label index="tx_ligestmembrelabo_AObtenu.idmembrelabo">id Membre Labo</label>
@@ -165,7 +178,16 @@
 			<label index="tt_content.pi_flexform.docteur">Docteurs</label>
 			<label index="tt_content.pi_flexform.doctorant">Doctorants</label>
 			<label index="tt_content.pi_flexform.autre">Autres Chercheurs</label>
-
+			<label index="tt_content.pi_flexform.pid">Données</label>
+			<label index="tt_content.pi_flexform.sheet_request">Requête</label>
+			<label index="tt_content.pi_flexform.requete">Utiliser une requête pour afficher les membres</label>
+			<label index="tt_content.pi_flexform.select">select</label>
+			<label index="tt_content.pi_flexform.from_table">from_table</label>
+			<label index="tt_content.pi_flexform.where_clause">where_clause</label>
+			<label index="tt_content.pi_flexform.groupBy">groupBy</label>
+			<label index="tt_content.pi_flexform.orderBy">orderBy</label>
+			<label index="tt_content.pi_flexform.limit">limit</label>
+			<label index="tt_content.pi_flexform.tryMemcached">tryMemcached</label>
 		</languageKey>
 	</data>
 </T3locallang>
