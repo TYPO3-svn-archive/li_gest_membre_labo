@@ -1,4 +1,4 @@
-﻿#
+#
 # Table structure for table 'tx_ligestmembrelabo_MembreDuLabo'
 #
 CREATE TABLE tx_ligestmembrelabo_MembreDuLabo (

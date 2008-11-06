@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 if (!defined ('TYPO3_MODE')) 	die ('Access denied.');
 $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 	"ctrl" => array (

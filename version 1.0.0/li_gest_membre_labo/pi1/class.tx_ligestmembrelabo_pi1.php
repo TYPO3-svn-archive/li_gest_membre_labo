@@ -1,4 +1,4 @@
-ï»¿<?php
+<?php
 /***************************************************************
 *  Copyright notice
 *
@@ -70,7 +70,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 
 		
 		/*----------------------------------------------------------------------------------------
-		//CrÃ©ation de requÃªte
+		//Création de requête
 		$select_fields = '*';
 		$from_table = 'test';
 		$where_clause = '';
@@ -86,160 +86,197 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			$test = $test.$row['champ1'].' ';
 		}
 		----------------------------------------------------------------------------------------*/
+		$select_fields = '';
+		$from_table = '';
+		$where_clause = '';
+		$groupBy = '';
+		$orderBy = '';
+		$limit = '';
+		$tryMemcached = '';
 		
 		
-		
-		
-		
-		//RÃ©cupÃ©ration de toutes les membres de l'Ã©quipe demandÃ©e ayant les postes sÃ©lectionnÃ©s
-		$code = ''; //Variable contenant le code Ã  afficher
-		
-		
-		//CrÃ©atio nde la clause permettant l'affichage que de certains types de poste...
-		$premier = true;
-		
-		$postes = '';
-		if(($this->lConf['professeur'])==true)
+		if(($this->lConf['requete'])<>true)
 		{
-			if ($premier == true)
-			{
-				$postes = 'AND ( ';
-				$premier = false;
-			}
-			else
-			{
-				$postes = $postes.' OR ';
-			}
-			$postes=$postes.'tx_ligestmembrelabo_TypePosteWeb.LibelleWeb LIKE "%Professeur%"';
-		}
-		if(($this->lConf['maitre'])==true)
-		{
-			if ($premier == true)
-			{
-				$postes = 'AND ( ';
-				$premier = false;
-			}
-			else
-			{
-				$postes = $postes.' OR ';
-			}
-			$postes=$postes.'tx_ligestmembrelabo_TypePosteWeb.LibelleWeb LIKE "%Maitre de Conferences%"';
-		}
-		if(($this->lConf['docteur'])==true)
-		{
-			if ($premier == true)
-			{
-				$postes = 'AND ( ';
-				$premier = false;
-			}
-			else
-			{
-				$postes = $postes.' OR ';
-			}
-			$postes=$postes.'tx_ligestmembrelabo_TypePosteWeb.LibelleWeb LIKE "%Docteur%"';
-		}
-		if(($this->lConf['doctorant'])==true)
-		{
-			if ($premier == true)
-			{
-				$postes = 'AND ( ';
-				$premier = false;
-			}
-			else
-			{
-				$postes = $postes.' OR ';
-			}
-			$postes=$postes.'tx_ligestmembrelabo_TypePosteWeb.LibelleWeb LIKE "%Doctorant%"';
-		}
-		if(($this->lConf['autre'])==true)
-		{
-			if ($premier == true)
-			{
-				$postes = 'AND ( ';
-				$premier = false;
-			}
-			else
-			{
-				$postes = $postes.' OR ';
-			}
-			$postes=$postes.'tx_ligestmembrelabo_TypePosteWeb.LibelleWeb LIKE "%Autre Chercheur%"';
-		}
-		if ($postes <> '')
-		{
-			$postes = $postes.' )';
-		}
-
-
-		//CrÃ©ation de la clause permettant de ne choisir que certains membres selon les dossiers sÃ©lectionnÃ©s
-		$dossiers = '';	
 		
-		$pid = array();
 		
-		$chaine = $this->lConf['pid'];
-		
-		if ($chaine<>'')
-		{
-			$dossiers = $dossiers.' AND (';
-			$pid = Explode(",",$chaine);
+			//Récupération de toutes les membres de l'équipe demandée ayant les postes sélectionnés
+			$code = ''; //Variable contenant le code à afficher
 			
+			
+			//Création de la clause permettant l'affichage que de certains types de poste...
 			$premier = true;
 			
-			while (list($key, $value) = each($pid)) {
+			$postes = '';
+			if(($this->lConf['professeur'])==true)
+			{
 				if ($premier == true)
 				{
-					$dossiers = $dossiers.'tx_ligestmembrelabo_MembreDuLabo.pid='.$value;
+					$postes = 'AND ( ';
 					$premier = false;
 				}
 				else
 				{
-				$dossiers = $dossiers.' OR tx_ligestmembrelabo_MembreDuLabo.pid='.$value;
+					$postes = $postes.' OR ';
 				}
+				$postes=$postes.'tx_ligestmembrelabo_TypePosteWeb.LibelleWeb LIKE "%Professeur%"';
 			}
-			$dossiers = $dossiers.')';
+			if(($this->lConf['maitre'])==true)
+			{
+				if ($premier == true)
+				{
+					$postes = 'AND ( ';
+					$premier = false;
+				}
+				else
+				{
+					$postes = $postes.' OR ';
+				}
+				$postes=$postes.'tx_ligestmembrelabo_TypePosteWeb.LibelleWeb LIKE "%Maitre de Conferences%"';
+			}
+			if(($this->lConf['docteur'])==true)
+			{
+				if ($premier == true)
+				{
+					$postes = 'AND ( ';
+					$premier = false;
+				}
+				else
+				{
+					$postes = $postes.' OR ';
+				}
+				$postes=$postes.'tx_ligestmembrelabo_TypePosteWeb.LibelleWeb LIKE "%Docteur%"';
+			}
+			if(($this->lConf['doctorant'])==true)
+			{
+				if ($premier == true)
+				{
+					$postes = 'AND ( ';
+					$premier = false;
+				}
+				else
+				{
+					$postes = $postes.' OR ';
+				}
+				$postes=$postes.'tx_ligestmembrelabo_TypePosteWeb.LibelleWeb LIKE "%Doctorant%"';
+			}
+			if(($this->lConf['autre'])==true)
+			{
+				if ($premier == true)
+				{
+					$postes = 'AND ( ';
+					$premier = false;
+				}
+				else
+				{
+					$postes = $postes.' OR ';
+				}
+				$postes=$postes.'tx_ligestmembrelabo_TypePosteWeb.LibelleWeb LIKE "%Autre Chercheur%"';
+			}
+			if ($postes <> '')
+			{
+				$postes = $postes.' )';
+			}
+
+			
+			//Gestion du nom de l'Equipe
+			$from_table = '';
+			$equipe_where_clause = '';
+			if (($this->lConf['labo'])<>'')
+			{
+				$from_table = ', tx_ligestmembrelabo_EstMembreDe, tx_ligestmembrelabo_Equipe';
+				$equipe_where_clause = ' AND tx_ligestmembrelabo_MembreDuLabo.uid = tx_ligestmembrelabo_EstMembreDe.idMembreLabo AND tx_ligestmembrelabo_EstMembreDe.idEquipe = tx_ligestmembrelabo_Equipe.uid AND (tx_ligestmembrelabo_Equipe.Nom = "'.$this->lConf['labo'].'" OR tx_ligestmembrelabo_Equipe.Abreviation = "'.$this->lConf['labo'].'")';
+			}
+			
+			
+			
+			
+
+			//Création de la clause permettant de ne choisir que certains membres selon les dossiers sélectionnés
+			$dossiers = '';	
+			
+			$pid = array();
+			
+			$chaine = $this->lConf['pid'];
+			
+			if ($chaine<>'')
+			{
+				$dossiers = $dossiers.' AND (';
+				$pid = Explode(",",$chaine);
+				
+				$premier = true;
+				
+				while (list($key, $value) = each($pid)) {
+					if ($premier == true)
+					{
+						$dossiers = $dossiers.'tx_ligestmembrelabo_MembreDuLabo.pid='.$value;
+						$premier = false;
+					}
+					else
+					{
+					$dossiers = $dossiers.' OR tx_ligestmembrelabo_MembreDuLabo.pid='.$value;
+					}
+				}
+				$dossiers = $dossiers.')';
+			}
+			
+			
+			
+			
+			$select_fields = 'tx_ligestmembrelabo_MembreDuLabo.uid, tx_ligestmembrelabo_MembreDuLabo.NomDUsage, tx_ligestmembrelabo_MembreDuLabo.Prenom, tx_ligestmembrelabo_MembreDuLabo.PageWeb, tx_ligestmembrelabo_TypePosteWeb.LibelleWeb';
+			$from_table = 'tx_ligestmembrelabo_MembreDuLabo, tx_ligestmembrelabo_Possede, tx_ligestmembrelabo_TypePoste, tx_ligestmembrelabo_TypePosteWeb'.$from_table;
+			$where_clause = 'tx_ligestmembrelabo_Possede.idMembreLabo = tx_ligestmembrelabo_MembreDuLabo.uid AND tx_ligestmembrelabo_Possede.idTypePoste = tx_ligestmembrelabo_TypePoste.idTypePoste AND tx_ligestmembrelabo_TypePoste.idTypePosteWeb = tx_ligestmembrelabo_TypePosteWeb.idTypePosteWeb '.$equipe_where_clause.$postes.$dossiers;
+			$groupBy = '';
+			$orderBy = 'tx_ligestmembrelabo_MembreDuLabo.NomDUsage, tx_ligestmembrelabo_MembreDuLabo.Prenom';
+			$limit = '';
+			$tryMemcached = '';
+				
+
+			
+			
 		}
-		
-		
-		
-
-
-		$select_fields = 'tx_ligestmembrelabo_MembreDuLabo.uid, tx_ligestmembrelabo_MembreDuLabo.NomDUsage, tx_ligestmembrelabo_MembreDuLabo.Prenom, tx_ligestmembrelabo_MembreDuLabo.PageWeb, tx_ligestmembrelabo_TypePosteWeb.LibelleWeb';
-		$from_table = 'tx_ligestmembrelabo_MembreDuLabo, tx_ligestmembrelabo_EstMembreDe, tx_ligestmembrelabo_Equipe, tx_ligestmembrelabo_Possede, tx_ligestmembrelabo_TypePoste, tx_ligestmembrelabo_TypePosteWeb';
-		$where_clause = 'tx_ligestmembrelabo_MembreDuLabo.uid = tx_ligestmembrelabo_EstMembreDe.idMembreLabo AND tx_ligestmembrelabo_EstMembreDe.idEquipe = tx_ligestmembrelabo_Equipe.uid AND (tx_ligestmembrelabo_Equipe.Nom = "'.$this->lConf['labo'].'" OR tx_ligestmembrelabo_Equipe.Abreviation = "'.$this->lConf['labo'].'") AND tx_ligestmembrelabo_Possede.idMembreLabo = tx_ligestmembrelabo_MembreDuLabo.uid AND tx_ligestmembrelabo_Possede.idTypePoste = tx_ligestmembrelabo_TypePoste.idTypePoste AND tx_ligestmembrelabo_TypePoste.idTypePosteWeb = tx_ligestmembrelabo_TypePosteWeb.idTypePosteWeb '.$postes.$dossiers;
-		$groupBy = '';
-		$orderBy = 'tx_ligestmembrelabo_MembreDuLabo.NomDUsage, tx_ligestmembrelabo_MembreDuLabo.Prenom';
-		$limit = '';
-		$tryMemcached = '';
-
-		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select_fields, $from_table, $where_clause, $groupBy, $orderBy, $tryMemcached);
-
-		while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))
+		else
 		{
-
-			$pageWeb = false;
-			$code = $code.'<p>';
-			
-			if ($row['PageWeb']<>'' && !(is_null($row['PageWeb'])))
-			{
-				$code = $code.'<a href="'.$row['PageWeb'].'">';
-				$pageWeb=true;
-			}
-			$code = $code.$row['NomDUsage'].' '.$row['Prenom'];
-			if ($pageWeb=true)
-			{
-				$code = $code.'</a>';			
-			}
-
-			if ($this->lConf['poste']==true)
-			{
-				$code= $code.', '.$row['LibelleWeb'];
-			}
-			
-			
-			$code = $code.'</p>
-			';
+			$select_fields = $this->lConf['select'];
+			$from_table = $this->lConf['from_table'];
+			$where_clause = $this->lConf['where_clause'];
+			$groupBy = $this->lConf['groupBy'];
+			$orderBy = $this->lConf['orderBy'];
+			$limit = $this->lConf['limit'];
+			$tryMemcached = $this->lConf['tryMemcached'];
 			
 		}
 		
+
+
+			$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select_fields, $from_table, $where_clause, $groupBy, $orderBy, $tryMemcached);
+
+			while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))
+			{
+
+				$pageWeb = false;
+				$code = $code.'<p>';
+				
+				if ($row['PageWeb']<>'' && !(is_null($row['PageWeb'])))
+				{
+					$code = $code.'<a href="'.$row['PageWeb'].'">';
+					$pageWeb=true;
+				}
+				$code = $code.$row['NomDUsage'].' '.$row['Prenom'];
+				if ($pageWeb=true)
+				{
+					$code = $code.'</a>';			
+				}
+
+				if ($this->lConf['poste']==true)
+				{
+					$code= $code.', '.$row['LibelleWeb'];
+				}
+				
+				
+				$code = $code.'</p>
+				';
+				
+			}
 		
 
 	

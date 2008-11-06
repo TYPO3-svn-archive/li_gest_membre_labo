@@ -1,4 +1,5 @@
-﻿<T3DataStructure>
+<?xml version="1.0" encoding="iso-8859-1"?>
+<T3DataStructure>
 	<meta>
 		<langDisable>1</langDisable>
 	</meta>
@@ -28,16 +29,6 @@
 							</config>
 						</TCEforms>
 					</poste>
-				</el>
-		    </ROOT>
-		</sDEF>
-		<display>
-		    <ROOT>
-				<TCEforms>
-					<sheetTitle>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.sheet_display</sheetTitle>
-				</TCEforms>
-				<type>array</type>
-				<el>
 					<professeur>
 						<TCEforms>
 							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.professeur</label>
@@ -47,7 +38,7 @@
 							</config>
 						</TCEforms>
 					</professeur>
-					<maitre>
+										<maitre>
 						<TCEforms>
 							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.maitre</label>
 							<config>
@@ -99,7 +90,7 @@
 					</pid>
 				</el>
 		    </ROOT>
-		</display>
+		</sDEF>
 		<request>
 		    <ROOT>
 				<TCEforms>
@@ -120,8 +111,8 @@
 							<exclude>1</exclude>
 							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.select</label>
 							<config>
-								<type>input</type>
-								<size>30</size>
+								<type>text</type>
+								<cols>70</cols>
 							</config>
 						</TCEforms>
 					</select>
@@ -130,8 +121,8 @@
 							<exclude>1</exclude>
 							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.from_table</label>
 							<config>
-								<type>input</type>
-								<size>30</size>
+								<type>text</type>
+								<cols>70</cols>
 							</config>
 						</TCEforms>
 					</from_table>
@@ -140,8 +131,8 @@
 							<exclude>1</exclude>
 							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.where_clause</label>
 							<config>
-								<type>input</type>
-								<size>30</size>
+								<type>text</type>
+								<cols>70</cols>
 							</config>
 						</TCEforms>
 					</where_clause>
@@ -150,8 +141,8 @@
 							<exclude>1</exclude>
 							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.groupBy</label>
 							<config>
-								<type>input</type>
-								<size>30</size>
+								<type>text</type>
+								<cols>70</cols>
 							</config>
 						</TCEforms>
 					</groupBy>
@@ -160,8 +151,8 @@
 							<exclude>1</exclude>
 							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.orderBy</label>
 							<config>
-								<type>input</type>
-								<size>30</size>
+								<type>text</type>
+								<cols>70</cols>
 							</config>
 						</TCEforms>
 					</orderBy>
@@ -170,8 +161,8 @@
 							<exclude>1</exclude>
 							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.limit</label>
 							<config>
-								<type>input</type>
-								<size>30</size>
+								<type>text</type>
+								<cols>70</cols>
 							</config>
 						</TCEforms>
 					</limit>
@@ -180,8 +171,8 @@
 							<exclude>1</exclude>
 							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.tryMemcached</label>
 							<config>
-								<type>input</type>
-								<size>30</size>
+								<type>text</type>
+								<cols>70</cols>
 							</config>
 						</TCEforms>
 					</tryMemcached>

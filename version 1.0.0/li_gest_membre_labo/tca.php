@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 if (!defined ('TYPO3_MODE')) 	die ('Access denied.');
 
 $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
@@ -91,7 +91,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 				"size" => "48",	
 				"max" => "255",	
 				"eval" => "trim",
-				'default' => 'Français'
+				'default' => 'Fran�ais'
 			)
 		),
 		"DateArrivee" => Array (		
