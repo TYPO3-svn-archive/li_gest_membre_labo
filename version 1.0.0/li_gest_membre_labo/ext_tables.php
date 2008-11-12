@@ -101,7 +101,10 @@ $TCA["tx_ligestmembrelabo_TypePosteWeb"] = array (
 		'tstamp'    => 'tstamp',
 		'crdate'    => 'crdate',
 		'cruser_id' => 'cruser_id',
-		'default_sortby' => "ORDER BY LibelleWeb",	
+		'languageField'            => 'sys_language_uid',
+		'transOrigPointerField'    => 'l18n_parent',
+		'transOrigDiffSourceField' => 'l18n_diffsource',
+		'default_sortby' => "ORDER BY sys_language_uid, LibelleWeb",	
 		'delete' => 'deleted',	
 		'enablecolumns' => array (		
 			'disabled' => 'hidden',
@@ -110,7 +113,7 @@ $TCA["tx_ligestmembrelabo_TypePosteWeb"] = array (
 		'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_ligestmembrelabo_TypePosteWeb.gif',
 	),
 	"feInterface" => array (
-		"fe_admin_fieldList" => "hidden, idTypePosteWeb, LibelleWeb",
+		"fe_admin_fieldList" => "sys_language_uid, l18n_parent, l18n_diffsource, hidden, idTypePosteWeb, LibelleWeb",
 	)
 );
 

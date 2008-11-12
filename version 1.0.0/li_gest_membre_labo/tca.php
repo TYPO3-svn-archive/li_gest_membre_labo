@@ -403,10 +403,41 @@ $TCA["tx_ligestmembrelabo_Exerce"] = array (
 $TCA["tx_ligestmembrelabo_TypePosteWeb"] = array (
 	"ctrl" => $TCA["tx_ligestmembrelabo_TypePosteWeb"]["ctrl"],
 	"interface" => array (
-		"showRecordFieldList" => "hidden,idTypePosteWeb,LibelleWeb"
+		"showRecordFieldList" => "sys_language_uid, l18n_parent, l18n_diffsource, hidden, idTypePosteWeb, LibelleWeb"
 	),
 	"feInterface" => $TCA["tx_ligestmembrelabo_TypePosteWeb"]["feInterface"],
 	"columns" => array (
+		'sys_language_uid' => array (		
+			'exclude' => 1,
+			'label'  => 'LLL:EXT:lang/locallang_general.xml:LGL.language',
+			'config' => array (
+				'type'                => 'select',
+				'foreign_table'       => 'sys_language',
+				'foreign_table_where' => 'ORDER BY sys_language.title',
+				'items' => array(
+					array('LLL:EXT:lang/locallang_general.xml:LGL.allLanguages', -1),
+					array('LLL:EXT:lang/locallang_general.xml:LGL.default_value', 0)
+				)
+			)
+		),
+		'l18n_parent' => array (		
+			'displayCond' => 'FIELD:sys_language_uid:>:0',
+			'exclude'     => 1,
+			'label'       => 'LLL:EXT:lang/locallang_general.xml:LGL.l18n_parent',
+			'config'      => array (
+				'type'  => 'select',
+				'items' => array (
+					array('', 0),
+				),
+				'foreign_table'       => 'tx_ligestmembrelabo_TypePosteWeb',
+				'foreign_table_where' => 'AND tx_ligestmembrelabo_TypePosteWeb.pid=###CURRENT_PID### AND tx_ligestmembrelabo_TypePosteWeb.sys_language_uid IN (-1,0)',
+			)
+		),
+		'l18n_diffsource' => array (		
+			'config' => array (
+				'type' => 'passthrough'
+			)
+		),
 		'hidden' => array (
 			'exclude' => 1,
 			'label'   => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
@@ -437,7 +468,7 @@ $TCA["tx_ligestmembrelabo_TypePosteWeb"] = array (
 		),	
 	),
 	"types" => array (
-		"0" => array("showitem" => "hidden;;1;;1-1-1,idTypePosteWeb,LibelleWeb")
+		"0" => array("showitem" => "sys_language_uid;;1;;1-1-1,l18n_parent,l18n_diffsource,hidden,idTypePosteWeb,LibelleWeb")
 	),
 	"palettes" => array (
 		"1" => array("showitem" => "")
@@ -487,7 +518,7 @@ $TCA["tx_ligestmembrelabo_TypePoste"] = array (
 			"config" => Array (
 				"type" => "select",	
 				"foreign_table" => "tx_ligestmembrelabo_TypePosteWeb",	
-				"foreign_table_where" => "ORDER BY tx_ligestmembrelabo_TypePosteWeb.LibelleWeb",	
+				"foreign_table_where" => "AND tx_ligestmembrelabo_TypePosteWeb.sys_language_uid='0' ORDER BY tx_ligestmembrelabo_TypePosteWeb.LibelleWeb",	
 				"size" => 1,
 				"minitems" => 0,
 				"maxitems" => 1,
