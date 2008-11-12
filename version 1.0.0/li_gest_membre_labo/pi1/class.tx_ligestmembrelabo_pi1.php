@@ -376,7 +376,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 					$code = $code.'</a>';			
 				}
 
-				if ($this->lConf['poste']==true && !(is_null($row['LibelleWeb'])))
+				if ($this->lConf['poste']==true && !(is_null($row['LibelleWeb'])) && $row['LibelleWeb']<>'')
 				{
 					$code= $code.', '.$row['LibelleWeb'];
 				}
