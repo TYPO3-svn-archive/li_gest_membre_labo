@@ -37,6 +37,50 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 	var $scriptRelPath = 'pi1/class.tx_ligestmembrelabo_pi1.php';	// Path to this script relative to the extension dir.
 	var $extKey        = 'li_gest_membre_labo';	// The extension key.
 	var $pi_checkCHash = true;
+
+	
+	private function rechercheFils($pid_parent)
+	{
+		$tableau = array(); //tableau contenant tous les sous-dossiers trouvés...
+		
+		$tableau_temp = array(); //tableau intermédiaire contenant les sous-dossiers à stocker
+		
+		//Requête pour trouver tous les sous-dossiers du dossier courant
+		$select_fields_pid = 'pages.uid';
+		$from_table_pid = 'pages';
+		$where_clause_pid = 'pages.pid='.$pid_parent;
+		$groupBy_pid = '';
+		$orderBy_pid = '';
+		$limit_pid = '';
+		$tryMemcached_pid = '';
+
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select_fields_pid, $from_table_pid, $where_clause_pid, $groupBy_pid, $orderBy_pid, $tryMemcached_pid);
+
+		while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))
+		{
+			$pid_courant = $row['uid'];
+
+			
+			//On stocke l'uid courant dans le tableau
+			$taille_tableau = count($tableau);
+						
+			$tableau[$taille_tableau] = $pid_courant;
+
+			$tableau_temp = $this->rechercheFils($pid_courant);
+				
+			foreach ($tableau_temp as $value) {
+				$taille_tableau = count($tableau);
+					
+				$tableau[$taille_tableau] = $value;
+			}
+
+		}
+
+		return $tableau;
+	}
+	
+	
+	
 	
 	/**
 	 * The main method of the PlugIn
@@ -192,20 +236,73 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			
 
 			//Création de la clause permettant de ne choisir que certains membres selon les dossiers sélectionnés
+			//$dossiers = '';	
+			
+			//$pid = array();
+			
+			//$chaine = $this->lConf['pid'];
+			
+			//if ($chaine<>'')
+			//{
+			//	$dossiers = $dossiers.' AND (';
+			//	$pid = Explode(",",$chaine);
+				
+				
+				
+				
+			//	$premier = true;
+				
+				
+			//	while (list($key, $value) = each($pid)) {
+			//		if ($premier == true)
+			//		{
+			//			$dossiers = $dossiers.'tx_ligestmembrelabo_MembreDuLabo.pid='.$value;
+			//			$premier = false;
+			//		}
+			//		else
+			//		{
+			//		$dossiers = $dossiers.' OR tx_ligestmembrelabo_MembreDuLabo.pid='.$value;
+			//		}
+			//	}
+			//	$dossiers = $dossiers.')';
+			//}
+			
+			
+			
+			
+			
+			
+			
+			
+			//Version2: Création de la clause permettant de ne choisir que certains membres selon les dossiers sélectionnés
+			//On récupère tous les sous-dossiers...
 			$dossiers = '';	
 			
-			$pid = array();
+			$pid = array(); //dossiers sélectionnés
+			$pages = array(); //dossiers et sous dossiers...
 			
 			$chaine = $this->lConf['pid'];
 			
-			if ($chaine<>'')
+			if ($chaine!='')
 			{
 				$dossiers = $dossiers.' AND (';
 				$pid = Explode(",",$chaine);
+				//$pages = $pid;
 				
 				$premier = true;
 				
-				while (list($key, $value) = each($pid)) {
+				foreach ($pid as $pid_courant) {
+					$pages = $pages+$this->rechercheFils($pid_courant);
+				}
+				
+				foreach ($pid as $value) {
+					$taille_tableau = count($pages);
+
+					$pages[$taille_tableau] = $value;
+				}
+				
+				
+				foreach ($pages as $value) {
 					if ($premier == true)
 					{
 						$dossiers = $dossiers.'tx_ligestmembrelabo_MembreDuLabo.pid='.$value;
@@ -213,11 +310,23 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 					}
 					else
 					{
-					$dossiers = $dossiers.' OR tx_ligestmembrelabo_MembreDuLabo.pid='.$value;
+						$dossiers = $dossiers.' OR tx_ligestmembrelabo_MembreDuLabo.pid='.$value;
 					}
 				}
+
 				$dossiers = $dossiers.')';
 			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			
@@ -267,7 +376,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 					$code = $code.'</a>';			
 				}
 
-				if ($this->lConf['poste']==true)
+				if ($this->lConf['poste']==true && !(is_null($row['LibelleWeb'])))
 				{
 					$code= $code.', '.$row['LibelleWeb'];
 				}
@@ -284,6 +393,9 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 	
 		return $this->pi_wrapInBaseClass($content);
 	}
+
+	
+	
 }
 
 
