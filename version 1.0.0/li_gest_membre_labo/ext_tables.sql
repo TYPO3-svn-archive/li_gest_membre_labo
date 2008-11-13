@@ -71,8 +71,8 @@ CREATE TABLE tx_ligestmembrelabo_Structure (
 	Nom varchar(255) DEFAULT '' NOT NULL,
 	Adresse varchar(255) DEFAULT '' NOT NULL,
 	Type char(1) DEFAULT '' NOT NULL,
-	idStructureParente int(11) DEFAULT NULL,
-	
+	idStructureParente int(11) DEFAULT '0',
+
 	PRIMARY KEY (uid),
 	KEY parent (pid)
 );
@@ -112,7 +112,7 @@ CREATE TABLE tx_ligestmembrelabo_TypePosteWeb (
 	l18n_diffsource mediumblob NOT NULL,
 	deleted tinyint(4) DEFAULT '0' NOT NULL,
 	hidden tinyint(4) DEFAULT '0' NOT NULL,
-	idTypePosteWeb varchar(5) NOT NULL,
+	idTypePosteWeb varchar(5) DEFAULT '0' NOT NULL,
 	LibelleWeb varchar(255) DEFAULT '',
 
 	PRIMARY KEY (uid),
@@ -132,7 +132,7 @@ CREATE TABLE tx_ligestmembrelabo_TypePoste (
 	cruser_id int(11) DEFAULT '0' NOT NULL,
 	deleted tinyint(4) DEFAULT '0' NOT NULL,
 	hidden tinyint(4) DEFAULT '0' NOT NULL,
-	idTypePoste varchar(5) NOT NULL,
+	idTypePoste varchar(5) DEFAULT '0' NOT NULL,
 	Libelle varchar(255) DEFAULT '' NOT NULL,
 	idTypePosteWeb varchar(5) DEFAULT '0' NOT NULL,
 	

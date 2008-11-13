@@ -518,7 +518,7 @@ $TCA["tx_ligestmembrelabo_TypePoste"] = array (
 			"config" => Array (
 				"type" => "select",	
 				"foreign_table" => "tx_ligestmembrelabo_TypePosteWeb",	
-				"foreign_table_where" => "AND tx_ligestmembrelabo_TypePosteWeb.sys_language_uid='0' ORDER BY tx_ligestmembrelabo_TypePosteWeb.LibelleWeb",	
+				"foreign_table_where" => "AND tx_ligestmembrelabo_TypePosteWeb.sys_language_uid=0 ORDER BY tx_ligestmembrelabo_TypePosteWeb.LibelleWeb",	
 				"size" => 1,
 				"minitems" => 0,
 				"maxitems" => 1,

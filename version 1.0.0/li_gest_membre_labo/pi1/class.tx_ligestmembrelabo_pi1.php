@@ -142,87 +142,34 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 	}
 	
 	//Choix du type de poste
-	private function typeDePoste()
+	private function typeDePoste($typeDePoste)
 	{
 			//Création de la clause permettant l'affichage que de certains types de poste...
-			$premier = true;
-			
-			$postes = '';
-			if(($this->lConf['professeur'])==true && ($this->lConf['maitre'])==true && ($this->lConf['docteur'])==true && ($this->lConf['doctorant'])==true && ($this->lConf['autre'])==true){
-				//On n'indique pas de restrictions...
-			}
-			else
+			$postes='';
+	
+	
+			if($typeDePoste<>'')
 			{
-				if(($this->lConf['professeur'])==true)
-				{
-					if ($premier == true)
-					{
-						$postes = 'AND ( ';
-						$premier = false;
-					}
-					else
-					{
-						$postes = $postes.' OR ';
-					}
-					$postes=$postes.'tx_ligestmembrelabo_TypePosteWeb.LibelleWeb LIKE "%Professeur%"';
-				}
-				if(($this->lConf['maitre'])==true)
-				{
-					if ($premier == true)
-					{
-						$postes = 'AND ( ';
-						$premier = false;
-					}
-					else
+				$postes=' AND ( ';
+				$premier=true;
+
+				$tableau_postes = Explode(",",$typeDePoste);
+
+				foreach ($tableau_postes as $poste_courant) {
+					if ($premier <> true)
 					{
 						$postes = $postes.' OR ';
 					}
-					$postes=$postes.'tx_ligestmembrelabo_TypePosteWeb.LibelleWeb LIKE "%Maitre de Conferences%"';
-				}
-				if(($this->lConf['docteur'])==true)
-				{
-					if ($premier == true)
-					{
-						$postes = 'AND ( ';
-						$premier = false;
-					}
 					else
 					{
-						$postes = $postes.' OR ';
+						$premier=false;
 					}
-					$postes=$postes.'tx_ligestmembrelabo_TypePosteWeb.LibelleWeb LIKE "%Docteur%"';
+					$postes=$postes.'tx_ligestmembrelabo_TypePosteWeb.uid='.$poste_courant;
 				}
-				if(($this->lConf['doctorant'])==true)
-				{
-					if ($premier == true)
-					{
-						$postes = 'AND ( ';
-						$premier = false;
-					}
-					else
-					{
-						$postes = $postes.' OR ';
-					}
-					$postes=$postes.'tx_ligestmembrelabo_TypePosteWeb.LibelleWeb LIKE "%Doctorant%"';
-				}
-				if(($this->lConf['autre'])==true)
-				{
-					if ($premier == true)
-					{
-						$postes = 'AND ( ';
-						$premier = false;
-					}
-					else
-					{
-						$postes = $postes.' OR ';
-					}
-					$postes=$postes.'tx_ligestmembrelabo_TypePosteWeb.LibelleWeb LIKE "%Autre Chercheur%"';
-				}
-				if ($postes <> '')
-				{
-					$postes = $postes.' )';
-				}
+	
+				$postes = $postes.' )';
 			}
+
 			return $postes;
 	}
 	
@@ -293,7 +240,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			$code = ''; //Variable contenant le code à afficher
 			
 			//Gestion des types de postes
-			$postes=$this->typeDePoste();
+			$postes=$this->typeDePoste($this->lConf['typePoste']);
 
 			
 			//Gestion du nom de l'Equipe

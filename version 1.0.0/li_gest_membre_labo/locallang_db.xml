@@ -81,6 +81,7 @@
 			<label index="tt_content.pi_flexform.labo">Laboratory Name</label>
 			<label index="tt_content.pi_flexform.poste">Showing the type of job (Master Conferences, Professor, Doctor,...)</label>
 			<label index="tt_content.pi_flexform.sheet_display">Display</label>
+			<label index="tt_content.pi_flexform.typePoste">Job Type to be displayed (if no job is selected, all jobs are displayed)</label>
 			<label index="tt_content.pi_flexform.professeur">Professors</label>
 			<label index="tt_content.pi_flexform.maitre">Masters Conferences</label>
 			<label index="tt_content.pi_flexform.docteur">Doctors</label>
@@ -173,6 +174,7 @@
 			<label index="tt_content.pi_flexform.labo">Nom du Laboratoire</label>
 			<label index="tt_content.pi_flexform.poste">Afficher le type de poste (Maître de Conférences, Professeur, Docteur,...)</label>
 			<label index="tt_content.pi_flexform.sheet_display">Affichage</label>
+			<label index="tt_content.pi_flexform.typePoste">Type de poste à afficher (si aucun poste n'est sélectionné, tous les postes seront affichés)</label>
 			<label index="tt_content.pi_flexform.professeur">Professeurs</label>
 			<label index="tt_content.pi_flexform.maitre">Maîtres de Conférences</label>
 			<label index="tt_content.pi_flexform.docteur">Docteurs</label>
