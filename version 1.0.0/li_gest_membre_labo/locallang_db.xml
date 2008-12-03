@@ -55,11 +55,11 @@
 			<label index="tx_ligestmembrelabo_Categorie">Category</label>
 			<label index="tx_ligestmembrelabo_Categorie.idcategorie">id Category</label>
 			<label index="tx_ligestmembrelabo_Categorie.libelle">Label</label>
-			<label index="tx_ligestmembrelabo_Categorie_MembreDuLabo">Category Member of Lab</label>
-			<label index="tx_ligestmembrelabo_Categorie_MembreDuLabo.idcategorie">id Category</label>
-			<label index="tx_ligestmembrelabo_Categorie_MembreDuLabo.idmembrelabo">id Lab Member</label>
-			<label index="tx_ligestmembrelabo_Categorie_MembreDuLabo.datedebut">Start Date (yyyy-mm-dd)</label>
-			<label index="tx_ligestmembrelabo_Categorie_MembreDuLabo.datefin">End Date (yyyy-mm-dd)</label>
+			<label index="tx_ligestmembrelabo_CategorieMembre">Category Member of Lab</label>
+			<label index="tx_ligestmembrelabo_CategorieMembre.idcategorie">id Category</label>
+			<label index="tx_ligestmembrelabo_CategorieMembre.idmembrelabo">id Lab Member</label>
+			<label index="tx_ligestmembrelabo_CategorieMembre.datedebut">Start Date (yyyy-mm-dd)</label>
+			<label index="tx_ligestmembrelabo_CategorieMembre.datefin">End Date (yyyy-mm-dd)</label>
 			<label index="tx_ligestmembrelabo_Equipe">Team</label>
 			<label index="tx_ligestmembrelabo_Equipe.nom">Name</label>
 			<label index="tx_ligestmembrelabo_Equipe.abreviation">Abbreviation</label>
@@ -77,17 +77,22 @@
 			<label index="tx_ligestmembrelabo_AObtenu.intitule">Label</label>
 			<label index="tx_ligestmembrelabo_AObtenu.lieudobtention">Instead of obtaining</label>
 			<label index="tt_content.list_type_pi1">Managing Member</label>
-			<label index="tt_content.pi_flexform.sheet_general">Properties</label>
-			<label index="tt_content.pi_flexform.labo">Laboratory Name</label>
-			<label index="tt_content.pi_flexform.poste">Showing the type of job (Master Conferences, Professor, Doctor,...)</label>
+			<label index="tt_content.pi_flexform.sheet_general">Data</label>
+			<label index="tt_content.pi_flexform.equipe">Team Name</label>
 			<label index="tt_content.pi_flexform.sheet_display">Display</label>
-			<label index="tt_content.pi_flexform.typePoste">Job Type to be displayed (if no job is selected, all jobs are displayed)</label>
 			<label index="tt_content.pi_flexform.professeur">Professors</label>
 			<label index="tt_content.pi_flexform.maitre">Masters Conferences</label>
 			<label index="tt_content.pi_flexform.docteur">Doctors</label>
 			<label index="tt_content.pi_flexform.doctorant">Graduate Students</label>
 			<label index="tt_content.pi_flexform.autre">Others Researchers</label>
 			<label index="tt_content.pi_flexform.pid">Data</label>
+			<label index="tt_content.pi_flexform.sheet_filtres">Filters</label>
+			<label index="tt_content.pi_flexform.typeposte">Job Type to be displayed (if no job is selected, all jobs are displayed)</label>
+			<label index="tt_content.pi_flexform.typedateposte">Filter by date of Job Type</label>
+			<label index="tt_content.pi_flexform.typedate.0">Actual</label>
+			<label index="tt_content.pi_flexform.typedate.1">All</label>
+			<label index="tt_content.pi_flexform.typedate.2">Old</label>
+			<label index="tt_content.pi_flexform.categorie">Category</label>
 			<label index="tt_content.pi_flexform.sheet_request">Request</label>
 			<label index="tt_content.pi_flexform.requete">Use a request for display members</label>
 			<label index="tt_content.pi_flexform.select">select</label>
@@ -97,6 +102,8 @@
 			<label index="tt_content.pi_flexform.orderBy">orderBy</label>
 			<label index="tt_content.pi_flexform.limit">limit</label>
 			<label index="tt_content.pi_flexform.tryMemcached">tryMemcached</label>
+			<label index="tt_content.pi_flexform.sheet_template">Template</label>
+			<label index="tt_content.pi_flexform.template_file_ref">Template file reference</label>
 		</languageKey>
 		<languageKey index="fr" type="array">
 			<label index="tx_ligestmembrelabo_MembreDuLabo">Membre du labo</label>
@@ -148,11 +155,11 @@
 			<label index="tx_ligestmembrelabo_Categorie">Catégorie</label>
 			<label index="tx_ligestmembrelabo_Categorie.idcategorie">id Categorie</label>
 			<label index="tx_ligestmembrelabo_Categorie.libelle">Libelle</label>
-			<label index="tx_ligestmembrelabo_Categorie_MembreDuLabo">Categorie Membre Du Labo</label>
-			<label index="tx_ligestmembrelabo_Categorie_MembreDuLabo.idcategorie">id Categorie</label>
-			<label index="tx_ligestmembrelabo_Categorie_MembreDuLabo.idmembrelabo">id Membre Labo</label>
-			<label index="tx_ligestmembrelabo_Categorie_MembreDuLabo.datedebut">Date Debut (au format: aaaa-mm-jj)</label>
-			<label index="tx_ligestmembrelabo_Categorie_MembreDuLabo.datefin">Date Fin (au format: aaaa-mm-jj)</label>
+			<label index="tx_ligestmembrelabo_CategorieMembre">Categorie Membre Du Labo</label>
+			<label index="tx_ligestmembrelabo_CategorieMembre.idcategorie">id Categorie</label>
+			<label index="tx_ligestmembrelabo_CategorieMembre.idmembrelabo">id Membre Labo</label>
+			<label index="tx_ligestmembrelabo_CategorieMembre.datedebut">Date Debut (au format: aaaa-mm-jj)</label>
+			<label index="tx_ligestmembrelabo_CategorieMembre.datefin">Date Fin (au format: aaaa-mm-jj)</label>
 			<label index="tx_ligestmembrelabo_Equipe">Equipe</label>
 			<label index="tx_ligestmembrelabo_Equipe.nom">Nom</label>
 			<label index="tx_ligestmembrelabo_Equipe.abreviation">Abréviation</label>
@@ -170,17 +177,22 @@
 			<label index="tx_ligestmembrelabo_AObtenu.intitule">Intitule</label>
 			<label index="tx_ligestmembrelabo_AObtenu.lieudobtention">Lieu D'Obtention</label>
 			<label index="tt_content.list_type_pi1">Gestion de membres</label>
-			<label index="tt_content.pi_flexform.sheet_general">Propriétés</label>
-			<label index="tt_content.pi_flexform.labo">Nom du Laboratoire</label>
-			<label index="tt_content.pi_flexform.poste">Afficher le type de poste (Maître de Conférences, Professeur, Docteur,...)</label>
+			<label index="tt_content.pi_flexform.sheet_general">Données</label>
+			<label index="tt_content.pi_flexform.equipe">Nom de l'équipe</label>
 			<label index="tt_content.pi_flexform.sheet_display">Affichage</label>
-			<label index="tt_content.pi_flexform.typePoste">Type de poste à afficher (si aucun poste n'est sélectionné, tous les postes seront affichés)</label>
 			<label index="tt_content.pi_flexform.professeur">Professeurs</label>
 			<label index="tt_content.pi_flexform.maitre">Maîtres de Conférences</label>
 			<label index="tt_content.pi_flexform.docteur">Docteurs</label>
 			<label index="tt_content.pi_flexform.doctorant">Doctorants</label>
 			<label index="tt_content.pi_flexform.autre">Autres Chercheurs</label>
 			<label index="tt_content.pi_flexform.pid">Données</label>
+			<label index="tt_content.pi_flexform.sheet_filtres">Filtres</label>
+			<label index="tt_content.pi_flexform.typeposte">Type de poste à afficher (si aucun poste n'est sélectionné, tous les postes seront affichés)</label>
+			<label index="tt_content.pi_flexform.typedateposte">Filtrer les types de poste par date</label>
+			<label index="tt_content.pi_flexform.typedate.0">Actuels</label>
+			<label index="tt_content.pi_flexform.typedate.1">Tous</label>
+			<label index="tt_content.pi_flexform.typedate.2">Anciens</label>
+			<label index="tt_content.pi_flexform.categorie">Categorie</label>
 			<label index="tt_content.pi_flexform.sheet_request">Requête</label>
 			<label index="tt_content.pi_flexform.requete">Utiliser une requête pour afficher les membres</label>
 			<label index="tt_content.pi_flexform.select">select</label>
@@ -190,6 +202,8 @@
 			<label index="tt_content.pi_flexform.orderBy">orderBy</label>
 			<label index="tt_content.pi_flexform.limit">limit</label>
 			<label index="tt_content.pi_flexform.tryMemcached">tryMemcached</label>
+			<label index="tt_content.pi_flexform.sheet_template">Gabarit</label>
+			<label index="tt_content.pi_flexform.template_file_ref">Référence vers le fichier du gabarit HTML</label>
 		</languageKey>
 	</data>
 </T3locallang>

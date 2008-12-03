@@ -79,7 +79,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 				"type" => "input",	
 				"size" => "10",	
 				"max" => "10",	
-				"eval" => "trim",
+				"eval" => "trim,tx_ligestmembrelabo_dateValide",
 				'default' => '0000-00-00'
 			)
 		),
@@ -91,7 +91,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 				"size" => "48",	
 				"max" => "255",	
 				"eval" => "trim",
-				'default' => 'Français'
+				'default' => "Francais"
 			)
 		),
 		"DateArrivee" => Array (		
@@ -101,7 +101,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 				"type" => "input",	
 				"size" => "10",	
 				"max" => "10",	
-				"eval" => "trim",
+				"eval" => "required,trim,tx_ligestmembrelabo_dateValide,tx_ligestmembrelabo_dateObligatoire",
 				'default' => '0000-00-00'
 			)
 		),
@@ -112,7 +112,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 				"type" => "input",	
 				"size" => "10",	
 				"max" => "10",	
-				"eval" => "trim",
+				"eval" => "trim,tx_ligestmembrelabo_dateValide",
 				'default' => '0000-00-00'
 			)
 		),
@@ -173,7 +173,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 				"type" => "input",	
 				"size" => "48",	
 				"max" => "255",	
-				"eval" => "trim",
+				"eval" => "trim,email",
 			)
 		),
 		"PageWeb" => Array (		
@@ -373,7 +373,7 @@ $TCA["tx_ligestmembrelabo_Exerce"] = array (
 				"type" => "input",	
 				"size" => "10",	
 				"max" => "10",	
-				"eval" => "trim",
+				"eval" => "required,trim,tx_ligestmembrelabo_dateValide,tx_ligestmembrelabo_dateObligatoire",
 				'default' => '0000-00-00'
 			)
 		),
@@ -384,7 +384,7 @@ $TCA["tx_ligestmembrelabo_Exerce"] = array (
 				"type" => "input",	
 				"size" => "10",	
 				"max" => "10",	
-				"eval" => "trim",
+				"eval" => "trim,tx_ligestmembrelabo_dateValide",
 				'default' => '0000-00-00'
 			)
 		),
@@ -556,7 +556,7 @@ $TCA["tx_ligestmembrelabo_Possede"] = array (
 			"config" => Array (
 				"type" => "select",	
 				"foreign_table" => "tx_ligestmembrelabo_TypePoste",	
-				"foreign_table_where" => "ORDER BY tx_ligestmembrelabo_TypePoste.idTypePoste",	
+				"foreign_table_where" => "ORDER BY tx_ligestmembrelabo_TypePoste.Libelle",	
 				"size" => 1,	
 				"minitems" => 0,
 				"maxitems" => 1,
@@ -581,7 +581,7 @@ $TCA["tx_ligestmembrelabo_Possede"] = array (
 				"type" => "input",	
 				"size" => "10",	
 				"max" => "10",	
-				"eval" => "trim",
+				"eval" => "required,trim,tx_ligestmembrelabo_dateValide,tx_ligestmembrelabo_dateObligatoire",
 				'default' => '0000-00-00'
 			)
 		),
@@ -592,7 +592,7 @@ $TCA["tx_ligestmembrelabo_Possede"] = array (
 				"type" => "input",	
 				"size" => "10",	
 				"max" => "10",	
-				"eval" => "trim",
+				"eval" => "trim,tx_ligestmembrelabo_dateValide",
 				'default' => '0000-00-00'
 			)
 		),
@@ -610,10 +610,41 @@ $TCA["tx_ligestmembrelabo_Possede"] = array (
 $TCA["tx_ligestmembrelabo_Categorie"] = array (
 	"ctrl" => $TCA["tx_ligestmembrelabo_Categorie"]["ctrl"],
 	"interface" => array (
-		"showRecordFieldList" => "hidden, idCategorie, Libelle"
+		"showRecordFieldList" => "sys_language_uid, l18n_parent, l18n_diffsource, hidden, idCategorie, Libelle"
 	),
 	"feInterface" => $TCA["tx_ligestmembrelabo_Categorie"]["feInterface"],
 	"columns" => array (
+		'sys_language_uid' => array (		
+			'exclude' => 1,
+			'label'  => 'LLL:EXT:lang/locallang_general.xml:LGL.language',
+			'config' => array (
+				'type'                => 'select',
+				'foreign_table'       => 'sys_language',
+				'foreign_table_where' => 'ORDER BY sys_language.title',
+				'items' => array(
+					array('LLL:EXT:lang/locallang_general.xml:LGL.allLanguages', -1),
+					array('LLL:EXT:lang/locallang_general.xml:LGL.default_value', 0)
+				)
+			)
+		),
+		'l18n_parent' => array (		
+			'displayCond' => 'FIELD:sys_language_uid:>:0',
+			'exclude'     => 1,
+			'label'       => 'LLL:EXT:lang/locallang_general.xml:LGL.l18n_parent',
+			'config'      => array (
+				'type'  => 'select',
+				'items' => array (
+					array('', 0),
+				),
+				'foreign_table'       => 'tx_ligestmembrelabo_Categorie',
+				'foreign_table_where' => 'AND tx_ligestmembrelabo_Categorie.pid=###CURRENT_PID### AND tx_ligestmembrelabo_Categorie.sys_language_uid IN (-1,0)',
+			)
+		),
+		'l18n_diffsource' => array (		
+			'config' => array (
+				'type' => 'passthrough'
+			)
+		),
 		'hidden' => array (		
 			'exclude' => 1,
 			'label'   => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
@@ -644,7 +675,7 @@ $TCA["tx_ligestmembrelabo_Categorie"] = array (
 		),
 	),
 	"types" => array (
-		"0" => array("showitem" => "hidden;;1;;1-1-1, idCategorie, Libelle")
+		"0" => array("showitem" => "sys_language_uid;;1;;1-1-1, l18n_parent, l18n_diffsource, hidden, idCategorie, Libelle")
 	),
 	"palettes" => array (
 		"1" => array("showitem" => "")
@@ -653,12 +684,17 @@ $TCA["tx_ligestmembrelabo_Categorie"] = array (
 
 
 
-$TCA["tx_ligestmembrelabo_Categorie_MembreDuLabo"] = array (
-	"ctrl" => $TCA["tx_ligestmembrelabo_Categorie_MembreDuLabo"]["ctrl"],
+
+
+
+
+
+$TCA["tx_ligestmembrelabo_CategorieMembre"] = array (
+	"ctrl" => $TCA["tx_ligestmembrelabo_CategorieMembre"]["ctrl"],
 	"interface" => array (
 		"showRecordFieldList" => "hidden, idMembreLabo, idCategorie, DateDebut, DateFin"
 	),
-	"feInterface" => $TCA["tx_ligestmembrelabo_Categorie_MembreDuLabo"]["feInterface"],
+	"feInterface" => $TCA["tx_ligestmembrelabo_CategorieMembre"]["feInterface"],
 	"columns" => array (
 		'hidden' => array (		
 			'exclude' => 1,
@@ -670,47 +706,47 @@ $TCA["tx_ligestmembrelabo_Categorie_MembreDuLabo"] = array (
 		),
 		"idMembreLabo" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Possede.idmembremabo",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_CategorieMembre.idmembrelabo",		
 			"config" => Array (
 				"type" => "select",	
 				"foreign_table" => "tx_ligestmembrelabo_MembreDuLabo",	
-				"foreign_table_where" => "ORDER BY tx_ligestmembrelabo_MembreDuLabo.NomDUsage, tx_ligestmembrelabo_MembreDuLabo.Prenom",		
-				"size" => 1,
+				"foreign_table_where" => "ORDER BY tx_ligestmembrelabo_MembreDuLabo.NomDUsage, tx_ligestmembrelabo_MembreDuLabo.Prenom",	
+				"size" => 1,	
 				"minitems" => 0,
 				"maxitems" => 1,
 			)
 		),
-		"idCategorie" => Array (
-			"exclude" => 1,
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Categorie.idcategorie",
-			"config" => Array (
-				"type" => "select",
-				"foreign_table" => "tx_ligestmembrelabo_Categorie",
-				"foreign_table_where" => "ORDER BY tx_ligestmembrelabo_Categorie.idCategorie",
-				"size" => 1,
-				"minitems" => 0,
-				"maxitems" => 1,
-			)
-		),
-		"DateDebut" => Array (		
+		"idCategorie" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Categorie_MembreDuLabo.datedebut",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_CategorieMembre.idcategorie",		
 			"config" => Array (
-				"type" => "input",	
-				"size" => "10",	
-				"max" => "10",	
-				"eval" => "trim",
+				"type" => "select",	
+				"foreign_table" => "tx_ligestmembrelabo_Categorie",	
+				"foreign_table_where" => "AND tx_ligestmembrelabo_Categorie.sys_language_uid=0 ORDER BY tx_ligestmembrelabo_Categorie.Libelle",	
+				"size" => 1,	
+				"minitems" => 0,
+				"maxitems" => 1,
+			)
+		),
+		"DateDebut" => Array (
+			"exclude" => 1,
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_CategorieMembre.datedebut",
+			"config" => Array (
+				"type" => "input",
+				"size" => "10",
+				"max" => "10",
+				"eval" => "required,trim,tx_ligestmembrelabo_dateValide,tx_ligestmembrelabo_dateObligatoire",
 				'default' => '0000-00-00'
 			)
 		),
 		"DateFin" => Array (
-			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Categorie_MembreDuLabo.datefin",		
+			"exclude" => 1,
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_CategorieMembre.datefin",
 			"config" => Array (
-				"type" => "input",	
-				"size" => "10",	
-				"max" => "10",	
-				"eval" => "trim",
+				"type" => "input",
+				"size" => "10",
+				"max" => "10",
+				"eval" => "trim,tx_ligestmembrelabo_dateValide",
 				'default' => '0000-00-00'
 			)
 		),
@@ -722,6 +758,7 @@ $TCA["tx_ligestmembrelabo_Categorie_MembreDuLabo"] = array (
 		"1" => array("showitem" => "")
 	)
 );
+
 
 
 

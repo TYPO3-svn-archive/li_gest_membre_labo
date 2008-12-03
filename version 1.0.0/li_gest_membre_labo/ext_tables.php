@@ -1,5 +1,12 @@
 <?php
 if (!defined ('TYPO3_MODE')) 	die ('Access denied.');
+
+
+$TYPO3_CONF_VARS['SC_OPTIONS']['tce']['formevals']['tx_ligestmembrelabo_dateValide'] = 'EXT:li_gest_membre_labo/class.tx_ligestmembrelabo_dateValide.php';
+$TYPO3_CONF_VARS['SC_OPTIONS']['tce']['formevals']['tx_ligestmembrelabo_dateObligatoire'] = 'EXT:li_gest_membre_labo/class.tx_ligestmembrelabo_dateObligatoire.php';
+
+
+
 $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 	"ctrl" => array (
 		'title'     => 'LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo',		
@@ -122,7 +129,7 @@ $TCA["tx_ligestmembrelabo_TypePoste"] = array (
 		'title'     => 'LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_TypePoste',		
 		'label'     => 'uid',
 		'label_alt' => 'Libelle',
-		'label_alt_force' => '1',	
+		'label_alt_force' => '1',
 		'tstamp'    => 'tstamp',
 		'crdate'    => 'crdate',
 		'cruser_id' => 'cruser_id',
@@ -148,7 +155,7 @@ $TCA["tx_ligestmembrelabo_Possede"] = array (
 		'tstamp'    => 'tstamp',
 		'crdate'    => 'crdate',
 		'cruser_id' => 'cruser_id',
-		'default_sortby' => "ORDER BY uid",	
+		'default_sortby' => "ORDER BY idMembreLabo",	
 		'delete' => 'deleted',	
 		'enablecolumns' => array (		
 			'disabled' => 'hidden',
@@ -170,7 +177,7 @@ $TCA["tx_ligestmembrelabo_Categorie"] = array (
 		'tstamp'    => 'tstamp',
 		'crdate'    => 'crdate',
 		'cruser_id' => 'cruser_id',
-		'default_sortby' => "ORDER BY idCategorie, Libelle",	
+		'default_sortby' => "ORDER BY sys_language_uid, idCategorie, Libelle",	
 		'delete' => 'deleted',
 		'enablecolumns' => array (		
 			'disabled' => 'hidden',
@@ -179,13 +186,15 @@ $TCA["tx_ligestmembrelabo_Categorie"] = array (
 		'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_ligestmembrelabo_Categorie.gif',
 	),
 	"feInterface" => array (
-		"fe_admin_fieldList" => "hidden, idCategorie, Libelle",
+		"fe_admin_fieldList" => "sys_language_uid, l18n_parent, l18n_diffsource, hidden, idCategorie, Libelle",
 	)
 );
 
-$TCA["tx_ligestmembrelabo_Categorie_MembreDuLabo"] = array (
+
+
+$TCA["tx_ligestmembrelabo_CategorieMembre"] = array (
 	"ctrl" => array (
-		'title'     => 'LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Categorie_MembreDuLabo',		
+		'title'     => 'LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_CategorieMembre',		
 		'label'     => 'uid',
 		'label_alt' => 'idMembreLabo, idCategorie',
 		'label_alt_force' => '1',	
@@ -193,17 +202,37 @@ $TCA["tx_ligestmembrelabo_Categorie_MembreDuLabo"] = array (
 		'crdate'    => 'crdate',
 		'cruser_id' => 'cruser_id',
 		'default_sortby' => "ORDER BY uid",	
-		'delete' => 'deleted',	
-		'enablecolumns' => array (
+		'delete' => 'deleted',
+		'enablecolumns' => array (		
 			'disabled' => 'hidden',
 		),
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
-		'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_ligestmembrelabo_Categorie_MembreDuLabo.gif',
+		'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_ligestmembrelabo_CategorieMembre.gif',
 	),
 	"feInterface" => array (
 		"fe_admin_fieldList" => "hidden, idMembreLabo, idCategorie, DateDebut, DateFin",
 	)
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 $TCA["tx_ligestmembrelabo_Equipe"] = array (
 	"ctrl" => array (
@@ -295,7 +324,7 @@ $TCA["tx_ligestmembrelabo_AObtenu"] = array (
 
 
 t3lib_div::loadTCA('tt_content');
-$TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_pi1']='layout,select_key';
+$TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_pi1']='layout,select_key,pages';
 
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_pi1']='pi_flexform'; //Ajouté
 

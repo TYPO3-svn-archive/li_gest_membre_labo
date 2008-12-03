@@ -173,6 +173,9 @@ CREATE TABLE tx_ligestmembrelabo_Categorie (
 	tstamp int(11) DEFAULT '0' NOT NULL,
 	crdate int(11) DEFAULT '0' NOT NULL,
 	cruser_id int(11) DEFAULT '0' NOT NULL,
+	sys_language_uid int(11) DEFAULT '0' NOT NULL,
+	l18n_parent int(11) DEFAULT '0' NOT NULL,
+	l18n_diffsource mediumblob NOT NULL,
 	deleted tinyint(4) DEFAULT '0' NOT NULL,
 	hidden tinyint(4) DEFAULT '0' NOT NULL,
 	idCategorie varchar(5) DEFAULT '' NOT NULL,
@@ -185,9 +188,9 @@ CREATE TABLE tx_ligestmembrelabo_Categorie (
 
 
 #
-# Table structure for table 'tx_ligestmembrelabo_Categorie_MembreDuLabo'
+# Table structure for table 'tx_ligestmembrelabo_CategorieMembre'
 #
-CREATE TABLE tx_ligestmembrelabo_Categorie_MembreDuLabo (
+CREATE TABLE tx_ligestmembrelabo_CategorieMembre (
 	uid int(11) DEFAULT '0' NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 	tstamp int(11) DEFAULT '0' NOT NULL,
@@ -195,14 +198,16 @@ CREATE TABLE tx_ligestmembrelabo_Categorie_MembreDuLabo (
 	cruser_id int(11) DEFAULT '0' NOT NULL,
 	deleted tinyint(4) DEFAULT '0' NOT NULL,
 	hidden tinyint(4) DEFAULT '0' NOT NULL,
-	idCategorie varchar(5) DEFAULT '' NOT NULL,
 	idMembreLabo int(11) DEFAULT '0' NOT NULL,
+	idCategorie int(11) DEFAULT '0' NOT NULL,
 	DateDebut date DEFAULT '0000-00-00' NOT NULL,
 	DateFin date DEFAULT '0000-00-00' NOT NULL,
-	
+
 	PRIMARY KEY (uid),
 	KEY parent (pid)
 );
+
+
 
 
 

@@ -38,6 +38,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 	var $extKey        = 'li_gest_membre_labo';	// The extension key.
 	var $pi_checkCHash = true;
 
+
 	//Recherche des sous-dossiers contenant les membres du laboratoire...
 	private function rechercheFils($pid_parent)
 	{
@@ -60,14 +61,14 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 		{
 			$pid_courant = $row['uid'];
 
-			
+
 			//On stocke l'uid courant dans le tableau
 			$taille_tableau = count($tableau);
 						
 			$tableau[$taille_tableau] = $pid_courant;
 
 			$tableau_temp = $this->rechercheFils($pid_courant);
-				
+
 			foreach ($tableau_temp as $value) {
 				$taille_tableau = count($tableau);
 					
@@ -137,17 +138,18 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 				}
 			}
 		}
-		
+
 		return $texte;
 	}
 	
 	//Choix du type de poste
-	private function typeDePoste($typeDePoste)
+	//Cette fonction permet de créer une clause concernant le type de poste
+	private function typeDePoste($typeDePoste,$typeDate)
 	{
 			//Création de la clause permettant l'affichage que de certains types de poste...
 			$postes='';
 	
-	
+
 			if($typeDePoste<>'')
 			{
 				$postes=' AND ( ';
@@ -168,8 +170,19 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 				}
 	
 				$postes = $postes.' )';
+
 			}
 
+			//Gestion des dates...
+			if($typeDate=='Actuels')
+			{
+				$postes = $postes.' AND tx_ligestmembrelabo_Possede.DateDebut<"'.date('Y-m-d').'" AND (tx_ligestmembrelabo_Possede.DateFin>="'.date('Y-m-d').'" OR tx_ligestmembrelabo_Possede.DateFin="0000-00-00")';
+			}
+			else if($typeDate=='Anciens')
+			{
+					$postes = $postes.' AND tx_ligestmembrelabo_Possede.DateFin<"'.date('Y-m-d').'" AND tx_ligestmembrelabo_Possede.DateFin<>"0000-00-00"';
+			}
+				
 			return $postes;
 	}
 	
@@ -206,6 +219,27 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 		$this->pi_loadLL();
 
 		
+		//Gestion de gabarits (Template)
+
+		$this->templateCode = $this->cObj->fileResource($this->lConf["template_file"]);
+
+		# Get the template code
+		$template = array();
+		
+		# Get the total template
+		$template['total'] = $this->cObj->getSubpart($this->templateCode, '###TEMPLATE###');
+
+		# Get a row
+		$template['item'] = $this->cObj->getSubpart($template['total'], '###ITEM###');
+		
+		
+		
+		
+		
+		
+		
+		
+		//Exemple de création de requêtes
 		/*----------------------------------------------------------------------------------------
 		//Création de requête
 		$select_fields = '*';
@@ -222,6 +256,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 		{
 			$test = $test.$row['champ1'].' ';
 		}
+		
 		----------------------------------------------------------------------------------------*/
 		$select_fields = '';
 		$from_table = '';
@@ -232,27 +267,23 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 		$tryMemcached = '';
 		
 		
-		if(($this->lConf['requete'])<>true)
-		{
+		if(($this->lConf['requete'])<>true){
 		
 		
 			//Récupération de toutes les membres de l'équipe demandée ayant les postes sélectionnés
 			$code = ''; //Variable contenant le code à afficher
 			
 			//Gestion des types de postes
-			$postes=$this->typeDePoste($this->lConf['typePoste']);
+			$postes=$this->typeDePoste($this->lConf['typePoste'],$this->lConf['DatetypePoste']);
 
-			
+
 			//Gestion du nom de l'Equipe
 			$from_table = '';
 			$equipe_where_clause = '';
-			if (($this->lConf['labo'])<>'')
-			{
+			if (($this->lConf['labo'])<>''){
 				$from_table = ', tx_ligestmembrelabo_EstMembreDe, tx_ligestmembrelabo_Equipe';
 				$equipe_where_clause = ' AND tx_ligestmembrelabo_MembreDuLabo.uid = tx_ligestmembrelabo_EstMembreDe.idMembreLabo AND tx_ligestmembrelabo_EstMembreDe.idEquipe = tx_ligestmembrelabo_Equipe.uid AND (tx_ligestmembrelabo_Equipe.Nom = "'.$this->lConf['labo'].'" OR tx_ligestmembrelabo_Equipe.Abreviation = "'.$this->lConf['labo'].'")';
 			}
-			
-			
 
 			
 			// Création de la clause permettant de ne choisir que certains membres selon les dossiers sélectionnés
@@ -264,8 +295,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			
 			$chaine = $this->lConf['pid'];
 			
-			if ($chaine!='')
-			{
+			if ($chaine!=''){
 				$dossiers = $dossiers.' AND (';
 				$pid = Explode(",",$chaine);
 				//$pages = $pid;
@@ -273,7 +303,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 				$premier = true;
 				
 				foreach ($pid as $pid_courant) {
-					$pages = $pages+$this->rechercheFils($pid_courant);
+					$pages = array_merge($pages,$this->rechercheFils($pid_courant));
 				}
 				
 				foreach ($pid as $value) {
@@ -284,13 +314,11 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 				
 				
 				foreach ($pages as $value) {
-					if ($premier == true)
-					{
+					if ($premier == true){
 						$dossiers = $dossiers.'tx_ligestmembrelabo_MembreDuLabo.pid='.$value;
 						$premier = false;
 					}
-					else
-					{
+					else{
 						$dossiers = $dossiers.' OR tx_ligestmembrelabo_MembreDuLabo.pid='.$value;
 					}
 				}
@@ -303,7 +331,8 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			
 			
 			
-			$select_fields = 'tx_ligestmembrelabo_MembreDuLabo.uid, tx_ligestmembrelabo_MembreDuLabo.NomDUsage, tx_ligestmembrelabo_MembreDuLabo.Prenom, tx_ligestmembrelabo_MembreDuLabo.PageWeb, tx_ligestmembrelabo_TypePosteWeb.uid, tx_ligestmembrelabo_TypePosteWeb.sys_language_uid, tx_ligestmembrelabo_TypePosteWeb.l18n_parent, tx_ligestmembrelabo_TypePosteWeb.LibelleWeb';
+			//$select_fields = 'tx_ligestmembrelabo_MembreDuLabo.uid, tx_ligestmembrelabo_MembreDuLabo.NomDUsage, tx_ligestmembrelabo_MembreDuLabo.Prenom, tx_ligestmembrelabo_MembreDuLabo.PageWeb, tx_ligestmembrelabo_TypePosteWeb.uid, tx_ligestmembrelabo_TypePosteWeb.sys_language_uid, tx_ligestmembrelabo_TypePosteWeb.l18n_parent, tx_ligestmembrelabo_TypePosteWeb.LibelleWeb';
+			$select_fields = 'tx_ligestmembrelabo_MembreDuLabo.*, tx_ligestmembrelabo_Possede.*, tx_ligestmembrelabo_TypePoste.*, tx_ligestmembrelabo_TypePosteWeb.*';
 			$from_table = 'tx_ligestmembrelabo_MembreDuLabo, tx_ligestmembrelabo_Possede, tx_ligestmembrelabo_TypePoste, tx_ligestmembrelabo_TypePosteWeb'.$from_table;
 			$where_clause = 'tx_ligestmembrelabo_Possede.idMembreLabo = tx_ligestmembrelabo_MembreDuLabo.uid AND tx_ligestmembrelabo_Possede.idTypePoste = tx_ligestmembrelabo_TypePoste.idTypePoste AND tx_ligestmembrelabo_TypePoste.idTypePosteWeb = tx_ligestmembrelabo_TypePosteWeb.idTypePosteWeb '.$equipe_where_clause.$postes.$dossiers;
 			$groupBy = '';
@@ -315,8 +344,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			
 			
 		}
-		else
-		{
+		else{
 			$select_fields = $this->lConf['select'];
 			$from_table = $this->lConf['from_table'];
 			$where_clause = $this->lConf['where_clause'];
@@ -328,62 +356,95 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 		}
 		
 
+		$markerArray = array();
 
-			$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select_fields, $from_table, $where_clause, $groupBy, $orderBy, $tryMemcached);
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select_fields, $from_table, $where_clause, $groupBy, $orderBy, $tryMemcached);
 
-			while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))
-			{
-
-				$pageWeb = false;
-				$code = $code.'<p>';
-				
-				if ($row['PageWeb']<>'' && !(is_null($row['PageWeb'])))
-				{
-					$code = $code.'<a href="'.$row['PageWeb'].'">';
-					$pageWeb=true;
-				}
-				$code = $code.$row['NomDUsage'].' '.$row['Prenom'];
-				if ($pageWeb=true)
-				{
-					$code = $code.'</a>';			
-				}
-
-
-				//Gestion multilangue
-				
-				//Si le type de poste est affiché
-				if ($this->lConf['poste']==true)
-				{
-					$champ='';
-					$champ=$row['LibelleWeb'];
-					//On recherche le libellé traduit de LibelleWeb
-					$champ=$this->rechercherUidLangue($row['uid'],$row['sys_language_uid'],$row['l18n_parent'],$row['LibelleWeb'],'tx_ligestmembrelabo_TypePosteWeb','LibelleWeb');
-					
-					if(!(is_null($row['LibelleWeb'])) && $row['LibelleWeb']<>'')
-					{
-						$code= $code.', '.$champ;
-					}
-				}
-				
-				
-				
-				
-				
-				
-				
-				//Ancien sans multi langue
-				//if ($this->lConf['poste']==true && !(is_null($row['LibelleWeb'])) && $row['LibelleWeb']<>'')
-				//{
-				//	$code= $code.', '.$row['LibelleWeb'];
-				//}
-				
-				
-				$code = $code.'</p>
-				';
-				
-			}
+		while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))       {
 		
-		$content=$code;
+			//**************************************
+			// Table MembreDuLabo
+			$markerArray['###NomDUsage###'] = $row['NomDUsage'];
+			$markerArray['###NomMaritale###'] = $row['NomMaritale'];
+			$markerArray['###NomPreMarital###'] = $row['NomPreMarital'];
+			$markerArray['###Prenom###'] = $row['Prenom'];
+			$markerArray['###Genre###'] = $row['Genre'];
+			$markerArray['###DateNaissance###'] = $row['DateNaissance'];
+			$markerArray['###Nationalite###'] = $row['Nationalite'];
+			$markerArray['###DateArrivee###'] = $row['DateArrivee'];
+			$markerArray['###DateSortie###'] = $row['DateSortie'];
+			$markerArray['###NumINE###'] = $row['NumINE'];
+			$markerArray['###SectionCNU###'] = $row['SectionCNU'];
+			$markerArray['###CoordonneesRecherche###'] = $row['CoordonneesRecherche'];
+			$markerArray['###CoordonneesEnseignement###'] = $row['CoordonneesEnseignement'];
+			$markerArray['###email###'] = $row['email'];
+			$markerArray['###CoordonneesPersonnelles###'] = $row['CoordonneesPersonnelles'];
+
+
+			$markerArray['###DatetypePoste###'] = $postes;
+			
+			
+			
+			
+			//**************************************
+			//Table TypoPosteWeb
+			//Champ LibelleWeb: voir plus bas
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			//Champ LibelleWeb
+			$champLibelleWeb='';
+			$champLibelleWeb=$row['LibelleWeb'];
+				//On recherche le libellé traduit de LibelleWeb
+			$champLibelleWeb=$this->rechercherUidLangue($row['uid'],$row['sys_language_uid'],$row['l18n_parent'],$row['LibelleWeb'],'tx_ligestmembrelabo_TypePosteWeb','LibelleWeb');
+			$markerArray['###LibelleWeb###'] = $champLibelleWeb;
+			
+			
+			
+			
+			//Configuration du lien
+
+			// configure the typolink
+			$this->local_cObj = t3lib_div::makeInstance('tslib_cObj');
+			$this->local_cObj->setCurrentVal($GLOBALS['TSFE']->id);
+			$this->typolink_conf = $this->conf['typolink.'];
+
+			// configure typolink
+			$temp_conf = $this->typolink_conf;
+			$temp_conf['parameter'] = $row['PageWeb'];
+			$temp_conf['extTarget'] = '';				
+			$temp_conf['parameter.']['wrap'] = "|";
+			// Fill wrapped subpart marker
+			$wrappedSubpartContentArray['###PageWeb###'] = $this->local_cObj->typolinkWrap($temp_conf); 
+
+
+
+			
+			
+			
+			
+			
+			// Fill the temporary item
+			$contentItem .= $this->cObj->substituteMarkerArrayCached($template['item'],$markerArray,array(),$wrappedSubpartContentArray);		
+		}
+		
+
+
+		// Fill the content with items in $contentItem
+		$subpartArray['###CONTENT###'] = $contentItem;
+
+		// Fill the TEMPLATE subpart
+		$content = $this->cObj->substituteMarkerArrayCached($template['total'], array(), $subpartArray);
+		
+		//$content=$code;
 	
 		return $this->pi_wrapInBaseClass($content);
 	}
