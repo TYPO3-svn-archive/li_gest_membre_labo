@@ -221,6 +221,132 @@
 				</el>
 		    </ROOT>
 		</filtres>
+		<affichage>
+		    <ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.sheet_affichage</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<datenaissance>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.datenaissance</label>
+							<config>
+								<type>input</type>
+								<cols>50</cols>
+								<default>????-??-??</default>
+							</config>
+						</TCEforms>
+					</datenaissance>
+					<datearrivee>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.datearrivee</label>
+							<config>
+								<type>input</type>
+								<cols>50</cols>
+								<default>????-??-??</default>
+							</config>
+						</TCEforms>
+					</datearrivee>
+					<datesortie>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.datesortie</label>
+							<config>
+								<type>input</type>
+								<cols>50</cols>
+								<default>????-??-??</default>
+							</config>
+						</TCEforms>
+					</datesortie>
+					<categoriedatedebut>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.categoriedatedebut</label>
+							<config>
+								<type>input</type>
+								<cols>50</cols>
+								<default>????-??-??</default>
+							</config>
+						</TCEforms>
+					</categoriedatedebut>
+					<categoriedatefin>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.categoriedatefin</label>
+							<config>
+								<type>input</type>
+								<cols>50</cols>
+								<default>????-??-??</default>
+							</config>
+						</TCEforms>
+					</categoriedatefin>
+					<diplomedateobtention>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.diplomedateobtention</label>
+							<config>
+								<type>input</type>
+								<cols>50</cols>
+								<default>????-??-??</default>
+							</config>
+						</TCEforms>
+					</diplomedateobtention>
+					<typepostedatedebut>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typepostedatedebut</label>
+							<config>
+								<type>input</type>
+								<cols>50</cols>
+								<default>????-??-??</default>
+							</config>
+						</TCEforms>
+					</typepostedatedebut>
+					<typepostedatefin>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typepostedatefin</label>
+							<config>
+								<type>input</type>
+								<cols>50</cols>
+								<default>????-??-??</default>
+							</config>
+						</TCEforms>
+					</typepostedatefin>
+					<fonctionstructuredatedebut>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.fonctionstructuredatedebut</label>
+							<config>
+								<type>input</type>
+								<cols>50</cols>
+								<default>????-??-??</default>
+							</config>
+						</TCEforms>
+					</fonctionstructuredatedebut>
+					<fonctionstructuredatefin>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.fonctionstructuredatefin</label>
+							<config>
+								<type>input</type>
+								<cols>50</cols>
+								<default>????-??-??</default>
+							</config>
+						</TCEforms>
+					</fonctionstructuredatefin>
+
+
+
+
+
+
+				</el>
+			</ROOT>
+		</affichage>
 		<request>
 		    <ROOT>
 				<TCEforms>
