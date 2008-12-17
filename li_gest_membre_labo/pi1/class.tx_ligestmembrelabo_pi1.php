@@ -695,7 +695,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			
 			$markerArray['###Genre###'] = $row['Genre'];
 			if($row['DateNaissance']=='0000-00-00'){
-				$markerArray['###DateNaissance###'] = '????-??-??';
+				$markerArray['###DateNaissance###'] = $this->lConf['datenaissance'];
 			}
 			else{
 				$markerArray['###DateNaissance###'] = $row['DateNaissance'];
@@ -705,13 +705,13 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			$markerArray['###NATIONALITE###'] = mb_strtoupper($row['Nationalite'],"UTF-8");
 			
 			if($row['DateArrivee']=='0000-00-00'){
-				$markerArray['###DateArrivee###'] = '????-??-??';
+				$markerArray['###DateArrivee###'] = $this->lConf['datearrivee'];
 			}
 			else{
 				$markerArray['###DateArrivee###'] = $row['DateArrivee'];
 			}
 			if($row['DateSortie']=='0000-00-00'){
-				$markerArray['###DateSortie###'] = '????-??-??';
+				$markerArray['###DateSortie###'] = $this->lConf['datesortie'];
 			}
 			else{
 				$markerArray['###DateSortie###'] = $row['DateSortie'];
@@ -814,9 +814,9 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 					}
 					
 					if($categorie_row['DateDebut']=='0000-00-00'){
-						$markerArray_Categories['###CategorieMembre_DateDebut###'] = '????-??-??';
+						$markerArray_Categories['###CategorieMembre_DateDebut###'] = $this->lConf['categoriedatedebut'];
 						if($premier_enregistrement==true){
-							$markerArray_Categories_dernier['###CategorieMembre_DateDebut_Dernier###'] = '????-??-??';
+							$markerArray_Categories_dernier['###CategorieMembre_DateDebut_Dernier###'] = $this->lConf['categoriedatedebut'];
 						}
 					}
 					else{
@@ -827,9 +827,9 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 					}
 					
 					if($categorie_row['DateFin']=='0000-00-00'){
-						$markerArray_Categories['###CategorieMembre_DateFin###'] = '????-??-??';
+						$markerArray_Categories['###CategorieMembre_DateFin###'] = $this->lConf['categoriedatefin'];
 						if($premier_enregistrement==true){
-							$markerArray_Categories_dernier['###CategorieMembre_DateFin_Dernier###'] = '????-??-??';
+							$markerArray_Categories_dernier['###CategorieMembre_DateFin_Dernier###'] = $this->lConf['categoriedatefin'];
 						}
 					}
 					else{
@@ -848,15 +848,6 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 
 				$subpartArray_Item['###CATEGORIES###'] = $contentCategorie;
 				$subpartArray_Item['###CATEGORIES_DERNIER###'] = $contentCategorie_dernier;
-
-				//**************************************
-				//**************************************
-				//**************************************
-				// IL FAUT RAJOUTER LES DATES OU LES FILTRES DE CATEGORIES
-				//**************************************
-				//**************************************
-				//**************************************
-
 
 
 			//**************************************
@@ -895,9 +886,9 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 					}
 
 					if($diplomes_row['DateObtention']=='0000-00-00'){
-						$markerArray_Diplomes['###Diplomes_DateObtention###'] = '????-??-??';
+						$markerArray_Diplomes['###Diplomes_DateObtention###'] = $this->lConf['diplomedateobtention'];
 						if($premier_enregistrement==true){
-							$markerArray_Diplomes_dernier['###Diplomes_DateObtention_Dernier###'] = '????-??-??';
+							$markerArray_Diplomes_dernier['###Diplomes_DateObtention_Dernier###'] = $this->lConf['diplomedateobtention'];
 						}
 					}
 					else{
@@ -927,14 +918,6 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 				$subpartArray_Item['###DIPLOMES###'] = $contentDiplomes;
 				$subpartArray_Item['###DIPLOMES_DERNIER###'] = $contentDiplomes_dernier;
 
-
-				//**************************************
-				//**************************************
-				//**************************************
-				// IL FAUT RAJOUTER LES FILTRES DE DIPLOMES
-				//**************************************
-				//**************************************
-				//**************************************
 
 		
 		
@@ -979,9 +962,9 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 					}
 
 					if($postes_row['DateDebut']=='0000-00-00'){
-						$markerArray_Postes['###Postes_DateDebut###'] = '????-??-??';
+						$markerArray_Postes['###Postes_DateDebut###'] = $this->lConf['typepostedatedebut'];
 						if($premier_enregistrement==true){
-							$markerArray_Postes_dernier['###Postes_DateDebut_Dernier###'] = '????-??-??';
+							$markerArray_Postes_dernier['###Postes_DateDebut_Dernier###'] = $this->lConf['typepostedatedebut'];
 						}
 					}
 					else{
@@ -992,9 +975,9 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 					}
 
 					if($postes_row['DateFin']=='0000-00-00'){
-						$markerArray_Postes['###Postes_DateFin###'] = '????-??-??';
+						$markerArray_Postes['###Postes_DateFin###'] = $this->lConf['typepostedatefin'];
 						if($premier_enregistrement==true){
-							$markerArray_Postes_dernier['###Postes_DateFin_Dernier###'] = '????-??-??';
+							$markerArray_Postes_dernier['###Postes_DateFin_Dernier###'] = $this->lConf['typepostedatefin'];
 						}
 					}
 					else{
@@ -1014,14 +997,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 
 				$subpartArray_Item['###POSTES###'] = $contentPostes;
 				$subpartArray_Item['###POSTES_DERNIER###'] = $contentPostes_dernier;
-		
-				//**************************************
-				//**************************************
-				//**************************************
-				// IL FAUT RAJOUTER LES FILTRES DE POSTES
-				//**************************************
-				//**************************************
-				//**************************************
+
 		
 
 		
@@ -1078,9 +1054,9 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 					}
 
 					if($fonctionsstructures_row['DateDebut']=='0000-00-00'){
-						$markerArray_FonctionsStructures['###FonctionsStructures_DateDebut###'] = '????-??-??';
+						$markerArray_FonctionsStructures['###FonctionsStructures_DateDebut###'] = $this->lConf['fonctionstructuredatedebut'];
 						if($premier_enregistrement==true){
-							$markerArray_FonctionsStructures_dernier['###FonctionsStructures_DateDebut_Dernier###'] = '????-??-??';
+							$markerArray_FonctionsStructures_dernier['###FonctionsStructures_DateDebut_Dernier###'] = $this->lConf['fonctionstructuredatedebut'];
 						}
 					}
 					else{
@@ -1091,9 +1067,9 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 					}
 					
 					if($fonctionsstructures_row['DateFin']=='0000-00-00'){
-						$markerArray_FonctionsStructures['###FonctionsStructures_DateFin###'] = '????-??-??';
+						$markerArray_FonctionsStructures['###FonctionsStructures_DateFin###'] = $this->lConf['fonctionstructuredatefin'];
 						if($premier_enregistrement==true){
-							$markerArray_FonctionsStructures_dernier['###FonctionsStructures_DateFin_Dernier###'] = '????-??-??';
+							$markerArray_FonctionsStructures_dernier['###FonctionsStructures_DateFin_Dernier###'] = $this->lConf['fonctionstructuredatefin'];
 						}
 					}
 					else{
@@ -1113,15 +1089,6 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 
 				$subpartArray_Item['###FONCTIONS_STRUCTURES###'] = $contentFonctionsStructures;
 				$subpartArray_Item['###FONCTIONS_STRUCTURES_DERNIER###'] = $contentFonctionsStructures_dernier;
-
-				//**************************************
-				//**************************************
-				//**************************************
-				// IL FAUT RAJOUTER LES FILTRES DE FONCTIONS ET DE STRUCTURES
-				// Si possible rajouter le nom de la structures la plus haute...
-				//**************************************
-				//**************************************
-				//**************************************
 
 
 
