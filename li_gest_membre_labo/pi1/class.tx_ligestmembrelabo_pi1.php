@@ -168,7 +168,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 					}
 					$postes=$postes.'tx_ligestmembrelabo_TypePosteWeb.uid='.$poste_courant;
 				}
-	
+
 				$postes = $postes.' )';
 
 			}
@@ -509,8 +509,8 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 		$orderBy = '';
 		$limit = '';
 		$tryMemcached = '';
-		
-		
+
+
 		if(($this->lConf['requete'])<>true){
 
 
@@ -545,7 +545,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			//$select = $select.', tx_ligestmembrelabo_Possede.*, tx_ligestmembrelabo_TypePoste.*, tx_ligestmembrelabo_TypePosteWeb.*';
 			$table = $table.', tx_ligestmembrelabo_Possede, tx_ligestmembrelabo_TypePoste, tx_ligestmembrelabo_TypePosteWeb';
 			$where = $where.' AND tx_ligestmembrelabo_Possede.deleted<>1 AND tx_ligestmembrelabo_TypePoste.deleted<>1 AND tx_ligestmembrelabo_TypePosteWeb.deleted<>1 AND tx_ligestmembrelabo_Possede.idMembreLabo = tx_ligestmembrelabo_MembreDuLabo.uid AND tx_ligestmembrelabo_Possede.idTypePoste = tx_ligestmembrelabo_TypePoste.uid AND tx_ligestmembrelabo_TypePoste.idTypePosteWeb = tx_ligestmembrelabo_TypePosteWeb.uid';
-			if($categorie<>""){
+			if($postes<>""){
 				$where = $where.$postes;
 			}
 
@@ -683,16 +683,21 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			//$markerArray['###uid###'] = $row['uidmembre'];
 			$markerArray['###NomDUsage###'] = $row['NomDUsage'];
 			$markerArray['###NOMDUSAGE###'] = mb_strtoupper($row['NomDUsage'],"UTF-8");
-			
+
 			$markerArray['###NomMaritale###'] = $row['NomMaritale'];
 			$markerArray['###NOMMARITALE###'] = mb_strtoupper($row['NomMaritale'],"UTF-8");
 
 			$markerArray['###NomPreMarital###'] = $row['NomPreMarital'];
 			$markerArray['###NOMPREMARITAL###'] = mb_strtoupper($row['NomPreMarital'],"UTF-8");
-			
+
 			$markerArray['###Prenom###'] = $row['Prenom'];
 			$markerArray['###PRENOM###'] = mb_strtoupper($row['Prenom'],"UTF-8");
-			
+
+			// Afficher les initailes d'un membre
+			$markerArray['###InitialesPN###'] = substr($row['Prenom'],0,1).'.'.substr($row['NomDUsage'],0,1).'.';
+			$markerArray['###InitialesNP###'] = substr($row['NomDUsage'],0,1).'.'.substr($row['Prenom'],0,1).'.';
+
+
 			$markerArray['###Genre###'] = $row['Genre'];
 			if($row['DateNaissance']=='0000-00-00'){
 				$markerArray['###DateNaissance###'] = $this->lConf['datenaissance'];
@@ -700,10 +705,10 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			else{
 				$markerArray['###DateNaissance###'] = $row['DateNaissance'];
 			}
-			
+
 			$markerArray['###Nationalite###'] = $row['Nationalite'];
 			$markerArray['###NATIONALITE###'] = mb_strtoupper($row['Nationalite'],"UTF-8");
-			
+
 			if($row['DateArrivee']=='0000-00-00'){
 				$markerArray['###DateArrivee###'] = $this->lConf['datearrivee'];
 			}
@@ -733,8 +738,8 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 				$temp_conf['extTarget'] = '';				
 				$temp_conf['parameter.']['wrap'] = "|";
 				// Fill wrapped subpart marker
-			$wrappedSubpartContentArray['###PageWeb###'] = $this->local_cObj->typolinkWrap($temp_conf);
-
+			$wrappedSubpartContentArray['###PageWebLien###'] = $this->local_cObj->typolinkWrap($temp_conf);
+			$markerArray['###PageWeb###'] = $row['PageWeb'];
 
 
 			//**************************************
@@ -868,7 +873,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 				$diplomes_res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($diplomes_select_fields, $diplomes_from_table, $diplomes_where_clause, $diplomes_groupBy, $diplomes_orderBy, $diplomes_tryMemcached);
 
 				$premier_enregistrement = true; //On recupère l'enregistrement ayant la date de début la plus recente
-				
+
 				while($diplomes_row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($diplomes_res)){
 					//Champ Libelle (multilingue)
 						$champLibelle='';

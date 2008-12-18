@@ -731,7 +731,7 @@ $TCA["tx_ligestmembrelabo_TypePoste"] = array (
 				"eval" => "trim",
 			)
 		),
-		"Libelle" => Array (		
+		"Libelle" => Array (
 			"exclude" => 1,
 			'l10n_mode' => 'mergeIfNotBlank',
 			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_TypePoste.libelle",		
@@ -744,11 +744,11 @@ $TCA["tx_ligestmembrelabo_TypePoste"] = array (
 		),
 		"idTypePosteWeb" => Array (		
 			"exclude" => 1,
-			'l10n_mode' => 'mergeIfNotBlank',			
+			'l10n_mode' => 'mergeIfNotBlank',	
 			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_TypePoste.idtypeposteweb",		
 			"config" => Array (
-				"type" => "select",	
-				"foreign_table" => "tx_ligestmembrelabo_TypePosteWeb",	
+				"type" => "select",
+				"foreign_table" => "tx_ligestmembrelabo_TypePosteWeb",
 				"foreign_table_where" => "AND tx_ligestmembrelabo_TypePosteWeb.sys_language_uid=0 ORDER BY tx_ligestmembrelabo_TypePosteWeb.LibelleWeb",	
 				"size" => 1,
 				"minitems" => 0,
