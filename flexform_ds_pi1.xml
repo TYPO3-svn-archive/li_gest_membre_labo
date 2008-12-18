@@ -234,7 +234,6 @@
 							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.datenaissance</label>
 							<config>
 								<type>input</type>
-								<cols>50</cols>
 								<default>????-??-??</default>
 							</config>
 						</TCEforms>
@@ -245,7 +244,6 @@
 							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.datearrivee</label>
 							<config>
 								<type>input</type>
-								<cols>50</cols>
 								<default>????-??-??</default>
 							</config>
 						</TCEforms>
@@ -256,7 +254,6 @@
 							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.datesortie</label>
 							<config>
 								<type>input</type>
-								<cols>50</cols>
 								<default>????-??-??</default>
 							</config>
 						</TCEforms>
@@ -267,7 +264,6 @@
 							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.categoriedatedebut</label>
 							<config>
 								<type>input</type>
-								<cols>50</cols>
 								<default>????-??-??</default>
 							</config>
 						</TCEforms>
@@ -278,7 +274,6 @@
 							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.categoriedatefin</label>
 							<config>
 								<type>input</type>
-								<cols>50</cols>
 								<default>????-??-??</default>
 							</config>
 						</TCEforms>
@@ -289,7 +284,6 @@
 							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.diplomedateobtention</label>
 							<config>
 								<type>input</type>
-								<cols>50</cols>
 								<default>????-??-??</default>
 							</config>
 						</TCEforms>
@@ -300,7 +294,6 @@
 							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typepostedatedebut</label>
 							<config>
 								<type>input</type>
-								<cols>50</cols>
 								<default>????-??-??</default>
 							</config>
 						</TCEforms>
@@ -311,7 +304,6 @@
 							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typepostedatefin</label>
 							<config>
 								<type>input</type>
-								<cols>50</cols>
 								<default>????-??-??</default>
 							</config>
 						</TCEforms>
@@ -322,7 +314,6 @@
 							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.fonctionstructuredatedebut</label>
 							<config>
 								<type>input</type>
-								<cols>50</cols>
 								<default>????-??-??</default>
 							</config>
 						</TCEforms>
@@ -333,17 +324,10 @@
 							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.fonctionstructuredatefin</label>
 							<config>
 								<type>input</type>
-								<cols>50</cols>
 								<default>????-??-??</default>
 							</config>
 						</TCEforms>
 					</fonctionstructuredatefin>
-
-
-
-
-
-
 				</el>
 			</ROOT>
 		</affichage>
@@ -448,6 +432,7 @@
 							<config>
 								<type>input</type>
 								<eval>trim</eval>
+								<size>50</size>
 								<default>EXT:li_gest_membre_labo/pi1/li_gest_membre_labo_template.html</default>
 								<wizards type="array">
 									<_PADDING>2</_PADDING>
