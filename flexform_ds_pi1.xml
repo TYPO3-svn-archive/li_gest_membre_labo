@@ -45,6 +45,32 @@
 				</TCEforms>
 				<type>array</type>
 				<el>
+					<datelabo>
+						<TCEforms>
+							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.datelabo</label>
+								<config>
+									<type>select</type>
+										<items type="array">
+											<numIndex index="0" type="array">
+												<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.0</numIndex>
+												<numIndex index="1">Actuels</numIndex>
+											</numIndex>
+											<numIndex index="1" type="array">
+												<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.1</numIndex>
+												<numIndex index="1">Anciens</numIndex>
+											</numIndex>
+											<numIndex index="2" type="array">
+												<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.2</numIndex>
+												<numIndex index="1">Tous</numIndex>
+											</numIndex>
+								         </items>
+								         <minitems>0</minitems>
+								         <maxitems>1</maxitems>
+										 <default>Actuels</default>
+								         <size>1</size>
+								</config>
+						</TCEforms>
+					</datelabo>
 					<typeposte>
 						<TCEforms>
 							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typeposte</label>
@@ -70,15 +96,16 @@
 											</numIndex>
 											<numIndex index="1" type="array">
 												<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.1</numIndex>
-												<numIndex index="1">Tous</numIndex>
+												<numIndex index="1">Anciens</numIndex>
 											</numIndex>
 											<numIndex index="2" type="array">
 												<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.2</numIndex>
-												<numIndex index="1">Anciens</numIndex>
+												<numIndex index="1">Tous</numIndex>
 											</numIndex>
 								         </items>
 								         <minitems>0</minitems>
 								         <maxitems>1</maxitems>
+										 <default>Tous</default>
 								         <size>1</size>
 								</config>
 						</TCEforms>
@@ -99,7 +126,7 @@
 					
 					<datetypecategorie>
 						<TCEforms>
-							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedatestructure</label>
+							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedatecategorie</label>
 								<config>
 									<type>select</type>
 										<items type="array">
@@ -109,15 +136,16 @@
 											</numIndex>
 											<numIndex index="1" type="array">
 												<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.1</numIndex>
-												<numIndex index="1">Tous</numIndex>
+												<numIndex index="1">Anciens</numIndex>
 											</numIndex>
 											<numIndex index="2" type="array">
 												<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.2</numIndex>
-												<numIndex index="1">Anciens</numIndex>
+												<numIndex index="1">Tous</numIndex>
 											</numIndex>
 								         </items>
 								         <minitems>0</minitems>
 								         <maxitems>1</maxitems>
+										 <default>Tous</default>
 								         <size>1</size>
 								</config>
 						</TCEforms>
@@ -149,15 +177,16 @@
 											</numIndex>
 											<numIndex index="1" type="array">
 												<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.1</numIndex>
-												<numIndex index="1">Tous</numIndex>
+												<numIndex index="1">Anciens</numIndex>
 											</numIndex>
 											<numIndex index="2" type="array">
 												<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.2</numIndex>
-												<numIndex index="1">Anciens</numIndex>
+												<numIndex index="1">Tous</numIndex>
 											</numIndex>
 								         </items>
 								         <minitems>0</minitems>
 								         <maxitems>1</maxitems>
+										 <default>Tous</default>
 								         <size>1</size>
 								</config>
 						</TCEforms>
@@ -189,15 +218,16 @@
 											</numIndex>
 											<numIndex index="1" type="array">
 												<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.1</numIndex>
-												<numIndex index="1">Tous</numIndex>
+												<numIndex index="1">Anciens</numIndex>
 											</numIndex>
 											<numIndex index="2" type="array">
 												<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.2</numIndex>
-												<numIndex index="1">Anciens</numIndex>
+												<numIndex index="1">Tous</numIndex>
 											</numIndex>
 								         </items>
 								         <minitems>0</minitems>
 								         <maxitems>1</maxitems>
+										 <default>Tous</default>
 								         <size>1</size>
 								</config>
 						</TCEforms>
@@ -348,7 +378,6 @@
 					</requete>
 					<select>
 						<TCEforms>
-							<exclude>1</exclude>
 							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.select</label>
 							<config>
 								<type>text</type>
@@ -358,7 +387,6 @@
 					</select>
 					<from_table>
 						<TCEforms>
-							<exclude>1</exclude>
 							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.from_table</label>
 							<config>
 								<type>text</type>

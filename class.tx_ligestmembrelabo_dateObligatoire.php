@@ -1,7 +1,20 @@
 <?php
 
+
+
+/**
+ * Plugin 'Managing Member' for the 'li_gest_membre_labo' extension.
+ * Teste de la présence d'une date dans un formulaire
+ * @author	Bruno Gallet <gallet.bruno@gmail.com>
+ * @package	TYPO3
+ * @subpackage	tx_ligestmembrelabo
+ */
 class tx_ligestmembrelabo_dateObligatoire {
 
+	/**
+	 * Teste la présence ou non d'une date dans un champ
+	 * @return Retourne la date de départ ou un message d'erreur si cette date est vide
+	 */
 	function returnFieldJS() {
 
 			return "var modif = value;
@@ -11,8 +24,14 @@ class tx_ligestmembrelabo_dateObligatoire {
 				return value;";
 	}
 
-	
-	
+
+	/**
+	 * Teste du champ lors de la validation du formulaire
+	 * On teste si le champ est bien une date, sinon on met la date du jour
+	 * On test si les séparateurs sont les bons, et s'il le faut, on les remplace
+	 * @param $value Valeur du champ
+	 * @return Retourne la nouvelle valeur du champ
+	 */
 	function evaluateFieldValue($value, $is_in, &$set) {
 		if (!(checkdate(substr($value,5,2),substr($value,8,2),substr($value,0,4)))) {
 			$value = date('Y-m-d');

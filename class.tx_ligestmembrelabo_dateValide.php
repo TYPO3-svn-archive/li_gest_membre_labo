@@ -1,7 +1,18 @@
 <?php
 
+/**
+ * Plugin 'Managing Member' for the 'li_gest_membre_labo' extension.
+ * Teste de la validité d'une date dans un formulaire
+ * @author	Bruno Gallet <gallet.bruno@gmail.com>
+ * @package	TYPO3
+ * @subpackage	tx_ligestmembrelabo
+ */
 class tx_ligestmembrelabo_dateValide {
 
+	/**
+	 * Teste la validité d'une date dans un champ (enfin... à peu prêt... il peut y avoir un problème avec le mois de février....)
+	 * @return Retourne la date de départ ou un message d'erreur si cette date est invalide
+	 */
 	function returnFieldJS() {
 
 			return "var modif = value;
@@ -31,7 +42,13 @@ class tx_ligestmembrelabo_dateValide {
 				return value;";
 	}
 
-
+	/**
+	 * Teste du champ lors de la validation du formulaire
+	 * On teste si le champ est bien une date, sinon on met la date '0000-00-00'
+	 * On test si les séparateurs sont les bons, et s'il le faut, on les remplace
+	 * @param $value Valeur du champ
+	 * @return Retourne la nouvelle valeur du champ
+	 */
 	function evaluateFieldValue($value, $is_in, &$set) {
 		if (!(checkdate(substr($value,5,2),substr($value,8,2),substr($value,0,4)))) {
 			$value = '0000-00-00';
@@ -48,6 +65,12 @@ class tx_ligestmembrelabo_dateValide {
 		return $value;
 	}
 
+	/**
+	 * Teste du champ avant l'affichage du formulaire
+	 * On teste si le champ est bien une date, sinon on n'afficheun champ vide.
+	 * @param $params Paramètres du champs du formulaire. $params['value'] contient la valeur du champ.
+	 * @return Retourne la nouvelle valeur du champ
+	 */
 	function deevaluateFieldValue($params) {
 		$dateTest = $params['value'];
 		if (!(checkdate(substr($dateTest,5,2),substr($dateTest,8,2),substr($dateTest,0,4)))) {

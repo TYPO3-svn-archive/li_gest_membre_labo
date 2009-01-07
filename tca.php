@@ -1,7 +1,9 @@
 <?php
 if (!defined ('TYPO3_MODE')) 	die ('Access denied.');
 
-
+// ******************************************************************
+// Création du formulaire pour la table tx_ligestmembrelabo_MembreDuLabo
+// ******************************************************************
 $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 	"ctrl" => $TCA["tx_ligestmembrelabo_MembreDuLabo"]["ctrl"],
 	"interface" => array (
@@ -200,8 +202,8 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 				"wizards" => Array(
 					"_PADDING" => 2,
 					"_VERTICAL" => 1,
-					/*"add" => Array(
-						"type" => "script",
+					"add" => Array(
+						"type" => "popup",
 						"title" => "Create new record",
 						"icon" => "add.gif",
 						"params" => Array(
@@ -210,7 +212,8 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 							"setValue" => "prepend"
 						),
 						"script" => "wizard_add.php",
-					),*/
+						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
+					),
 					"edit" => Array(
 						"type" => "popup",
 						"title" => "Edit",
@@ -246,7 +249,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 					"_PADDING" => 2,
 					"_VERTICAL" => 1,
 					"add" => Array(
-						"type" => "script",
+						"type" => "popup",
 						"title" => "Create new record",
 						"icon" => "add.gif",
 						"params" => Array(
@@ -255,6 +258,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 							"setValue" => "prepend"
 						),
 						"script" => "wizard_add.php",
+						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
 					),
 					"edit" => Array(
 						"type" => "popup",
@@ -281,7 +285,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 					"_PADDING" => 2,
 					"_VERTICAL" => 1,
 					"add" => Array(
-						"type" => "script",
+						"type" => "popup",
 						"title" => "Create new record",
 						"icon" => "add.gif",
 						"params" => Array(
@@ -290,6 +294,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 							"setValue" => "prepend"
 						),
 						"script" => "wizard_add.php",
+						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
 					),
 					"edit" => Array(
 						"type" => "popup",
@@ -316,7 +321,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 					"_PADDING" => 2,
 					"_VERTICAL" => 1,
 					"add" => Array(
-						"type" => "script",
+						"type" => "popup",
 						"title" => "Create new record",
 						"icon" => "add.gif",
 						"params" => Array(
@@ -325,6 +330,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 							"setValue" => "prepend"
 						),
 						"script" => "wizard_add.php",
+						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
 					),
 					"edit" => Array(
 						"type" => "popup",
@@ -351,7 +357,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 					"_PADDING" => 2,
 					"_VERTICAL" => 1,
 					"add" => Array(
-						"type" => "script",
+						"type" => "popup",
 						"title" => "Create new record",
 						"icon" => "add.gif",
 						"params" => Array(
@@ -360,6 +366,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 							"setValue" => "prepend"
 						),
 						"script" => "wizard_add.php",
+						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
 					),
 					"edit" => Array(
 						"type" => "popup",
@@ -387,7 +394,9 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 
 
 
-
+// ******************************************************************
+// Création du formulaire pour la table tx_ligestmembrelabo_Fonction
+// ******************************************************************
 $TCA["tx_ligestmembrelabo_Fonction"] = array (
 	"ctrl" => $TCA["tx_ligestmembrelabo_Fonction"]["ctrl"],
 	"interface" => array (
@@ -451,7 +460,9 @@ $TCA["tx_ligestmembrelabo_Fonction"] = array (
 	),
 );
 
-
+// ******************************************************************
+// Création du formulaire pour la table tx_ligestmembrelabo_Structure
+// ******************************************************************
 $TCA["tx_ligestmembrelabo_Structure"] = array (
 	"ctrl" => $TCA["tx_ligestmembrelabo_Structure"]["ctrl"],
 	"interface" => array (
@@ -535,7 +546,9 @@ $TCA["tx_ligestmembrelabo_Structure"] = array (
 
 
 
-
+// ******************************************************************
+// Création du formulaire pour la table tx_ligestmembrelabo_Exerce
+// ******************************************************************
 $TCA["tx_ligestmembrelabo_Exerce"] = array (
 	"ctrl" => $TCA["tx_ligestmembrelabo_Exerce"]["ctrl"],
 	"interface" => array (
@@ -620,7 +633,9 @@ $TCA["tx_ligestmembrelabo_Exerce"] = array (
 
 
 
-
+// ******************************************************************
+// Création du formulaire pour la table tx_ligestmembrelabo_TypePosteWeb
+// ******************************************************************
 $TCA["tx_ligestmembrelabo_TypePosteWeb"] = array (
 	"ctrl" => $TCA["tx_ligestmembrelabo_TypePosteWeb"]["ctrl"],
 	"interface" => array (
@@ -704,7 +719,9 @@ $TCA["tx_ligestmembrelabo_TypePosteWeb"] = array (
 
 
 
-
+// ******************************************************************
+// Création du formulaire pour la table tx_ligestmembrelabo_TypePoste
+// ******************************************************************
 $TCA["tx_ligestmembrelabo_TypePoste"] = array (
 	"ctrl" => $TCA["tx_ligestmembrelabo_TypePoste"]["ctrl"],
 	"interface" => array (
@@ -793,7 +810,9 @@ $TCA["tx_ligestmembrelabo_TypePoste"] = array (
 );
 
 
-
+// ******************************************************************
+// Création du formulaire pour la table tx_ligestmembrelabo_Possede
+// ******************************************************************
 $TCA["tx_ligestmembrelabo_Possede"] = array (
 	"ctrl" => $TCA["tx_ligestmembrelabo_Possede"]["ctrl"],
 	"interface" => array (
@@ -815,7 +834,7 @@ $TCA["tx_ligestmembrelabo_Possede"] = array (
 			"config" => Array (
 				"type" => "select",	
 				"foreign_table" => "tx_ligestmembrelabo_TypePoste",	
-				"foreign_table_where" => "ORDER BY tx_ligestmembrelabo_TypePoste.Libelle",	
+				"foreign_table_where" => "AND tx_ligestmembrelabo_TypePoste.sys_language_uid=0 ORDER BY tx_ligestmembrelabo_TypePoste.Libelle",	
 				"size" => 1,	
 				"minitems" => 0,
 				"maxitems" => 1,
@@ -865,7 +884,9 @@ $TCA["tx_ligestmembrelabo_Possede"] = array (
 );
 
 
-
+// ******************************************************************
+// Création du formulaire pour la table tx_ligestmembrelabo_Categorie
+// ******************************************************************
 $TCA["tx_ligestmembrelabo_Categorie"] = array (
 	"ctrl" => $TCA["tx_ligestmembrelabo_Categorie"]["ctrl"],
 	"interface" => array (
@@ -946,7 +967,9 @@ $TCA["tx_ligestmembrelabo_Categorie"] = array (
 
 
 
-
+// ******************************************************************
+// Création du formulaire pour la table tx_ligestmembrelabo_CategorieMembre
+// ******************************************************************
 $TCA["tx_ligestmembrelabo_CategorieMembre"] = array (
 	"ctrl" => $TCA["tx_ligestmembrelabo_CategorieMembre"]["ctrl"],
 	"interface" => array (
@@ -1019,7 +1042,9 @@ $TCA["tx_ligestmembrelabo_CategorieMembre"] = array (
 
 
 
-
+// ******************************************************************
+// Création du formulaire pour la table tx_ligestmembrelabo_Equipe
+// ******************************************************************
 $TCA["tx_ligestmembrelabo_Equipe"] = array (
 	"ctrl" => $TCA["tx_ligestmembrelabo_Equipe"]["ctrl"],
 	"interface" => array (
@@ -1098,7 +1123,9 @@ $TCA["tx_ligestmembrelabo_Equipe"] = array (
 );
 
 
-
+// ******************************************************************
+// Création du formulaire pour la table tx_ligestmembrelabo_EstMembreDe
+// ******************************************************************
 $TCA["tx_ligestmembrelabo_EstMembreDe"] = array (
 	"ctrl" => $TCA["tx_ligestmembrelabo_EstMembreDe"]["ctrl"],
 	"interface" => array (
@@ -1132,7 +1159,7 @@ $TCA["tx_ligestmembrelabo_EstMembreDe"] = array (
 			"config" => Array (
 				"type" => "select",	
 				"foreign_table" => "tx_ligestmembrelabo_Equipe",	
-				"foreign_table_where" => "ORDER BY tx_ligestmembrelabo_Equipe.Abreviation, tx_ligestmembrelabo_Equipe.Nom",	
+				"foreign_table_where" => "AND tx_ligestmembrelabo_Equipe.sys_language_uid=0 ORDER BY tx_ligestmembrelabo_Equipe.Abreviation, tx_ligestmembrelabo_Equipe.Nom",	
 				"size" => 1,	
 				"minitems" => 0,
 				"maxitems" => 1,
@@ -1158,7 +1185,9 @@ $TCA["tx_ligestmembrelabo_EstMembreDe"] = array (
 );
 
 
-
+// ******************************************************************
+// Création du formulaire pour la table tx_ligestmembrelabo_TypeDiplome
+// ******************************************************************
 $TCA["tx_ligestmembrelabo_TypeDiplome"] = array (
 	"ctrl" => $TCA["tx_ligestmembrelabo_TypeDiplome"]["ctrl"],
 	"interface" => array (
@@ -1235,7 +1264,9 @@ $TCA["tx_ligestmembrelabo_TypeDiplome"] = array (
 );
 
 
-
+// ******************************************************************
+// Création du formulaire pour la table tx_ligestmembrelabo_AObtenu
+// ******************************************************************
 $TCA["tx_ligestmembrelabo_AObtenu"] = array (
 	"ctrl" => $TCA["tx_ligestmembrelabo_AObtenu"]["ctrl"],
 	"interface" => array (
@@ -1269,7 +1300,7 @@ $TCA["tx_ligestmembrelabo_AObtenu"] = array (
 			"config" => Array (
 				"type" => "select",	
 				"foreign_table" => "tx_ligestmembrelabo_TypeDiplome",
-				"foreign_table_where" => "ORDER BY tx_ligestmembrelabo_TypeDiplome.Libelle, tx_ligestmembrelabo_TypeDiplome.Code",	
+				"foreign_table_where" => "AND tx_ligestmembrelabo_TypeDiplome.sys_language_uid=0 ORDER BY tx_ligestmembrelabo_TypeDiplome.Libelle, tx_ligestmembrelabo_TypeDiplome.Code",	
 				"size" => 1,	
 				"minitems" => 0,
 				"maxitems" => 1,
