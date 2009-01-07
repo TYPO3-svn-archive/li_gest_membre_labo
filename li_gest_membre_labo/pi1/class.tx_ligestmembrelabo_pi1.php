@@ -38,8 +38,11 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 	var $extKey        = 'li_gest_membre_labo';	// The extension key.
 	var $pi_checkCHash = true;
 
-
-	//Recherche des sous-dossiers contenant les membres du laboratoire...
+	/**
+	 * Recherche des sous-dossiers contenant les membres du laboratoire...
+	 * @param $pid_parent identifiant du dossier à explorer
+	 * @return Un tableau contenant tous les sous-dossiers trouvés...
+	 */
 	private function rechercheFils($pid_parent)
 	{
 		$tableau = array(); //tableau contenant tous les sous-dossiers trouvés...
@@ -78,7 +81,19 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 		return $tableau;
 	}
 	
-	//Gestion du multilangue
+
+	/**
+	 * Gestion du multilangue
+	 * Cette fonction recherche le texte le plus approprié par rapport à la page chargée
+	 * Cette fonction est utilisée à la suite d'une requête permettant de connaître les paramètres $uid, $sys_language_uid, $uid_parent et $texte_champ.
+	 * @param $uid L'identifiant de l'enregistrement pour lequel on recherche la meilleur traduction.
+	 * @param $sys_language_uid L'identifiant de la langue de l'enregistrement pour lequel on recherche la meilleur traduction.
+	 * @param $uid_parent L'identifiant du parent  de l'enregistrement pour lequel on recherche la meilleur traduction.
+	 * @param $texte_champ La traduction de l'enregistrement pour lequel on recherche la meilleur traduction.
+	 * @param $table Le nom de la table dans laquel se trouve le champ à traduire
+	 * @param $nom_champ Le nom du champ à traduire
+	 * @return Une chaîne de caratères contenant la traduction a afficher
+	 */
 	private function rechercherUidLangue($uid,$sys_language_uid,$uid_parent,$texte_champ,$table,$nom_champ)
 	{
 		$texte=$texte_champ;
@@ -142,11 +157,17 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 		return $texte;
 	}
 	
-	//Choix du type de poste
-	//Cette fonction permet de créer une clause concernant le type de poste
+
+	/**
+	 * Choix du type de poste
+	 * Cette fonction permet de créer une contrainte concernant le type de poste
+	 * @param $typeDePoste Chaîne de caractères contenant les identifiants des types de poste (uid) séparés par des virgules
+	 * @param $typeDate Chaîne de caractère contenant le type de date: Actuels, Anciens ou Tous
+	 * @return Une chaîne de caratères contenant une contrainte à rajouter à une requête
+	 */
 	private function typeDePoste($typeDePoste,$typeDate)
 	{
-			//Création de la clause permettant l'affichage que de certains types de poste...
+			//Création de la contrainte permettant l'affichage que de certains types de postes...
 			$postes='';
 	
 
@@ -176,7 +197,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			//Gestion des dates...
 			if($typeDate=='Actuels')
 			{
-				$postes = $postes.' AND tx_ligestmembrelabo_Possede.DateDebut<"'.date('Y-m-d').'" AND (tx_ligestmembrelabo_Possede.DateFin>="'.date('Y-m-d').'" OR tx_ligestmembrelabo_Possede.DateFin="0000-00-00")';
+				$postes = $postes.' AND tx_ligestmembrelabo_Possede.DateDebut<="'.date('Y-m-d').'" AND (tx_ligestmembrelabo_Possede.DateFin>="'.date('Y-m-d').'" OR tx_ligestmembrelabo_Possede.DateFin="0000-00-00")';
 			}
 			else if($typeDate=='Anciens')
 			{
@@ -187,15 +208,17 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 	}
 	
 	
-	
-	
-	//Choix des categories
-	//Cette fonction permet de créer une clause concernant les categories
-	//id_categories contient une chaîne de caractères des uid des catégories à afficher (séparés par des virgules)
-	//typeDate contient le type de date à afficher (Actuels, Tous ou Anciens)
+
+	/**
+	 * Choix des categories
+	 * Cette fonction permet de créer une contrainte concernant les categories
+	 * @param $uid_categories Chaîne de caractères contenant les identifiants des catégories (uid) séparés par une virgule
+	 * @param $typeDate Chaîne de caractère contenant le type de date: Actuels, Anciens ou Tous
+	 * @return Une chaîne de caratères contenant une contrainte à rajouter à une requête
+	 */
 	private function categorie($uid_categories,$typeDate)
 	{
-			//Création de la clause permettant l'affichage que de certains types de poste...
+			//Création de la contrainte permettant l'affichage que de certains types de catégories...
 			$categories='';
 
 			if($uid_categories<>'')
@@ -224,7 +247,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			//Gestion des dates...
 			if($typeDate=='Actuels')
 			{
-				$categories = $categories.' AND tx_ligestmembrelabo_CategorieMembre.DateDebut<"'.date('Y-m-d').'" AND (tx_ligestmembrelabo_CategorieMembre.DateFin>="'.date('Y-m-d').'" OR tx_ligestmembrelabo_CategorieMembre.DateFin="0000-00-00")';
+				$categories = $categories.' AND tx_ligestmembrelabo_CategorieMembre.DateDebut<="'.date('Y-m-d').'" AND (tx_ligestmembrelabo_CategorieMembre.DateFin>="'.date('Y-m-d').'" OR tx_ligestmembrelabo_CategorieMembre.DateFin="0000-00-00")';
 			}
 			else if($typeDate=='Anciens')
 			{
@@ -237,13 +260,16 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 	
 	
 	
-	//Choix des structures
-	//Cette fonction permet de créer une clause concernant les structures
-	//uid_structures contient une chaîne de caractères des uid des catégories à afficher (séparés par des virgules)
-	//typeDate contient le type de date à afficher (Actuels, Tous ou Anciens)
+	/**
+	 * Choix des structures
+	 * Cette fonction permet de créer une contrainte concernant les structures
+	 * @param $uid_categories Chaîne de caractères contenant les identifiants des structures (uid) séparés par une virgule
+	 * @param $typeDate Chaîne de caractère contenant le type de date: Actuels, Anciens ou Tous
+	 * @return Une chaîne de caratères contenant une contrainte à rajouter à une requête
+	 */
 	private function structure($uid_structures,$typeDate)
 	{
-			//Création de la clause permettant l'affichage que de certains types de poste...
+			//Création de la contrainte permettant l'affichage que de certains types de structures...
 			$structures='';
 
 			if($uid_structures<>'')
@@ -286,7 +312,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			//Gestion des dates...
 			if($typeDate=='Actuels')
 			{
-				$structures = $structures.' AND tx_ligestmembrelabo_Exerce.DateDebut<"'.date('Y-m-d').'" AND (tx_ligestmembrelabo_Exerce.DateFin>="'.date('Y-m-d').'" OR tx_ligestmembrelabo_Exerce.DateFin="0000-00-00")';
+				$structures = $structures.' AND tx_ligestmembrelabo_Exerce.DateDebut<="'.date('Y-m-d').'" AND (tx_ligestmembrelabo_Exerce.DateFin>="'.date('Y-m-d').'" OR tx_ligestmembrelabo_Exerce.DateFin="0000-00-00")';
 			}
 			else if($typeDate=='Anciens')
 			{
@@ -298,6 +324,11 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 	
 	
 	//Recherche des structures filles
+	/**
+	 * Recherche de structures filles
+	 * @param $id_parent identifiant de la structure principale
+	 * @return Un tableau contenant toutes les sous-structures trouvées...
+	 */
 	private function rechercheStructuresFille($id_parent)
 	{
 		$tableau = array(); //tableau contenant toutes les sous-structures trouvées...
@@ -339,13 +370,17 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 	
 
 	
-	//Choix des fonctions
-	//Cette fonction permet de créer une clause concernant les fonctions
-	//uid_fonctions contient une chaîne de caractères des uid des fonctions à afficher (séparés par des virgules)
-	//typeDate contient le type de date à afficher (Actuels, Tous ou Anciens)
+
+	/**
+	 * Choix des fonctions
+	 * Cette fonction permet de créer une contrainte concernant les fonctions
+	 * @param $uid_fonctions Chaîne de caractères contenant les identifiants des fonctions (uid) séparés par une virgule
+	 * @param $typeDate Chaîne de caractère contenant le type de date: Actuels, Anciens ou Tous
+	 * @return Une chaîne de caratères contenant une contrainte à rajouter à une requête
+	 */
 	private function fonction($uid_fonctions,$typeDate)
 	{
-			//Création de la clause permettant l'affichage que de certains types de poste...
+			//Création de la contrainte permettant l'affichage que de certains types de fonctions...
 			$fonctions='';
 
 			if($uid_fonctions<>'')
@@ -374,7 +409,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			//Gestion des dates...
 			if($typeDate=='Actuels')
 			{
-				$fonctions = $fonctions.' AND tx_ligestmembrelabo_Exerce.DateDebut<"'.date('Y-m-d').'" AND (tx_ligestmembrelabo_Exerce.DateFin>="'.date('Y-m-d').'" OR tx_ligestmembrelabo_Exerce.DateFin="0000-00-00")';
+				$fonctions = $fonctions.' AND tx_ligestmembrelabo_Exerce.DateDebut<="'.date('Y-m-d').'" AND (tx_ligestmembrelabo_Exerce.DateFin>="'.date('Y-m-d').'" OR tx_ligestmembrelabo_Exerce.DateFin="0000-00-00")';
 			}
 			else if($typeDate=='Anciens')
 			{
@@ -386,12 +421,15 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 
 
 
-	//Choix des diplomes
-	//Cette fonction permet de créer une clause concernant les diplomes
-	//uid_diplomes contient une chaîne de caractères des uid des diplomes à afficher (séparés par des virgules)
+	/**
+	 * Choix des diplomes
+	 * Cette fonction permet de créer une contrainte concernant les diplomes
+	 * @param $uid_diplomes Chaîne de caractères contenant les identifiants des diplômes (uid) séparés par une virgule
+	 * @return Une chaîne de caratères contenant une contrainte à rajouter à une requête
+	 */
 	private function diplome($uid_diplomes)
 	{
-			//Création de la clause permettant l'affichage que de certains types de poste...
+			//Création de la contrainte permettant l'affichage que de certains diplomes...
 			$diplomes='';
 
 			if($uid_diplomes<>'')
@@ -410,7 +448,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 					{
 						$premier=false;
 					}
-					$diplomes=$diplomes.'tx_ligestmembrelabo_Fonction.uid='.$diplome_courant;
+					$diplomes=$diplomes.'tx_ligestmembrelabo_TypeDiplome.uid='.$diplome_courant;
 				}
 	
 				$diplomes = $diplomes.' )';
@@ -524,10 +562,6 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			
 
 			//Gestion du nom de l'Equipe
-
-			
-
-			//$select = $select.', tx_ligestmembrelabo_EstMembreDe.*, tx_ligestmembrelabo_Equipe.*';
 			$table = $table.', tx_ligestmembrelabo_EstMembreDe, tx_ligestmembrelabo_Equipe';
 			$where = $where.' AND tx_ligestmembrelabo_MembreDuLabo.uid = tx_ligestmembrelabo_EstMembreDe.idMembreLabo AND tx_ligestmembrelabo_EstMembreDe.idEquipe = tx_ligestmembrelabo_Equipe.uid';
 			if (($this->lConf['labo'])<>''){
@@ -537,7 +571,18 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 
 
 			/********************FILTRES********************/
-			//Ces filtres rajoute des contraintes sur la requête à afficher
+			//Ces filtres rajoutent des contraintes sur la requête à afficher
+
+
+			//Gestion de la date d'arrivée et de départ du labo
+			if($this->lConf['datelabo']=='Actuels')
+			{
+				$where = $where.' AND tx_ligestmembrelabo_MembreDuLabo.DateArrivee<="'.date('Y-m-d').'" AND (tx_ligestmembrelabo_MembreDuLabo.DateSortie>="'.date('Y-m-d').'" OR tx_ligestmembrelabo_MembreDuLabo.DateSortie="0000-00-00")';
+			}
+			else if($this->lConf['datelabo']=='Anciens')
+			{
+				$where = $where.' AND tx_ligestmembrelabo_MembreDuLabo.DateSortie<"'.date('Y-m-d').'" AND tx_ligestmembrelabo_MembreDuLabo.DateSortie<>"0000-00-00"';
+			}
 
 
 			//Gestion des types de postes
@@ -558,7 +603,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 				$where = $where.$categorie;
 			}
 			
-			
+			/*
 			//Gestion des structures
 			$structure = $this->structure($this->lConf['structure'],$this->lConf['datetypestructure']);
 			if($structure<>""){
@@ -567,8 +612,6 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 				$where = $where.' AND tx_ligestmembrelabo_Structure.deleted<>1 AND tx_ligestmembrelabo_Exerce.idStructure = tx_ligestmembrelabo_Structure.uid';
 				$where = $where.$structure;
 			}
-			
-			
 			
 			//Gestion des fonctions
 			$fonction = $this->fonction($this->lConf['fonction'],$this->lConf['datetypefonction']);
@@ -579,14 +622,24 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 				$where = $where.$fonction;
 			}
 			
-			
-						
 			if($structure<>"" || $fonction<>"")
 			{
 				//$select = $select.', tx_ligestmembrelabo_Exerce.*';
 				$table = $table.', tx_ligestmembrelabo_Exerce';
 				$where = $where.' AND tx_ligestmembrelabo_Exerce.deleted<>1 AND tx_ligestmembrelabo_Exerce.idMembreLabo = tx_ligestmembrelabo_MembreDuLabo.uid';
 			}
+			*/
+			
+			$structure = $this->structure($this->lConf['structure'],$this->lConf['datetypestructure']);
+			if($structure<>""){
+				$where = $where.' AND EXISTS (SELECT * FROM tx_ligestmembrelabo_Exerce, tx_ligestmembrelabo_Structure WHERE tx_ligestmembrelabo_MembreDuLabo.uid = tx_ligestmembrelabo_Exerce.idMembreLabo AND tx_ligestmembrelabo_Exerce.idStructure = tx_ligestmembrelabo_Structure.uid'.$structure.')';
+			}			
+			
+			$fonction = $this->fonction($this->lConf['fonction'],$this->lConf['datetypefonction']);
+			if($fonction<>""){
+				$where = $where.' AND EXISTS (SELECT * FROM tx_ligestmembrelabo_Exerce, tx_ligestmembrelabo_Fonction WHERE tx_ligestmembrelabo_MembreDuLabo.uid = tx_ligestmembrelabo_Exerce.idMembreLabo AND tx_ligestmembrelabo_Exerce.idFonction = tx_ligestmembrelabo_Fonction.uid'.$fonction.')';
+			}
+			
 			
 			
 			
@@ -669,7 +722,16 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 
 
 		$markerArray = array();
+		$markerArray_Equipe = array();
 		$markerArray_Categories = array();
+		$markerArray_Categories_dernier = array();
+		$markerArray_Diplomes = array();
+		$markerArray_Diplomes_dernier = array();
+		$markerArray_Postes = array();
+		$markerArray_Postes_dernier = array();
+		$markerArray_FonctionsStructures = array();
+		$markerArray_FonctionsStructures_dernier = array();
+		
 		$contentItem='';
 
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select_fields, $from_table, $where_clause, $groupBy, $orderBy, $tryMemcached);

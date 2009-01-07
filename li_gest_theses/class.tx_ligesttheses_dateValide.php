@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Plugin 'Managing Member' for the 'li_gest_membre_labo' extension.
+ * Plugin 'Managing Member' for the 'li_gest_theses' extension.
  * Teste de la validité d'une date dans un formulaire
  * @author	Bruno Gallet <gallet.bruno@gmail.com>
  * @package	TYPO3
- * @subpackage	tx_ligestmembrelabo
+ * @subpackage	tx_ligesttheses
  */
-class tx_ligestmembrelabo_dateValide {
+class tx_ligesttheses_dateValide {
 
 	/**
 	 * Teste la validité d'une date dans un champ (enfin... à peu prêt... il peut y avoir un problème avec le mois de février....)
@@ -86,8 +86,8 @@ class tx_ligestmembrelabo_dateValide {
 	
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/li_gest_membre_labo/class.tx_ligestmembrelabo_dateValide.php'])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/li_gest_membre_labo/class.tx_ligestmembrelabo_dateValide.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/li_gest_theses/class.tx_ligesttheses_dateValide.php'])	{
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/li_gest_theses/class.tx_ligesttheses_dateValide.php']);
 }
 
 ?>

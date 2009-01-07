@@ -3,13 +3,13 @@
 
 
 /**
- * Plugin 'Managing Member' for the 'li_gest_membre_labo' extension.
+ * Plugin 'Managing Member' for the 'li_gest_theses' extension.
  * Teste de la présence d'une date dans un formulaire
  * @author	Bruno Gallet <gallet.bruno@gmail.com>
  * @package	TYPO3
- * @subpackage	tx_ligestmembrelabo
+ * @subpackage	tx_ligesttheses
  */
-class tx_ligestmembrelabo_dateObligatoire {
+class tx_ligesttheses_dateObligatoire {
 
 	/**
 	 * Teste la présence ou non d'une date dans un champ
@@ -54,8 +54,8 @@ class tx_ligestmembrelabo_dateObligatoire {
 	
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/li_gest_membre_labo/class.tx_ligestmembrelabo_dateObligatoire.php'])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/li_gest_membre_labo/class.tx_ligestmembrelabo_dateObligatoire.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/li_gest_theses/class.tx_ligesttheses_dateObligatoire.php'])	{
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/li_gest_theses/class.tx_ligesttheses_dateObligatoire.php']);
 }
 
 ?>
