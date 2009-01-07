@@ -1,0 +1,255 @@
+\documentclass[twoside]{EPURapport}
+\input{include.tex}
+
+\thedocument{Documentation}{\LaTeX : Manuel d'utilisation de la classe EPURapport}{Classe EPURapport}
+
+\grade{D\'epartement Informatique}
+
+\authors{Cyrille FAUCHEUX}{cyrille.faucheux@etu.univ-tours.fr}
+	{Alexandre LISSY}{alexandre.lissy@etu.univ-tours.fr}
+	{}{}
+
+\supervisors{Nicolas Monmarché}{nicolas.monmarche@univ-tours.fr}
+	{}{}
+	{}{}
+	{Universit\'e Fran\c cois-Rabelais, Tours}
+
+\abstracts{Description en français}
+	{Mots clés français}
+	{Description en anglais}
+	{Mots clés en anglais}
+
+\begin{document}
+
+\introduction
+
+\chapter{Utilisation du modèle}
+\section{Remarques préliminaires}
+	Avant toute chose, voici quelques points important qui méritent d'être énoncés dés le début.
+
+\begin{itemize}
+	\item Ce modèle ne document ne supporte \textbf{pas} l'\textbf{UTF-8}\index{UTF-8}. Cela concerne principalement les utilisateurs de Linux (nous sommes profondément désolés, cela n'est pas un choix personnel), pensez à passer votre éditeur en \textbf{ISO-8859-15}.
+
+	\item Ce modèle de document ne permet pour l'instant de générer seulement du \textbf{pdf} (mais qu'est ce qu'il est bien ce pdf).
+\end{itemize}
+
+\section{Fichiers}
+	Ce modèle s'organise autour de 4 fichiers :
+
+\begin{itemize}
+  \item votreDocument.tex\\
+	Il s'agit de votre rapport. Vous pouvez bien entendu lui donner le nom que vous désirez. Nous reviendrons sur la structure de celui-ci plus tard.
+
+  \item EPURapport.cls\\
+	Il s'agit du fichier définissant le modèle de document. Il ne vous est normalement pas nécessaire de toucher au contenu de ce document, certaines portions de code étant réservées à des utilisateurs avertis.
+
+  \item include.tex\\
+	Ce fichier permet d'inclure des packages supplémentaires ou de définir des options particulières hors de votre document .tex original, afin de ne pas remplir ce dernier de commandes peu importantes. Son contenu est inclus dans le document principal; juste après la classe; ce qui veux dire que ce qui y est défini sera valable pour tout le rapport. Nous reviendrons sur les options définies dans la classes qui peuvent y êtres utilisées.
+
+  \item Logo\_Polytech\_Tours\_et\_DI\_et\_UFR\_2.pdf\\
+	Il s'agit ici du logo de l'école, au format vectoriel.
+
+  \item .to*, .lo*, .aux \ldots\\
+	Ces fichiers sont temporaires et sont générés lors de la (double) compilation. Il ne vous est donc en aucun cas nécessaire de les conserver.
+\end{itemize}
+
+\section{Structure du document}
+	Voici les commandes minimum qui doivent se trouver dans votre fichier .tex.
+
+	\paragraph{Définition de la classe du document (EPURapport).}Vous voyez apparaitre ici l'option ``twoside''. Celle ci permet d'avoir un document pour une impression recto-verso, donc avec des en-têtes et pieds de page différents suivant si la page est paire ou impaire. De plus, le nombre de page sera un multiple de 4, afin d'avoir la 4\ieme de couverture au verso de la dernière page (des pages blanches seront donc ajoutées si besoin est avant celle-ci). Pensez tout de même à sélectionner l'option recto-verso lors de l'impression. Le retrait de cette option génèrera un document prévu pour une impression recto.
+\begin{lstlisting}[frame=single]
+\documentclass[twoside]{EPURapport}
+\end{lstlisting}
+
+	Il vous est possible de passer d'autres options :
+\begin{itemize}
+	\item landscape : Permet de compiler le document au format paysage.
+	\item draft : Génère un ``brouillon'' du document, il sera en noir et blanc et les images seront remplacées par un cadre de même taille. 
+\end{itemize}
+
+	\paragraph{Fichier de configuration personnalisée.}Ce fichier contiendra toutes les options et détails de configuration des packages afin de conserver le fichier tex de votre rapport le plus propre possible.
+
+\begin{lstlisting}[frame=single]
+\input{include.tex}
+\end{lstlisting}
+
+	\paragraph{Informations concernant le document.} Les 3 paramètres sont obligatoires. Ils seront présents sur la première et quatrième de couverture, dans les pieds de page et dans les propriétés du pdf.
+\begin{lstlisting}[frame=single]
+\thedocument{Type de document}{Titre long du document}{Titre court}
+\end{lstlisting}
+
+	\paragraph{Année d'étude.} L'année d'étude et l'année en cours sont absolument obligatoires dans le cas d'un rapport (projet et stage). Nous vous conseillons  de conserver la disposition proposée en exemple. (nb : les commandes \verb!\iere! et \verb!\ieme! sont définies dans la classe)
+\begin{lstlisting}[frame=single]
+\grade{Département Informatique\\ 1\iere année\\ 2007-2008}
+\end{lstlisting}
+
+	\paragraph{Identité de(s) auteur(s) du document.\index{Auteur}} Il vous est possible de spécifier jusqu'à trois auteurs ainsi que leurs adresses e-mail. Présent sur la première et quatrième de couverture, ainsi que dans les propriétés du pdf.
+\begin{lstlisting}[frame=single]
+\authors{Cyrille FAUCHEUX}{cyrille.faucheux@etu.univ-tours.fr}
+	{Alexandre LISSY}{alexandre.lissy@etu.univ-tours.fr}
+	{}{}
+\end{lstlisting}
+
+	\paragraph{Identité de(s) responsable(s) du projet/rapport.\index{Encadrant}{Responsable}} Il vous est possible de spécifier jusqu'à trois responsables ainsi que leurs adresses e-mail. Le dernier paramètre vous permet de définir leur localisation (université, adresse de l'entreprise). Présent sur la première et quatrième de couverture.
+\begin{lstlisting}[frame=single]
+\supervisors{Nicolas MONMARCHE}{nicolas.monmarche@univ-tours.fr}
+	{}{}
+	{}{}
+	{Université François-Rabelais, Tours}
+\end{lstlisting}
+
+	\paragraph{Résumés et mots clés.\index{Résumé}\index{Mots-clés}} En français et anglais. Présent sur la quatrième de couverture afin de savoir au premier coup d'oeil le contenu du document. Les mots clés en français seront aussi présents dans les propriétés du pdf.
+\begin{lstlisting}[frame=single]
+\abstracts{Description en français}
+	{Mots clés français}
+	{Description en anglais}
+	{Mots clés en anglais}
+\end{lstlisting}
+
+	\paragraph{Contenu du rapport}La suite du document est le contenu de votre rapport, présent entre ces deux balises.
+\begin{lstlisting}[frame=single]
+\begin{document}
+...
+\end{document}
+\end{lstlisting}
+
+	Afin de mieux organiser les sources de votre rapport, il vous est par exemple possible d'avoir un fichier tex par chapitre. Dans ce cas, vous n'avez qu'à inclure entre ces deux balises les différents fichiers tex constituant votre rapport via la commande \verb!\include{}!.
+
+	Afin de structurer votre rapport, il vous est possible d'utiliser les commandes habituelles telles que \verb!\chapter!, \verb!\section!, \verb!\subsection! \ldots Si besoin est, vous pouvez utiliser aussi \verb!\part!, mais cela est peu probable.
+
+	Pour l'introduction et la conclusion, ne définissez aucun chapitre particulier, utilisez simplement les fonctions \verb!\introduction! et \verb!\conclusion!.
+
+\section{Options de la classe}
+
+\subsection{Tables et listes}
+	Par défaut, la classe affiche la table des matières, la table des figures et la table des tableaux. Au cas ou l'une de ces tables serait vide, ou si vous ne souhaitez pas l'afficher, voici les trois commandes qui le permettent.
+
+\begin{lstlisting}[frame=single]
+\notableofcontents
+\nolistoffigures
+\nolistoftables
+\end{lstlisting}
+
+	Si vous utilisez des packages particuliers qui eux aussi génèrent des table ou listes à mettre en début de document, utilisez la commande suivante.
+
+\begin{lstlisting}[frame=single]
+\addextratables{
+	\specialtable1
+	\speciallist2
+}
+\end{lstlisting}
+
+Toutes les tables et listes spécifiées en argument seront ajoutées à la suite des tables et listes affichées par défaut.
+
+\subsection{Auteurs et encadrants}
+Les auteurs du document sont par défaut appelés ``Etudiants'', et les encadrant du projet sont appelés ``Encadrant'' (visible sur la première et quatrième de couverture). Si vous souhaitez changer cela, par exemple pour renommer ``Encadrant`` en ''Responsable``, utilisez les commandes suivantes.
+
+\begin{lstlisting}[frame=single]
+\setsupervisorstitle{Encadrant}
+\setauthorstitle{Etudiant}
+\end{lstlisting}
+
+	Attention, mettez ce ''titre`` au singulier, la classe ajoutant automatiquement un ''s`` si plus d'un auteur ou plus d'un responsable est spécifié.
+
+	Si vous écrivez une documentation, il se peut que vous n'ayez pas d'encadrant à spécifier. Dans ce cas, ne spécifiez aucun responsable dans la commande \verb!\supervisors{}{}{}{}{}{}{}! et utilisez la commande \verb!\nosupervisors! pour en neutraliser l'affichage.
+
+
+\section{Images\index{Images}}
+	L'insertion d'image s'effectue de la façon suivante.
+\begin{lstlisting}[frame=single]
+\begin{figure}[!ht]
+	\label{fig:logo_polytech}
+	\centering
+	\includegraphics[height=4cm]{Logo_Polytech_Tours_et_DI_et_UFR_2.pdf}
+	\caption{Logo de polytech'Tours}
+\end{figure}
+\end{lstlisting}
+
+	Les images seront donc répertoriées dans la table des figures grâce à leur légende (\verb!\caption!), et vous pourrez y faire référence grâce à leur identifiant (\verb!\label!). Attention, l'identifiant ne doit comporter que des caractères ``basiques'' (lettres non accentuées, chiffres, underscore, tiret).
+
+\section{Tableaux}
+	Les tableaux sont à définir de la manière suivante.
+
+\begin{lstlisting}[frame=single]
+\begin{table}[!ht]
+	\centering
+	\label{tab:montableau}
+	\begin{tabular}{|c|c|}
+		\hline
+		Première cellule & Deuxième cellule \\
+		\hline
+	\end{tabular}
+	\caption{Mon tableau}
+\end{table}
+\end{lstlisting}
+
+\begin{table}[!ht]
+	\centering
+	\label{tab:montableau}
+	\begin{tabular}{|c|c|}
+		\hline
+		Première cellule & Deuxième cellule \\
+		\hline
+	\end{tabular}
+	\caption{Mon tableau}
+\end{table}
+
+\begin{lstlisting}[frame=single]
+\begin{table}[!ht]
+	\centering
+	\label{tab:montableau2}
+	\begin{tabularx}{4cm}{|X|>{\centering\arraybackslash}p{4cm}|}
+		\hline
+		Première cellule & Deuxième cellule \\
+		\hline
+	\end{tabularx}
+	\caption{Mon tableau}
+\end{table}
+\end{lstlisting}
+
+Dans certains cas, vous aurez peut être besoin de faire appel au package \textit{tabularx}\index{Tabularx}. Celui-ci permet de gérer plus finement la largeur de chaque colonne. Plus d'informations sont disponibles dans la documentation du package.
+
+\begin{table}[!ht]
+	\centering
+	\label{tab:montableaux}
+	\begin{tabularx}{7cm}{|X|>{\centering\arraybackslash}p{4cm}|}
+		\hline
+		Première cellule & Deuxième cellule \\
+		\hline
+	\end{tabularx}
+	\caption{Mon tableau X}
+\end{table}
+
+	Si vous disposez d'un tableau assez large, qui serait mieux représenté sur une page au format paysage, utilisez l'environnement \textit{sidewaystable} issue du package \textit{rotating}\index{Rotating} à la place de \textit{table}.
+
+\section{Liens}
+	Lorsque vous identifiez un élément via la commande \verb!\label{}!, vous avez ensuite la possibilité de faire des liens internes grâce aux commandes \verb!\ref{}! et \verb!\pageref{}!.
+
+	En ce qui concerne les liens externes, vous devez utiliser la commande \verb!\url{}!.
+
+\begin{lstlisting}[frame=single]
+\url{http://www.polytech.univ-tours.fr}
+\end{lstlisting}
+
+
+	Dans le cas d'une adresse email, même fonctionnement avec la commande \verb!\email{}!.
+
+
+
+\conclusion
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\annexe
+
+\chapter{Liens utiles}
+\section{Documentation des packages utilisés}
+\begin{itemize}
+	\item Documentation de Fancyhdr \url{http://www.ctan.org/tex-archive/help/Catalogue/entries/fancyhdr.html} 
+	\item Documentation de Hyperref \url{http://www.tug.org/applications/hyperref/}
+	\item Documentation de Fp \url{http://www.ctan.org/tex-archive/macros/latex/contrib/fp/}
+	\item Documentation de Rotating\index{Rotating} \url{http://www.mackichan.com/index.html?techtalk/516.htm}
+	\item Documentation de Tabularx\index{Tabularx} \url{http://www.cs.ualberta.ca/~c603/latex/tabularx.pdf}
+\end{itemize}
+
+\end{document}
