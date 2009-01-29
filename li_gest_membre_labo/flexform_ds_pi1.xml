@@ -11,16 +11,19 @@
 				</TCEforms>
 				<type>array</type>
 				<el>
-					<labo>
+					<equipe>
 						<TCEforms>
-							<exclude>1</exclude>
 							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.equipe</label>
-							<config>
-								<type>input</type>
-								<size>30</size>
-							</config>
+								<config>
+									<type>select</type>
+									<foreign_table>tx_ligestmembrelabo_Equipe</foreign_table>
+									<foreign_table_where>AND tx_ligestmembrelabo_Equipe.sys_language_uid=0 ORDER BY tx_ligestmembrelabo_Equipe.Abreviation</foreign_table_where>
+									<size>10</size>
+									<minitems>0</minitems>
+									<maxitems>99</maxitems>
+								</config>
 						</TCEforms>
-					</labo>
+					</equipe>
 					<pid>
 						<TCEforms>
 							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.pid</label>
@@ -45,209 +48,239 @@
 				</TCEforms>
 				<type>array</type>
 				<el>
-					<datelabo>
-						<TCEforms>
-							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.datelabo</label>
-								<config>
-									<type>select</type>
-										<items type="array">
-											<numIndex index="0" type="array">
-												<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.0</numIndex>
-												<numIndex index="1">Actuels</numIndex>
-											</numIndex>
-											<numIndex index="1" type="array">
-												<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.1</numIndex>
-												<numIndex index="1">Anciens</numIndex>
-											</numIndex>
-											<numIndex index="2" type="array">
-												<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.2</numIndex>
-												<numIndex index="1">Tous</numIndex>
-											</numIndex>
-								         </items>
-								         <minitems>0</minitems>
-								         <maxitems>1</maxitems>
-										 <default>Actuels</default>
-								         <size>1</size>
-								</config>
-						</TCEforms>
-					</datelabo>
-					<typeposte>
-						<TCEforms>
-							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typeposte</label>
-								<config>
-									<type>select</type>
-									<foreign_table>tx_ligestmembrelabo_TypePosteWeb</foreign_table>
-									<foreign_table_where>AND tx_ligestmembrelabo_TypePosteWeb.sys_language_uid=0 ORDER BY tx_ligestmembrelabo_TypePosteWeb.LibelleWeb</foreign_table_where>
-									<size>10</size>
-									<minitems>0</minitems>
-									<maxitems>99</maxitems>
-								</config>
-						</TCEforms>
-					</typeposte>
-					<datetypeposte>
-						<TCEforms>
-							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedateposte</label>
-								<config>
-									<type>select</type>
-										<items type="array">
-											<numIndex index="0" type="array">
-												<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.0</numIndex>
-												<numIndex index="1">Actuels</numIndex>
-											</numIndex>
-											<numIndex index="1" type="array">
-												<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.1</numIndex>
-												<numIndex index="1">Anciens</numIndex>
-											</numIndex>
-											<numIndex index="2" type="array">
-												<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.2</numIndex>
-												<numIndex index="1">Tous</numIndex>
-											</numIndex>
-								         </items>
-								         <minitems>0</minitems>
-								         <maxitems>1</maxitems>
-										 <default>Tous</default>
-								         <size>1</size>
-								</config>
-						</TCEforms>
-					</datetypeposte>
-					<categorie>
-						<TCEforms>
-							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.categorie</label>
-								<config>
-									<type>select</type>
-									<foreign_table>tx_ligestmembrelabo_Categorie</foreign_table>
-									<foreign_table_where>AND tx_ligestmembrelabo_Categorie.sys_language_uid=0 ORDER BY tx_ligestmembrelabo_Categorie.Libelle</foreign_table_where>
-									<size>10</size>
-									<minitems>0</minitems>
-									<maxitems>99</maxitems>
-								</config>
-						</TCEforms>
-					</categorie>
+					<groupelabo>
+						<type>array</type>
+						<el>
+							<datelabo>
+								<TCEforms>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.datelabo</label>
+										<config>
+											<type>select</type>
+												<items type="array">
+													<numIndex index="0" type="array">
+														<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.0</numIndex>
+														<numIndex index="1">Actuels</numIndex>
+													</numIndex>
+													<numIndex index="1" type="array">
+														<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.1</numIndex>
+														<numIndex index="1">Anciens</numIndex>
+													</numIndex>
+													<numIndex index="2" type="array">
+														<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.2</numIndex>
+														<numIndex index="1">Tous</numIndex>
+													</numIndex>
+										         </items>
+										         <minitems>0</minitems>
+										         <maxitems>1</maxitems>
+												 <default>Actuels</default>
+										         <size>1</size>
+										</config>
+								</TCEforms>
+							</datelabo>
+						</el>
+					</groupelabo>
+				
+					<groupeposte>
+						<type>array</type>
+						<el>
+							<typeposte>
+								<TCEforms>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typeposte</label>
+										<config>
+											<type>select</type>
+											<foreign_table>tx_ligestmembrelabo_TypePosteWeb</foreign_table>
+											<foreign_table_where>AND tx_ligestmembrelabo_TypePosteWeb.sys_language_uid=0 ORDER BY tx_ligestmembrelabo_TypePosteWeb.LibelleWeb</foreign_table_where>
+											<size>10</size>
+											<minitems>0</minitems>
+											<maxitems>99</maxitems>
+										</config>
+								</TCEforms>
+							</typeposte>
+							<datetypeposte>
+								<TCEforms>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedateposte</label>
+										<config>
+											<type>select</type>
+												<items type="array">
+													<numIndex index="0" type="array">
+														<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.0</numIndex>
+														<numIndex index="1">Actuels</numIndex>
+													</numIndex>
+													<numIndex index="1" type="array">
+														<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.1</numIndex>
+														<numIndex index="1">Anciens</numIndex>
+													</numIndex>
+													<numIndex index="2" type="array">
+														<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.2</numIndex>
+														<numIndex index="1">Tous</numIndex>
+													</numIndex>
+										         </items>
+										         <minitems>0</minitems>
+										         <maxitems>1</maxitems>
+												 <default>Tous</default>
+										         <size>1</size>
+										</config>
+								</TCEforms>
+							</datetypeposte>
+						</el>
+					</groupeposte>
 					
-					<datetypecategorie>
-						<TCEforms>
-							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedatecategorie</label>
-								<config>
-									<type>select</type>
-										<items type="array">
-											<numIndex index="0" type="array">
-												<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.0</numIndex>
-												<numIndex index="1">Actuels</numIndex>
-											</numIndex>
-											<numIndex index="1" type="array">
-												<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.1</numIndex>
-												<numIndex index="1">Anciens</numIndex>
-											</numIndex>
-											<numIndex index="2" type="array">
-												<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.2</numIndex>
-												<numIndex index="1">Tous</numIndex>
-											</numIndex>
-								         </items>
-								         <minitems>0</minitems>
-								         <maxitems>1</maxitems>
-										 <default>Tous</default>
-								         <size>1</size>
-								</config>
-						</TCEforms>
-					</datetypecategorie>
-
-					<structure>
-						<TCEforms>
-							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.structure</label>
-								<config>
-									<type>select</type>
-									<foreign_table>tx_ligestmembrelabo_Structure</foreign_table>
-									<foreign_table_where>ORDER BY tx_ligestmembrelabo_Structure.Nom</foreign_table_where>
-									<size>10</size>
-									<minitems>0</minitems>
-									<maxitems>99</maxitems>
-								</config>
-						</TCEforms>
-					</structure>
+					<groupecategorie>
+						<type>array</type>
+						<el>
+							<categorie>
+								<TCEforms>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.categorie</label>
+										<config>
+											<type>select</type>
+											<foreign_table>tx_ligestmembrelabo_Categorie</foreign_table>
+											<foreign_table_where>AND tx_ligestmembrelabo_Categorie.sys_language_uid=0 ORDER BY tx_ligestmembrelabo_Categorie.Libelle</foreign_table_where>
+											<size>10</size>
+											<minitems>0</minitems>
+											<maxitems>99</maxitems>
+										</config>
+								</TCEforms>
+							</categorie>
 					
-					<datetypestructure>
-						<TCEforms>
-							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedatestructure</label>
-								<config>
-									<type>select</type>
-										<items type="array">
-											<numIndex index="0" type="array">
-												<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.0</numIndex>
-												<numIndex index="1">Actuels</numIndex>
-											</numIndex>
-											<numIndex index="1" type="array">
-												<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.1</numIndex>
-												<numIndex index="1">Anciens</numIndex>
-											</numIndex>
-											<numIndex index="2" type="array">
-												<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.2</numIndex>
-												<numIndex index="1">Tous</numIndex>
-											</numIndex>
-								         </items>
-								         <minitems>0</minitems>
-								         <maxitems>1</maxitems>
-										 <default>Tous</default>
-								         <size>1</size>
-								</config>
-						</TCEforms>
-					</datetypestructure>
+							<datetypecategorie>
+								<TCEforms>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedatecategorie</label>
+										<config>
+											<type>select</type>
+												<items type="array">
+													<numIndex index="0" type="array">
+														<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.0</numIndex>
+														<numIndex index="1">Actuels</numIndex>
+													</numIndex>
+													<numIndex index="1" type="array">
+														<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.1</numIndex>
+														<numIndex index="1">Anciens</numIndex>
+													</numIndex>
+													<numIndex index="2" type="array">
+														<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.2</numIndex>
+														<numIndex index="1">Tous</numIndex>
+													</numIndex>
+										         </items>
+										         <minitems>0</minitems>
+										         <maxitems>1</maxitems>
+												 <default>Tous</default>
+										         <size>1</size>
+										</config>
+								</TCEforms>
+							</datetypecategorie>
+						</el>
+					</groupecategorie>
 					
-					<fonction>
-						<TCEforms>
-							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.fonction</label>
-								<config>
-									<type>select</type>
-									<foreign_table>tx_ligestmembrelabo_Fonction</foreign_table>
-									<foreign_table_where>AND tx_ligestmembrelabo_Fonction.sys_language_uid=0 ORDER BY tx_ligestmembrelabo_Fonction.Libelle</foreign_table_where>
-									<size>10</size>
-									<minitems>0</minitems>
-									<maxitems>99</maxitems>
-								</config>
-						</TCEforms>
-					</fonction>
+					<groupestructure>
+						<type>array</type>
+						<el>
+							<structure>
+								<TCEforms>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.structure</label>
+										<config>
+											<type>select</type>
+											<foreign_table>tx_ligestmembrelabo_Structure</foreign_table>
+											<foreign_table_where>ORDER BY tx_ligestmembrelabo_Structure.Nom</foreign_table_where>
+											<size>10</size>
+											<minitems>0</minitems>
+											<maxitems>99</maxitems>
+										</config>
+								</TCEforms>
+							</structure>
 					
-					<datetypefonction>
-						<TCEforms>
-							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedatefonction</label>
-								<config>
-									<type>select</type>
-										<items type="array">
-											<numIndex index="0" type="array">
-												<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.0</numIndex>
-												<numIndex index="1">Actuels</numIndex>
-											</numIndex>
-											<numIndex index="1" type="array">
-												<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.1</numIndex>
-												<numIndex index="1">Anciens</numIndex>
-											</numIndex>
-											<numIndex index="2" type="array">
-												<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.2</numIndex>
-												<numIndex index="1">Tous</numIndex>
-											</numIndex>
-								         </items>
-								         <minitems>0</minitems>
-								         <maxitems>1</maxitems>
-										 <default>Tous</default>
-								         <size>1</size>
-								</config>
-						</TCEforms>
-					</datetypefonction>
+							<datetypestructure>
+								<TCEforms>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedatestructure</label>
+										<config>
+											<type>select</type>
+												<items type="array">
+													<numIndex index="0" type="array">
+														<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.0</numIndex>
+														<numIndex index="1">Actuels</numIndex>
+													</numIndex>
+													<numIndex index="1" type="array">
+														<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.1</numIndex>
+														<numIndex index="1">Anciens</numIndex>
+													</numIndex>
+													<numIndex index="2" type="array">
+														<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.2</numIndex>
+														<numIndex index="1">Tous</numIndex>
+													</numIndex>
+										         </items>
+										         <minitems>0</minitems>
+										         <maxitems>1</maxitems>
+												 <default>Tous</default>
+										         <size>1</size>
+										</config>
+								</TCEforms>
+							</datetypestructure>
+						</el>
+					</groupestructure>
 					
-					<diplome>
-						<TCEforms>
-							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.diplome</label>
-								<config>
-									<type>select</type>
-									<foreign_table>tx_ligestmembrelabo_TypeDiplome</foreign_table>
-									<foreign_table_where>AND tx_ligestmembrelabo_TypeDiplome.sys_language_uid=0 ORDER BY tx_ligestmembrelabo_TypeDiplome.Libelle</foreign_table_where>
-									<size>10</size>
-									<minitems>0</minitems>
-									<maxitems>99</maxitems>
-								</config>
-						</TCEforms>
-					</diplome>
+					<groupefonction>
+						<type>array</type>
+						<el>
+							<fonction>
+								<TCEforms>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.fonction</label>
+										<config>
+											<type>select</type>
+											<foreign_table>tx_ligestmembrelabo_Fonction</foreign_table>
+											<foreign_table_where>AND tx_ligestmembrelabo_Fonction.sys_language_uid=0 ORDER BY tx_ligestmembrelabo_Fonction.Libelle</foreign_table_where>
+											<size>10</size>
+											<minitems>0</minitems>
+											<maxitems>99</maxitems>
+										</config>
+								</TCEforms>
+							</fonction>
 					
+							<datetypefonction>
+								<TCEforms>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedatefonction</label>
+										<config>
+											<type>select</type>
+												<items type="array">
+													<numIndex index="0" type="array">
+														<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.0</numIndex>
+														<numIndex index="1">Actuels</numIndex>
+													</numIndex>
+													<numIndex index="1" type="array">
+														<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.1</numIndex>
+														<numIndex index="1">Anciens</numIndex>
+													</numIndex>
+													<numIndex index="2" type="array">
+														<numIndex index="0">LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedate.2</numIndex>
+														<numIndex index="1">Tous</numIndex>
+													</numIndex>
+										         </items>
+										         <minitems>0</minitems>
+										         <maxitems>1</maxitems>
+												 <default>Tous</default>
+										         <size>1</size>
+										</config>
+								</TCEforms>
+							</datetypefonction>
+						</el>
+					</groupefonction>
 					
+					<groupediplome>
+						<type>array</type>
+						<el>
+							<diplome>
+								<TCEforms>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.diplome</label>
+										<config>
+											<type>select</type>
+											<foreign_table>tx_ligestmembrelabo_TypeDiplome</foreign_table>
+											<foreign_table_where>AND tx_ligestmembrelabo_TypeDiplome.sys_language_uid=0 ORDER BY tx_ligestmembrelabo_TypeDiplome.Libelle</foreign_table_where>
+											<size>10</size>
+											<minitems>0</minitems>
+											<maxitems>99</maxitems>
+										</config>
+								</TCEforms>
+							</diplome>
+					</el>
+					</groupediplome>
 				</el>
 		    </ROOT>
 		</filtres>
@@ -258,106 +291,147 @@
 				</TCEforms>
 				<type>array</type>
 				<el>
-					<datenaissance>
-						<TCEforms>
-							<exclude>1</exclude>
-							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.datenaissance</label>
-							<config>
-								<type>input</type>
-								<default>????-??-??</default>
-							</config>
-						</TCEforms>
-					</datenaissance>
-					<datearrivee>
-						<TCEforms>
-							<exclude>1</exclude>
-							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.datearrivee</label>
-							<config>
-								<type>input</type>
-								<default>????-??-??</default>
-							</config>
-						</TCEforms>
-					</datearrivee>
-					<datesortie>
-						<TCEforms>
-							<exclude>1</exclude>
-							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.datesortie</label>
-							<config>
-								<type>input</type>
-								<default>????-??-??</default>
-							</config>
-						</TCEforms>
-					</datesortie>
-					<categoriedatedebut>
-						<TCEforms>
-							<exclude>1</exclude>
-							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.categoriedatedebut</label>
-							<config>
-								<type>input</type>
-								<default>????-??-??</default>
-							</config>
-						</TCEforms>
-					</categoriedatedebut>
-					<categoriedatefin>
-						<TCEforms>
-							<exclude>1</exclude>
-							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.categoriedatefin</label>
-							<config>
-								<type>input</type>
-								<default>????-??-??</default>
-							</config>
-						</TCEforms>
-					</categoriedatefin>
-					<diplomedateobtention>
-						<TCEforms>
-							<exclude>1</exclude>
-							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.diplomedateobtention</label>
-							<config>
-								<type>input</type>
-								<default>????-??-??</default>
-							</config>
-						</TCEforms>
-					</diplomedateobtention>
-					<typepostedatedebut>
-						<TCEforms>
-							<exclude>1</exclude>
-							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typepostedatedebut</label>
-							<config>
-								<type>input</type>
-								<default>????-??-??</default>
-							</config>
-						</TCEforms>
-					</typepostedatedebut>
-					<typepostedatefin>
-						<TCEforms>
-							<exclude>1</exclude>
-							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typepostedatefin</label>
-							<config>
-								<type>input</type>
-								<default>????-??-??</default>
-							</config>
-						</TCEforms>
-					</typepostedatefin>
-					<fonctionstructuredatedebut>
-						<TCEforms>
-							<exclude>1</exclude>
-							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.fonctionstructuredatedebut</label>
-							<config>
-								<type>input</type>
-								<default>????-??-??</default>
-							</config>
-						</TCEforms>
-					</fonctionstructuredatedebut>
-					<fonctionstructuredatefin>
-						<TCEforms>
-							<exclude>1</exclude>
-							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.fonctionstructuredatefin</label>
-							<config>
-								<type>input</type>
-								<default>????-??-??</default>
-							</config>
-						</TCEforms>
-					</fonctionstructuredatefin>
+					<groupeaffichagedate>
+						<type>array</type>
+						<el>
+							<datenaissance>
+								<TCEforms>
+									<exclude>1</exclude>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.datenaissance</label>
+									<config>
+										<type>input</type>
+										<default>????-??-??</default>
+									</config>
+								</TCEforms>
+							</datenaissance>
+							<datearrivee>
+								<TCEforms>
+									<exclude>1</exclude>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.datearrivee</label>
+									<config>
+										<type>input</type>
+										<default>????-??-??</default>
+									</config>
+								</TCEforms>
+							</datearrivee>
+							<datesortie>
+								<TCEforms>
+									<exclude>1</exclude>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.datesortie</label>
+									<config>
+										<type>input</type>
+										<default>????-??-??</default>
+									</config>
+								</TCEforms>
+							</datesortie>
+							<categoriedatedebut>
+								<TCEforms>
+									<exclude>1</exclude>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.categoriedatedebut</label>
+									<config>
+										<type>input</type>
+										<default>????-??-??</default>
+									</config>
+								</TCEforms>
+							</categoriedatedebut>
+							<categoriedatefin>
+								<TCEforms>
+									<exclude>1</exclude>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.categoriedatefin</label>
+									<config>
+										<type>input</type>
+										<default>????-??-??</default>
+									</config>
+								</TCEforms>
+							</categoriedatefin>
+							<diplomedateobtention>
+								<TCEforms>
+									<exclude>1</exclude>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.diplomedateobtention</label>
+									<config>
+										<type>input</type>
+										<default>????-??-??</default>
+									</config>
+								</TCEforms>
+							</diplomedateobtention>
+							<typepostedatedebut>
+								<TCEforms>
+									<exclude>1</exclude>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typepostedatedebut</label>
+									<config>
+										<type>input</type>
+										<default>????-??-??</default>
+									</config>
+								</TCEforms>
+							</typepostedatedebut>
+							<typepostedatefin>
+								<TCEforms>
+									<exclude>1</exclude>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typepostedatefin</label>
+									<config>
+										<type>input</type>
+										<default>????-??-??</default>
+									</config>
+								</TCEforms>
+							</typepostedatefin>
+							<fonctionstructuredatedebut>
+								<TCEforms>
+									<exclude>1</exclude>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.fonctionstructuredatedebut</label>
+									<config>
+										<type>input</type>
+										<default>????-??-??</default>
+									</config>
+								</TCEforms>
+							</fonctionstructuredatedebut>
+							<fonctionstructuredatefin>
+								<TCEforms>
+									<exclude>1</exclude>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.fonctionstructuredatefin</label>
+									<config>
+										<type>input</type>
+										<default>????-??-??</default>
+									</config>
+								</TCEforms>
+							</fonctionstructuredatefin>
+						</el>
+					</groupeaffichagedate>
+
+					<groupeaffichagerang>
+						<type>array</type>
+						<el>
+							<rang1>
+								<TCEforms>
+									<exclude>1</exclude>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.rang1</label>
+									<config>
+										<type>input</type>
+										<default>Responsable</default>
+									</config>
+								</TCEforms>
+							</rang1>
+							<rang2>
+								<TCEforms>
+									<exclude>1</exclude>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.rang2</label>
+									<config>
+										<type>input</type>
+										<default>Responsable adjoint</default>
+									</config>
+								</TCEforms>
+							</rang2>
+							<rang0>
+								<TCEforms>
+									<exclude>1</exclude>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.rang0</label>
+									<config>
+										<type>input</type>
+										<default>Autre</default>
+									</config>
+								</TCEforms>
+							</rang0>
+						</el>
+					</groupeaffichagerang>
 				</el>
 			</ROOT>
 		</affichage>
@@ -382,6 +456,7 @@
 							<config>
 								<type>text</type>
 								<cols>70</cols>
+								<default>DISTINCT tx_ligestmembrelabo_MembreDuLabo.uid AS uidmembre, tx_ligestmembrelabo_MembreDuLabo.*</default>
 							</config>
 						</TCEforms>
 					</select>
@@ -391,6 +466,7 @@
 							<config>
 								<type>text</type>
 								<cols>70</cols>
+								<default>tx_ligestmembrelabo_MembreDuLabo</default>
 							</config>
 						</TCEforms>
 					</from_table>
@@ -401,6 +477,7 @@
 							<config>
 								<type>text</type>
 								<cols>70</cols>
+								<default>tx_ligestmembrelabo_MembreDuLabo.deleted!=1</default>
 							</config>
 						</TCEforms>
 					</where_clause>
