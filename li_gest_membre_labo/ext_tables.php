@@ -403,6 +403,9 @@ t3lib_extMgm::addPlugin(array('LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_c
 
 t3lib_extMgm::addStaticFile($_EXTKEY,"pi1/static/","Managing Member");
 
+// initalize "context sensitive help" (csh)
+t3lib_extMgm::addLLrefForTCAdescr('tx_ligestmembrelabo_MembreDuLabo','EXT:li_gest_membre_labo/csh/ligestmembrelabo_locallang_csh_tx_ligestmembrelabo_MembreDuLabo.xml');
+
 t3lib_extMgm::addPiFlexFormValue($_EXTKEY.'_pi1', 'FILE:EXT:li_gest_membre_labo/flexform_ds_pi1.xml'); //Ajouté
 
 
