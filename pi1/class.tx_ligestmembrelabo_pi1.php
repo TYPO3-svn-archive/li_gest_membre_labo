@@ -159,6 +159,47 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 	
 
 	/**
+	 * Choix de l'équipe
+	 * Cette fonction permet de créer une contrainte concernant le type de poste
+	 * @param $equipe Chaîne de caractères contenant les identifiants des équipes(uid) séparés par des virgules
+	 * @return Une chaîne de caratères contenant une contrainte à rajouter à une requête
+	 */
+	private function equipe($uid_equipes)
+	{
+			//Création de la contrainte permettant l'affichage que de certains types de postes...
+			$equipes='';
+	
+
+			if($uid_equipes<>'')
+			{
+				$equipes=' AND ( ';
+				$premier=true;
+
+				$tableau_equipes = Explode(",",$uid_equipes);
+
+				foreach ($tableau_equipes as $equipe_courante) {
+					if ($premier <> true)
+					{
+						$equipes = $equipes.' OR ';
+					}
+					else
+					{
+						$premier=false;
+					}
+					$equipes=$equipes.'tx_ligestmembrelabo_Equipe.uid='.$equipe_courante;
+				}
+
+				$equipes = $equipes.' )';
+
+			}
+
+
+			return $equipes;
+	}
+	
+	
+	
+	/**
 	 * Choix du type de poste
 	 * Cette fonction permet de créer une contrainte concernant le type de poste
 	 * @param $typeDePoste Chaîne de caractères contenant les identifiants des types de poste (uid) séparés par des virgules
@@ -472,6 +513,8 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 		$this->conf=$conf;
 		$this->pi_initPIflexForm(); // Init and get the flexform data of the plugin
 		$this->lConf = array(); // Setup our storage array...
+		$this->lConf2 = array();
+		$this->lConftotal = array();
 		// Assign the flexform data to a local variable for easier access
 		$this->pi_setPiVarDefaults();
 		$piFlexForm = $this->cObj->data['pi_flexform'];
@@ -484,12 +527,30 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			{
 				foreach ( $value as $key => $val )
 				{
-					$this->lConf[$key] = $this->pi_getFFvalue($piFlexForm, $key, $sheet);
-				}
-			}
-		}
-		$this->pi_loadLL();
+					$this->lConf[$key] = $this->pi_getFFvalue($piFlexForm, $key, $sheet);			
 
+
+					if(ereg('groupe',$key)){
+						$temp = $key;
+						foreach ($val as $key2 => $val2 )
+						{
+							$temp = $temp.'/'.$key2;
+							foreach ($val2 as $key3 => $val3 )
+							{
+								$this->lConf[$key3] = $this->pi_getFFvalue($piFlexForm, $key.'/'.$key2.'/'.$key3, $sheet);
+							}
+						}
+		
+					
+					}
+				}
+
+			}
+
+		}
+		//$this->lConftotal = array_merge($this->lConf,$this->lConf2);
+
+		$this->pi_loadLL();
 
 		//Gestion de gabarits (Template)
 
@@ -514,11 +575,6 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 
 		$template['fonctions_structures'] = $this->cObj->getSubpart($template['item'], '###FONCTIONS_STRUCTURES###');
 		$template['fonctions_structures_dernier'] = $this->cObj->getSubpart($template['item'], '###FONCTIONS_STRUCTURES_DERNIER###');
-
-
-
-
-
 
 
 		//Exemple de création de requêtes
@@ -562,12 +618,18 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			
 
 			//Gestion du nom de l'Equipe
-			$table = $table.', tx_ligestmembrelabo_EstMembreDe, tx_ligestmembrelabo_Equipe';
+			/*$table = $table.', tx_ligestmembrelabo_EstMembreDe, tx_ligestmembrelabo_Equipe';
 			$where = $where.' AND tx_ligestmembrelabo_MembreDuLabo.uid = tx_ligestmembrelabo_EstMembreDe.idMembreLabo AND tx_ligestmembrelabo_EstMembreDe.idEquipe = tx_ligestmembrelabo_Equipe.uid';
 			if (($this->lConf['labo'])<>''){
 				$where = $where.' AND tx_ligestmembrelabo_EstMembreDe.deleted<>1 AND tx_ligestmembrelabo_Equipe.deleted<>1 AND (tx_ligestmembrelabo_Equipe.Nom = "'.$this->lConf['labo'].'" OR tx_ligestmembrelabo_Equipe.Abreviation = "'.$this->lConf['labo'].'")';
+			}*/
+			$equipes = $this->equipe($this->lConf['equipe']);
+			$table = $table.', tx_ligestmembrelabo_EstMembreDe, tx_ligestmembrelabo_Equipe';
+			$where = $where.' AND tx_ligestmembrelabo_EstMembreDe.deleted<>1 AND tx_ligestmembrelabo_Equipe.deleted<>1 AND tx_ligestmembrelabo_EstMembreDe.idMembreLabo = tx_ligestmembrelabo_MembreDuLabo.uid AND tx_ligestmembrelabo_EstMembreDe.idEquipe = tx_ligestmembrelabo_Equipe.uid';
+			if($equipes<>""){
+				$where = $where.$equipes;
 			}
-
+			
 
 
 			/********************FILTRES********************/
@@ -575,11 +637,11 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 
 
 			//Gestion de la date d'arrivée et de départ du labo
-			if($this->lConf['datelabo']=='Actuels')
+			if($this->lConftotal['datelabo']=='Actuels')
 			{
 				$where = $where.' AND tx_ligestmembrelabo_MembreDuLabo.DateArrivee<="'.date('Y-m-d').'" AND (tx_ligestmembrelabo_MembreDuLabo.DateSortie>="'.date('Y-m-d').'" OR tx_ligestmembrelabo_MembreDuLabo.DateSortie="0000-00-00")';
 			}
-			else if($this->lConf['datelabo']=='Anciens')
+			else if($this->lConftotal['datelabo']=='Anciens')
 			{
 				$where = $where.' AND tx_ligestmembrelabo_MembreDuLabo.DateSortie<"'.date('Y-m-d').'" AND tx_ligestmembrelabo_MembreDuLabo.DateSortie<>"0000-00-00"';
 			}
@@ -630,12 +692,12 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			}
 			*/
 			
-			$structure = $this->structure($this->lConf['structure'],$this->lConf['datetypestructure']);
+			$structure = $this->structure($this->lConftotal['structure'],$this->lConftotal['datetypestructure']);
 			if($structure<>""){
 				$where = $where.' AND EXISTS (SELECT * FROM tx_ligestmembrelabo_Exerce, tx_ligestmembrelabo_Structure WHERE tx_ligestmembrelabo_MembreDuLabo.uid = tx_ligestmembrelabo_Exerce.idMembreLabo AND tx_ligestmembrelabo_Exerce.idStructure = tx_ligestmembrelabo_Structure.uid'.$structure.')';
 			}			
 			
-			$fonction = $this->fonction($this->lConf['fonction'],$this->lConf['datetypefonction']);
+			$fonction = $this->fonction($this->lConftotal['fonction'],$this->lConftotal['datetypefonction']);
 			if($fonction<>""){
 				$where = $where.' AND EXISTS (SELECT * FROM tx_ligestmembrelabo_Exerce, tx_ligestmembrelabo_Fonction WHERE tx_ligestmembrelabo_MembreDuLabo.uid = tx_ligestmembrelabo_Exerce.idMembreLabo AND tx_ligestmembrelabo_Exerce.idFonction = tx_ligestmembrelabo_Fonction.uid'.$fonction.')';
 			}
@@ -644,7 +706,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			
 			
 			//Gestion des diplomes
-			$diplome = $this->diplome($this->lConf['diplome']);
+			$diplome = $this->diplome($this->lConftotal['diplome']);
 			if($diplome<>""){
 				//$select = $select.', tx_ligestmembrelabo_TypeDiplome.*, tx_ligestmembrelabo_AObtenu.*';
 				$table = $table.', tx_ligestmembrelabo_TypeDiplome, tx_ligestmembrelabo_AObtenu';
@@ -660,7 +722,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			$pid = array(); //dossiers sélectionnés
 			$pages = array(); //dossiers et sous dossiers...
 			
-			$chaine = $this->lConf['pid'];
+			$chaine = $this->lConftotal['pid'];
 			
 			if ($chaine!=''){
 				$dossiers = $dossiers.' AND (';
@@ -756,8 +818,8 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			$markerArray['###PRENOM###'] = mb_strtoupper($row['Prenom'],"UTF-8");
 
 			// Afficher les initailes d'un membre
-			$markerArray['###InitialesPN###'] = substr($row['Prenom'],0,1).'.'.substr($row['NomDUsage'],0,1).'.';
-			$markerArray['###InitialesNP###'] = substr($row['NomDUsage'],0,1).'.'.substr($row['Prenom'],0,1).'.';
+			$markerArray['###InitialePrenom###'] = substr($row['Prenom'],0,1);
+			$markerArray['###InitialeNom###'] = substr($row['NomDUsage'],0,1);
 
 
 			$markerArray['###Genre###'] = $row['Genre'];
@@ -785,10 +847,14 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			}
 			$markerArray['###NumINE###'] = $row['NumINE'];
 			$markerArray['###SectionCNU###'] = $row['SectionCNU'];
-			$markerArray['###CoordonneesRecherche###'] = $row['CoordonneesRecherche'];
-			$markerArray['###CoordonneesEnseignement###'] = $row['CoordonneesEnseignement'];
+			$markerArray['###CoordonneesRecherche###'] = nl2br($row['CoordonneesRecherche']);
+			$markerArray['###CoordonneesRecherche_Ligne###'] = $row['CoordonneesRecherche'];
+			$markerArray['###CoordonneesEnseignement###'] = nl2br($row['CoordonneesEnseignement']);
+			$markerArray['###CoordonneesEnseignement_Ligne###'] = $row['CoordonneesEnseignement'];
+			$markerArray['###CoordonneesPersonnelles###'] = nl2br($row['CoordonneesPersonnelles']);
+			$markerArray['###CoordonneesPersonnelles_Ligne###'] = $row['CoordonneesPersonnelles'];
 			$markerArray['###email###'] = $row['email'];
-			$markerArray['###CoordonneesPersonnelles###'] = $row['CoordonneesPersonnelles'];
+
 			//Configuration du lien PageWeb
 				// configure the typolink
 				$this->local_cObj = t3lib_div::makeInstance('tslib_cObj');
@@ -803,7 +869,9 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			$wrappedSubpartContentArray['###PageWebLien###'] = $this->local_cObj->typolinkWrap($temp_conf);
 			$markerArray['###PageWeb###'] = $row['PageWeb'];
 
-
+			
+			
+			
 			//**************************************
 			// Tables Equipe et EstMembreDe
 			//**************************************
@@ -828,18 +896,19 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 
 					$markerArray_Equipe['###Equipe_Abreviation###'] = $equipe_row['Abreviation'];
 
-					/*$rang='';
-					if ($equipe_row['Rang']=='1')
-					{
-						$rang="Responsable d'équipe";
+
+					//$markerArray_Equipe['###EstMembreDe_Rang###'] = $equipe_row['Rang'];
+					
+					if($equipe_row['Rang']=='1'){
+						$markerArray_Equipe['###EstMembreDe_Rang###']= $this->lConf['rang1'];
 					}
-					else if ($equipe_row['Rang']=='2')
-					{
-						$rang="Responsable adjoint";
+					else if($equipe_row['Rang']=='2'){
+						$markerArray_Equipe['###EstMembreDe_Rang###']= $this->lConf['rang2'];
 					}
-					$markerArray_Equipe['###EstMembreDe_Rang###'] = $rang;
-					*/
-					$markerArray_Equipe['###EstMembreDe_Rang###'] = $equipe_row['Rang'];
+					else
+					{
+						$markerArray_Equipe['###EstMembreDe_Rang###']= $this->lConf['rang0'];
+					}
 
 					$contentEquipe .= $this->cObj->substituteMarkerArrayCached($template['equipe'],$markerArray_Equipe,array(),array());
 				}

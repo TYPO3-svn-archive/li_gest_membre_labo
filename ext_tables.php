@@ -5,12 +5,13 @@ if (!defined ('TYPO3_MODE')) 	die ('Access denied.');
 $TYPO3_CONF_VARS['SC_OPTIONS']['tce']['formevals']['tx_ligestmembrelabo_dateValide'] = 'EXT:li_gest_membre_labo/class.tx_ligestmembrelabo_dateValide.php';
 $TYPO3_CONF_VARS['SC_OPTIONS']['tce']['formevals']['tx_ligestmembrelabo_dateObligatoire'] = 'EXT:li_gest_membre_labo/class.tx_ligestmembrelabo_dateObligatoire.php';
 
-
+t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_MembreDuLabo');
+t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_MembreDuLabo');
 
 $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 	"ctrl" => array (
 		'title'     => 'LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo',		
-		'label'     => 'uid',
+		'label'     => 'NomDUsage, Prenom',
 		'label_alt' => 'NomDUsage, Prenom',
 		'label_alt_force' => '1',		
 		'tstamp'    => 'tstamp',
@@ -29,12 +30,13 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 	)
 );
 
-
+t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_Fonction');
+t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_Fonction');
 
 $TCA["tx_ligestmembrelabo_Fonction"] = array (
 	"ctrl" => array (
 		'title'     => 'LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Fonction',		
-		'label'     => 'uid',
+		'label'     => 'Libelle',
 		'label_alt' => 'Libelle',
 		'label_alt_force' => '1',
 		'tstamp'    => 'tstamp',
@@ -61,10 +63,13 @@ $TCA["tx_ligestmembrelabo_Fonction"] = array (
 	)
 );
 
+t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_Structure');
+t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_Structure');
+
 $TCA["tx_ligestmembrelabo_Structure"] = array (
 	"ctrl" => array (
 		'title'     => 'LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Structure',		
-		'label'     => 'uid',
+		'label'     => 'LibelleDesSaisies',
 		'label_alt' => 'LibelleDesSaisies',
 		'label_alt_force' => '1',
 		'tstamp'    => 'tstamp',
@@ -84,13 +89,14 @@ $TCA["tx_ligestmembrelabo_Structure"] = array (
 );
 
 
-
+t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_Exerce');
+t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_Exerce');
 
 $TCA["tx_ligestmembrelabo_Exerce"] = array (
 	"ctrl" => array (
 		'title'     => 'LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Exerce',		
-		'label'     => 'uid',
-		'label_alt' => 'idMembreLabo, idStructure, idFonction',
+		'label'     => 'idMembreLabo, idStructure, idFonction, DateDebut, DateFin',
+		'label_alt' => 'idMembreLabo, idStructure, idFonction, DateDebut, DateFin',
 		'label_alt_force' => '1',
 		'tstamp'    => 'tstamp',
 		'crdate'    => 'crdate',
@@ -108,11 +114,13 @@ $TCA["tx_ligestmembrelabo_Exerce"] = array (
 	)
 );
 
+t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_TypePosteWeb');
+t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_TypePosteWeb');
 
 $TCA["tx_ligestmembrelabo_TypePosteWeb"] = array (
 	"ctrl" => array (
 		'title'     => 'LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_TypePosteWeb',		
-		'label'     => 'uid',
+		'label'     => 'LibelleWeb',
 		'label_alt' => 'LibelleWeb',
 		'label_alt_force' => '1',	
 		'tstamp'    => 'tstamp',
@@ -144,12 +152,13 @@ $TCA["tx_ligestmembrelabo_TypePosteWeb"] = array (
 
 
 
-
+t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_TypePoste');
+t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_TypePoste');
 
 $TCA["tx_ligestmembrelabo_TypePoste"] = array (
 	"ctrl" => array (
 		'title'     => 'LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_TypePoste',		
-		'label'     => 'uid',
+		'label'     => 'Libelle',
 		'label_alt' => 'Libelle',
 		'label_alt_force' => '1',
 		'tstamp'    => 'tstamp',
@@ -176,11 +185,14 @@ $TCA["tx_ligestmembrelabo_TypePoste"] = array (
 	)
 );
 
+t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_Possede');
+t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_Possede');
+
 $TCA["tx_ligestmembrelabo_Possede"] = array (
 	"ctrl" => array (
 		'title'     => 'LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Possede',		
-		'label'     => 'uid',
-		'label_alt' => 'idMembreLabo, idTypePoste',
+		'label'     => 'idMembreLabo, idTypePoste, DateDebut, DateFin',
+		'label_alt' => 'idMembreLabo, idTypePoste, DateDebut, DateFin',
 		'label_alt_force' => '1',		
 		'tstamp'    => 'tstamp',
 		'crdate'    => 'crdate',
@@ -198,11 +210,14 @@ $TCA["tx_ligestmembrelabo_Possede"] = array (
 	)
 );
 
+t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_Categorie');
+t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_Categorie');
+
 $TCA["tx_ligestmembrelabo_Categorie"] = array (
 	"ctrl" => array (
 		'title'     => 'LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Categorie',		
-		'label'     => 'uid',
-		'label_alt' => 'idCategorie, Libelle',
+		'label'     => 'Libelle',
+		'label_alt' => 'Libelle',
 		'label_alt_force' => '1',
 		'tstamp'    => 'tstamp',
 		'crdate'    => 'crdate',
@@ -230,20 +245,21 @@ $TCA["tx_ligestmembrelabo_Categorie"] = array (
 	)
 );
 
-
+t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_CategorieMembre');
+t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_CategorieMembre');
 
 $TCA["tx_ligestmembrelabo_CategorieMembre"] = array (
 	"ctrl" => array (
 		'title'     => 'LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_CategorieMembre',		
-		'label'     => 'uid',
-		'label_alt' => 'idMembreLabo, idCategorie',
-		'label_alt_force' => '1',	
+		'label'     => 'idMembreLabo, idCategorie, DateDebut, DateFin',
+		'label_alt' => 'idMembreLabo, idCategorie, DateDebut, DateFin',
+		'label_alt_force' => '1',
 		'tstamp'    => 'tstamp',
 		'crdate'    => 'crdate',
 		'cruser_id' => 'cruser_id',
-		'default_sortby' => "ORDER BY uid",	
+		'default_sortby' => "ORDER BY uid",
 		'delete' => 'deleted',
-		'enablecolumns' => array (		
+		'enablecolumns' => array (
 			'disabled' => 'hidden',
 		),
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
@@ -256,13 +272,14 @@ $TCA["tx_ligestmembrelabo_CategorieMembre"] = array (
 
 
 
-
+t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_Equipe');
+t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_Equipe');
 
 $TCA["tx_ligestmembrelabo_Equipe"] = array (
 	"ctrl" => array (
 		'title'     => 'LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Equipe',		
-		'label'     => 'uid',
-		'label_alt' => 'Abreviation, Nom',
+		'label'     => 'Abreviation',
+		'label_alt' => 'Abreviation',
 		'label_alt_force' => '1',
 		'tstamp'    => 'tstamp',
 		'crdate'    => 'crdate',
@@ -288,16 +305,19 @@ $TCA["tx_ligestmembrelabo_Equipe"] = array (
 	)
 );
 
+t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_EstMembreDe');
+t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_EstMembreDe');
+
 $TCA["tx_ligestmembrelabo_EstMembreDe"] = array (
 	"ctrl" => array (
 		'title'     => 'LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_EstMembreDe',		
-		'label'     => 'uid',
-		'label_alt' => 'idMembreLabo, idEquipe',
-		'label_alt_force' => '1',	
+		'label'     => 'idMembreLabo, idEquipe, DateDebut, DateFin',
+		'label_alt' => 'idMembreLabo, idEquipe, DateDebut, DateFin',
+		'label_alt_force' => '1',
 		'tstamp'    => 'tstamp',
 		'crdate'    => 'crdate',
 		'cruser_id' => 'cruser_id',
-		'default_sortby' => "ORDER BY uid",	
+		'default_sortby' => "ORDER BY uid",
 		'delete' => 'deleted',
 		'enablecolumns' => array (		
 			'disabled' => 'hidden',
@@ -306,15 +326,18 @@ $TCA["tx_ligestmembrelabo_EstMembreDe"] = array (
 		'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_ligestmembrelabo_EstMembreDe.gif',
 	),
 	"feInterface" => array (
-		"fe_admin_fieldList" => "hidden, idMembreLabo, idEquipe, Rang",
+		"fe_admin_fieldList" => "hidden, idMembreLabo, idEquipe, Rang, DateDebut, DateFin",
 	)
 );
+
+t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_TypeDiplome');
+t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_TypeDiplome');
 
 $TCA["tx_ligestmembrelabo_TypeDiplome"] = array (
 	"ctrl" => array (
 		'title'     => 'LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_TypeDiplome',		
-		'label'     => 'uid',
-		'label_alt' => 'Code, Libelle',
+		'label'     => 'Libelle',
+		'label_alt' => 'Libelle',
 		'label_alt_force' => '1',
 		'tstamp'    => 'tstamp',
 		'crdate'    => 'crdate',
@@ -340,11 +363,14 @@ $TCA["tx_ligestmembrelabo_TypeDiplome"] = array (
 	)
 );
 
+t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_AObtenu');
+t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_AObtenu');
+
 $TCA["tx_ligestmembrelabo_AObtenu"] = array (
 	"ctrl" => array (
 		'title'     => 'LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_AObtenu',
-		'label'     => 'uid',
-		'label_alt' => 'idMembreLabo, CodeDiplome, Intitule',
+		'label'     => 'idMembreLabo, Intitule',
+		'label_alt' => 'idMembreLabo, Intitule',
 		'label_alt_force' => '1',
 		'tstamp'    => 'tstamp',
 		'crdate'    => 'crdate',
@@ -361,6 +387,9 @@ $TCA["tx_ligestmembrelabo_AObtenu"] = array (
 		"fe_admin_fieldList" => "hidden, idMembreLabo, CodeDiplome, DateObtention, Intitule, LieuDObtention",
 	)
 );
+
+
+
 
 
 t3lib_div::loadTCA('tt_content');

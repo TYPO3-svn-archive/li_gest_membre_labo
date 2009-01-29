@@ -21,10 +21,10 @@
 			<label index="tx_ligestmembrelabo_MembreDuLabo.datesortie">The date of departure from lab (yyyy-mm-dd)</label>
 			<label index="tx_ligestmembrelabo_MembreDuLabo.numine">INE Number</label>
 			<label index="tx_ligestmembrelabo_MembreDuLabo.sectioncnu">CNU Number</label>
-			<label index="tx_ligestmembrelabo_MembreDuLabo.coordonneesrecherche">Coordinates research</label>
-			<label index="tx_ligestmembrelabo_MembreDuLabo.coordonneesenseignement">Coordinates lessons</label>
-			<label index="tx_ligestmembrelabo_MembreDuLabo.email">email</label>
-			<label index="tx_ligestmembrelabo_MembreDuLabo.coordonneespersonnelles">Coordinates Personal</label>
+			<label index="tx_ligestmembrelabo_MembreDuLabo.coordonneesrecherche">Address research</label>
+			<label index="tx_ligestmembrelabo_MembreDuLabo.coordonneesenseignement">Address lessons</label>
+			<label index="tx_ligestmembrelabo_MembreDuLabo.email">Email</label>
+			<label index="tx_ligestmembrelabo_MembreDuLabo.coordonneespersonnelles">Address personal</label>
 			<label index="tx_ligestmembrelabo_MembreDuLabo.pageweb">Web Page</label>
 			<label index="tx_ligestmembrelabo_MembreDuLabo.afficherequipe">Team linked to the current member</label>
 			<label index="tx_ligestmembrelabo_MembreDuLabo.afficherpossede">Jobs linked to the current member</label>
@@ -71,7 +71,9 @@
 			<label index="tx_ligestmembrelabo_EstMembreDe">Is Member Of</label>
 			<label index="tx_ligestmembrelabo_EstMembreDe.idmembrelabo">id Lab Member</label>
 			<label index="tx_ligestmembrelabo_EstMembreDe.idequipe">id Team</label>
-			<label index="tx_ligestmembrelabo_EstMembreDe.rang">The rank of the person in the team (0=none, 1=team leader, 2=Assistant Head)</label>
+			<label index="tx_ligestmembrelabo_EstMembreDe.rang">The rank of the person in the team (1=team leader, 2=assistant head, 0=others)</label>
+			<label index="tx_ligestmembrelabo_EstMembreDe.datedebut">Start Date (yyyy-mm-dd)</label>
+			<label index="tx_ligestmembrelabo_EstMembreDe.datefin">End Date (yyyy-mm-dd)</label>
 			<label index="tx_ligestmembrelabo_TypeDiplome">Diplome Type</label>
 			<label index="tx_ligestmembrelabo_TypeDiplome.code">Code</label>
 			<label index="tx_ligestmembrelabo_TypeDiplome.libelle">Label</label>
@@ -116,6 +118,9 @@
 			<label index="tt_content.pi_flexform.typepostedatefin">Text in lieu of a date 0000-00-00 for a end date of job</label>
 			<label index="tt_content.pi_flexform.fonctionstructuredatedebut">Text in lieu of a date 0000-00-00 for a start date of function in a structure</label>
 			<label index="tt_content.pi_flexform.fonctionstructuredatefin">Text in lieu of a date 0000-00-00 for a end date of function in a structure</label>
+			<label index="tt_content.pi_flexform.rang1">Text to appoint a team leader</label>
+			<label index="tt_content.pi_flexform.rang2">Text to appoint an assistant head</label>
+			<label index="tt_content.pi_flexform.rang0">Text to appoint an other type of responsibility</label>
 			<label index="tt_content.pi_flexform.sheet_request">Request</label>
 			<label index="tt_content.pi_flexform.requete">Use a request for display members</label>
 			<label index="tt_content.pi_flexform.select">select</label>
@@ -144,10 +149,10 @@
 			<label index="tx_ligestmembrelabo_MembreDuLabo.datesortie">La date de départ du labo (au format: aaaa-mm-jj)</label>
 			<label index="tx_ligestmembrelabo_MembreDuLabo.numine">Numéro INE</label>
 			<label index="tx_ligestmembrelabo_MembreDuLabo.sectioncnu">Le ou les numéro de sections CNU associé au poste de la personne</label>
-			<label index="tx_ligestmembrelabo_MembreDuLabo.coordonneesrecherche">Les coordonnées recherches</label>
-			<label index="tx_ligestmembrelabo_MembreDuLabo.coordonneesenseignement">Coordonnées enseignements</label>
-			<label index="tx_ligestmembrelabo_MembreDuLabo.email">email</label>
-			<label index="tx_ligestmembrelabo_MembreDuLabo.coordonneespersonnelles">Coordonnees Personnelles</label>
+			<label index="tx_ligestmembrelabo_MembreDuLabo.coordonneesrecherche">Adresse recherche</label>
+			<label index="tx_ligestmembrelabo_MembreDuLabo.coordonneesenseignement">Adresse enseignement</label>
+			<label index="tx_ligestmembrelabo_MembreDuLabo.email">Email</label>
+			<label index="tx_ligestmembrelabo_MembreDuLabo.coordonneespersonnelles">Adresse personnelle</label>
 			<label index="tx_ligestmembrelabo_MembreDuLabo.pageweb">Page Web</label>
 			<label index="tx_ligestmembrelabo_MembreDuLabo.afficherequipe">Equipe liée à l'enregistrement courant</label>
 			<label index="tx_ligestmembrelabo_MembreDuLabo.afficherpossede">Postes liés à l'enregistrement courant</label>
@@ -182,7 +187,7 @@
 			<label index="tx_ligestmembrelabo_Possede.datefin">Date Fin (au format: aaaa-mm-jj)</label>
 			<label index="tx_ligestmembrelabo_Categorie">Catégorie</label>
 			<label index="tx_ligestmembrelabo_Categorie.idcategorie">id Categorie</label>
-			<label index="tx_ligestmembrelabo_Categorie.libelle">Libelle</label>
+			<label index="tx_ligestmembrelabo_Categorie.libelle">Libellé</label>
 			<label index="tx_ligestmembrelabo_CategorieMembre">Categorie Membre Du Labo</label>
 			<label index="tx_ligestmembrelabo_CategorieMembre.idcategorie">id Categorie</label>
 			<label index="tx_ligestmembrelabo_CategorieMembre.idmembrelabo">id Membre Labo</label>
@@ -194,7 +199,9 @@
 			<label index="tx_ligestmembrelabo_EstMembreDe">Est Membre De</label>
 			<label index="tx_ligestmembrelabo_EstMembreDe.idmembrelabo">id Membre Labo</label>
 			<label index="tx_ligestmembrelabo_EstMembreDe.idequipe">id Equipe</label>
-			<label index="tx_ligestmembrelabo_EstMembreDe.rang">Le rang de la personne dans l'équipe (0=rien, 1=responsable d'équipe, 2=responsable adjoint)</label>
+			<label index="tx_ligestmembrelabo_EstMembreDe.rang">Le rang de la personne dans l'équipe (1=responsable d'équipe, 2=responsable adjoint, 0=autres)</label>
+			<label index="tx_ligestmembrelabo_EstMembreDe.datedebut">Date Debut (au format: aaaa-mm-jj)</label>
+			<label index="tx_ligestmembrelabo_EstMembreDe.datefin">Date Fin (au format: aaaa-mm-jj)</label>
 			<label index="tx_ligestmembrelabo_TypeDiplome">Type Diplome</label>
 			<label index="tx_ligestmembrelabo_TypeDiplome.code">Code</label>
 			<label index="tx_ligestmembrelabo_TypeDiplome.libelle">Libelle</label>
@@ -239,6 +246,9 @@
 			<label index="tt_content.pi_flexform.typepostedatefin">Texte en remplacement d'une date 0000-00-00 pour une date de fin de poste</label>
 			<label index="tt_content.pi_flexform.fonctionstructuredatedebut">Texte en remplacement d'une date 0000-00-00 pour une date de début de fonction dans une structure</label>
 			<label index="tt_content.pi_flexform.fonctionstructuredatefin">Texte en remplacement d'une date 0000-00-00 pour une date de fin de fonction dans une structure</label>
+			<label index="tt_content.pi_flexform.rang1">Texte pour désigner un responsable d'équipe</label>
+			<label index="tt_content.pi_flexform.rang2">Texte pour désigner un responsable adjoint</label>
+			<label index="tt_content.pi_flexform.rang0">Texte pour désigner un autre type de responsabilité</label>
 			<label index="tt_content.pi_flexform.sheet_request">Requête</label>
 			<label index="tt_content.pi_flexform.requete">Utiliser une requête pour afficher les membres</label>
 			<label index="tt_content.pi_flexform.select">select</label>
