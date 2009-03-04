@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<description>CSH for table tx_ligestmembrelabo_PEDR</description>
+		<type>CSH</type>
+		<csh_table>tx_ligestmembrelabo_PEDR</csh_table>
+		<fileId>EXT:li_gest_membre_labo/csh/ligestmembrelabo_locallang_csh_tx_ligestmembrelabo_PEDR.xml</fileId>
+		<labelContext type="array"></labelContext>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+            <label index=".description">PEDR</label>
+            <label index="hidden.description">Cette option permet de cacher ou non un enregistrement.</label>
+			<label index="hidden.details">Les enregistrements cachés seront affichés sur le site.</label>
+            <label index="idMembreLabo.description">Membre du laboratoire à qui l'on veut rattacher une PEDR.</label>
+            <label index="idMembreLabo.details">Tous les membres du laboratoire sont indiqués dans la liste. Pour en ajouter un, vous devez utiliser le formulaire d'ajout de membre.</label>
+            <label index="DateDebut.description">La date de début de la PEDR à mettre au format aaaa-mm-jj. Cette date est obligatoire.</label>
+            <label index="DateDebut.details">Dans le cas ou vous validez une date non valide, la date du jour sera insérée dans la base de données.
+			
+			Cette date ne peut pas être affichée sur le site.</label>
+            <label index="DateFin.description">La date de fin de la PEDR à mettre au format aaaa-mm-jj.</label>
+            <label index="DateFin.details">Si vous validez une date non valide ou sans avoir mis de date, la date 0000-00-00 sera insérée dans la base de données. Cette date est perçu par l'extension comme une date non déterminée, on peut par exemple l'utiliser dans le cas où l'on ne sait pas quand le membre va perdre sa PEDR.
+			
+			Cette date ne peut pas être affichée sur le site.</label>
+		</languageKey>
+		<languageKey index="fr" type="array">
+            <label index=".description">PEDR</label>
+            <label index="hidden.description">Cette option permet de cacher ou non un enregistrement.</label>
+			<label index="hidden.details">Les enregistrements cachés seront affichés sur le site.</label>
+            <label index="idMembreLabo.description">Membre du laboratoire à qui l'on veut rattacher une PEDR.</label>
+            <label index="idMembreLabo.details">Tous les membres du laboratoire sont indiqués dans la liste. Pour en ajouter un, vous devez utiliser le formulaire d'ajout de membre.</label>
+            <label index="DateDebut.description">La date de début de la PEDR à mettre au format aaaa-mm-jj. Cette date est obligatoire.</label>
+            <label index="DateDebut.details">Dans le cas ou vous validez une date non valide, la date du jour sera insérée dans la base de données.
+			
+			Cette date ne peut pas être affichée sur le site.</label>
+            <label index="DateFin.description">La date de fin de la PEDR à mettre au format aaaa-mm-jj.</label>
+            <label index="DateFin.details">Si vous validez une date non valide ou sans avoir mis de date, la date 0000-00-00 sera insérée dans la base de données. Cette date est perçu par l'extension comme une date non déterminée, on peut par exemple l'utiliser dans le cas où l'on ne sait pas quand le membre va perdre sa PEDR.
+			
+			Cette date ne peut pas être affichée sur le site.</label>
+		</languageKey>
+	</data>
+</T3locallang>

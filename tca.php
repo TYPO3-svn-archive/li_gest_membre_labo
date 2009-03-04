@@ -7,7 +7,7 @@ if (!defined ('TYPO3_MODE')) 	die ('Access denied.');
 $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 	"ctrl" => $TCA["tx_ligestmembrelabo_MembreDuLabo"]["ctrl"],
 	"interface" => array (
-		"showRecordFieldList" => "hidden, NomDUsage, NomMaritale, NomPreMarital, Prenom, Genre, DateNaissance, Nationalite, DateArrivee, DateSortie, NumINE, SectionCNU, CoordonneesRecherche, CoordonneesEnseignement, CoordonneesPersonnelles, email, PageWeb, Afficher_Equipe, Afficher_Possede, Afficher_Exerce, Afficher_CategorieMembre, Afficher_AObtenu"
+		"showRecordFieldList" => "hidden, NomDUsage, NomMarital, NomPreMarital, Prenom, Genre, DateNaissance, Nationalite, DateArrivee, DateSortie, NumINE, SectionCNU, CoordonneesRecherche, CoordonneesEnseignement, CoordonneesPersonnelles, email, PageWeb, Afficher_Equipe, Afficher_Possede, Afficher_Exerce, Afficher_CategorieMembre, Afficher_AObtenu, Afficher_PEDR, Informations"
 	),
 	"feInterface" => $TCA["tx_ligestmembrelabo_MembreDuLabo"]["feInterface"],
 	"columns" => array (
@@ -29,9 +29,9 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 				"eval" => "required,trim",
 			)
 		),
-		"NomMaritale" => Array (		
+		"NomMarital" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.nommaritale",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.nommarital",		
 			"config" => Array (
 				"type" => "input",	
 				"size" => "48",	
@@ -193,24 +193,48 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 				"type" => "select",
 				"foreign_table" => "tx_ligestmembrelabo_EstMembreDe",	
 				"foreign_table_where" => "AND tx_ligestmembrelabo_EstMembreDe.IdMembreLabo=###THIS_UID### ORDER BY tx_ligestmembrelabo_EstMembreDe.uid",
-				"size" => 1,
+				"size" => 6,
 				"minitems" => 0,
 				"maxitems" => 1,
 				"wizards" => Array(
 					"_PADDING" => 2,
 					"_VERTICAL" => 1,
-					"add" => Array(
+					/*"add" => Array(
 						"type" => "popup",
 						"title" => "Create new record",
 						"icon" => "add.gif",
 						"params" => Array(
-							"table"=>"tx_ligestmembrelabo_EstMembreDe",
-							'pid' => '###CURRENT_PID###',
-							"setValue" => "prepend"
+							"table"		=> "tx_ligestmembrelabo_EstMembreDe",
+							"pid" 			=> '###CURRENT_PID###',
+							"setValue"		=> "prepend"
 						),
 						"script" => "wizard_add.php",
+						//"script" => "wizard_add_equipe.php",
+						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
+					),*/
+					/*"add" => Array(
+						"type" => "popup",
+						"title" => "Create new record",
+						"icon" => "add.gif",
+						"params" => Array(
+							"table"			=> "tx_ligestmembrelabo_EstMembreDe",
+							"pid" 			=> '###CURRENT_PID###',
+							"setValue"		=> "prepend"
+						),
+						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/add.php",
+						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
+					),*/
+					"add" => Array(
+						"type" => "popup",
+						"title" => "Create new record",
+						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/add.php",
+						"icon" => "add.gif",
+						"params" => Array(
+							"table"			=> "tx_ligestmembrelabo_EstMembreDe"
+						),
 						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
 					),
+					
 					"edit" => Array(
 						"type" => "popup",
 						"title" => "Edit",
@@ -219,7 +243,8 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 						"icon" => "edit2.gif",
 						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
 					),
-					'list' => Array(
+					
+					/*'list' => Array(
 						'type' => 'script',
 						'title' => 'List groups',
 						'icon' => 'list.gif',
@@ -228,7 +253,28 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 							'pid' => '###CURRENT_PID###',
 						),
 						'script' => 'wizard_list.php',
+					),*/
+					"del" => Array(
+						"title" => "Delete record",
+						"type" => "popup",
+						"notNewRecords" => 1,
+						"icon" => "clearout.gif",
+						"popup_onlyOpenIfSelected" => 1,
+						'params' => Array(
+							'table'=>'tx_ligestmembrelabo_EstMembreDe',
+						),
+						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/delete.php",
+						"JSopenParams" => "height=1,width=1,status=0,menubar=0,scrollbars=1",
 					),
+					"reload" => Array(
+						"title" => "Refresh",
+						"type" => "popup",
+						"notNewRecords" => 1,
+						"icon" => "refresh_n.gif",
+						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/reload.php",
+						"JSopenParams" => "height=1,width=1,status=0,menubar=0,scrollbars=1",
+					),
+					
 				),
 			),
 		),
@@ -239,7 +285,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 				"type" => "select",
 				"foreign_table" => "tx_ligestmembrelabo_Possede",	
 				"foreign_table_where" => "AND tx_ligestmembrelabo_Possede.idMembreLabo=###THIS_UID### ORDER BY tx_ligestmembrelabo_Possede.DateDebut DESC",
-				"size" => 1,
+				"size" => 6,
 				"minitems" => 0,
 				"maxitems" => 1,
 				"wizards" => Array(
@@ -248,13 +294,11 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 					"add" => Array(
 						"type" => "popup",
 						"title" => "Create new record",
+						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/add.php",
 						"icon" => "add.gif",
 						"params" => Array(
-							"table"=>"tx_ligestmembrelabo_Possede",
-							'pid' => '###CURRENT_PID###',
-							"setValue" => "prepend"
+							"table"			=> "tx_ligestmembrelabo_Possede"
 						),
-						"script" => "wizard_add.php",
 						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
 					),
 					"edit" => Array(
@@ -265,9 +309,30 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 						"icon" => "edit2.gif",
 						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
 					),
+					"del" => Array(
+						"title" => "Delete record",
+						"type" => "popup",
+						"notNewRecords" => 1,
+						"icon" => "clearout.gif",
+						"popup_onlyOpenIfSelected" => 1,
+						'params' => Array(
+							'table'=>'tx_ligestmembrelabo_Possede',
+						),
+						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/delete.php",
+						"JSopenParams" => "height=1,width=1,status=0,menubar=0,scrollbars=1",
+					),
+					"reload" => Array(
+						"title" => "Refresh",
+						"type" => "popup",
+						"notNewRecords" => 1,
+						"icon" => "refresh_n.gif",
+						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/reload.php",
+						"JSopenParams" => "height=1,width=1,status=0,menubar=0,scrollbars=1",
+					),
 				),
 			),
 		),
+		
 		"Afficher_Exerce" => Array (
 			"exclude" => 1,
 			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.afficherexerce",		
@@ -275,7 +340,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 				"type" => "select",
 				"foreign_table" => "tx_ligestmembrelabo_Exerce",	
 				"foreign_table_where" => "AND tx_ligestmembrelabo_Exerce.IdMembreLabo=###THIS_UID### ORDER BY tx_ligestmembrelabo_Exerce.DateDebut DESC",
-				"size" => 1,
+				"size" => 6,
 				"minitems" => 0,
 				"maxitems" => 1,
 				"wizards" => Array(
@@ -284,13 +349,11 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 					"add" => Array(
 						"type" => "popup",
 						"title" => "Create new record",
+						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/add.php",
 						"icon" => "add.gif",
 						"params" => Array(
-							"table"=>"tx_ligestmembrelabo_Exerce",
-							'pid' => '###CURRENT_PID###',
-							"setValue" => "prepend"
+							"table"			=> "tx_ligestmembrelabo_Exerce"
 						),
-						"script" => "wizard_add.php",
 						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
 					),
 					"edit" => Array(
@@ -300,6 +363,26 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 						"popup_onlyOpenIfSelected" => 1,
 						"icon" => "edit2.gif",
 						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
+					),
+					"del" => Array(
+						"title" => "Delete record",
+						"type" => "popup",
+						"notNewRecords" => 1,
+						"icon" => "clearout.gif",
+						"popup_onlyOpenIfSelected" => 1,
+						'params' => Array(
+							'table'=>'tx_ligestmembrelabo_Exerce',
+						),
+						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/delete.php",
+						"JSopenParams" => "height=1,width=1,status=0,menubar=0,scrollbars=1",
+					),
+					"reload" => Array(
+						"title" => "Refresh",
+						"type" => "popup",
+						"notNewRecords" => 1,
+						"icon" => "refresh_n.gif",
+						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/reload.php",
+						"JSopenParams" => "height=1,width=1,status=0,menubar=0,scrollbars=1",
 					),
 				),
 			),
@@ -311,7 +394,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 				"type" => "select",
 				"foreign_table" => "tx_ligestmembrelabo_CategorieMembre",	
 				"foreign_table_where" => "AND tx_ligestmembrelabo_CategorieMembre.IdMembreLabo=###THIS_UID### ORDER BY tx_ligestmembrelabo_CategorieMembre.DateDebut DESC",
-				"size" => 1,
+				"size" => 6,
 				"minitems" => 0,
 				"maxitems" => 1,
 				"wizards" => Array(
@@ -320,13 +403,11 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 					"add" => Array(
 						"type" => "popup",
 						"title" => "Create new record",
+						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/add.php",
 						"icon" => "add.gif",
 						"params" => Array(
-							"table"=>"tx_ligestmembrelabo_CategorieMembre",
-							'pid' => '###CURRENT_PID###',
-							"setValue" => "prepend"
+							"table"			=> "tx_ligestmembrelabo_CategorieMembre"
 						),
-						"script" => "wizard_add.php",
 						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
 					),
 					"edit" => Array(
@@ -336,6 +417,26 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 						"popup_onlyOpenIfSelected" => 1,
 						"icon" => "edit2.gif",
 						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
+					),
+					"del" => Array(
+						"title" => "Delete record",
+						"type" => "popup",
+						"notNewRecords" => 1,
+						"icon" => "clearout.gif",
+						"popup_onlyOpenIfSelected" => 1,
+						'params' => Array(
+							'table'=>'tx_ligestmembrelabo_CategorieMembre',
+						),
+						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/delete.php",
+						"JSopenParams" => "height=1,width=1,status=0,menubar=0,scrollbars=1",
+					),
+					"reload" => Array(
+						"title" => "Refresh",
+						"type" => "popup",
+						"notNewRecords" => 1,
+						"icon" => "refresh_n.gif",
+						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/reload.php",
+						"JSopenParams" => "height=1,width=1,status=0,menubar=0,scrollbars=1",
 					),
 				),
 			),
@@ -347,7 +448,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 				"type" => "select",
 				"foreign_table" => "tx_ligestmembrelabo_AObtenu",	
 				"foreign_table_where" => "AND tx_ligestmembrelabo_AObtenu.IdMembreLabo=###THIS_UID### ORDER BY tx_ligestmembrelabo_AObtenu.DateObtention DESC",
-				"size" => 1,
+				"size" => 6,
 				"minitems" => 0,
 				"maxitems" => 1,
 				"wizards" => Array(
@@ -356,13 +457,11 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 					"add" => Array(
 						"type" => "popup",
 						"title" => "Create new record",
+						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/add.php",
 						"icon" => "add.gif",
 						"params" => Array(
-							"table"=>"tx_ligestmembrelabo_AObtenu",
-							'pid' => '###CURRENT_PID###',
-							"setValue" => "prepend"
+							"table"			=> "tx_ligestmembrelabo_AObtenu"
 						),
-						"script" => "wizard_add.php",
 						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
 					),
 					"edit" => Array(
@@ -373,12 +472,95 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 						"icon" => "edit2.gif",
 						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
 					),
+					"del" => Array(
+						"title" => "Delete record",
+						"type" => "popup",
+						"notNewRecords" => 1,
+						"icon" => "clearout.gif",
+						"popup_onlyOpenIfSelected" => 1,
+						'params' => Array(
+							'table'=>'tx_ligestmembrelabo_AObtenu',
+						),
+						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/delete.php",
+						"JSopenParams" => "height=1,width=1,status=0,menubar=0,scrollbars=1",
+					),
+					"reload" => Array(
+						"title" => "Refresh",
+						"type" => "popup",
+						"notNewRecords" => 1,
+						"icon" => "refresh_n.gif",
+						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/reload.php",
+						"JSopenParams" => "height=1,width=1,status=0,menubar=0,scrollbars=1",
+					),
 				),
 			),
 		),
+		"Afficher_PEDR" => Array (
+			"exclude" => 1,
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.afficherpedr",
+			"config" => Array (
+				"type" => "select",
+				"foreign_table" => "tx_ligestmembrelabo_PEDR",	
+				"foreign_table_where" => "AND tx_ligestmembrelabo_PEDR.IdMembreLabo=###THIS_UID### ORDER BY tx_ligestmembrelabo_PEDR.DateDebut DESC",
+				"size" => 6,
+				"minitems" => 0,
+				"maxitems" => 1,
+				"wizards" => Array(
+					"_PADDING" => 2,
+					"_VERTICAL" => 1,
+					"add" => Array(
+						"type" => "popup",
+						"title" => "Create new record",
+						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/add.php",
+						"icon" => "add.gif",
+						"params" => Array(
+							"table"			=> "tx_ligestmembrelabo_PEDR"
+						),
+						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
+					),
+					"edit" => Array(
+						"type" => "popup",
+						"title" => "Edit",
+						"script" => "wizard_edit.php",
+						"popup_onlyOpenIfSelected" => 1,
+						"icon" => "edit2.gif",
+						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
+					),
+					"del" => Array(
+						"title" => "Delete record",
+						"type" => "popup",
+						"notNewRecords" => 1,
+						"icon" => "clearout.gif",
+						"popup_onlyOpenIfSelected" => 1,
+						'params' => Array(
+							'table'=>'tx_ligestmembrelabo_PEDR',
+						),
+						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/delete.php",
+						"JSopenParams" => "height=1,width=1,status=0,menubar=0,scrollbars=1",
+					),
+					"reload" => Array(
+						"title" => "Refresh",
+						"type" => "popup",
+						"notNewRecords" => 1,
+						"icon" => "refresh_n.gif",
+						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/reload.php",
+						"JSopenParams" => "height=1,width=1,status=0,menubar=0,scrollbars=1",
+					),
+				),
+			),
+		),
+		"Informations" => Array (		
+			"exclude" => 1,		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_MembreDuLabo.informations",		
+			"config" => Array (
+				"type" => "text",	
+				"cols" => "48",	
+				"rows" => "10",
+			)
+		),
 	),
 	"types" => array (
-		"0" => array("showitem" => "hidden;;1;;1-1-1, NomDUsage, NomMaritale, NomPreMarital, Prenom, Genre, DateNaissance, Nationalite, DateArrivee, DateSortie, NumINE, SectionCNU, CoordonneesRecherche, CoordonneesEnseignement, CoordonneesPersonnelles, email, PageWeb, Afficher_Equipe, Afficher_Possede, Afficher_Exerce, Afficher_CategorieMembre, Afficher_AObtenu")
+		"0" => array("showitem" => "hidden;;1;;1-1-1, NomDUsage, NomMarital, NomPreMarital, Prenom, Genre, DateNaissance, Nationalite, DateArrivee, DateSortie, NumINE, SectionCNU, CoordonneesRecherche, CoordonneesEnseignement, CoordonneesPersonnelles, email, PageWeb, Afficher_Equipe, Afficher_Possede, Afficher_Exerce, Afficher_CategorieMembre, Afficher_AObtenu, Afficher_PEDR, Informations")
 	),
 	"palettes" => array (
 		"1" => array("showitem" => "")
@@ -443,7 +625,9 @@ $TCA["tx_ligestmembrelabo_Fonction"] = array (
 					array('', 0),
 				),
 				'foreign_table'       => 'tx_ligestmembrelabo_Fonction',
-				'foreign_table_where' => 'AND tx_ligestmembrelabo_Fonction.pid=###CURRENT_PID### AND tx_ligestmembrelabo_Fonction.sys_language_uid IN (-1,0)',
+				//'foreign_table_where' => 'AND tx_ligestmembrelabo_Fonction.pid=###CURRENT_PID### AND tx_ligestmembrelabo_Fonction.sys_language_uid IN (-1,0)',
+				'foreign_table_where' => 'AND tx_ligestmembrelabo_Fonction.sys_language_uid IN (-1,0)',
+			
 			)
 		),
 		'l18n_diffsource' => array (		
@@ -499,10 +683,9 @@ $TCA["tx_ligestmembrelabo_Structure"] = array (
 			"exclude" => 1,		
 			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Structure.adresse",		
 			"config" => Array (
-				"type" => "input",	
-				"size" => "48",	
-				"max" => "255",	
-				"eval" => "trim",
+				"type" => "text",	
+				"cols" => "48",	
+				"rows" => "10",
 			)
 		),
 		"Type" => Array (		
@@ -693,7 +876,8 @@ $TCA["tx_ligestmembrelabo_TypePosteWeb"] = array (
 					array('', 0),
 				),
 				'foreign_table'       => 'tx_ligestmembrelabo_TypePosteWeb',
-				'foreign_table_where' => 'AND tx_ligestmembrelabo_TypePosteWeb.pid=###CURRENT_PID### AND tx_ligestmembrelabo_TypePosteWeb.sys_language_uid IN (-1,0)',
+				//'foreign_table_where' => 'AND tx_ligestmembrelabo_TypePosteWeb.pid=###CURRENT_PID### AND tx_ligestmembrelabo_TypePosteWeb.sys_language_uid IN (-1,0)',
+				'foreign_table_where' => 'AND tx_ligestmembrelabo_TypePosteWeb.sys_language_uid IN (-1,0)',
 			)
 		),
 		'l18n_diffsource' => array (		
@@ -792,7 +976,8 @@ $TCA["tx_ligestmembrelabo_TypePoste"] = array (
 					array('', 0),
 				),
 				'foreign_table'       => 'tx_ligestmembrelabo_TypePoste',
-				'foreign_table_where' => 'AND tx_ligestmembrelabo_TypePoste.pid=###CURRENT_PID### AND tx_ligestmembrelabo_TypePoste.sys_language_uid IN (-1,0)',
+				//'foreign_table_where' => 'AND tx_ligestmembrelabo_TypePoste.pid=###CURRENT_PID### AND tx_ligestmembrelabo_TypePoste.sys_language_uid IN (-1,0)',
+				'foreign_table_where' => 'AND tx_ligestmembrelabo_TypePoste.sys_language_uid IN (-1,0)',
 			)
 		),
 		'l18n_diffsource' => array (		
@@ -914,7 +1099,8 @@ $TCA["tx_ligestmembrelabo_Categorie"] = array (
 					array('', 0),
 				),
 				'foreign_table'       => 'tx_ligestmembrelabo_Categorie',
-				'foreign_table_where' => 'AND tx_ligestmembrelabo_Categorie.pid=###CURRENT_PID### AND tx_ligestmembrelabo_Categorie.sys_language_uid IN (-1,0)',
+				//'foreign_table_where' => 'AND tx_ligestmembrelabo_Categorie.pid=###CURRENT_PID### AND tx_ligestmembrelabo_Categorie.sys_language_uid IN (-1,0)',
+				'foreign_table_where' => 'AND tx_ligestmembrelabo_Categorie.sys_language_uid IN (-1,0)',
 			)
 		),
 		'l18n_diffsource' => array (
@@ -1102,7 +1288,8 @@ $TCA["tx_ligestmembrelabo_Equipe"] = array (
 					array('', 0),
 				),
 				'foreign_table'       => 'tx_ligestmembrelabo_Equipe',
-				'foreign_table_where' => 'AND tx_ligestmembrelabo_Equipe.pid=###CURRENT_PID### AND tx_ligestmembrelabo_Equipe.sys_language_uid IN (-1,0)',
+				//'foreign_table_where' => 'AND tx_ligestmembrelabo_Equipe.pid=###CURRENT_PID### AND tx_ligestmembrelabo_Equipe.sys_language_uid IN (-1,0)',
+				'foreign_table_where' => 'AND tx_ligestmembrelabo_Equipe.sys_language_uid IN (-1,0)',
 			)
 		),
 		'l18n_diffsource' => array (		
@@ -1267,7 +1454,8 @@ $TCA["tx_ligestmembrelabo_TypeDiplome"] = array (
 					array('', 0),
 				),
 				'foreign_table'       => 'tx_ligestmembrelabo_TypeDiplome',
-				'foreign_table_where' => 'AND tx_ligestmembrelabo_TypeDiplome.pid=###CURRENT_PID### AND tx_ligestmembrelabo_TypeDiplome.sys_language_uid IN (-1,0)',
+				//'foreign_table_where' => 'AND tx_ligestmembrelabo_TypeDiplome.pid=###CURRENT_PID### AND tx_ligestmembrelabo_TypeDiplome.sys_language_uid IN (-1,0)',
+				'foreign_table_where' => 'AND tx_ligestmembrelabo_TypeDiplome.sys_language_uid IN (-1,0)',
 			)
 		),
 		'l18n_diffsource' => array (		
@@ -1364,4 +1552,66 @@ $TCA["tx_ligestmembrelabo_AObtenu"] = array (
 		"1" => array("showitem" => "")
 	)
 );
+
+// ******************************************************************
+// Création du formulaire pour la table tx_ligestmembrelabo_PEDR
+// ******************************************************************
+$TCA["tx_ligestmembrelabo_PEDR"] = array (
+	"ctrl" => $TCA["tx_ligestmembrelabo_PEDR"]["ctrl"],
+	"interface" => array (
+		"showRecordFieldList" => "hidden, idMembreLabo, DateDebut, DateFin"
+	),
+	"feInterface" => $TCA["tx_ligestmembrelabo_AObtenu"]["feInterface"],
+	"columns" => array (
+		'hidden' => array (
+			'exclude' => 1,
+			'label'   => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
+			'config'  => array (
+				'type'    => 'check',
+				'default' => '0'
+			)
+		),
+		"idMembreLabo" => Array (
+			"exclude" => 1,
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_PEDR.idmembrelabo",		
+			"config" => Array (
+				"type" => "select",
+				"foreign_table" => "tx_ligestmembrelabo_MembreDuLabo",	
+				"foreign_table_where" => "ORDER BY tx_ligestmembrelabo_MembreDuLabo.NomDUsage, tx_ligestmembrelabo_MembreDuLabo.Prenom",
+				"size" => 1,
+				"minitems" => 0,
+				"maxitems" => 1,
+			)
+		),
+		"DateDebut" => Array (
+			"exclude" => 1,
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_PEDR.datedebut",		
+			"config" => Array (
+				"type" => "input",
+				"size" => "10",
+				"max" => "10",
+				"eval" => "required,trim,tx_ligestmembrelabo_dateValide,tx_ligestmembrelabo_dateObligatoire",
+				'default' => '0000-00-00'
+			)
+		),
+		"DateFin" => Array (
+			"exclude" => 1,
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_PEDR.datefin",		
+			"config" => Array (
+				"type" => "input",
+				"size" => "10",
+				"max" => "10",
+				"eval" => "trim,tx_ligestmembrelabo_dateValide",
+				'default' => '0000-00-00'
+			)
+		),
+	),
+	"types" => array (
+		"0" => array("showitem" => "hidden;;1;;1-1-1, idMembreLabo, DateDebut, DateFin")
+	),
+	"palettes" => array (
+		"1" => array("showitem" => "")
+	)
+);
+
 ?>

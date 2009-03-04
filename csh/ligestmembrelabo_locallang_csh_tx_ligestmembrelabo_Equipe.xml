@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<description>CSH for table tx_ligestmembrelabo_Equipe</description>
+		<type>CSH</type>
+		<csh_table>tx_ligestmembrelabo_Equipe</csh_table>
+		<fileId>EXT:li_gest_membre_labo/csh/ligestmembrelabo_locallang_csh_tx_ligestmembrelabo_Equipe.xml</fileId>
+		<labelContext type="array"></labelContext>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+            <label index=".description">Equipe</label>
+            <label index="hidden.description">Cette option permet de cacher ou non un enregistrement</label>
+			<label index="hidden.details">Les enregistrements cachés seront affichés sur le site</label>
+			<label index="sys_language_uid.description">The language of the news record.</label>
+            <label index="sys_language_uid.details">This should be the default language unless this record is a translation of another record.</label>
+            <label index="_sys_language_uid.seeAlso">tt_content:sys_language_uid,pages:sys_language_uid,pages_language_overlay:sys_language_uid</label>
+            <label index="l18n_parent.description">The Equipe record in the default language where the current record is a translation from.</label>
+            <label index="Nom.description">Ce champ contient le nom de l'équipe.</label>
+            <label index="Nom.details">Le marqueur ###Equipe_Nom### permet d'afficher le nom de toutes les équipes du membre avec la balise ###EQUIPE###. Le marqueur ###Equipe_Nom_Dernier### permet d'afficher le nom de la dernière équipe du membre avec la balise ###EQUIPE_DERNIER###.</label>
+            <label index="Abreviation.description">Ce champ contient l'abréviation utilisé pour désigner l'équipe.</label>
+            <label index="Abreviation.details">Le marqueur ###Equipe_Abreviation### permet d'afficher l'abréviation de toutes les équipes du membre avec la balise ###EQUIPE###. Le marqueur ###Equipe_Abreviation_Dernier### permet d'afficher l'abréviation de la dernière équipe du membre avec la balise ###EQUIPE_DERNIER###.</label>
+		</languageKey>
+		<languageKey index="fr" type="array">
+            <label index=".description">Equipe</label>
+            <label index="hidden.description">Cette option permet de cacher ou non un enregistrement</label>
+			<label index="hidden.details">Les enregistrements cachés seront affichés sur le site</label>
+			<label index="sys_language_uid.description">La langue du nouvel enregistrement.</label>
+            <label index="sys_language_uid.details">Ce champ doit être la langue par défaut, sauf si cet enregistrement est une traduction d'un autre enregistrement.</label>
+            <label index="_sys_language_uid.seeAlso">tt_content:sys_language_uid,pages:sys_language_uid,pages_language_overlay:sys_language_uid</label>
+            <label index="l18n_parent.description">L'enregistrement d'une équipe dans la langue par défaut d'où provient la traduction courante.</label>
+            <label index="Nom.description">Ce champ contient le nom de l'équipe.</label>
+            <label index="Nom.details">Le marqueur ###Equipe_Nom### permet d'afficher le nom de toutes les équipes du membre avec la balise ###EQUIPE###. Le marqueur ###Equipe_Nom_Dernier### permet d'afficher le nom de la dernière équipe du membre avec la balise ###EQUIPE_DERNIER###.</label>
+            <label index="Abreviation.description">Ce champ contient l'abréviation utilisé pour désigner l'équipe.</label>
+            <label index="Abreviation.details">Le marqueur ###Equipe_Abreviation### permet d'afficher l'abréviation de toutes les équipes du membre avec la balise ###EQUIPE###. Le marqueur ###Equipe_Abreviation_Dernier### permet d'afficher l'abréviation de la dernière équipe du membre avec la balise ###EQUIPE_DERNIER###.</label>
+		</languageKey>
+	</data>
+</T3locallang>

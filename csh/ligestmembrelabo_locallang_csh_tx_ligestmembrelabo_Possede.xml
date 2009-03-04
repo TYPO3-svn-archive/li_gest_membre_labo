@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<description>CSH for table tx_ligestmembrelabo_Possede</description>
+		<type>CSH</type>
+		<csh_table>tx_ligestmembrelabo_Possede</csh_table>
+		<fileId>EXT:li_gest_membre_labo/csh/ligestmembrelabo_locallang_csh_tx_ligestmembrelabo_Possede.xml</fileId>
+		<labelContext type="array"></labelContext>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+            <label index=".description">Possede</label>
+            <label index="hidden.description">Cette option permet de cacher ou non un enregistrement</label>
+			<label index="hidden.details">Les enregistrements cachés seront affichés sur le site</label>
+            <label index="idTypePoste.description">Type de poste que l'on veut rattacher au membre du laboratoire.</label>
+            <label index="idTypePoste.details">Toutes les types de poste sont indiquées dans la liste. Pour en ajouter un, vous devez utiliser le formulaire d'ajout de type de poste.</label>
+            <label index="idMembreLabo.description">Membre du laboratoire à qui l'on veut rattacher à un type de poste.</label>
+            <label index="idMembreLabo.details">Tous les membres du laboratoire sont indiqués dans la liste. Pour en ajouter un, vous devez utiliser le formulaire d'ajout de membre.</label>
+            <label index="DateDebut.description">La date de début de la personne à un type de poste à mettre au format aaaa-mm-jj. Cette date est obligatoire.</label>
+            <label index="DateDebut.details">Dans le cas ou vous validez une date non valide, la date du jour sera insérée dans la base de données.
+
+			Le marqueur ###Postes_DateDebut### permet d'afficher ce champ sur une page du site avec la balise ###POSTES###. Le marqueur ###Postes_DateDebut_Dernier### permet d'afficher la date de début du membre à son dernier type de poste sur une page du site avec la balise ###POSTES_DERNIER###. Le format aaaa-mm-jj est l'unique disponible.</label>
+            <label index="DateFin.description">La date de fin de la personne à un type de poste à mettre au format aaaa-mm-jj.</label>
+            <label index="DateFin.details">Si vous validez une date non valide ou sans avoir mis de date, la date 0000-00-00 sera insérée dans la base de données. Cette date est perçu par l'extension comme une date non déterminée, on peut par exemple l'utiliser dans le cas où l'on ne sait pas quand le membre va quitter ce type de poste.
+
+			Le marqueur ###Postes_DateFin### permet d'afficher ce champ sur une page du site avec la balise ###POSTES###. Le marqueur ###Postes_DateFin_Dernier### permet d'afficher la date de fin du membre à son dernier type de poste sur une page du site avec la balise ###POSTES_DERNIER###. Le format aaaa-mm-jj est l'unique disponible. Il est possible de personnaliser une date 0000-00-00 dans les options du plugin pour chaque page ou chaque traduction de page.</label>
+		</languageKey>
+		<languageKey index="fr" type="array">
+            <label index=".description">Possede</label>
+            <label index="hidden.description">Cette option permet de cacher ou non un enregistrement</label>
+			<label index="hidden.details">Les enregistrements cachés seront affichés sur le site</label>
+            <label index="idTypePoste.description">Type de poste que l'on veut rattacher au membre du laboratoire.</label>
+            <label index="idTypePoste.details">Toutes les types de poste sont indiquées dans la liste. Pour en ajouter un, vous devez utiliser le formulaire d'ajout de type de poste.</label>
+            <label index="idMembreLabo.description">Membre du laboratoire à qui l'on veut rattacher à un type de poste.</label>
+            <label index="idMembreLabo.details">Tous les membres du laboratoire sont indiqués dans la liste. Pour en ajouter un, vous devez utiliser le formulaire d'ajout de membre.</label>
+            <label index="DateDebut.description">La date de début de la personne à un type de poste à mettre au format aaaa-mm-jj. Cette date est obligatoire.</label>
+            <label index="DateDebut.details">Dans le cas ou vous validez une date non valide, la date du jour sera insérée dans la base de données.
+
+			Le marqueur ###Postes_DateDebut### permet d'afficher ce champ sur une page du site avec la balise ###POSTES###. Le marqueur ###Postes_DateDebut_Dernier### permet d'afficher la date de début du membre à son dernier type de poste sur une page du site avec la balise ###POSTES_DERNIER###. Le format aaaa-mm-jj est l'unique disponible.</label>
+            <label index="DateFin.description">La date de fin de la personne à un type de poste à mettre au format aaaa-mm-jj.</label>
+            <label index="DateFin.details">Si vous validez une date non valide ou sans avoir mis de date, la date 0000-00-00 sera insérée dans la base de données. Cette date est perçu par l'extension comme une date non déterminée, on peut par exemple l'utiliser dans le cas où l'on ne sait pas quand le membre va quitter ce type de poste.
+
+			Le marqueur ###Postes_DateFin### permet d'afficher ce champ sur une page du site avec la balise ###POSTES###. Le marqueur ###Postes_DateFin_Dernier### permet d'afficher la date de fin du membre à son dernier type de poste sur une page du site avec la balise ###POSTES_DERNIER###. Le format aaaa-mm-jj est l'unique disponible. Il est possible de personnaliser une date 0000-00-00 dans les options du plugin pour chaque page ou chaque traduction de page.</label>
+		</languageKey>
+	</data>
+</T3locallang>
