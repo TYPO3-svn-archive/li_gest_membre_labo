@@ -10,7 +10,7 @@ CREATE TABLE tx_ligestmembrelabo_MembreDuLabo (
 	deleted tinyint(4) DEFAULT '0' NOT NULL,
 	hidden tinyint(4) DEFAULT '0' NOT NULL,
 	NomDUsage varchar(255) DEFAULT '' NOT NULL,
-	NomMaritale varchar(255) DEFAULT '' NOT NULL,
+	NomMarital varchar(255) DEFAULT '' NOT NULL,
 	NomPreMarital varchar(255) DEFAULT '' NOT NULL,
 	Prenom varchar(255) DEFAULT '' NOT NULL,
 	Genre char(1) DEFAULT '' NOT NULL,
@@ -20,16 +20,18 @@ CREATE TABLE tx_ligestmembrelabo_MembreDuLabo (
 	DateSortie date DEFAULT '0000-00-00' NOT NULL,
 	NumINE varchar(255) DEFAULT '' NOT NULL,
 	SectionCNU varchar(255) DEFAULT '' NOT NULL,
-	CoordonneesRecherche text DEFAULT '' NOT NULL,
-	CoordonneesEnseignement text DEFAULT '' NOT NULL,
+	CoordonneesRecherche tinytext NOT NULL,
+	CoordonneesEnseignement tinytext NOT NULL,
 	email varchar(255) DEFAULT '' NOT NULL,
-	CoordonneesPersonnelles text DEFAULT '' NOT NULL,
+	CoordonneesPersonnelles tinytext NOT NULL,
 	PageWeb varchar(255) DEFAULT '',
 	Afficher_Equipe int(11) DEFAULT '0' NOT NULL,
 	Afficher_Possede int(11) DEFAULT '0' NOT NULL,
 	Afficher_Exerce int(11) DEFAULT '0' NOT NULL,
 	Afficher_CategorieMembre int(11) DEFAULT '0' NOT NULL,
 	Afficher_AObtenu int(11) DEFAULT '0' NOT NULL,
+	Afficher_PEDR int(11) DEFAULT '0' NOT NULL,
+	Informations tinytext NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid)
@@ -76,7 +78,7 @@ CREATE TABLE tx_ligestmembrelabo_Structure (
 	hidden tinyint(4) DEFAULT '0' NOT NULL,
 	LibelleDesSaisies varchar(255) DEFAULT '' NOT NULL,
 	Nom varchar(255) DEFAULT '' NOT NULL,
-	Adresse varchar(255) DEFAULT '' NOT NULL,
+	Adresse tinytext NOT NULL,
 	Type char(1) DEFAULT '' NOT NULL,
 	idStructureParente int(11) DEFAULT '0',
 
@@ -314,6 +316,28 @@ CREATE TABLE tx_ligestmembrelabo_AObtenu (
 	DateObtention date DEFAULT '0000-00-00' NOT NULL,
 	Intitule varchar(255) DEFAULT '' NOT NULL,
 	LieuDObtention varchar(255) DEFAULT '' NOT NULL,
+	
+	PRIMARY KEY (uid),
+	KEY parent (pid)
+);
+
+
+#
+# Table structure for table 'PEDR'
+#
+
+CREATE TABLE tx_ligestmembrelabo_PEDR (
+	uid int(11) DEFAULT '0' NOT NULL auto_increment,
+	pid int(11) DEFAULT '0' NOT NULL,
+	tstamp int(11) DEFAULT '0' NOT NULL,
+	crdate int(11) DEFAULT '0' NOT NULL,
+	cruser_id int(11) DEFAULT '0' NOT NULL,
+	deleted tinyint(4) DEFAULT '0' NOT NULL,
+	hidden tinyint(4) DEFAULT '0' NOT NULL,
+	idMembreLabo int(11) DEFAULT '0' NOT NULL,
+	DateDebut date DEFAULT '0000-00-00' NOT NULL,
+	DateFin date DEFAULT '0000-00-00' NOT NULL,
+
 	
 	PRIMARY KEY (uid),
 	KEY parent (pid)

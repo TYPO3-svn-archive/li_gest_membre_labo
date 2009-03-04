@@ -164,7 +164,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 	 * @param $equipe Chaîne de caractères contenant les identifiants des équipes(uid) séparés par des virgules
 	 * @return Une chaîne de caratères contenant une contrainte à rajouter à une requête
 	 */
-	private function equipe($uid_equipes)
+	private function equipe($uid_equipes,$typeDate)
 	{
 			//Création de la contrainte permettant l'affichage que de certains types de postes...
 			$equipes='';
@@ -192,6 +192,18 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 				$equipes = $equipes.' )';
 
 			}
+			
+			
+			//Gestion des dates...
+			if($typeDate=='Actuels')
+			{
+				$postes = $postes.' AND tx_ligestmembrelabo_EstMembreDe.DateDebut<="'.date('Y-m-d').'" AND (tx_ligestmembrelabo_EstMembreDe.DateFin>="'.date('Y-m-d').'" OR tx_ligestmembrelabo_EstMembreDe.DateFin="0000-00-00")';
+			}
+			else if($typeDate=='Anciens')
+			{
+				$postes = $postes.' AND tx_ligestmembrelabo_EstMembreDe.DateFin<"'.date('Y-m-d').'" AND tx_ligestmembrelabo_EstMembreDe.DateFin<>"0000-00-00"';
+			}
+			
 
 
 			return $equipes;
@@ -566,6 +578,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 		$template['categories_dernier'] = $this->cObj->getSubpart($template['item'], '###CATEGORIES_DERNIER###');
 
 		$template['equipe'] = $this->cObj->getSubpart($template['item'], '###EQUIPE###');
+		$template['equipe_dernier'] = $this->cObj->getSubpart($template['item'], '###EQUIPE_DERNIER###');
 
 		$template['diplomes'] = $this->cObj->getSubpart($template['item'], '###DIPLOMES###');
 		$template['diplomes_dernier'] = $this->cObj->getSubpart($template['item'], '###DIPLOMES_DERNIER###');
@@ -623,7 +636,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			if (($this->lConf['labo'])<>''){
 				$where = $where.' AND tx_ligestmembrelabo_EstMembreDe.deleted<>1 AND tx_ligestmembrelabo_Equipe.deleted<>1 AND (tx_ligestmembrelabo_Equipe.Nom = "'.$this->lConf['labo'].'" OR tx_ligestmembrelabo_Equipe.Abreviation = "'.$this->lConf['labo'].'")';
 			}*/
-			$equipes = $this->equipe($this->lConf['equipe']);
+			$equipes = $this->equipe($this->lConf['equipe'],$this->lConf['dateequipe']);
 			$table = $table.', tx_ligestmembrelabo_EstMembreDe, tx_ligestmembrelabo_Equipe';
 			$where = $where.' AND tx_ligestmembrelabo_EstMembreDe.deleted<>1 AND tx_ligestmembrelabo_Equipe.deleted<>1 AND tx_ligestmembrelabo_EstMembreDe.idMembreLabo = tx_ligestmembrelabo_MembreDuLabo.uid AND tx_ligestmembrelabo_EstMembreDe.idEquipe = tx_ligestmembrelabo_Equipe.uid';
 			if($equipes<>""){
@@ -637,11 +650,11 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 
 
 			//Gestion de la date d'arrivée et de départ du labo
-			if($this->lConftotal['datelabo']=='Actuels')
+			if($this->lConf['datelabo']=='Actuels')
 			{
 				$where = $where.' AND tx_ligestmembrelabo_MembreDuLabo.DateArrivee<="'.date('Y-m-d').'" AND (tx_ligestmembrelabo_MembreDuLabo.DateSortie>="'.date('Y-m-d').'" OR tx_ligestmembrelabo_MembreDuLabo.DateSortie="0000-00-00")';
 			}
-			else if($this->lConftotal['datelabo']=='Anciens')
+			else if($this->lConf['datelabo']=='Anciens')
 			{
 				$where = $where.' AND tx_ligestmembrelabo_MembreDuLabo.DateSortie<"'.date('Y-m-d').'" AND tx_ligestmembrelabo_MembreDuLabo.DateSortie<>"0000-00-00"';
 			}
@@ -665,39 +678,15 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 				$where = $where.$categorie;
 			}
 			
-			/*
-			//Gestion des structures
+
+			//Gestion des structures et des fonctions
+			
 			$structure = $this->structure($this->lConf['structure'],$this->lConf['datetypestructure']);
-			if($structure<>""){
-				//$select = $select.', tx_ligestmembrelabo_Structure.*';
-				$table = $table.', tx_ligestmembrelabo_Structure';
-				$where = $where.' AND tx_ligestmembrelabo_Structure.deleted<>1 AND tx_ligestmembrelabo_Exerce.idStructure = tx_ligestmembrelabo_Structure.uid';
-				$where = $where.$structure;
-			}
-			
-			//Gestion des fonctions
-			$fonction = $this->fonction($this->lConf['fonction'],$this->lConf['datetypefonction']);
-			if($fonction<>""){
-				//$select = $select.', tx_ligestmembrelabo_Fonction.*';
-				$table = $table.', tx_ligestmembrelabo_Fonction';
-				$where = $where.' AND tx_ligestmembrelabo_Fonction.deleted<>1 AND tx_ligestmembrelabo_Exerce.idFonction = tx_ligestmembrelabo_Fonction.uid';
-				$where = $where.$fonction;
-			}
-			
-			if($structure<>"" || $fonction<>"")
-			{
-				//$select = $select.', tx_ligestmembrelabo_Exerce.*';
-				$table = $table.', tx_ligestmembrelabo_Exerce';
-				$where = $where.' AND tx_ligestmembrelabo_Exerce.deleted<>1 AND tx_ligestmembrelabo_Exerce.idMembreLabo = tx_ligestmembrelabo_MembreDuLabo.uid';
-			}
-			*/
-			
-			$structure = $this->structure($this->lConftotal['structure'],$this->lConftotal['datetypestructure']);
 			if($structure<>""){
 				$where = $where.' AND EXISTS (SELECT * FROM tx_ligestmembrelabo_Exerce, tx_ligestmembrelabo_Structure WHERE tx_ligestmembrelabo_MembreDuLabo.uid = tx_ligestmembrelabo_Exerce.idMembreLabo AND tx_ligestmembrelabo_Exerce.idStructure = tx_ligestmembrelabo_Structure.uid'.$structure.')';
 			}			
 			
-			$fonction = $this->fonction($this->lConftotal['fonction'],$this->lConftotal['datetypefonction']);
+			$fonction = $this->fonction($this->lConf['fonction'],$this->lConf['datetypefonction']);
 			if($fonction<>""){
 				$where = $where.' AND EXISTS (SELECT * FROM tx_ligestmembrelabo_Exerce, tx_ligestmembrelabo_Fonction WHERE tx_ligestmembrelabo_MembreDuLabo.uid = tx_ligestmembrelabo_Exerce.idMembreLabo AND tx_ligestmembrelabo_Exerce.idFonction = tx_ligestmembrelabo_Fonction.uid'.$fonction.')';
 			}
@@ -706,14 +695,38 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			
 			
 			//Gestion des diplomes
-			$diplome = $this->diplome($this->lConftotal['diplome']);
+			$diplome = $this->diplome($this->lConf['diplome']);
 			if($diplome<>""){
 				//$select = $select.', tx_ligestmembrelabo_TypeDiplome.*, tx_ligestmembrelabo_AObtenu.*';
 				$table = $table.', tx_ligestmembrelabo_TypeDiplome, tx_ligestmembrelabo_AObtenu';
 				$where = $where.' AND tx_ligestmembrelabo_TypeDiplome.deleted<>1 AND tx_ligestmembrelabo_AObtenu.deleted<>1 AND tx_ligestmembrelabo_AObtenu.idMembreLabo = tx_ligestmembrelabo_MembreDuLabo.uid AND tx_ligestmembrelabo_AObtenu.CodeDiplome = tx_ligestmembrelabo_TypeDiplome.uid';
 				$where = $where.$diplome;
 			}
-
+			
+			//Gestion des PEDR
+			$datepedr = $this->lConf['datepedr'];
+			if($datepedr<>"")
+			{
+				if($datepedr=='Actuels')
+				{
+					$table = $table.', tx_ligestmembrelabo_PEDR';
+					$where = $where.' AND tx_ligestmembrelabo_PEDR.deleted<>1 AND tx_ligestmembrelabo_PEDR.idMembreLabo = tx_ligestmembrelabo_MembreDuLabo.uid AND tx_ligestmembrelabo_PEDR.DateDebut<="'.date('Y-m-d').'" AND (tx_ligestmembrelabo_PEDR.DateFin>="'.date('Y-m-d').'" OR tx_ligestmembrelabo_PEDR.DateFin="0000-00-00")';
+				}
+				else if($datepedr=='Anciens')
+				{
+					$table = $table.', tx_ligestmembrelabo_PEDR';
+					$where = $where.' AND tx_ligestmembrelabo_PEDR.deleted<>1 AND tx_ligestmembrelabo_PEDR.idMembreLabo = tx_ligestmembrelabo_MembreDuLabo.uid AND tx_ligestmembrelabo_PEDR.DateFin<"'.date('Y-m-d').'" AND tx_ligestmembrelabo_PEDR.DateFin<>"0000-00-00"';
+				}
+				else if($datepedr=='ActuelsEtAnciens')
+				{
+					$table = $table.', tx_ligestmembrelabo_PEDR';
+					$where = $where.' AND tx_ligestmembrelabo_PEDR.deleted<>1 AND tx_ligestmembrelabo_PEDR.idMembreLabo = tx_ligestmembrelabo_MembreDuLabo.uid';
+				}
+			}
+			
+			
+			
+			
 
 			// Création de la clause permettant de ne choisir que certains membres selon les dossiers sélectionnés
 			//On récupère tous les sous-dossiers...
@@ -722,7 +735,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			$pid = array(); //dossiers sélectionnés
 			$pages = array(); //dossiers et sous dossiers...
 			
-			$chaine = $this->lConftotal['pid'];
+			$chaine = $this->lConf['pid'];
 			
 			if ($chaine!=''){
 				$dossiers = $dossiers.' AND (';
@@ -808,52 +821,246 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			$markerArray['###NomDUsage###'] = $row['NomDUsage'];
 			$markerArray['###NOMDUSAGE###'] = mb_strtoupper($row['NomDUsage'],"UTF-8");
 
-			$markerArray['###NomMaritale###'] = $row['NomMaritale'];
-			$markerArray['###NOMMARITALE###'] = mb_strtoupper($row['NomMaritale'],"UTF-8");
+			if($row['NomDUsage']<>''){
+				$markerArray['###NomDUsage_Separateur###'] = $this->lConf['separateurNomDUsage'];
+			}
+			else{
+				$markerArray['###NomDUsage_Separateur###'] = '';
+			}
+
+
+			$markerArray['###NomMarital###'] = $row['NomMarital'];
+			$markerArray['###NOMMARITAL###'] = mb_strtoupper($row['NomMarital'],"UTF-8");
+
+			if($row['NomMarital']<>''){
+				$markerArray['###NomMarital_Separateur###'] = $this->lConf['separateurNomMarital'];
+			}
+			else{
+				$markerArray['###NomMarital_Separateur###'] = '';
+			}
+
 
 			$markerArray['###NomPreMarital###'] = $row['NomPreMarital'];
 			$markerArray['###NOMPREMARITAL###'] = mb_strtoupper($row['NomPreMarital'],"UTF-8");
 
+			if($row['NomPreMarital']<>''){
+				$markerArray['###NomPreMarital_Separateur###'] = $this->lConf['separateurNomPreMarital'];
+			}
+			else{
+				$markerArray['###NomPreMarital_Separateur###'] = '';
+			}
+
+
 			$markerArray['###Prenom###'] = $row['Prenom'];
 			$markerArray['###PRENOM###'] = mb_strtoupper($row['Prenom'],"UTF-8");
 
+			if($row['Prenom']<>''){
+				$markerArray['###Prenom_Separateur###'] = $this->lConf['separateurPrenom'];
+			}
+			else{
+				$markerArray['###Prenom_Separateur###'] = '';
+			}
+
 			// Afficher les initailes d'un membre
 			$markerArray['###InitialePrenom###'] = substr($row['Prenom'],0,1);
+
+			if($row['Prenom']<>''){
+				$markerArray['###InitialePrenom_Separateur###'] = $this->lConf['separateurInitialePrenom'];
+			}
+			else{
+				$markerArray['###InitialePrenom_Separateur###'] = '';
+			}
+
+
 			$markerArray['###InitialeNom###'] = substr($row['NomDUsage'],0,1);
 
+			if($row['NomDUsage']<>''){
+				$markerArray['###InitialeNom_Separateur###'] = $this->lConf['separateurInitialeNom'];
+			}
+			else{
+				$markerArray['###InitialeNom_Separateur###'] = '';
+			}
 
-			$markerArray['###Genre###'] = $row['Genre'];
+
+			
+			if($row['Genre']=='H'){
+				$markerArray['###Genre###'] = $this->lConf['genrehomme'];
+				
+				if($this->lConf['genrehomme']<>''){
+					$markerArray['###Genre_Separateur###'] = $this->lConf['separateurGenre'];
+				}
+				else{
+					$markerArray['###Genre_Separateur###'] = '';
+				}
+			}
+			else if($row['Genre']=='F'){
+				$markerArray['###Genre###'] = $this->lConf['genrefemme'];
+				
+				if($this->lConf['genrefemme']<>''){
+					$markerArray['###Genre_Separateur###'] = $this->lConf['separateurGenre'];
+				}
+				else{
+					$markerArray['###Genre_Separateur###'] = '';
+				}
+			}
+			else{
+				$markerArray['###Genre###'] = $this->lConf['genreinconnu'];
+				
+				if($this->lConf['genreinconnu']<>''){
+					$markerArray['###Genre_Separateur###'] = $this->lConf['separateurGenre'];
+				}
+				else{
+					$markerArray['###Genre_Separateur###'] = '';
+				}
+			}
+			
+			
+
+
+
+			
+			
+			
+			
+
+
 			if($row['DateNaissance']=='0000-00-00'){
 				$markerArray['###DateNaissance###'] = $this->lConf['datenaissance'];
+				
+				if($this->lConf['datenaissance']<>''){
+					$markerArray['###DateNaissance_Separateur###'] = $this->lConf['separateurDateNaissance'];
+				}
+				else{
+					$markerArray['###DateNaissance_Separateur###'] = '';
+				}
 			}
 			else{
 				$markerArray['###DateNaissance###'] = $row['DateNaissance'];
+				
+				if($row['DateNaissance']<>''){
+					$markerArray['###DateNaissance_Separateur###'] = $this->lConf['separateurDateNaissance'];
+				}
+				else{
+					$markerArray['###DateNaissance_Separateur###'] = '';
+				}
 			}
 
 			$markerArray['###Nationalite###'] = $row['Nationalite'];
 			$markerArray['###NATIONALITE###'] = mb_strtoupper($row['Nationalite'],"UTF-8");
 
+			if($row['Nationalite']<>''){
+				$markerArray['###Nationalite_Separateur###'] = $this->lConf['separateurNationalite'];
+			}
+			else{
+				$markerArray['###Nationalite_Separateur###'] = '';
+			}
+			
+			
 			if($row['DateArrivee']=='0000-00-00'){
 				$markerArray['###DateArrivee###'] = $this->lConf['datearrivee'];
+				
+				if($this->lConf['datearrivee']<>''){
+					$markerArray['###DateArrivee_Separateur###'] = $this->lConf['separateurDateArrivee'];
+				}
+				else{
+					$markerArray['###DateArrivee_Separateur###'] = '';
+				}
 			}
 			else{
 				$markerArray['###DateArrivee###'] = $row['DateArrivee'];
+				
+				if($row['DateArrivee']<>''){
+					$markerArray['###DateArrivee_Separateur###'] = $this->lConf['separateurDateArrivee'];
+				}
+				else{
+					$markerArray['###DateArrivee_Separateur###'] = '';
+				}
 			}
+			
+			
 			if($row['DateSortie']=='0000-00-00'){
 				$markerArray['###DateSortie###'] = $this->lConf['datesortie'];
+				
+				if($this->lConf['datesortie']<>''){
+					$markerArray['###DateSortie_Separateur###'] = $this->lConf['separateurDateSortie'];
+				}
+				else{
+					$markerArray['###DateSortie_Separateur###'] = '';
+				}
 			}
 			else{
 				$markerArray['###DateSortie###'] = $row['DateSortie'];
+				
+				if($row['DateSortie']<>''){
+					$markerArray['###DateSortie_Separateur###'] = $this->lConf['separateurDateSortie'];
+				}
+				else{
+					$markerArray['###DateSortie_Separateur###'] = '';
+				}
 			}
+			
 			$markerArray['###NumINE###'] = $row['NumINE'];
+
+			if($row['NumINE']<>''){
+				$markerArray['###NumINE_Separateur###'] = $this->lConf['separateurNumINE'];
+			}
+			else{
+				$markerArray['###NumINE_Separateur###'] = '';
+			}
+
+
 			$markerArray['###SectionCNU###'] = $row['SectionCNU'];
+
+			if($row['SectionCNU']<>''){
+				$markerArray['###SectionCNU_Separateur###'] = $this->lConf['separateurSectionCNU'];
+			}
+			else{
+				$markerArray['###SectionCNU_Separateur###'] = '';
+			}
+
+
 			$markerArray['###CoordonneesRecherche###'] = nl2br($row['CoordonneesRecherche']);
 			$markerArray['###CoordonneesRecherche_Ligne###'] = $row['CoordonneesRecherche'];
+			
+			if($row['CoordonneesRecherche']<>''){
+				$markerArray['###CoordonneesRecherche_Separateur###'] = $this->lConf['separateurCoordonneesRecherche'];
+			}
+			else{
+				$markerArray['###CoordonneesRecherche_Separateur###'] = '';
+			}
+
+
 			$markerArray['###CoordonneesEnseignement###'] = nl2br($row['CoordonneesEnseignement']);
 			$markerArray['###CoordonneesEnseignement_Ligne###'] = $row['CoordonneesEnseignement'];
+
+			if($row['CoordonneesEnseignement']<>''){
+				$markerArray['###CoordonneesEnseignement_Separateur###'] = $this->lConf['separateurCoordonneesEnseignement'];
+			}
+			else{
+				$markerArray['###CoordonneesEnseignement_Separateur###'] = '';
+			}
+
+
 			$markerArray['###CoordonneesPersonnelles###'] = nl2br($row['CoordonneesPersonnelles']);
 			$markerArray['###CoordonneesPersonnelles_Ligne###'] = $row['CoordonneesPersonnelles'];
+			
+			if($row['CoordonneesPersonnelles']<>''){
+				$markerArray['###CoordonneesPersonnelles_Separateur###'] = $this->lConf['separateurCoordonneesPersonnelles'];
+			}
+			else{
+				$markerArray['###CoordonneesPersonnelles_Separateur###'] = '';
+			}
+
+
 			$markerArray['###email###'] = $row['email'];
+
+			if($row['email']<>''){
+				$markerArray['###email_Separateur###'] = $this->lConf['separateuremail'];
+			}
+			else{
+				$markerArray['###email_Separateur###'] = '';
+			}
+
 
 			//Configuration du lien PageWeb
 				// configure the typolink
@@ -869,23 +1076,32 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			$wrappedSubpartContentArray['###PageWebLien###'] = $this->local_cObj->typolinkWrap($temp_conf);
 			$markerArray['###PageWeb###'] = $row['PageWeb'];
 
-			
-			
-			
+			if($row['PageWeb']<>''){
+				$markerArray['###PageWeb_Separateur###'] = $this->lConf['separateurPageWeb'];
+			}
+			else{
+				$markerArray['###PageWeb_Separateur###'] = '';
+			}
+
+
 			//**************************************
 			// Tables Equipe et EstMembreDe
 			//**************************************
 				$contentEquipe = '';
+				$contentEquipe_dernier = '';
+
 				$equipe_select_fields = "tx_ligestmembrelabo_Equipe.uid AS uidequipe, tx_ligestmembrelabo_Equipe.*, tx_ligestmembrelabo_EstMembreDe.*";
 				$equipe_from_table = "tx_ligestmembrelabo_MembreDuLabo, tx_ligestmembrelabo_Equipe, tx_ligestmembrelabo_EstMembreDe";
 				$equipe_where_clause = "tx_ligestmembrelabo_MembreDuLabo.uid = ".$uid." AND tx_ligestmembrelabo_MembreDuLabo.uid = tx_ligestmembrelabo_EstMembreDe.idMembreLabo AND tx_ligestmembrelabo_EstMembreDe.deleted<>1 AND tx_ligestmembrelabo_EstMembreDe.idEquipe = tx_ligestmembrelabo_Equipe.uid AND tx_ligestmembrelabo_Equipe.deleted<>1";
 				$equipe_groupBy = "";
-				$equipe_orderBy = "";
+				$equipe_orderBy = "tx_ligestmembrelabo_EstMembreDe.DateDebut DESC";
 				$equipe_limit = "";
 				$equipe_tryMemcached = "";
 
 				$equipe_res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($equipe_select_fields, $equipe_from_table, $equipe_where_clause, $equipe_groupBy, $equipe_orderBy, $equipe_tryMemcached);
-				
+
+				$premier_enregistrement = true; //On recupère l'enregistrement ayant la date de début la plus recente
+
 				while($equipe_row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($equipe_res)){
 					//Champ Libelle (multilingue)
 						$champNom='';
@@ -894,27 +1110,208 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						$champNom=$this->rechercherUidLangue($equipe_row['uidequipe'],$equipe_row['sys_language_uid'],$equipe_row['l18n_parent'],$equipe_row['Nom'],'tx_ligestmembrelabo_Equipe','Nom');
 					$markerArray_Equipe['###Equipe_Nom###'] = $champNom;
 
+					if($champNom<>''){
+						$markerArray_Equipe['###Equipe_Nom_Separateur###'] = $this->lConf['separateurEquipeNom'];
+					}
+					else{
+						$markerArray_Equipe['###Equipe_Nom_Separateur###'] = '';
+					}
+
+					if($premier_enregistrement==true){
+						$markerArray_Equipe_dernier['###Equipe_Nom_Dernier###'] = $champNom;
+						
+						if($champNom<>''){
+							$markerArray_Equipe_dernier['###Equipe_Nom_Dernier_Separateur###'] = $this->lConf['separateurEquipeNomdernier'];
+						}
+						else{
+							$markerArray_Equipe_dernier['###Equipe_Nom_Dernier_Separateur###'] = '';
+						}
+					}
+
 					$markerArray_Equipe['###Equipe_Abreviation###'] = $equipe_row['Abreviation'];
 
+					if($equipe_row['Abreviation']<>''){
+						$markerArray_Equipe['###Equipe_Abreviation_Separateur###'] = $this->lConf['separateurEquipeAbreviation'];
+					}
+					else{
+						$markerArray_Equipe['###Equipe_Abreviation_Separateur###'] = '';
+					}
+					
+					if($premier_enregistrement==true){
+						$markerArray_Equipe_dernier['###Equipe_Abreviation_Dernier###'] = $equipe_row['Abreviation'];
+						
+						if($equipe_row['Abreviation']<>''){
+							$markerArray_Equipe_dernier['###Equipe_Abreviation_Dernier_Separateur###'] = $this->lConf['separateurEquipeAbreviationdernier'];
+						}
+						else{
+							$markerArray_Equipe_dernier['###Equipe_Abreviation_Dernier_Separateur###'] = '';
+						}
+					}
 
 					//$markerArray_Equipe['###EstMembreDe_Rang###'] = $equipe_row['Rang'];
 					
 					if($equipe_row['Rang']=='1'){
 						$markerArray_Equipe['###EstMembreDe_Rang###']= $this->lConf['rang1'];
+
+						if($this->lConf['rang1']<>''){
+							$markerArray_Equipe['###EstMembreDe_Rang_Separateur###'] = $this->lConf['separateurEstMembreDeRang'];
+						}
+						else{
+							$markerArray_Equipe['###EstMembreDe_Rang_Separateur###'] = '';
+						}
+
+						if($premier_enregistrement==true){
+							$markerArray_Equipe_dernier['###EstMembreDe_Rang_Dernier###'] = $this->lConf['rang1'];
+
+							if($this->lConf['rang1']<>''){
+								$markerArray_Equipe_dernier['###EstMembreDe_Rang_Dernier_Separateur###'] = $this->lConf['separateurEstMembreDeRangdernier'];
+							}
+							else{
+								$markerArray_Equipe_dernier['###EstMembreDe_Rang_Dernier_Separateur###'] = '';
+							}
+						}
 					}
 					else if($equipe_row['Rang']=='2'){
 						$markerArray_Equipe['###EstMembreDe_Rang###']= $this->lConf['rang2'];
+
+						if($this->lConf['rang2']<>''){
+							$markerArray_Equipe['###EstMembreDe_Rang_Separateur###'] = $this->lConf['separateurEstMembreDeRang'];
+						}
+						else{
+							$markerArray_Equipe['###EstMembreDe_Rang_Separateur###'] = '';
+						}
+
+						if($premier_enregistrement==true){
+							$markerArray_Equipe_dernier['###EstMembreDe_Rang_Dernier###'] = $this->lConf['rang2'];
+
+							if($this->lConf['rang2']<>''){
+								$markerArray_Equipe_dernier['###EstMembreDe_Rang_Dernier_Separateur###'] = $this->lConf['separateurEstMembreDeRangdernier'];
+							}
+							else{
+								$markerArray_Equipe_dernier['###EstMembreDe_Rang_Dernier_Separateur###'] = '';
+							}
+						}
 					}
 					else
 					{
 						$markerArray_Equipe['###EstMembreDe_Rang###']= $this->lConf['rang0'];
+						
+						if($this->lConf['rang2']<>''){
+							$markerArray_Equipe['###EstMembreDe_Rang_Separateur###'] = $this->lConf['separateurEstMembreDeRang'];
+						}
+						else{
+							$markerArray_Equipe['###EstMembreDe_Rang_Separateur###'] = '';
+						}
+
+						if($premier_enregistrement==true){
+							$markerArray_Equipe_dernier['###EstMembreDe_Rang_Dernier###'] = $this->lConf['rang0'];
+							
+							if($this->lConf['rang0']<>''){
+								$markerArray_Equipe_dernier['###EstMembreDe_Rang_Dernier_Separateur###'] = $this->lConf['separateurEstMembreDeRangdernier'];
+							}
+							else{
+								$markerArray_Equipe_dernier['###EstMembreDe_Rang_Dernier_Separateur###'] = '';
+							}
+						}
+					}
+					
+					if($equipe_row['DateDebut']=='0000-00-00'){
+						$markerArray_Equipe['###EstMembreDe_DateDebut###'] = $this->lConf['equipedatedebut'];
+						
+						if($this->lConf['equipedatedebut']<>''){
+							$markerArray_Equipe['###EstMembreDe_DateDebut_Separateur###'] = $this->lConf['separateurEstMembreDateDebut'];
+						}
+						else{
+							$markerArray_Equipe['###EstMembreDe_DateDebut_Separateur###'] = '';
+						}
+
+						if($premier_enregistrement==true){
+							$markerArray_Equipe_dernier['###EstMembreDe_DateDebut_Dernier###'] = $this->lConf['equipedatedebut'];
+
+							if($this->lConf['equipedatedebut']<>''){
+								$markerArray_Equipe_dernier['###EstMembreDe_DateDebut_Dernier_Separateur###'] = $this->lConf['separateurEstMembreDateDebutdernier'];
+							}
+							else{
+								$markerArray_Equipe_dernier['###EstMembreDe_DateDebut_Dernier_Separateur###'] = '';
+							}
+						}
+					}
+					else{
+						$markerArray_Equipe['###EstMembreDe_DateDebut###'] = $equipe_row['DateDebut'];
+
+						if($equipe_row['DateDebut']<>''){
+							$markerArray_Equipe['###EstMembreDe_DateDebut_Separateur###'] = $this->lConf['separateurEstMembreDateDebut'];
+						}
+						else{
+							$markerArray_Equipe['###EstMembreDe_DateDebut_Separateur###'] = '';
+						}
+	
+						if($premier_enregistrement==true){
+							$markerArray_Equipe_dernier['###EstMembreDe_DateDebut_Dernier###'] = $equipe_row['DateDebut'];
+
+							if($equipe_row['DateDebut']<>''){
+								$markerArray_Equipe_dernier['###EstMembreDe_DateDebut_Dernier_Separateur###'] = $this->lConf['separateurEstMembreDateDebutdernier'];
+							}
+							else{
+								$markerArray_Equipe_dernier['###EstMembreDe_DateDebut_Dernier_Separateur###'] = '';
+							}
+						}
 					}
 
+					if($equipe_row['DateFin']=='0000-00-00'){
+						$markerArray_Equipe['###EstMembreDe_DateFin###'] = $this->lConf['equipedatefin'];
+
+						if($this->lConf['equipedatefin']<>''){
+							$markerArray_Equipe['###EstMembreDe_DateFin_Separateur###'] = $this->lConf['separateurEstMembreDateFin'];
+						}
+						else{
+							$markerArray_Equipe['###EstMembreDe_DateFin_Separateur###'] = '';
+						}
+
+						if($premier_enregistrement==true){
+							$markerArray_Equipe_dernier['###EstMembreDe_DateFin_Dernier###'] = $this->lConf['equipedatefin'];
+
+							if($this->lConf['equipedatefin']<>''){
+								$markerArray_Equipe_dernier['###EstMembreDe_DateFin_Dernier_Separateur###'] = $this->lConf['separateurEstMembreDateFindernier'];
+							}
+							else{
+								$markerArray_Equipe_dernier['###EstMembreDe_DateFin_Dernier_Separateur###'] = '';
+							}
+						}
+					}
+					else{
+						$markerArray_Equipe['###EstMembreDe_DateFin###'] = $equipe_row['DateFin'];
+
+						if($equipe_row['DateFin']<>''){
+							$markerArray_Equipe['###EstMembreDe_DateFin_Separateur###'] = $this->lConf['separateurEstMembreDateFin'];
+						}
+						else{
+							$markerArray_Equipe['###EstMembreDe_DateFin_Separateur###'] = '';
+						}
+
+						if($premier_enregistrement==true){
+							$markerArray_Equipe_dernier['###EstMembreDe_DateFin_Dernier###'] = $equipe_row['DateFin'];
+
+							if($equipe_row['DateFin']<>''){
+								$markerArray_Equipe_dernier['###EstMembreDe_DateFin_Dernier_Separateur###'] = $this->lConf['separateurEstMembreDateFindernier'];
+							}
+							else{
+								$markerArray_Equipe_dernier['###EstMembreDe_DateFin_Dernier_Separateur###'] = '';
+							}
+						}
+					}
+
+
 					$contentEquipe .= $this->cObj->substituteMarkerArrayCached($template['equipe'],$markerArray_Equipe,array(),array());
+					if($premier_enregistrement==true){
+						$contentEquipe_dernier .= $this->cObj->substituteMarkerArrayCached($template['equipe_dernier'],$markerArray_Equipe_dernier,array(),array());
+					}
+
+					$premier_enregistrement = false;
 				}
 
 				$subpartArray_Item['###EQUIPE###'] = $contentEquipe;
-
+				$subpartArray_Item['###EQUIPE_DERNIER###'] = $contentEquipe_dernier;
 
 
 
@@ -934,7 +1331,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 				$categorie_tryMemcached = "";
 
 				$categorie_res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($categorie_select_fields, $categorie_from_table, $categorie_where_clause, $categorie_groupBy, $categorie_orderBy, $categorie_tryMemcached);
-				
+
 				$premier_enregistrement = true; //On recupère l'enregistrement ayant la date de début la plus recente
 
 				while($categorie_row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($categorie_res))       {
@@ -945,40 +1342,116 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 							//On recherche le libellé traduit de Libelle
 						$champLibelle=$this->rechercherUidLangue($categorie_row['uidcategorie'],$categorie_row['sys_language_uid'],$categorie_row['l18n_parent'],$categorie_row['Libelle'],'tx_ligestmembrelabo_Categorie','Libelle');
 					$markerArray_Categories['###Categorie_Libelle###'] = $champLibelle;
+
+					if($champLibelle<>''){
+						$markerArray_Categories['###Categorie_Libelle_Separateur###'] = $this->lConf['separateurCategorieLibelle'];
+					}
+					else{
+						$markerArray_Categories['###Categorie_Libelle_Separateur###'] = '';
+					}
+
 					if($premier_enregistrement==true){
 						$markerArray_Categories_dernier['###Categorie_Libelle_Dernier###'] = $champLibelle;
+						
+						if($champLibelle<>''){
+							$markerArray_Categories_dernier['###Categorie_Libelle_Dernier_Separateur###'] = $this->lConf['separateurCategorieLibelledernier'];
+						}
+						else{
+							$markerArray_Categories_dernier['###Categorie_Libelle_Dernier_Separateur###'] = '';
+						}
 					}
-					
+
 					if($categorie_row['DateDebut']=='0000-00-00'){
 						$markerArray_Categories['###CategorieMembre_DateDebut###'] = $this->lConf['categoriedatedebut'];
+						
+						if($this->lConf['categoriedatedebut']<>''){
+							$markerArray_Categories['###CategorieMembre_DateDebut_Separateur###'] = $this->lConf['separateurCategorieMembreDateDebut'];
+						}
+						else{
+							$markerArray_Categories['###CategorieMembre_DateDebut_Separateur###'] = '';
+						}
+
 						if($premier_enregistrement==true){
 							$markerArray_Categories_dernier['###CategorieMembre_DateDebut_Dernier###'] = $this->lConf['categoriedatedebut'];
+
+							if($this->lConf['categoriedatedebut']<>''){
+								$markerArray_Categories_dernier['###CategorieMembre_DateDebut_Dernier_Separateur###'] = $this->lConf['separateurCategorieMembreDateDebutdernier'];
+							}
+							else{
+								$markerArray_Categories_dernier['###CategorieMembre_DateDebut_Dernier_Separateur###'] = '';
+							}
 						}
 					}
 					else{
 						$markerArray_Categories['###CategorieMembre_DateDebut###'] = $categorie_row['DateDebut'];
+
+						if($categorie_row['DateDebut']<>''){
+							$markerArray_Categories['###CategorieMembre_DateDebut_Separateur###'] = $this->lConf['separateurCategorieMembreDateDebut'];
+						}
+						else{
+							$markerArray_Categories['###CategorieMembre_DateDebut_Separateur###'] = '';
+						}
+	
 						if($premier_enregistrement==true){
 							$markerArray_Categories_dernier['###CategorieMembre_DateDebut_Dernier###'] = $categorie_row['DateDebut'];
+
+							if($categorie_row['DateDebut']<>''){
+								$markerArray_Categories_dernier['###CategorieMembre_DateDebut_Dernier_Separateur###'] = $this->lConf['separateurCategorieMembreDateDebutdernier'];
+							}
+							else{
+								$markerArray_Categories_dernier['###CategorieMembre_DateDebut_Dernier_Separateur###'] = '';
+							}
 						}
 					}
-					
+
 					if($categorie_row['DateFin']=='0000-00-00'){
 						$markerArray_Categories['###CategorieMembre_DateFin###'] = $this->lConf['categoriedatefin'];
+
+						if($this->lConf['categoriedatefin']<>''){
+							$markerArray_Categories['###CategorieMembre_DateFin_Separateur###'] = $this->lConf['separateurCategorieMembreDateFin'];
+						}
+						else{
+							$markerArray_Categories['###CategorieMembre_DateFin_Separateur###'] = '';
+						}
+
 						if($premier_enregistrement==true){
 							$markerArray_Categories_dernier['###CategorieMembre_DateFin_Dernier###'] = $this->lConf['categoriedatefin'];
+
+							if($this->lConf['categoriedatefin']<>''){
+								$markerArray_Categories_dernier['###CategorieMembre_DateFin_Dernier_Separateur###'] = $this->lConf['separateurCategorieMembreDateFindernier'];
+							}
+							else{
+								$markerArray_Categories_dernier['###CategorieMembre_DateFin_Dernier_Separateur###'] = '';
+							}
 						}
 					}
 					else{
 						$markerArray_Categories['###CategorieMembre_DateFin###'] = $categorie_row['DateFin'];
+
+						if($categorie_row['DateFin']<>''){
+							$markerArray_Categories['###CategorieMembre_DateFin_Separateur###'] = $this->lConf['separateurCategorieMembreDateFin'];
+						}
+						else{
+							$markerArray_Categories['###CategorieMembre_DateFin_Separateur###'] = '';
+						}
+
 						if($premier_enregistrement==true){
 							$markerArray_Categories_dernier['###CategorieMembre_DateFin_Dernier###'] = $categorie_row['DateFin'];
+
+							if($categorie_row['DateFin']<>''){
+								$markerArray_Categories_dernier['###CategorieMembre_DateFin_Dernier_Separateur###'] = $this->lConf['separateurCategorieMembreDateFindernier'];
+							}
+							else{
+								$markerArray_Categories_dernier['###CategorieMembre_DateFin_Dernier_Separateur###'] = '';
+							}
 						}
 					}
+
 					$contentCategorie .= $this->cObj->substituteMarkerArrayCached($template['categories'],$markerArray_Categories,array(),array());
 					if($premier_enregistrement==true){
 							$contentCategorie_dernier .= $this->cObj->substituteMarkerArrayCached($template['categories_dernier'],$markerArray_Categories_dernier,array(),array());
 					}
-					
+
 					$premier_enregistrement = false;
 				}
 
@@ -1012,13 +1485,44 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 							//On recherche le libellé traduit de Libelle
 						$champLibelle=$this->rechercherUidLangue($diplomes_row['uiddiplome'],$diplomes_row['sys_language_uid'],$diplomes_row['l18n_parent'],$diplomes_row['Libelle'],'tx_ligestmembrelabo_TypeDiplome','Libelle');
 					$markerArray_Diplomes['###Diplomes_Libelle###'] = $champLibelle;
+					
+					if($champLibelle<>''){
+						$markerArray_Diplomes['###Diplomes_Libelle_Separateur###'] = $this->lConf['separateurDiplomesLibelle'];
+					}
+					else{
+						$markerArray_Diplomes['###Diplomes_Libelle_Separateur###'] = '';
+					}
+					
 					if($premier_enregistrement==true){
 						$markerArray_Diplomes_dernier['###Diplomes_Libelle_Dernier###'] = $champLibelle;
+						
+						if($champLibelle<>''){
+							$markerArray_Diplomes_dernier['###Diplomes_Libelle_Dernier_Separateur###'] = $this->lConf['separateurDiplomesLibelledernier'];
+						}
+						else{
+							$markerArray_Diplomes_dernier['###Diplomes_Libelle_Dernier_Separateur###'] = '';
+						}
 					}
 
+
 					$markerArray_Diplomes['###Diplomes_Code###'] = $diplomes_row['Code'];
+
+					if($diplomes_row['Code']<>''){
+						$markerArray_Diplomes['###Diplomes_Code_Separateur###'] = $this->lConf['separateurDiplomesCode'];
+					}
+					else{
+						$markerArray_Diplomes['###Diplomes_Code_Separateur###'] = '';
+					}
+
 					if($premier_enregistrement==true){
 						$markerArray_Diplomes_dernier['###Diplomes_Code_Dernier###'] = $diplomes_row['Code'];
+
+						if($diplomes_row['Code']<>''){
+							$markerArray_Diplomes_dernier['###Diplomes_Code_Dernier_Separateur###'] = $this->lConf['separateurDiplomesCodedernier'];
+						}
+						else{
+							$markerArray_Diplomes_dernier['###Diplomes_Code_Dernier_Separateur###'] = '';
+						}
 					}
 
 					if($diplomes_row['DateObtention']=='0000-00-00'){
@@ -1029,19 +1533,64 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 					}
 					else{
 						$markerArray_Diplomes['###Diplomes_DateObtention###'] = $diplomes_row['DateObtention'];
+
+						if($diplomes_row['DateObtention']<>''){
+							$markerArray_Diplomes['###Diplomes_DateObtention_Separateur###'] = $this->lConf['separateurDiplomesDateObtention'];
+						}
+						else{
+							$markerArray_Diplomes['###Diplomes_DateObtention_Separateur###'] = '';
+						}
+
 						if($premier_enregistrement==true){
 							$markerArray_Diplomes_dernier['###Diplomes_DateObtention_Dernier###'] = $diplomes_row['DateObtention'];
+							
+							if($diplomes_row['DateObtention']<>''){
+								$markerArray_Diplomes_dernier['###Diplomes_DateObtention_Dernier_Separateur###'] = $this->lConf['separateurDiplomesDateObtentiondernier'];
+							}
+							else{
+								$markerArray_Diplomes_dernier['###Diplomes_DateObtention_Dernier_Separateur###'] = '';
+							}
 						}
 					}
 
 					$markerArray_Diplomes['###Diplomes_Intitule###'] = $diplomes_row['Intitule'];
+
+					if($diplomes_row['Intitule']<>''){
+						$markerArray_Diplomes['###Diplomes_Intitule_Separateur###'] = $this->lConf['separateurDiplomesIntitule'];
+					}
+					else{
+						$markerArray_Diplomes['###Diplomes_Intitule_Separateur###'] = '';
+					}
+
 					if($premier_enregistrement==true){
 						$markerArray_Diplomes_dernier['###Diplomes_Intitule_Dernier###'] = $diplomes_row['Intitule'];
+
+						if($diplomes_row['Intitule']<>''){
+							$markerArray_Diplomes_dernier['###Diplomes_Intitule_Dernier_Separateur###'] = $this->lConf['separateurDiplomesIntituledernier'];
+						}
+						else{
+							$markerArray_Diplomes_dernier['###Diplomes_Intitule_Dernier_Separateur###'] = '';
+						}
 					}
 
 					$markerArray_Diplomes['###Diplomes_LieuDObtention###'] = $diplomes_row['LieuDObtention'];
+
+					if($diplomes_row['LieuDObtention']<>''){
+						$markerArray_Diplomes['###Diplomes_LieuDObtention_Separateur###'] = $this->lConf['separateurDiplomesLieuDObtention'];
+					}
+					else{
+						$markerArray_Diplomes['###Diplomes_LieuDObtention_Separateur###'] = '';
+					}
+
 					if($premier_enregistrement==true){
 						$markerArray_Diplomes_dernier['###Diplomes_LieuDObtention_Dernier###'] = $diplomes_row['LieuDObtention'];
+
+						if($diplomes_row['LieuDObtention']<>''){
+							$markerArray_Diplomes_dernier['###Diplomes_LieuDObtention_Dernier_Separateur###'] = $this->lConf['separateurDiplomesLieuDObtentiondernier'];
+						}
+						else{
+							$markerArray_Diplomes_dernier['###Diplomes_LieuDObtention_Dernier_Separateur###'] = '';
+						}
 					}
 
 					$contentDiplomes .= $this->cObj->substituteMarkerArrayCached($template['diplomes'],$markerArray_Diplomes,array(),array());
@@ -1055,9 +1604,9 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 				$subpartArray_Item['###DIPLOMES_DERNIER###'] = $contentDiplomes_dernier;
 
 
-		
-		
-		
+
+
+
 			//**************************************
 			// Tables TypePosteWeb, TypePoste et Possede
 			//**************************************
@@ -1083,8 +1632,23 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 							//On recherche le libellé traduit de LibelleWeb
 						$champLibelleWeb=$this->rechercherUidLangue($postes_row['uidposteweb'],$postes_row['sys_language_uidposteweb'],$postes_row['l18n_parentposteweb'],$postes_row['LibelleWeb'],'tx_ligestmembrelabo_TypePosteWeb','LibelleWeb');
 					$markerArray_Postes['###Postes_LibelleWeb###'] = $champLibelleWeb;
+
+					if($champLibelleWeb<>''){
+						$markerArray_Postes['###Postes_LibelleWeb_Separateur###'] = $this->lConf['separateurPostesLibelleWeb'];
+					}
+					else{
+						$markerArray_Postes['###Postes_LibelleWeb_Separateur###'] = '';
+					}
+
 					if($premier_enregistrement==true){
 						$markerArray_Postes_dernier['###Postes_LibelleWeb_Dernier###'] = $champLibelleWeb;
+						
+						if($champLibelleWeb<>''){
+							$markerArray_Postes_dernier['###Postes_LibelleWeb_Dernier_Separateur###'] = $this->lConf['separateurPostesLibelleWebdernier'];
+						}
+						else{
+							$markerArray_Postes_dernier['###Postes_LibelleWeb_Dernier_Separateur###'] = '';
+						}
 					}
 
 					//Champ Libelle (multilingue)
@@ -1093,33 +1657,108 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 							//On recherche le libellé traduit de Libelle
 						$champLibelle=$this->rechercherUidLangue($postes_row['uidposte'],$postes_row['sys_language_uidposte'],$postes_row['l18n_parentposte'],$postes_row['Libelle'],'tx_ligestmembrelabo_TypePoste','Libelle');
 					$markerArray_Postes['###Postes_Libelle###'] = $champLibelle;
+
+					if($champLibelle<>''){
+						$markerArray_Postes['###Postes_Libelle_Separateur###'] = $this->lConf['separateurPostesLibelle'];
+					}
+					else{
+						$markerArray_Postes['###Postes_Libelle_Separateur###'] = '';
+					}
+
 					if($premier_enregistrement==true){
 						$markerArray_Postes_dernier['###Postes_Libelle_Dernier###'] = $champLibelle;
+
+						if($champLibelle<>''){
+							$markerArray_Postes_dernier['###Postes_Libelle_Dernier_Separateur###'] = $this->lConf['separateurPostesLibelledernier'];
+						}
+						else{
+							$markerArray_Postes_dernier['###Postes_Libelle_Dernier_Separateur###'] = '';
+						}
 					}
 
 					if($postes_row['DateDebut']=='0000-00-00'){
 						$markerArray_Postes['###Postes_DateDebut###'] = $this->lConf['typepostedatedebut'];
+
+						if($this->lConf['typepostedatedebut']<>''){
+							$markerArray_Postes['###Postes_DateDebut_Separateur###'] = $this->lConf['separateurPostesDateDebut'];
+						}
+						else{
+							$markerArray_Postes['###Postes_DateDebut_Separateur###'] = '';
+						}
+
 						if($premier_enregistrement==true){
 							$markerArray_Postes_dernier['###Postes_DateDebut_Dernier###'] = $this->lConf['typepostedatedebut'];
+
+							if($this->lConf['typepostedatedebut']<>''){
+								$markerArray_Postes_dernier['###Postes_DateDebut_Dernier_Separateur###'] = $this->lConf['separateurPostesDateDebutdernier'];
+							}
+							else{
+								$markerArray_Postes_dernier['###Postes_DateDebut_Dernier_Separateur###'] = '';
+							}
 						}
 					}
 					else{
 						$markerArray_Postes['###Postes_DateDebut###'] = $postes_row['DateDebut'];
+						
+						if($postes_row['DateDebut']<>''){
+							$markerArray_Postes['###Postes_DateDebut_Separateur###'] = $this->lConf['separateurPostesDateDebut'];
+						}
+						else{
+							$markerArray_Postes['###Postes_DateDebut_Separateur###'] = '';
+						}
+
 						if($premier_enregistrement==true){
 							$markerArray_Postes_dernier['###Postes_DateDebut_Dernier###'] = $postes_row['DateDebut'];
+
+							if($postes_row['DateDebut']<>''){
+								$markerArray_Postes_dernier['###Postes_DateDebut_Dernier_Separateur###'] = $this->lConf['separateurPostesDateDebutdernier'];
+							}
+							else{
+								$markerArray_Postes_dernier['###Postes_DateDebut_Dernier_Separateur###'] = '';
+							}
 						}
 					}
 
 					if($postes_row['DateFin']=='0000-00-00'){
 						$markerArray_Postes['###Postes_DateFin###'] = $this->lConf['typepostedatefin'];
+
+						if($this->lConf['typepostedatefin']<>''){
+							$markerArray_Postes['###Postes_DateFin_Separateur###'] = $this->lConf['separateurPostesDateFin'];
+						}
+						else{
+							$markerArray_Postes['###Postes_DateFin_Separateur###'] = '';
+						}
+
 						if($premier_enregistrement==true){
 							$markerArray_Postes_dernier['###Postes_DateFin_Dernier###'] = $this->lConf['typepostedatefin'];
+
+							if($this->lConf['typepostedatefin']<>''){
+								$markerArray_Postes_dernier['###Postes_DateFin_Dernier_Separateur###'] = $this->lConf['separateurPostesDateFindernier'];
+							}
+							else{
+								$markerArray_Postes_dernier['###Postes_DateFin_Dernier_Separateur###'] = '';
+							}
 						}
 					}
 					else{
 						$markerArray_Postes['###Postes_DateFin###'] = $postes_row['DateFin'];
+
+						if($postes_row['DateFin']<>''){
+							$markerArray_Postes['###Postes_DateFin_Separateur###'] = $this->lConf['separateurPostesDateFin'];
+						}
+						else{
+							$markerArray_Postes['###Postes_DateFin_Separateur###'] = '';
+						}
+
 						if($premier_enregistrement==true){
 							$markerArray_Postes_dernier['###Postes_DateFin_Dernier###'] = $postes_row['DateFin'];
+							
+							if($postes_row['DateFin']<>''){
+								$markerArray_Postes_dernier['###Postes_DateFin_Dernier_Separateur###'] = $this->lConf['separateurPostesDateFindernier'];
+							}
+							else{
+								$markerArray_Postes_dernier['###Postes_DateFin_Dernier_Separateur###'] = '';
+							}
 						}
 					}
 					
@@ -1165,53 +1804,188 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 							//On recherche le libellé traduit de LibelleWeb
 						$champLibelle=$this->rechercherUidLangue($fonctionsstructures_row['uidfonction'],$fonctionsstructures_row['sys_language_uid'],$fonctionsstructures_row['l18n_parent'],$fonctionsstructures_row['Libelle'],'tx_ligestmembrelabo_Fonction','Libelle');
 					$markerArray_FonctionsStructures['###Fonctions_Libelle###'] = $champLibelle;
+
+					if($champLibelle<>''){
+						$markerArray_FonctionsStructures['###Fonctions_Libelle_Separateur###'] = $this->lConf['separateurFonctionsLibelle'];
+					}
+					else{
+						$markerArray_FonctionsStructures['###Fonctions_Libelle_Separateur###'] = '';
+					}
+
+
 					if($premier_enregistrement==true){
 						$markerArray_FonctionsStructures_dernier['###Fonctions_Libelle_Dernier###'] = $champLibelle;
+
+						if($champLibelle<>''){
+							$markerArray_FonctionsStructures_dernier['###Fonctions_Libelle_Dernier_Separateur###'] = $this->lConf['separateurFonctionsLibelledernier'];
+						}
+						else{
+							$markerArray_FonctionsStructures_dernier['###Fonctions_Libelle_Dernier_Separateur###'] = '';
+						}
 					}
 
 					$markerArray_FonctionsStructures['###Structures_LibelleDesSaisies###'] = $fonctionsstructures_row['LibelleDesSaisies'];
+					if($fonctionsstructures_row['LibelleDesSaisies']<>''){
+						$markerArray_FonctionsStructures['###Structures_LibelleDesSaisies_Separateur###'] = $this->lConf['separateurStructuresLibelleDesSaisies'];
+					}
+					else{
+						$markerArray_FonctionsStructures['###Structures_LibelleDesSaisies_Separateur###'] = '';
+					}
+
 					if($premier_enregistrement==true){
 						$markerArray_FonctionsStructures_dernier['###Structures_LibelleDesSaisies_Dernier###'] = $fonctionsstructures_row['LibelleDesSaisies'];
+
+						if($fonctionsstructures_row['LibelleDesSaisies']<>''){
+							$markerArray_FonctionsStructures_dernier['###Structures_LibelleDesSaisies_Dernier_Separateur###'] = $this->lConf['separateurStructuresLibelleDesSaisiesdernier'];
+						}
+						else{
+							$markerArray_FonctionsStructures_dernier['###Structures_LibelleDesSaisies_Dernier_Separateur###'] = '';
+						}
 					}
 
 					$markerArray_FonctionsStructures['###Structures_Nom###'] = $fonctionsstructures_row['Nom'];
-					if($premier_enregistrement==true){
-						$markerArray_FonctionsStructures_dernier['###Structures_Nom_Dernier###'] = $fonctionsstructures_row['Nom'];
+					if($fonctionsstructures_row['Nom']<>''){
+						$markerArray_FonctionsStructures['###Structures_Nom_Separateur###'] = $this->lConf['separateurStructuresNom'];
+					}
+					else{
+						$markerArray_FonctionsStructures['###Structures_Nom_Separateur###'] = '';
 					}
 
-					$markerArray_FonctionsStructures['###Structures_Adresse###'] = $fonctionsstructures_row['Adresse'];
 					if($premier_enregistrement==true){
-						$markerArray_FonctionsStructures_dernier['###Structures_Adresse_Dernier###'] = $fonctionsstructures_row['Adresse'];
+						$markerArray_FonctionsStructures_dernier['###Structures_Nom_Dernier###'] = $fonctionsstructures_row['Nom'];
+
+						if($fonctionsstructures_row['Nom']<>''){
+							$markerArray_FonctionsStructures_dernier['###Structures_Nom_Dernier_Separateur###'] = $this->lConf['separateurStructuresNomdernier'];
+						}
+						else{
+							$markerArray_FonctionsStructures_dernier['###Structures_Nom_Dernier_Separateur###'] = '';
+						}
+					}
+
+					//$markerArray_FonctionsStructures['###Structures_Adresse###'] = $fonctionsstructures_row['Adresse'];
+					$markerArray_FonctionsStructures['###Structures_Adresse###'] = nl2br($fonctionsstructures_row['Adresse']);
+					
+					if($fonctionsstructures_row['Adresse']<>''){
+						$markerArray_FonctionsStructures['###Structures_Adresse_Separateur###'] = $this->lConf['separateurStructuresAdresse'];
+					}
+					else{
+						$markerArray_FonctionsStructures['###Structures_Adresse_Separateur###'] = '';
+					}
+
+					if($premier_enregistrement==true){
+						//['###Structures_Adresse_Dernier###'] = $fonctionsstructures_row['Adresse'];
+						$markerArray_FonctionsStructures_dernier['###Structures_Adresse_Dernier###'] = nl2br($fonctionsstructures_row['Adresse']);
+
+						if($fonctionsstructures_row['Adresse']<>''){
+							$markerArray_FonctionsStructures_dernier['###Structures_Adresse_Dernier_Separateur###'] = $this->lConf['separateurStructuresAdressedernier'];
+						}
+						else{
+							$markerArray_FonctionsStructures_dernier['###Structures_Adresse_Dernier_Separateur###'] = '';
+						}
 					}
 
 					$markerArray_FonctionsStructures['###Structures_Type###'] = $fonctionsstructures_row['Type'];
+					if($fonctionsstructures_row['Type']<>''){
+						$markerArray_FonctionsStructures['###Structures_Type_Separateur###'] = $this->lConf['separateurStructuresType'];
+					}
+					else{
+						$markerArray_FonctionsStructures['###Structures_Type_Separateur###'] = '';
+					}
+
 					if($premier_enregistrement==true){
 						$markerArray_FonctionsStructures_dernier['###Structures_Type_Dernier###'] = $fonctionsstructures_row['Type'];
+						if($fonctionsstructures_row['Type']<>''){
+							$markerArray_FonctionsStructures_dernier['###Structures_Type_Dernier_Separateur###'] = $this->lConf['separateurStructuresTypedernier'];
+						}
+						else{
+							$markerArray_FonctionsStructures_dernier['###Structures_Type_Dernier_Separateur###'] = '';
+						}
 					}
 
 					if($fonctionsstructures_row['DateDebut']=='0000-00-00'){
 						$markerArray_FonctionsStructures['###FonctionsStructures_DateDebut###'] = $this->lConf['fonctionstructuredatedebut'];
+
+						if($this->lConf['fonctionstructuredatedebut']<>''){
+							$markerArray_FonctionsStructures['###Structures_DateDebut_Separateur###'] = $this->lConf['separateurStructuresDateDebut'];
+						}
+						else{
+							$markerArray_FonctionsStructures['###Structures_DateDebut_Separateur###'] = '';
+						}
+
 						if($premier_enregistrement==true){
 							$markerArray_FonctionsStructures_dernier['###FonctionsStructures_DateDebut_Dernier###'] = $this->lConf['fonctionstructuredatedebut'];
+
+							if($this->lConf['fonctionstructuredatedebut']<>''){
+								$markerArray_FonctionsStructures_dernier['###Structures_DateDebut_Dernier_Separateur###'] = $this->lConf['separateurStructuresDateDebutdernier'];
+							}
+							else{
+								$markerArray_FonctionsStructures_dernier['###Structures_DateDebut_Dernier_Separateur###'] = '';
+							}
+
 						}
 					}
 					else{
 						$markerArray_FonctionsStructures['###FonctionsStructures_DateDebut###'] = $fonctionsstructures_row['DateDebut'];
+
+						if($fonctionsstructures_row['DateDebut']<>''){
+							$markerArray_FonctionsStructures['###Structures_DateDebut_Separateur###'] = $this->lConf['separateurStructuresDateDebut'];
+						}
+						else{
+							$markerArray_FonctionsStructures['###Structures_DateDebut_Separateur###'] = '';
+						}
+
 						if($premier_enregistrement==true){
 							$markerArray_FonctionsStructures_dernier['###FonctionsStructures_DateDebut_Dernier###'] = $fonctionsstructures_row['DateDebut'];
+
+							if($fonctionsstructures_row['DateDebut']<>''){
+								$markerArray_FonctionsStructures_dernier['###Structures_DateDebut_Dernier_Separateur###'] = $this->lConf['separateurStructuresDateDebutdernier'];
+							}
+							else{
+								$markerArray_FonctionsStructures_dernier['###Structures_DateDebut_Dernier_Separateur###'] = '';
+							}
 						}
 					}
 					
 					if($fonctionsstructures_row['DateFin']=='0000-00-00'){
 						$markerArray_FonctionsStructures['###FonctionsStructures_DateFin###'] = $this->lConf['fonctionstructuredatefin'];
+
+						if($this->lConf['fonctionstructuredatefin']<>''){
+							$markerArray_FonctionsStructures['###Structures_DateFin_Separateur###'] = $this->lConf['separateurStructuresDateFin'];
+						}
+						else{
+							$markerArray_FonctionsStructures['###Structures_DateFin_Separateur###'] = '';
+						}
+
 						if($premier_enregistrement==true){
 							$markerArray_FonctionsStructures_dernier['###FonctionsStructures_DateFin_Dernier###'] = $this->lConf['fonctionstructuredatefin'];
+
+							if($this->lConf['fonctionstructuredatefin']<>''){
+								$markerArray_FonctionsStructures_dernier['###Structures_DateFin_Dernier_Separateur###'] = $this->lConf['separateurStructuresDateFindernier'];
+							}
+							else{
+								$markerArray_FonctionsStructures_dernier['###Structures_DateFin_Dernier_Separateur###'] = '';
+							}
 						}
 					}
 					else{
 						$markerArray_FonctionsStructures['###FonctionsStructures_DateFin###'] = $fonctionsstructures_row['DateFin'];
+						
+						if($fonctionsstructures_row['DateFin']<>''){
+							$markerArray_FonctionsStructures['###Structures_DateFin_Separateur###'] = $this->lConf['separateurStructuresDateFin'];
+						}
+						else{
+							$markerArray_FonctionsStructures['###Structures_DateFin_Separateur###'] = '';
+						}
+
 						if($premier_enregistrement==true){
 							$markerArray_FonctionsStructures_dernier['###FonctionsStructures_DateFin_Dernier###'] = $fonctionsstructures_row['DateFin'];
+
+							if($fonctionsstructures_row['DateFin']<>''){
+								$markerArray_FonctionsStructures_dernier['###Structures_DateFin_Dernier_Separateur###'] = $this->lConf['separateurStructuresDateFindernier'];
+							}
+							else{
+								$markerArray_FonctionsStructures_dernier['###Structures_DateFin_Dernier_Separateur###'] = '';
+							}
 						}
 					}
 					

@@ -26,7 +26,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 		'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_ligestmembrelabo_MembreDuLabo.gif',
 	),
 	"feInterface" => array (
-		"fe_admin_fieldList" => "hidden, NomDUsage, NomMaritale, NomPreMarital, Prenom, Genre, DateNaissance, Nationalite, DateArrivee, DateSortie, NumINE, SectionCNU, CoordonneesRecherche, CoordonneesEnseignement, email, CoordonneesPersonnelles, PageWeb, Afficher_Equipe, Afficher_Possede, Afficher_Exerce, Afficher_CategorieMembre, Afficher_AObtenu",
+		"fe_admin_fieldList" => "hidden, NomDUsage, NomMarital, NomPreMarital, Prenom, Genre, DateNaissance, Nationalite, DateArrivee, DateSortie, NumINE, SectionCNU, CoordonneesRecherche, CoordonneesEnseignement, email, CoordonneesPersonnelles, PageWeb, Afficher_Equipe, Afficher_Possede, Afficher_Exerce, Afficher_CategorieMembre, Afficher_AObtenu, Afficher_PEDR, Informations",
 	)
 );
 
@@ -369,13 +369,13 @@ t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_AObtenu');
 $TCA["tx_ligestmembrelabo_AObtenu"] = array (
 	"ctrl" => array (
 		'title'     => 'LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_AObtenu',
-		'label'     => 'idMembreLabo, Intitule',
-		'label_alt' => 'idMembreLabo, Intitule',
+		'label'     => 'idMembreLabo, Intitule, CodeDiplome',
+		'label_alt' => 'idMembreLabo, Intitule, CodeDiplome',
 		'label_alt_force' => '1',
 		'tstamp'    => 'tstamp',
 		'crdate'    => 'crdate',
 		'cruser_id' => 'cruser_id',
-		'default_sortby' => "ORDER BY uid",
+		'default_sortby' => "ORDER BY Intitule",
 		'delete' => 'deleted',
 		'enablecolumns' => array (
 			'disabled' => 'hidden',
@@ -389,6 +389,30 @@ $TCA["tx_ligestmembrelabo_AObtenu"] = array (
 );
 
 
+t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_PEDR');
+t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_PEDR');
+
+$TCA["tx_ligestmembrelabo_PEDR"] = array (
+	"ctrl" => array (
+		'title'     => 'LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_PEDR',
+		'label'     => 'idMembreLabo, DateDebut, DateFin',
+		'label_alt' => 'idMembreLabo, DateDebut, DateFin',
+		'label_alt_force' => '1',
+		'tstamp'    => 'tstamp',
+		'crdate'    => 'crdate',
+		'cruser_id' => 'cruser_id',
+		'default_sortby' => "ORDER BY DateDebut",
+		'delete' => 'deleted',
+		'enablecolumns' => array (
+			'disabled' => 'hidden',
+		),
+		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
+		'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_ligestmembrelabo_PEDR.gif',
+	),
+	"feInterface" => array (
+		"fe_admin_fieldList" => "hidden, idMembreLabo, DateDebut, DateFin",
+	)
+);
 
 
 
@@ -405,6 +429,25 @@ t3lib_extMgm::addStaticFile($_EXTKEY,"pi1/static/","Managing Member");
 
 // initalize "context sensitive help" (csh)
 t3lib_extMgm::addLLrefForTCAdescr('tx_ligestmembrelabo_MembreDuLabo','EXT:li_gest_membre_labo/csh/ligestmembrelabo_locallang_csh_tx_ligestmembrelabo_MembreDuLabo.xml');
+t3lib_extMgm::addLLrefForTCAdescr('tx_ligestmembrelabo_Fonction','EXT:li_gest_membre_labo/csh/ligestmembrelabo_locallang_csh_tx_ligestmembrelabo_Fonction.xml');
+t3lib_extMgm::addLLrefForTCAdescr('tx_ligestmembrelabo_Structure','EXT:li_gest_membre_labo/csh/ligestmembrelabo_locallang_csh_tx_ligestmembrelabo_Structure.xml');
+t3lib_extMgm::addLLrefForTCAdescr('tx_ligestmembrelabo_Exerce','EXT:li_gest_membre_labo/csh/ligestmembrelabo_locallang_csh_tx_ligestmembrelabo_Exerce.xml');
+t3lib_extMgm::addLLrefForTCAdescr('tx_ligestmembrelabo_TypePosteWeb','EXT:li_gest_membre_labo/csh/ligestmembrelabo_locallang_csh_tx_ligestmembrelabo_TypePosteWeb.xml');
+t3lib_extMgm::addLLrefForTCAdescr('tx_ligestmembrelabo_TypePoste','EXT:li_gest_membre_labo/csh/ligestmembrelabo_locallang_csh_tx_ligestmembrelabo_TypePoste.xml');
+t3lib_extMgm::addLLrefForTCAdescr('tx_ligestmembrelabo_Possede','EXT:li_gest_membre_labo/csh/ligestmembrelabo_locallang_csh_tx_ligestmembrelabo_Possede.xml');
+t3lib_extMgm::addLLrefForTCAdescr('tx_ligestmembrelabo_Categorie','EXT:li_gest_membre_labo/csh/ligestmembrelabo_locallang_csh_tx_ligestmembrelabo_Categorie.xml');
+t3lib_extMgm::addLLrefForTCAdescr('tx_ligestmembrelabo_CategorieMembre','EXT:li_gest_membre_labo/csh/ligestmembrelabo_locallang_csh_tx_ligestmembrelabo_CategorieMembre.xml');
+t3lib_extMgm::addLLrefForTCAdescr('tx_ligestmembrelabo_Equipe','EXT:li_gest_membre_labo/csh/ligestmembrelabo_locallang_csh_tx_ligestmembrelabo_Equipe.xml');
+t3lib_extMgm::addLLrefForTCAdescr('tx_ligestmembrelabo_EstMembreDe','EXT:li_gest_membre_labo/csh/ligestmembrelabo_locallang_csh_tx_ligestmembrelabo_EstMembreDe.xml');
+t3lib_extMgm::addLLrefForTCAdescr('tx_ligestmembrelabo_TypeDiplome','EXT:li_gest_membre_labo/csh/ligestmembrelabo_locallang_csh_tx_ligestmembrelabo_TypeDiplome.xml');
+t3lib_extMgm::addLLrefForTCAdescr('tx_ligestmembrelabo_AObtenu','EXT:li_gest_membre_labo/csh/ligestmembrelabo_locallang_csh_tx_ligestmembrelabo_AObtenu.xml');
+t3lib_extMgm::addLLrefForTCAdescr('tx_ligestmembrelabo_PEDR','EXT:li_gest_membre_labo/csh/ligestmembrelabo_locallang_csh_tx_ligestmembrelabo_PEDR.xml');
+
+
+
+
+
+
 
 t3lib_extMgm::addPiFlexFormValue($_EXTKEY.'_pi1', 'FILE:EXT:li_gest_membre_labo/flexform_ds_pi1.xml'); //Ajouté
 
