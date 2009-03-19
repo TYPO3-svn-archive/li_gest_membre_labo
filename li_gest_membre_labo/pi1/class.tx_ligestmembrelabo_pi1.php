@@ -739,7 +739,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			
 			if ($chaine!=''){
 				$dossiers = $dossiers.' AND (';
-				$pid = Explode(",",$chaine);
+				$pid = explode(",",$chaine);
 				//$pages = $pid;
 				
 				$premier = true;
@@ -819,51 +819,94 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 
 			//$markerArray['###uid###'] = $row['uidmembre'];
 			$markerArray['###NomDUsage###'] = $row['NomDUsage'];
-			$markerArray['###NOMDUSAGE###'] = mb_strtoupper($row['NomDUsage'],"UTF-8");
-
 			if($row['NomDUsage']<>''){
 				$markerArray['###NomDUsage_Separateur###'] = $this->lConf['separateurNomDUsage'];
 			}
 			else{
 				$markerArray['###NomDUsage_Separateur###'] = '';
 			}
+			
+			$markerArray['###NOMDUSAGE###'] = mb_strtoupper($row['NomDUsage'],"UTF-8");
+			if($row['NomDUsage']<>''){
+				$markerArray['###NOMDUSAGE_Separateur###'] = $this->lConf['separateurNomDUsage'];
+			}
+			else{
+				$markerArray['###NOMDUSAGE_Separateur###'] = '';
+			}
 
 
 			$markerArray['###NomMarital###'] = $row['NomMarital'];
-			$markerArray['###NOMMARITAL###'] = mb_strtoupper($row['NomMarital'],"UTF-8");
-
 			if($row['NomMarital']<>''){
 				$markerArray['###NomMarital_Separateur###'] = $this->lConf['separateurNomMarital'];
 			}
 			else{
 				$markerArray['###NomMarital_Separateur###'] = '';
 			}
+			
+			$markerArray['###NOMMARITAL###'] = mb_strtoupper($row['NomMarital'],"UTF-8");
+			if($row['NomMarital']<>''){
+				$markerArray['###NOMMARITAL_Separateur###'] = $this->lConf['separateurNomMarital'];
+			}
+			else{
+				$markerArray['###NOMMARITAL_Separateur###'] = '';
+			}
 
 
 			$markerArray['###NomPreMarital###'] = $row['NomPreMarital'];
-			$markerArray['###NOMPREMARITAL###'] = mb_strtoupper($row['NomPreMarital'],"UTF-8");
-
 			if($row['NomPreMarital']<>''){
 				$markerArray['###NomPreMarital_Separateur###'] = $this->lConf['separateurNomPreMarital'];
 			}
 			else{
 				$markerArray['###NomPreMarital_Separateur###'] = '';
 			}
+			
+			$markerArray['###NOMPREMARITAL###'] = mb_strtoupper($row['NomPreMarital'],"UTF-8");
+			if($row['NomPreMarital']<>''){
+				$markerArray['###NOMPREMARITAL_Separateur###'] = $this->lConf['separateurNomPreMarital'];
+			}
+			else{
+				$markerArray['###NOMPREMARITAL_Separateur###'] = '';
+			}
+
 
 
 			$markerArray['###Prenom###'] = $row['Prenom'];
-			$markerArray['###PRENOM###'] = mb_strtoupper($row['Prenom'],"UTF-8");
-
 			if($row['Prenom']<>''){
 				$markerArray['###Prenom_Separateur###'] = $this->lConf['separateurPrenom'];
 			}
 			else{
 				$markerArray['###Prenom_Separateur###'] = '';
 			}
+			
+			$markerArray['###PRENOM###'] = mb_strtoupper($row['Prenom'],"UTF-8");
+			if($row['Prenom']<>''){
+				$markerArray['###PRENOM_Separateur###'] = $this->lConf['separateurPrenom'];
+			}
+			else{
+				$markerArray['###PRENOM_Separateur###'] = '';
+			}
 
-			// Afficher les initailes d'un membre
-			$markerArray['###InitialePrenom###'] = substr($row['Prenom'],0,1);
+			// Afficher les initiales d'un membre
+			//$markerArray['###InitialePrenom###'] = substr($row['Prenom'],0,1);
 
+			$prenoms = explode("-",$row['Prenom']);
+			$initiales_prenom = "";
+			$premier_prenom = true;
+			foreach ($prenoms as $prenom_courant) {
+				if($premier_prenom != true)
+				{
+					$initiales_prenom = $initiales_prenom."-";
+				}
+				$initiales_prenom = $initiales_prenom.substr($prenom_courant,0,1);
+				$premier_prenom = false;
+			}
+			if($initiales_prenom != '')
+			{
+				$markerArray['###InitialePrenom###'] = $initiales_prenom.".";
+			}	
+			
+			
+			
 			if($row['Prenom']<>''){
 				$markerArray['###InitialePrenom_Separateur###'] = $this->lConf['separateurInitialePrenom'];
 			}
@@ -872,8 +915,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			}
 
 
-			$markerArray['###InitialeNom###'] = substr($row['NomDUsage'],0,1);
-
+			$markerArray['###InitialeNom###'] = substr($row['NomDUsage'],0,1).".";
 			if($row['NomDUsage']<>''){
 				$markerArray['###InitialeNom_Separateur###'] = $this->lConf['separateurInitialeNom'];
 			}
@@ -882,7 +924,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			}
 
 
-			
+
 			if($row['Genre']=='H'){
 				$markerArray['###Genre###'] = $this->lConf['genrehomme'];
 				
@@ -913,20 +955,12 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 					$markerArray['###Genre_Separateur###'] = '';
 				}
 			}
-			
-			
 
-
-
-			
-			
-			
-			
 
 
 			if($row['DateNaissance']=='0000-00-00'){
+				//$markerArray['###DateNaissance###'] = $this->lConf['datenaissance'];			
 				$markerArray['###DateNaissance###'] = $this->lConf['datenaissance'];
-				
 				if($this->lConf['datenaissance']<>''){
 					$markerArray['###DateNaissance_Separateur###'] = $this->lConf['separateurDateNaissance'];
 				}
@@ -935,8 +969,16 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 				}
 			}
 			else{
-				$markerArray['###DateNaissance###'] = $row['DateNaissance'];
-				
+				//$markerArray['###DateNaissance###'] = $row['DateNaissance'];
+
+				$date_explosee = explode("-", $row['DateNaissance']);
+
+				$annee = (int)$date_explosee[0];
+				$mois = (int)$date_explosee[1];
+				$jour = (int)$date_explosee[2];
+
+				$markerArray['###DateNaissance###'] = date($this->lConf['formatdate'],mktime(0, 0, 0, $mois, $jour, $annee));
+
 				if($row['DateNaissance']<>''){
 					$markerArray['###DateNaissance_Separateur###'] = $this->lConf['separateurDateNaissance'];
 				}
@@ -946,13 +988,20 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			}
 
 			$markerArray['###Nationalite###'] = $row['Nationalite'];
-			$markerArray['###NATIONALITE###'] = mb_strtoupper($row['Nationalite'],"UTF-8");
-
 			if($row['Nationalite']<>''){
 				$markerArray['###Nationalite_Separateur###'] = $this->lConf['separateurNationalite'];
 			}
 			else{
 				$markerArray['###Nationalite_Separateur###'] = '';
+			}
+			
+			$markerArray['###NATIONALITE###'] = mb_strtoupper($row['Nationalite'],"UTF-8");
+
+			if($row['Nationalite']<>''){
+				$markerArray['###NATIONALITE_Separateur###'] = $this->lConf['separateurNationalite'];
+			}
+			else{
+				$markerArray['###NATIONALITE_Separateur###'] = '';
 			}
 			
 			
@@ -967,7 +1016,17 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 				}
 			}
 			else{
-				$markerArray['###DateArrivee###'] = $row['DateArrivee'];
+				//$markerArray['###DateArrivee###'] = $row['DateArrivee'];
+				
+				$date_explosee = explode("-", $row['DateArrivee']);
+
+				$annee = (int)$date_explosee[0];
+				$mois = (int)$date_explosee[1];
+				$jour = (int)$date_explosee[2];
+
+				$markerArray['###DateArrivee###'] = date($this->lConf['formatdate'],mktime(0, 0, 0, $mois, $jour, $annee));
+				
+				
 				
 				if($row['DateArrivee']<>''){
 					$markerArray['###DateArrivee_Separateur###'] = $this->lConf['separateurDateArrivee'];
@@ -989,7 +1048,15 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 				}
 			}
 			else{
-				$markerArray['###DateSortie###'] = $row['DateSortie'];
+				//$markerArray['###DateSortie###'] = $row['DateSortie'];
+				
+				$date_explosee = explode("-", $row['DateSortie']);
+
+				$annee = (int)$date_explosee[0];
+				$mois = (int)$date_explosee[1];
+				$jour = (int)$date_explosee[2];
+
+				$markerArray['###DateSortie###'] = date($this->lConf['formatdate'],mktime(0, 0, 0, $mois, $jour, $annee));
 				
 				if($row['DateSortie']<>''){
 					$markerArray['###DateSortie_Separateur###'] = $this->lConf['separateurDateSortie'];
@@ -1020,8 +1087,6 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 
 
 			$markerArray['###CoordonneesRecherche###'] = nl2br($row['CoordonneesRecherche']);
-			$markerArray['###CoordonneesRecherche_Ligne###'] = $row['CoordonneesRecherche'];
-			
 			if($row['CoordonneesRecherche']<>''){
 				$markerArray['###CoordonneesRecherche_Separateur###'] = $this->lConf['separateurCoordonneesRecherche'];
 			}
@@ -1029,26 +1094,48 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 				$markerArray['###CoordonneesRecherche_Separateur###'] = '';
 			}
 
+			$markerArray['###CoordonneesRecherche_Ligne###'] = $row['CoordonneesRecherche'];
+			
+			if($row['CoordonneesRecherche']<>''){
+				$markerArray['###CoordonneesRecherche_Ligne_Separateur###'] = $this->lConf['separateurCoordonneesRecherche'];
+			}
+			else{
+				$markerArray['###CoordonneesRecherche_Ligne_Separateur###'] = '';
+			}
+
 
 			$markerArray['###CoordonneesEnseignement###'] = nl2br($row['CoordonneesEnseignement']);
-			$markerArray['###CoordonneesEnseignement_Ligne###'] = $row['CoordonneesEnseignement'];
-
 			if($row['CoordonneesEnseignement']<>''){
 				$markerArray['###CoordonneesEnseignement_Separateur###'] = $this->lConf['separateurCoordonneesEnseignement'];
 			}
 			else{
 				$markerArray['###CoordonneesEnseignement_Separateur###'] = '';
 			}
+			
+			$markerArray['###CoordonneesEnseignement_Ligne###'] = $row['CoordonneesEnseignement'];
+			if($row['CoordonneesEnseignement']<>''){
+				$markerArray['###CoordonneesEnseignement_Ligne_Separateur###'] = $this->lConf['separateurCoordonneesEnseignement'];
+			}
+			else{
+				$markerArray['###CoordonneesEnseignement_Ligne_Separateur###'] = '';
+			}
+
 
 
 			$markerArray['###CoordonneesPersonnelles###'] = nl2br($row['CoordonneesPersonnelles']);
-			$markerArray['###CoordonneesPersonnelles_Ligne###'] = $row['CoordonneesPersonnelles'];
-			
 			if($row['CoordonneesPersonnelles']<>''){
 				$markerArray['###CoordonneesPersonnelles_Separateur###'] = $this->lConf['separateurCoordonneesPersonnelles'];
 			}
 			else{
 				$markerArray['###CoordonneesPersonnelles_Separateur###'] = '';
+			}
+			
+			$markerArray['###CoordonneesPersonnelles_Ligne###'] = $row['CoordonneesPersonnelles'];
+			if($row['CoordonneesPersonnelles']<>''){
+				$markerArray['###CoordonneesPersonnelles_Ligne_Separateur###'] = $this->lConf['separateurCoordonneesPersonnelles'];
+			}
+			else{
+				$markerArray['###CoordonneesPersonnelles_Ligne_Separateur###'] = '';
 			}
 
 
@@ -1074,6 +1161,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 				$temp_conf['parameter.']['wrap'] = "|";
 				// Fill wrapped subpart marker
 			$wrappedSubpartContentArray['###PageWebLien###'] = $this->local_cObj->typolinkWrap($temp_conf);
+			
 			$markerArray['###PageWeb###'] = $row['PageWeb'];
 
 			if($row['PageWeb']<>''){
@@ -1082,6 +1170,10 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			else{
 				$markerArray['###PageWeb_Separateur###'] = '';
 			}
+			
+			//Le contenu de cette balise est modifié, ci besoin dans la partie conernant l'équipe du membre.
+			$wrappedSubpartContentArray['###MembresSurlignes###'] = array('','');
+			
 
 
 			//**************************************
@@ -1103,6 +1195,8 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 				$premier_enregistrement = true; //On recupère l'enregistrement ayant la date de début la plus recente
 
 				while($equipe_row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($equipe_res)){
+					$idEquipe = $equipe_row['uidequipe'];
+					
 					//Champ Libelle (multilingue)
 						$champNom='';
 						$champNom=$equipe_row['Nom'];
@@ -1119,6 +1213,31 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 
 					if($premier_enregistrement==true){
 						$markerArray_Equipe_dernier['###Equipe_Nom_Dernier###'] = $champNom;
+						
+						
+						
+	
+					//On ajoute ou non les balises pour surligner le membre si sa dernière équipe a été sélectionnée
+
+					$tableau_equipes = explode(",",$this->lConf['baliseequipe']);
+					
+					foreach ($tableau_equipes as $equipe_courante) {
+						if($idEquipe==$equipe_courante)
+						{
+							$wrappedSubpartContentArray['###MembresSurlignes###'] = array($this->lConf['balisedebut'],$this->lConf['balisefin']);
+						}					
+					}
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
 						
 						if($champNom<>''){
 							$markerArray_Equipe_dernier['###Equipe_Nom_Dernier_Separateur###'] = $this->lConf['separateurEquipeNomdernier'];
@@ -1237,8 +1356,17 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 					}
 					else{
-						$markerArray_Equipe['###EstMembreDe_DateDebut###'] = $equipe_row['DateDebut'];
+						//$markerArray_Equipe['###EstMembreDe_DateDebut###'] = $equipe_row['DateDebut'];
 
+						$date_explosee = explode("-", $equipe_row['DateDebut']);
+
+						$annee = (int)$date_explosee[0];
+						$mois = (int)$date_explosee[1];
+						$jour = (int)$date_explosee[2];
+
+						$markerArray_Equipe['###EstMembreDe_DateDebut###'] = date($this->lConf['formatdate'],mktime(0, 0, 0, $mois, $jour, $annee));
+						
+						
 						if($equipe_row['DateDebut']<>''){
 							$markerArray_Equipe['###EstMembreDe_DateDebut_Separateur###'] = $this->lConf['separateurEstMembreDateDebut'];
 						}
@@ -1247,7 +1375,16 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 	
 						if($premier_enregistrement==true){
-							$markerArray_Equipe_dernier['###EstMembreDe_DateDebut_Dernier###'] = $equipe_row['DateDebut'];
+							//$markerArray_Equipe_dernier['###EstMembreDe_DateDebut_Dernier###'] = $equipe_row['DateDebut'];
+							
+							$date_explosee = explode("-", $equipe_row['DateDebut']);
+
+							$annee = (int)$date_explosee[0];
+							$mois = (int)$date_explosee[1];
+							$jour = (int)$date_explosee[2];
+
+							$markerArray_Equipe_dernier['###EstMembreDe_DateDebut_Dernier###'] = date($this->lConf['formatdate'],mktime(0, 0, 0, $mois, $jour, $annee));
+							
 
 							if($equipe_row['DateDebut']<>''){
 								$markerArray_Equipe_dernier['###EstMembreDe_DateDebut_Dernier_Separateur###'] = $this->lConf['separateurEstMembreDateDebutdernier'];
@@ -1280,8 +1417,17 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 					}
 					else{
-						$markerArray_Equipe['###EstMembreDe_DateFin###'] = $equipe_row['DateFin'];
+						//$markerArray_Equipe['###EstMembreDe_DateFin###'] = $equipe_row['DateFin'];
 
+						$date_explosee = explode("-", $equipe_row['DateFin']);
+
+						$annee = (int)$date_explosee[0];
+						$mois = (int)$date_explosee[1];
+						$jour = (int)$date_explosee[2];
+
+						$markerArray_Equipe['###EstMembreDe_DateFin###'] = date($this->lConf['formatdate'],mktime(0, 0, 0, $mois, $jour, $annee));
+						
+						
 						if($equipe_row['DateFin']<>''){
 							$markerArray_Equipe['###EstMembreDe_DateFin_Separateur###'] = $this->lConf['separateurEstMembreDateFin'];
 						}
@@ -1290,7 +1436,16 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 
 						if($premier_enregistrement==true){
-							$markerArray_Equipe_dernier['###EstMembreDe_DateFin_Dernier###'] = $equipe_row['DateFin'];
+							//$markerArray_Equipe_dernier['###EstMembreDe_DateFin_Dernier###'] = $equipe_row['DateFin'];
+							
+							$date_explosee = explode("-", $equipe_row['DateFin']);
+
+							$annee = (int)$date_explosee[0];
+							$mois = (int)$date_explosee[1];
+							$jour = (int)$date_explosee[2];
+
+							$markerArray_Equipe_dernier['###EstMembreDe_DateFin_Dernier###'] = date($this->lConf['formatdate'],mktime(0, 0, 0, $mois, $jour, $annee));
+							
 
 							if($equipe_row['DateFin']<>''){
 								$markerArray_Equipe_dernier['###EstMembreDe_DateFin_Dernier_Separateur###'] = $this->lConf['separateurEstMembreDateFindernier'];
@@ -1383,8 +1538,18 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 					}
 					else{
-						$markerArray_Categories['###CategorieMembre_DateDebut###'] = $categorie_row['DateDebut'];
+						//$markerArray_Categories['###CategorieMembre_DateDebut###'] = $categorie_row['DateDebut'];
 
+						$date_explosee = explode("-", $categorie_row['DateDebut']);
+
+						$annee = (int)$date_explosee[0];
+						$mois = (int)$date_explosee[1];
+						$jour = (int)$date_explosee[2];
+
+						$markerArray_Categories['###CategorieMembre_DateDebut###'] = date($this->lConf['formatdate'],mktime(0, 0, 0, $mois, $jour, $annee));
+						
+						
+						
 						if($categorie_row['DateDebut']<>''){
 							$markerArray_Categories['###CategorieMembre_DateDebut_Separateur###'] = $this->lConf['separateurCategorieMembreDateDebut'];
 						}
@@ -1393,7 +1558,16 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 	
 						if($premier_enregistrement==true){
-							$markerArray_Categories_dernier['###CategorieMembre_DateDebut_Dernier###'] = $categorie_row['DateDebut'];
+							//$markerArray_Categories_dernier['###CategorieMembre_DateDebut_Dernier###'] = $categorie_row['DateDebut'];
+							
+							$date_explosee = explode("-", $categorie_row['DateDebut']);
+
+							$annee = (int)$date_explosee[0];
+							$mois = (int)$date_explosee[1];
+							$jour = (int)$date_explosee[2];
+
+							$markerArray_Categories_dernier['###CategorieMembre_DateDebut_Dernier###'] = date($this->lConf['formatdate'],mktime(0, 0, 0, $mois, $jour, $annee));
+							
 
 							if($categorie_row['DateDebut']<>''){
 								$markerArray_Categories_dernier['###CategorieMembre_DateDebut_Dernier_Separateur###'] = $this->lConf['separateurCategorieMembreDateDebutdernier'];
@@ -1426,8 +1600,17 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 					}
 					else{
-						$markerArray_Categories['###CategorieMembre_DateFin###'] = $categorie_row['DateFin'];
+						//$markerArray_Categories['###CategorieMembre_DateFin###'] = $categorie_row['DateFin'];
 
+						$date_explosee = explode("-", $categorie_row['DateFin']);
+
+						$annee = (int)$date_explosee[0];
+						$mois = (int)$date_explosee[1];
+						$jour = (int)$date_explosee[2];
+
+						$markerArray_Categories['###CategorieMembre_DateFin###'] = date($this->lConf['formatdate'],mktime(0, 0, 0, $mois, $jour, $annee));
+						
+						
 						if($categorie_row['DateFin']<>''){
 							$markerArray_Categories['###CategorieMembre_DateFin_Separateur###'] = $this->lConf['separateurCategorieMembreDateFin'];
 						}
@@ -1436,7 +1619,15 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 
 						if($premier_enregistrement==true){
-							$markerArray_Categories_dernier['###CategorieMembre_DateFin_Dernier###'] = $categorie_row['DateFin'];
+							//$markerArray_Categories_dernier['###CategorieMembre_DateFin_Dernier###'] = $categorie_row['DateFin'];
+							
+							$date_explosee = explode("-", $categorie_row['DateFin']);
+
+							$annee = (int)$date_explosee[0];
+							$mois = (int)$date_explosee[1];
+							$jour = (int)$date_explosee[2];
+
+							$markerArray_Categories_dernier['###CategorieMembre_DateFin_Dernier###'] = date($this->lConf['formatdate'],mktime(0, 0, 0, $mois, $jour, $annee));
 
 							if($categorie_row['DateFin']<>''){
 								$markerArray_Categories_dernier['###CategorieMembre_DateFin_Dernier_Separateur###'] = $this->lConf['separateurCategorieMembreDateFindernier'];
@@ -1527,12 +1718,22 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 
 					if($diplomes_row['DateObtention']=='0000-00-00'){
 						$markerArray_Diplomes['###Diplomes_DateObtention###'] = $this->lConf['diplomedateobtention'];
+						
 						if($premier_enregistrement==true){
 							$markerArray_Diplomes_dernier['###Diplomes_DateObtention_Dernier###'] = $this->lConf['diplomedateobtention'];
 						}
 					}
 					else{
-						$markerArray_Diplomes['###Diplomes_DateObtention###'] = $diplomes_row['DateObtention'];
+						//$markerArray_Diplomes['###Diplomes_DateObtention###'] = $diplomes_row['DateObtention'];
+
+						$date_explosee = explode("-", $diplomes_row['DateObtention']);
+
+						$annee = (int)$date_explosee[0];
+						$mois = (int)$date_explosee[1];
+						$jour = (int)$date_explosee[2];
+
+						$markerArray_Diplomes['###Diplomes_DateObtention###'] = date($this->lConf['formatdate'],mktime(0, 0, 0, $mois, $jour, $annee));
+						
 
 						if($diplomes_row['DateObtention']<>''){
 							$markerArray_Diplomes['###Diplomes_DateObtention_Separateur###'] = $this->lConf['separateurDiplomesDateObtention'];
@@ -1542,7 +1743,16 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 
 						if($premier_enregistrement==true){
-							$markerArray_Diplomes_dernier['###Diplomes_DateObtention_Dernier###'] = $diplomes_row['DateObtention'];
+							//$markerArray_Diplomes_dernier['###Diplomes_DateObtention_Dernier###'] = $diplomes_row['DateObtention'];
+							
+							$date_explosee = explode("-", $diplomes_row['DateObtention']);
+
+							$annee = (int)$date_explosee[0];
+							$mois = (int)$date_explosee[1];
+							$jour = (int)$date_explosee[2];
+
+							$markerArray_Diplomes_dernier['###Diplomes_DateObtention_Dernier###'] = date($this->lConf['formatdate'],mktime(0, 0, 0, $mois, $jour, $annee));
+							
 							
 							if($diplomes_row['DateObtention']<>''){
 								$markerArray_Diplomes_dernier['###Diplomes_DateObtention_Dernier_Separateur###'] = $this->lConf['separateurDiplomesDateObtentiondernier'];
@@ -1698,7 +1908,16 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 					}
 					else{
-						$markerArray_Postes['###Postes_DateDebut###'] = $postes_row['DateDebut'];
+						//$markerArray_Postes['###Postes_DateDebut###'] = $postes_row['DateDebut'];
+						
+						$date_explosee = explode("-", $postes_row['DateDebut']);
+
+						$annee = (int)$date_explosee[0];
+						$mois = (int)$date_explosee[1];
+						$jour = (int)$date_explosee[2];
+
+						$markerArray_Postes['###Postes_DateDebut###'] = date($this->lConf['formatdate'],mktime(0, 0, 0, $mois, $jour, $annee));
+							
 						
 						if($postes_row['DateDebut']<>''){
 							$markerArray_Postes['###Postes_DateDebut_Separateur###'] = $this->lConf['separateurPostesDateDebut'];
@@ -1708,7 +1927,14 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 
 						if($premier_enregistrement==true){
-							$markerArray_Postes_dernier['###Postes_DateDebut_Dernier###'] = $postes_row['DateDebut'];
+							//$markerArray_Postes_dernier['###Postes_DateDebut_Dernier###'] = $postes_row['DateDebut'];
+							$date_explosee = explode("-", $postes_row['DateDebut']);
+
+							$annee = (int)$date_explosee[0];
+							$mois = (int)$date_explosee[1];
+							$jour = (int)$date_explosee[2];
+
+							$markerArray_Postes_dernier['###Postes_DateDebut_Dernier###'] = date($this->lConf['formatdate'],mktime(0, 0, 0, $mois, $jour, $annee));
 
 							if($postes_row['DateDebut']<>''){
 								$markerArray_Postes_dernier['###Postes_DateDebut_Dernier_Separateur###'] = $this->lConf['separateurPostesDateDebutdernier'];
@@ -1721,7 +1947,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 
 					if($postes_row['DateFin']=='0000-00-00'){
 						$markerArray_Postes['###Postes_DateFin###'] = $this->lConf['typepostedatefin'];
-
+						
 						if($this->lConf['typepostedatefin']<>''){
 							$markerArray_Postes['###Postes_DateFin_Separateur###'] = $this->lConf['separateurPostesDateFin'];
 						}
@@ -1741,7 +1967,15 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 					}
 					else{
-						$markerArray_Postes['###Postes_DateFin###'] = $postes_row['DateFin'];
+						//$markerArray_Postes['###Postes_DateFin###'] = $postes_row['DateFin'];
+
+						$date_explosee = explode("-", $postes_row['DateFin']);
+
+						$annee = (int)$date_explosee[0];
+						$mois = (int)$date_explosee[1];
+						$jour = (int)$date_explosee[2];
+
+						$markerArray_Postes['###Postes_DateFin###'] = date($this->lConf['formatdate'],mktime(0, 0, 0, $mois, $jour, $annee));
 
 						if($postes_row['DateFin']<>''){
 							$markerArray_Postes['###Postes_DateFin_Separateur###'] = $this->lConf['separateurPostesDateFin'];
@@ -1751,7 +1985,15 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 
 						if($premier_enregistrement==true){
-							$markerArray_Postes_dernier['###Postes_DateFin_Dernier###'] = $postes_row['DateFin'];
+							//$markerArray_Postes_dernier['###Postes_DateFin_Dernier###'] = $postes_row['DateFin'];
+							
+							$date_explosee = explode("-", $postes_row['DateFin']);
+
+							$annee = (int)$date_explosee[0];
+							$mois = (int)$date_explosee[1];
+							$jour = (int)$date_explosee[2];
+
+							$markerArray_Postes_dernier['###Postes_DateFin_Dernier###'] = date($this->lConf['formatdate'],mktime(0, 0, 0, $mois, $jour, $annee));
 							
 							if($postes_row['DateFin']<>''){
 								$markerArray_Postes_dernier['###Postes_DateFin_Dernier_Separateur###'] = $this->lConf['separateurPostesDateFindernier'];
@@ -1904,7 +2146,8 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 
 					if($fonctionsstructures_row['DateDebut']=='0000-00-00'){
 						$markerArray_FonctionsStructures['###FonctionsStructures_DateDebut###'] = $this->lConf['fonctionstructuredatedebut'];
-
+						
+						
 						if($this->lConf['fonctionstructuredatedebut']<>''){
 							$markerArray_FonctionsStructures['###Structures_DateDebut_Separateur###'] = $this->lConf['separateurStructuresDateDebut'];
 						}
@@ -1925,8 +2168,16 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 					}
 					else{
-						$markerArray_FonctionsStructures['###FonctionsStructures_DateDebut###'] = $fonctionsstructures_row['DateDebut'];
+						//$markerArray_FonctionsStructures['###FonctionsStructures_DateDebut###'] = $fonctionsstructures_row['DateDebut'];
 
+						$date_explosee = explode("-", $fonctionsstructures_row['DateDebut']);
+
+						$annee = (int)$date_explosee[0];
+						$mois = (int)$date_explosee[1];
+						$jour = (int)$date_explosee[2];
+
+						$markerArray_FonctionsStructures['###FonctionsStructures_DateDebut###'] = date($this->lConf['formatdate'],mktime(0, 0, 0, $mois, $jour, $annee));
+						
 						if($fonctionsstructures_row['DateDebut']<>''){
 							$markerArray_FonctionsStructures['###Structures_DateDebut_Separateur###'] = $this->lConf['separateurStructuresDateDebut'];
 						}
@@ -1935,7 +2186,15 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 
 						if($premier_enregistrement==true){
-							$markerArray_FonctionsStructures_dernier['###FonctionsStructures_DateDebut_Dernier###'] = $fonctionsstructures_row['DateDebut'];
+							//$markerArray_FonctionsStructures_dernier['###FonctionsStructures_DateDebut_Dernier###'] = $fonctionsstructures_row['DateDebut'];
+
+							$date_explosee = explode("-", $fonctionsstructures_row['DateDebut']);
+
+							$annee = (int)$date_explosee[0];
+							$mois = (int)$date_explosee[1];
+							$jour = (int)$date_explosee[2];
+
+							$markerArray_FonctionsStructures_dernier['###FonctionsStructures_DateDebut_Dernier###'] = date($this->lConf['formatdate'],mktime(0, 0, 0, $mois, $jour, $annee));
 
 							if($fonctionsstructures_row['DateDebut']<>''){
 								$markerArray_FonctionsStructures_dernier['###Structures_DateDebut_Dernier_Separateur###'] = $this->lConf['separateurStructuresDateDebutdernier'];
@@ -1968,7 +2227,15 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 					}
 					else{
-						$markerArray_FonctionsStructures['###FonctionsStructures_DateFin###'] = $fonctionsstructures_row['DateFin'];
+						//$markerArray_FonctionsStructures['###FonctionsStructures_DateFin###'] = $fonctionsstructures_row['DateFin'];
+						
+						$date_explosee = explode("-", $fonctionsstructures_row['DateFin']);
+
+						$annee = (int)$date_explosee[0];
+						$mois = (int)$date_explosee[1];
+						$jour = (int)$date_explosee[2];
+
+						$markerArray_FonctionsStructures['###FonctionsStructures_DateFin###'] = date($this->lConf['formatdate'],mktime(0, 0, 0, $mois, $jour, $annee));
 						
 						if($fonctionsstructures_row['DateFin']<>''){
 							$markerArray_FonctionsStructures['###Structures_DateFin_Separateur###'] = $this->lConf['separateurStructuresDateFin'];
@@ -1978,7 +2245,15 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 
 						if($premier_enregistrement==true){
-							$markerArray_FonctionsStructures_dernier['###FonctionsStructures_DateFin_Dernier###'] = $fonctionsstructures_row['DateFin'];
+							//$markerArray_FonctionsStructures_dernier['###FonctionsStructures_DateFin_Dernier###'] = $fonctionsstructures_row['DateFin'];
+							
+							$date_explosee = explode("-", $fonctionsstructures_row['DateFin']);
+
+							$annee = (int)$date_explosee[0];
+							$mois = (int)$date_explosee[1];
+							$jour = (int)$date_explosee[2];
+
+							$markerArray_FonctionsStructures_dernier['###FonctionsStructures_DateFin_Dernier###'] = date($this->lConf['formatdate'],mktime(0, 0, 0, $mois, $jour, $annee));
 
 							if($fonctionsstructures_row['DateFin']<>''){
 								$markerArray_FonctionsStructures_dernier['###Structures_DateFin_Dernier_Separateur###'] = $this->lConf['separateurStructuresDateFindernier'];
