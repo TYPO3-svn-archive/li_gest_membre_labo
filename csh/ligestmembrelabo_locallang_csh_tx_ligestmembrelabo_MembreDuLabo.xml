@@ -128,31 +128,37 @@
             <label index="Afficher_Equipe.description">Cette boîte de sélection permet de visualiser tous les enregistrements liant le membre actuellement ouvert et les équipes auquelles il appartient ou il a appartenu.</label>
             <label index="Afficher_Equipe.details">Lorsque vous cliquez sur le bouton en forme de crayon, une nouvelle fenêtre s'ouvre pour vous permettre de modifier l'enregistrement sélectionné.
 
-			Lorsque vous cliquez sur le bouton "+", un nouveau formulaire s'ouvre pour vous permettre d'ajouter une nouvelle relation entre un membre et une équipe. Attention : le nom du membre n'est pas sélectionné par défaut, vous devez le sélectionner vous-même. Le nouvel enregistrement sera ajouté dans le même dossier que celui du membre duquel vous avez appelé le formulaire.
+			Lorsque vous cliquez sur le bouton "+", un nouveau formulaire s'ouvre pour vous permettre d'ajouter une nouvelle relation entre un membre et une équipe. Le nouvel enregistrement sera ajouté dans le même dossier que celui du membre duquel vous avez appelé le formulaire.
 
 			Quelque soit l'enregistrement sélectionné dans cette boîte, cela n'a pas d'importance. En effet, même si le numéro de l'enregistrement sélectionné est enregistré dans la base de données, il n'est pas réutilisé par la suite dans l'extension.</label>
             <label index="Afficher_Possede.description">Cette boîte de sélection permet de visualiser tous les enregistrements liant le membre actuellement ouvert et les postes qu'il a exercé ou qu'il exerce.</label>
             <label index="Afficher_Possede.details">Lorsque vous cliquez sur le bouton en forme de crayon, une nouvelle fenêtre s'ouvre pour vous permettre de modifier l'enregistrement sélectionné.
 
-			Lorsque vous cliquez sur le bouton "+", un nouveau formulaire s'ouvre pour vous permettre d'ajouter une nouvelle relation entre un membre et un poste. Attention : le nom du membre n'est pas sélectionné par défaut, vous devez le sélectionner vous-même. Le nouvel enregistrement sera ajouté dans le même dossier que celui du membre duquel vous avez appelé le formulaire.
+			Lorsque vous cliquez sur le bouton "+", un nouveau formulaire s'ouvre pour vous permettre d'ajouter une nouvelle relation entre un membre et un poste. Le nouvel enregistrement sera ajouté dans le même dossier que celui du membre duquel vous avez appelé le formulaire.
 
 			Quelque soit l'enregistrement sélectionné dans cette boîte, cela n'a pas d'importance. En effet, même si le numéro de l'enregistrement sélectionné est enregistré dans la base de données, il n'est pas réutilisé par la suite dans l'extension.</label>
             <label index="Afficher_Exerce.description">Cette boîte de sélection permet de visualiser tous les enregistrements liant le membre actuellement ouvert à une structure et une fonction.</label>
             <label index="Afficher_Exerce.details">Lorsque vous cliquez sur le bouton en forme de crayon, une nouvelle fenêtre s'ouvre pour vous permettre de modifier l'enregistrement sélectionné.
 
-			Lorsque vous cliquez sur le bouton "+", un nouveau formulaire s'ouvre pour vous permettre d'ajouter une nouvelle relation entre un membre, une structure et une fonction. Attention : le nom du membre n'est pas sélectionné par défaut, vous devez le sélectionner vous-même. Le nouvel enregistrement sera ajouté dans le même dossier que celui du membre duquel vous avez appelé le formulaire.
+			Lorsque vous cliquez sur le bouton "+", un nouveau formulaire s'ouvre pour vous permettre d'ajouter une nouvelle relation entre un membre, une structure et une fonction. Le nouvel enregistrement sera ajouté dans le même dossier que celui du membre duquel vous avez appelé le formulaire.
 
 			Quelque soit l'enregistrement sélectionné dans cette boîte, cela n'a pas d'importance. En effet, même si le numéro de l'enregistrement sélectionné est enregistré dans la base de données, il n'est pas réutilisé par la suite dans l'extension.</label>
             <label index="Afficher_CategorieMembre.description">Cette boîte de sélection permet de visualiser tous les enregistrements liant le membre actuellement ouvert à une catégorie.</label>
             <label index="Afficher_CategorieMembre.details">Lorsque vous cliquez sur le bouton en forme de crayon, une nouvelle fenêtre s'ouvre pour vous permettre de modifier l'enregistrement sélectionné.
 
-			Lorsque vous cliquez sur le bouton "+", un nouveau formulaire s'ouvre pour vous permettre d'ajouter une nouvelle relation entre un membre et une catégorie. Attention : le nom du membre n'est pas sélectionné par défaut, vous devez le sélectionner vous-même. Le nouvel enregistrement sera ajouté dans le même dossier que celui du membre duquel vous avez appelé le formulaire.
+			Lorsque vous cliquez sur le bouton "+", un nouveau formulaire s'ouvre pour vous permettre d'ajouter une nouvelle relation entre un membre et une catégorie. Le nouvel enregistrement sera ajouté dans le même dossier que celui du membre duquel vous avez appelé le formulaire.
 
 			Quelque soit l'enregistrement sélectionné dans cette boîte, cela n'a pas d'importance. En effet, même si le numéro de l'enregistrement sélectionné est enregistré dans la base de données, il n'est pas réutilisé par la suite dans l'extension.</label>
             <label index="Afficher_AObtenu.description">Cette boîte de sélection permet de visualiser tous les diplômes actuellements enregistrés pour le membre.</label>
             <label index="Afficher_AObtenu.details">Lorsque vous cliquez sur le bouton en forme de crayon, une nouvelle fenêtre s'ouvre pour vous permettre de modifier l'enregistrement sélectionné.
 
-			Lorsque vous cliquez sur le bouton "+", un nouveau formulaire s'ouvre pour vous permettre d'ajouter un diplome à un membre. Attention : le nom du membre n'est pas sélectionné par défaut, vous devez le sélectionner vous-même. Le nouvel enregistrement sera ajouté dans le même dossier que celui du membre duquel vous avez appelé le formulaire.
+			Lorsque vous cliquez sur le bouton "+", un nouveau formulaire s'ouvre pour vous permettre d'ajouter un diplome à un membre. Le nouvel enregistrement sera ajouté dans le même dossier que celui du membre duquel vous avez appelé le formulaire.
+
+			Quelque soit l'enregistrement sélectionné dans cette boîte, cela n'a pas d'importance. En effet, même si le numéro de l'enregistrement sélectionné est enregistré dans la base de données, il n'est pas réutilisé par la suite dans l'extension.</label>
+			<label index="Afficher_PEDR.description">Cette boîte de sélection permet de visualiser toutes les PEDR reçu par le membre.</label>
+            <label index="Afficher_PEDR.details">Lorsque vous cliquez sur le bouton en forme de crayon, une nouvelle fenêtre s'ouvre pour vous permettre de modifier l'enregistrement sélectionné.
+
+			Lorsque vous cliquez sur le bouton "+", un nouveau formulaire s'ouvre pour vous permettre d'ajouter une PEDR à un membre. Le nouvel enregistrement sera ajouté dans le même dossier que celui du membre duquel vous avez appelé le formulaire.
 
 			Quelque soit l'enregistrement sélectionné dans cette boîte, cela n'a pas d'importance. En effet, même si le numéro de l'enregistrement sélectionné est enregistré dans la base de données, il n'est pas réutilisé par la suite dans l'extension.</label>
 			<label index="Informations.description">Ce champs contient tous les informations que l'on ne peut pas mettre dans un autre champ</label>

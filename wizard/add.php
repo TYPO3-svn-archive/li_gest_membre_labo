@@ -24,48 +24,16 @@
 *
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
-/**
- * Wizard to edit records from group/select lists in TCEforms
- *
- * $Id: wizard_edit.php 3439 2008-03-16 19:16:51Z flyguide $
- * Revised for TYPO3 3.6 November/2003 by Kasper Skaarhoj
- *
- * @author	Kasper Skaarhoj <kasperYYYY@typo3.com>
- */
-/**
- * [CLASS/FUNCTION INDEX of SCRIPT]
- *
- *
- *
- *   76: class SC_wizard_edit
- *   90:     function init()
- *  101:     function main()
- *  149:     function closeWindow()
- *
- * TOTAL FUNCTIONS: 3
- * (This index is automatically created/updated by the extension "extdeveval")
- *
- */
 
 
-/* 
-// Lignes d'origine
-$BACK_PATH='';
-require ('init.php');
-require ('template.php');
-$LANG->includeLLFile('EXT:lang/locallang_wizards.xml');
-require_once (PATH_t3lib.'class.t3lib_loaddbgroup.php');
-*/
 
-
-/************** Début Lignes ajoutées ***********/
 unset($MCONF);
 define('TYPO3_MOD_PATH', '../typo3conf/ext/li_gest_membre_labo/wizard/');
 $BACK_PATH='../../../../typo3/';
-//$MCONF['name']='xMOD_tx_testtypo3_tx_testtypo3_testwiz';
+
 require_once($BACK_PATH.'init.php');
 require_once($BACK_PATH.'template.php');
-//$LANG->includeLLFile('EXT:li_gest_membre_labo/wizard/locallang.xml');
+
 require_once(PATH_t3lib.'class.t3lib_scbase.php');
  
 
@@ -73,7 +41,7 @@ require_once(PATH_t3lib.'class.t3lib_scbase.php');
 //require ('init.php');
 //require ('template.php');
 $LANG->includeLLFile('EXT:lang/locallang_wizards.xml');
-/************** Fin Lignes ajoutées ***********/
+
 
 
 
@@ -91,10 +59,7 @@ $LANG->includeLLFile('EXT:lang/locallang_wizards.xml');
  * @package TYPO3
  * @subpackage core
  */
- /* 
-// Lignes d'origine
-class SC_wizard_edit {
-*/
+
 /************** Début Lignes ajoutées ***********/
 class tx_ligestmembrelabo_add {
 /************** Fin Lignes ajoutées ***********/
@@ -140,9 +105,8 @@ class tx_ligestmembrelabo_add {
 			$config = $TCA[$table]['columns'][$field]['config'];
 			$fTable = $this->P['currentValue']<0 ? $config['neg_foreign_table'] : $config['foreign_table'];
 			
-			/************** Début Lignes ajoutées ***********/
 			$table_enregistrement = $this->P['params']['table']; // Table où sera créé l'enregistrement
-			
+			$champ_enregistrement = $this->P['params']['champ']; // Champ que l'on veut préremplir
 			
 			// On créé l'enregisterment avec notre utilisateur courant
 			$tstamp = time();
@@ -151,7 +115,7 @@ class tx_ligestmembrelabo_add {
 				'pid' => $this->P['pid'],
 				'tstamp' => $tstamp,
 				'crdate' => $tstamp,
-				'idMembreLabo' => $this->P['uid']
+				$champ_enregistrement => $this->P['uid']
 			);
 			
 			
@@ -177,21 +141,10 @@ class tx_ligestmembrelabo_add {
 			$uid = 0;
 			$uid = intval($row['uid']);
 
-			/************** Fin Lignes ajoutées ***********/
-			
-			
-			// Detecting the various allowed field type setups and acting accordingly.
-			/*
-			if (is_array($config) && $config['type']=='select' && !$config['MM'] && $config['maxitems']<=1 && t3lib_div::testInt($this->P['currentValue']) && $this->P['currentValue'] && $fTable)	{	// SINGLE value:
- 
-				// Lignes d'origine
-				header('Location: '.t3lib_div::locationHeaderUrl($BACK_PATH.'alt_doc.php?returnUrl='.rawurlencode('wizard_edit.php?doClose=1').'&edit['.$fTable.']['.$this->P['currentValue'].']=edit'));
-				*/
-				
-				/************** Début Lignes ajoutées ***********/
+
 			if (is_array($config) && $config['type']=='select' && !$config['MM'] && $config['maxitems']<=1 && $fTable)	{	// SINGLE value:
 				header('Location: '.t3lib_div::locationHeaderUrl($BACK_PATH.'alt_doc.php?returnUrl='.rawurlencode('wizard_edit.php?doClose=1').'&edit['.$fTable.']['.$uid.']=edit'));
-				/************** Fin Lignes ajoutées ***********/
+
 			
 			} elseif (is_array($config) && $this->P['currentSelectedValues'] && (($config['type']=='select' && $config['foreign_table']) || ($config['type']=='group' && $config['internal_type']=='db')))	{	// MULTIPLE VALUES:
 
@@ -234,22 +187,9 @@ class tx_ligestmembrelabo_add {
 // Include extension?
 
 
-
-
-
-/* 
-// Lignes d'origine
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['typo3/wizard_edit.php'])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['typo3/wizard_edit.php']);
-}
-*/
-
-
-/************** Début Lignes ajoutées ***********/
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/li_gest_membre_labo/wizard/add.php'])	{
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/li_gest_membre_labo/wizard/add.php']);
 }
-/************** Fin Lignes ajoutées ***********/
 
 
 
@@ -262,14 +202,7 @@ if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/li_gest
 
 // Make instance:
 
-/* 
-// Lignes d'origine
-$SOBE = t3lib_div::makeInstance('SC_wizard_edit');
-*/
-
-/************** Début Lignes ajoutées ***********/
 $SOBE = t3lib_div::makeInstance('tx_ligestmembrelabo_add');
-/************** Fin Lignes ajoutées ***********/
 
 $SOBE->init();
 $SOBE->main();
