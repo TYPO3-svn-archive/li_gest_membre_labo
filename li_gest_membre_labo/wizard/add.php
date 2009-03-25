@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 1999-2008 Kasper Skaarhoj (kasperYYYY@typo3.com)
+*  (c) 2009 Bruno Gallet <gallet.bruno@gmail.com>
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -13,9 +13,6 @@
 *
 *  The GNU General Public License can be found at
 *  http://www.gnu.org/copyleft/gpl.html.
-*  A copy is found in the textfile GPL.txt and important notices to the license
-*  from the author is found in LICENSE.txt distributed with these scripts.
-*
 *
 *  This script is distributed in the hope that it will be useful,
 *  but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -45,24 +42,17 @@ $LANG->includeLLFile('EXT:lang/locallang_wizards.xml');
 
 
 
-
-
-
-
-
-
-
 /**
- * Script Class for redirecting a backend user to the editing form when an "Edit wizard" link was clicked in TCEforms somewhere
+ * La classe tx_ligestmembrelabo_add permet de créer un enregistrement contenant des champs préremplis puis d'appeler la classe d'édition d'enregistrement
  *
- * @author	Kasper Skaarhoj <kasperYYYY@typo3.com>
- * @package TYPO3
- * @subpackage core
+ * @author	Bruno Gallet <gallet.bruno@gmail.com>
+ * @package	TYPO3
+ * @subpackage tx_ligestmembrelabo
  */
 
-/************** Début Lignes ajoutées ***********/
+
 class tx_ligestmembrelabo_add {
-/************** Fin Lignes ajoutées ***********/
+
 
 		// Internal, static: GPvars
 	var $P;						// Wizard parameters, coming from TCEforms linking to the wizard.
@@ -185,15 +175,9 @@ class tx_ligestmembrelabo_add {
 }
 
 // Include extension?
-
-
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/li_gest_membre_labo/wizard/add.php'])	{
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/li_gest_membre_labo/wizard/add.php']);
 }
-
-
-
-
 
 
 

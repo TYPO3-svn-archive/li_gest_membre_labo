@@ -22,6 +22,27 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+/**
+ *
+ * 56:    class tx_ligestmembrelabo_pi1 extends tslib_pibase
+ * 67:    function rechercheFils($pid_parent)
+ * 118:   function rechercherUidLangue($uid,$sys_language_uid,$uid_parent,$texte_champ,$table,$nom_champ)
+ * 188:   function equipe($uid_equipes,$typeDate)
+ * 242:  function typeDePoste($typeDePoste,$typeDate)
+ * 293:  function categorie($uid_categories,$typeDate)
+ * 344:  function structure($uid_structures,$typeDate)
+ * 406:  function rechercheStructuresFille($id_parent)
+ * 455:  function fonction($uid_fonctions,$typeDate)
+ * 504:  function diplome($uid_diplomes)
+ * 544:  function main($content,$conf)
+ *
+ * TOTAL FUNCTIONS: 0
+ *
+ */
+
+
+
+
 require_once(PATH_tslib.'class.tslib_pibase.php');
 
 
@@ -524,15 +545,16 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 		//Initialisation
 		$this->conf=$conf;
 		$this->pi_initPIflexForm(); // Init and get the flexform data of the plugin
+		
 		$this->lConf = array(); // Setup our storage array...
-		$this->lConf2 = array();
-		$this->lConftotal = array();
+		// Il est possible de récupérer les informations des options du plugin à partir de $this->lConf['nom_de_l_option'];
+		
+		
 		// Assign the flexform data to a local variable for easier access
 		$this->pi_setPiVarDefaults();
 		$piFlexForm = $this->cObj->data['pi_flexform'];
 		 // Traverse the entire array based on the language...
 		 // and assign each configuration option to $this->lConf array...
-
 		foreach ( $piFlexForm['data'] as $sheet => $data )
 		{
 			foreach ( $data as $lang => $value )
@@ -560,12 +582,10 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			}
 
 		}
-		//$this->lConftotal = array_merge($this->lConf,$this->lConf2);
 
 		$this->pi_loadLL();
 
 		//Gestion de gabarits (Template)
-
 		$this->templateCode = $this->cObj->fileResource($this->lConf["template_file"]);
 
 		$template = array();
@@ -607,8 +627,9 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 		{
 			$test = $test.$row['champ1'].' ';
 		}
-
 		----------------------------------------------------------------------------------------*/
+		
+		//On initialise la requête avec rien...
 		$select_fields = '';
 		$from_table = '';
 		$where_clause = '';
@@ -617,25 +638,21 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 		$limit = '';
 		$tryMemcached = '';
 
-
+		// On test si la case requête à été cochée ou non dans les ooptions du plugin
 		if(($this->lConf['requete'])<>true){
 
 
-			//Récupération de toutes les membres de l'équipe demandée ayant les postes sélectionnés
-			$code = ''; //Variable contenant le code à afficher
+			// Récupération de tous les membres de l'équipe demandée ayant les postes sélectionnés
+			$code = ''; // Variable contenant le code à afficher
 
-			//Construction de la requête
+			// Construction de la requête
 			$select = 'DISTINCT tx_ligestmembrelabo_MembreDuLabo.uid AS uidmembre, tx_ligestmembrelabo_MembreDuLabo.*';
 			$table = 'tx_ligestmembrelabo_MembreDuLabo';
 			$where = 'tx_ligestmembrelabo_MembreDuLabo.deleted<>1';
 			
 
-			//Gestion du nom de l'Equipe
-			/*$table = $table.', tx_ligestmembrelabo_EstMembreDe, tx_ligestmembrelabo_Equipe';
-			$where = $where.' AND tx_ligestmembrelabo_MembreDuLabo.uid = tx_ligestmembrelabo_EstMembreDe.idMembreLabo AND tx_ligestmembrelabo_EstMembreDe.idEquipe = tx_ligestmembrelabo_Equipe.uid';
-			if (($this->lConf['labo'])<>''){
-				$where = $where.' AND tx_ligestmembrelabo_EstMembreDe.deleted<>1 AND tx_ligestmembrelabo_Equipe.deleted<>1 AND (tx_ligestmembrelabo_Equipe.Nom = "'.$this->lConf['labo'].'" OR tx_ligestmembrelabo_Equipe.Abreviation = "'.$this->lConf['labo'].'")';
-			}*/
+			// Gestion du nom de l'Equipe
+
 			$equipes = $this->equipe($this->lConf['equipe'],$this->lConf['dateequipe']);
 			$table = $table.', tx_ligestmembrelabo_EstMembreDe, tx_ligestmembrelabo_Equipe';
 			$where = $where.' AND tx_ligestmembrelabo_EstMembreDe.deleted<>1 AND tx_ligestmembrelabo_Equipe.deleted<>1 AND tx_ligestmembrelabo_EstMembreDe.idMembreLabo = tx_ligestmembrelabo_MembreDuLabo.uid AND tx_ligestmembrelabo_EstMembreDe.idEquipe = tx_ligestmembrelabo_Equipe.uid';
@@ -646,10 +663,10 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 
 
 			/********************FILTRES********************/
-			//Ces filtres rajoutent des contraintes sur la requête à afficher
+			// Ces filtres rajoutent des contraintes sur la requête à afficher
 
 
-			//Gestion de la date d'arrivée et de départ du labo
+			//  Gestion de la date d'arrivée et de départ du labo
 			if($this->lConf['datelabo']=='Actuels')
 			{
 				$where = $where.' AND tx_ligestmembrelabo_MembreDuLabo.DateArrivee<="'.date('Y-m-d').'" AND (tx_ligestmembrelabo_MembreDuLabo.DateSortie>="'.date('Y-m-d').'" OR tx_ligestmembrelabo_MembreDuLabo.DateSortie="0000-00-00")';
@@ -660,26 +677,24 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			}
 
 
-			//Gestion des types de postes
+			// Gestion des types de postes
 			$postes = $this->typeDePoste($this->lConf['typeposte'],$this->lConf['datetypeposte']);
-			//$select = $select.', tx_ligestmembrelabo_Possede.*, tx_ligestmembrelabo_TypePoste.*, tx_ligestmembrelabo_TypePosteWeb.*';
 			$table = $table.', tx_ligestmembrelabo_Possede, tx_ligestmembrelabo_TypePoste, tx_ligestmembrelabo_TypePosteWeb';
 			$where = $where.' AND tx_ligestmembrelabo_Possede.deleted<>1 AND tx_ligestmembrelabo_TypePoste.deleted<>1 AND tx_ligestmembrelabo_TypePosteWeb.deleted<>1 AND tx_ligestmembrelabo_Possede.idMembreLabo = tx_ligestmembrelabo_MembreDuLabo.uid AND tx_ligestmembrelabo_Possede.idTypePoste = tx_ligestmembrelabo_TypePoste.uid AND tx_ligestmembrelabo_TypePoste.idTypePosteWeb = tx_ligestmembrelabo_TypePosteWeb.uid';
 			if($postes<>""){
 				$where = $where.$postes;
 			}
 
-			//Gestion des categories
+			// Gestion des categories
 			$categorie = $this->categorie($this->lConf['categorie'],$this->lConf['datetypecategorie']);
 			if($categorie<>""){
-				//$select = $select.', tx_ligestmembrelabo_Categorie.*, tx_ligestmembrelabo_CategorieMembre.*';
 				$table = $table.', tx_ligestmembrelabo_CategorieMembre, tx_ligestmembrelabo_Categorie';
 				$where = $where.' AND tx_ligestmembrelabo_CategorieMembre.deleted<>1 AND tx_ligestmembrelabo_Categorie.deleted<>1 AND tx_ligestmembrelabo_CategorieMembre.idMembreLabo = tx_ligestmembrelabo_MembreDuLabo.uid AND tx_ligestmembrelabo_CategorieMembre.idCategorie = tx_ligestmembrelabo_Categorie.uid';
 				$where = $where.$categorie;
 			}
 			
 
-			//Gestion des structures et des fonctions
+			// Gestion des structures et des fonctions
 			
 			$structure = $this->structure($this->lConf['structure'],$this->lConf['datetypestructure']);
 			if($structure<>""){
@@ -694,16 +709,15 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			
 			
 			
-			//Gestion des diplomes
+			// Gestion des diplomes
 			$diplome = $this->diplome($this->lConf['diplome']);
 			if($diplome<>""){
-				//$select = $select.', tx_ligestmembrelabo_TypeDiplome.*, tx_ligestmembrelabo_AObtenu.*';
 				$table = $table.', tx_ligestmembrelabo_TypeDiplome, tx_ligestmembrelabo_AObtenu';
 				$where = $where.' AND tx_ligestmembrelabo_TypeDiplome.deleted<>1 AND tx_ligestmembrelabo_AObtenu.deleted<>1 AND tx_ligestmembrelabo_AObtenu.idMembreLabo = tx_ligestmembrelabo_MembreDuLabo.uid AND tx_ligestmembrelabo_AObtenu.CodeDiplome = tx_ligestmembrelabo_TypeDiplome.uid';
 				$where = $where.$diplome;
 			}
 			
-			//Gestion des PEDR
+			// Gestion des PEDR
 			$datepedr = $this->lConf['datepedr'];
 			if($datepedr<>"")
 			{
@@ -729,7 +743,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			
 
 			// Création de la clause permettant de ne choisir que certains membres selon les dossiers sélectionnés
-			//On récupère tous les sous-dossiers...
+			// On récupère tous les sous-dossiers...
 			$dossiers = '';	
 			
 			$pid = array(); //dossiers sélectionnés
@@ -740,7 +754,6 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			if ($chaine!=''){
 				$dossiers = $dossiers.' AND (';
 				$pid = explode(",",$chaine);
-				//$pages = $pid;
 				
 				$premier = true;
 				
@@ -770,10 +783,8 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 
 			$where = $where.$dossiers;
 
-
-
-
-			//$select_fields = 'tx_ligestmembrelabo_MembreDuLabo.uid, tx_ligestmembrelabo_MembreDuLabo.NomDUsage, tx_ligestmembrelabo_MembreDuLabo.Prenom, tx_ligestmembrelabo_MembreDuLabo.PageWeb, tx_ligestmembrelabo_TypePosteWeb.uid, tx_ligestmembrelabo_TypePosteWeb.sys_language_uid, tx_ligestmembrelabo_TypePosteWeb.l18n_parent, tx_ligestmembrelabo_TypePosteWeb.LibelleWeb';
+			
+			// On écrit la requête
 			$select_fields = $select;
 			$from_table = $table;
 			$where_clause = $where;
@@ -786,6 +797,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 
 		}
 		else{
+			// Cas où l'on utilise une requête personnelle
 			$select_fields = $this->lConf['select'];
 			$from_table = $this->lConf['from_table'];
 			$where_clause = $this->lConf['where_clause'];
@@ -795,7 +807,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			$tryMemcached = $this->lConf['tryMemcached'];
 		}
 
-
+		// Initialisation des tableaux contenant les marqeurs
 		$markerArray = array();
 		$markerArray_Equipe = array();
 		$markerArray_Categories = array();
@@ -808,16 +820,20 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 		$markerArray_FonctionsStructures_dernier = array();
 		
 		$contentItem='';
-
+		
+		// Requête permettant de récupérer les informations personnelles des membres sélectionnés 
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select_fields, $from_table, $where_clause, $groupBy, $orderBy, $tryMemcached);
 
 		while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))       {
 
 			//**************************************
-			$uid=$row['uidmembre'];
 			// Table MembreDuLabo
+			//**************************************
+			
+			$uid=$row['uidmembre'];
 
 			//$markerArray['###uid###'] = $row['uidmembre'];
+			
 			$markerArray['###NomDUsage###'] = $row['NomDUsage'];
 			if($row['NomDUsage']<>''){
 				$markerArray['###NomDUsage_Separateur###'] = $this->lConf['separateurNomDUsage'];
@@ -889,9 +905,11 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			// Afficher les initiales d'un membre
 			//$markerArray['###InitialePrenom###'] = substr($row['Prenom'],0,1);
 
+			// On sépare les prénoms s'ils contiennent un - (cas des prénoms composés)
 			$prenoms = explode("-",$row['Prenom']);
 			$initiales_prenom = "";
 			$premier_prenom = true;
+			// Pour chaque prénom, on récupère l'initiale. On sépare ces initiales par des tirets
 			foreach ($prenoms as $prenom_courant) {
 				if($premier_prenom != true)
 				{
@@ -959,7 +977,6 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 
 
 			if($row['DateNaissance']=='0000-00-00'){
-				//$markerArray['###DateNaissance###'] = $this->lConf['datenaissance'];			
 				$markerArray['###DateNaissance###'] = $this->lConf['datenaissance'];
 				if($this->lConf['datenaissance']<>''){
 					$markerArray['###DateNaissance_Separateur###'] = $this->lConf['separateurDateNaissance'];
@@ -969,14 +986,13 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 				}
 			}
 			else{
-				//$markerArray['###DateNaissance###'] = $row['DateNaissance'];
-
 				$date_explosee = explode("-", $row['DateNaissance']);
 
 				$annee = (int)$date_explosee[0];
 				$mois = (int)$date_explosee[1];
 				$jour = (int)$date_explosee[2];
 
+				// la fonction date permet de reformater une date au format souhaité
 				$markerArray['###DateNaissance###'] = date($this->lConf['formatdate'],mktime(0, 0, 0, $mois, $jour, $annee));
 
 				if($row['DateNaissance']<>''){
@@ -1016,8 +1032,6 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 				}
 			}
 			else{
-				//$markerArray['###DateArrivee###'] = $row['DateArrivee'];
-				
 				$date_explosee = explode("-", $row['DateArrivee']);
 
 				$annee = (int)$date_explosee[0];
@@ -1026,8 +1040,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 
 				$markerArray['###DateArrivee###'] = date($this->lConf['formatdate'],mktime(0, 0, 0, $mois, $jour, $annee));
 				
-				
-				
+
 				if($row['DateArrivee']<>''){
 					$markerArray['###DateArrivee_Separateur###'] = $this->lConf['separateurDateArrivee'];
 				}
@@ -1048,8 +1061,6 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 				}
 			}
 			else{
-				//$markerArray['###DateSortie###'] = $row['DateSortie'];
-				
 				$date_explosee = explode("-", $row['DateSortie']);
 
 				$annee = (int)$date_explosee[0];
@@ -1349,8 +1360,6 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 					}
 					else{
-						//$markerArray_Equipe['###EstMembreDe_DateDebut###'] = $equipe_row['DateDebut'];
-
 						$date_explosee = explode("-", $equipe_row['DateDebut']);
 
 						$annee = (int)$date_explosee[0];
@@ -1368,8 +1377,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 	
 						if($premier_enregistrement==true){
-							//$markerArray_Equipe_dernier['###EstMembreDe_DateDebut_Dernier###'] = $equipe_row['DateDebut'];
-							
+
 							$date_explosee = explode("-", $equipe_row['DateDebut']);
 
 							$annee = (int)$date_explosee[0];
@@ -1410,8 +1418,6 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 					}
 					else{
-						//$markerArray_Equipe['###EstMembreDe_DateFin###'] = $equipe_row['DateFin'];
-
 						$date_explosee = explode("-", $equipe_row['DateFin']);
 
 						$annee = (int)$date_explosee[0];
@@ -1429,8 +1435,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 
 						if($premier_enregistrement==true){
-							//$markerArray_Equipe_dernier['###EstMembreDe_DateFin_Dernier###'] = $equipe_row['DateFin'];
-							
+
 							$date_explosee = explode("-", $equipe_row['DateFin']);
 
 							$annee = (int)$date_explosee[0];
@@ -1531,7 +1536,6 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 					}
 					else{
-						//$markerArray_Categories['###CategorieMembre_DateDebut###'] = $categorie_row['DateDebut'];
 
 						$date_explosee = explode("-", $categorie_row['DateDebut']);
 
@@ -1551,8 +1555,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 	
 						if($premier_enregistrement==true){
-							//$markerArray_Categories_dernier['###CategorieMembre_DateDebut_Dernier###'] = $categorie_row['DateDebut'];
-							
+
 							$date_explosee = explode("-", $categorie_row['DateDebut']);
 
 							$annee = (int)$date_explosee[0];
@@ -1593,7 +1596,6 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 					}
 					else{
-						//$markerArray_Categories['###CategorieMembre_DateFin###'] = $categorie_row['DateFin'];
 
 						$date_explosee = explode("-", $categorie_row['DateFin']);
 
@@ -1612,8 +1614,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 
 						if($premier_enregistrement==true){
-							//$markerArray_Categories_dernier['###CategorieMembre_DateFin_Dernier###'] = $categorie_row['DateFin'];
-							
+
 							$date_explosee = explode("-", $categorie_row['DateFin']);
 
 							$annee = (int)$date_explosee[0];
@@ -1717,7 +1718,6 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 					}
 					else{
-						//$markerArray_Diplomes['###Diplomes_DateObtention###'] = $diplomes_row['DateObtention'];
 
 						$date_explosee = explode("-", $diplomes_row['DateObtention']);
 
@@ -1736,8 +1736,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 
 						if($premier_enregistrement==true){
-							//$markerArray_Diplomes_dernier['###Diplomes_DateObtention_Dernier###'] = $diplomes_row['DateObtention'];
-							
+
 							$date_explosee = explode("-", $diplomes_row['DateObtention']);
 
 							$annee = (int)$date_explosee[0];
@@ -1901,8 +1900,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 					}
 					else{
-						//$markerArray_Postes['###Postes_DateDebut###'] = $postes_row['DateDebut'];
-						
+
 						$date_explosee = explode("-", $postes_row['DateDebut']);
 
 						$annee = (int)$date_explosee[0];
@@ -1960,7 +1958,6 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 					}
 					else{
-						//$markerArray_Postes['###Postes_DateFin###'] = $postes_row['DateFin'];
 
 						$date_explosee = explode("-", $postes_row['DateFin']);
 
@@ -1978,8 +1975,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 
 						if($premier_enregistrement==true){
-							//$markerArray_Postes_dernier['###Postes_DateFin_Dernier###'] = $postes_row['DateFin'];
-							
+
 							$date_explosee = explode("-", $postes_row['DateFin']);
 
 							$annee = (int)$date_explosee[0];
@@ -2009,10 +2005,6 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 				$subpartArray_Item['###POSTES_DERNIER###'] = $contentPostes_dernier;
 
 
-
-
-
-		//$template['fonctions_structures'] = $this->cObj->getSubpart($template['item'], '###FONCTIONS_STRUCTURES###');
 
 			//**************************************
 			// Tables Fonction, Structure et Exerce
@@ -2097,7 +2089,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 					}
 
-					//$markerArray_FonctionsStructures['###Structures_Adresse###'] = $fonctionsstructures_row['Adresse'];
+
 					$markerArray_FonctionsStructures['###Structures_Adresse###'] = nl2br($fonctionsstructures_row['Adresse']);
 					
 					if($fonctionsstructures_row['Adresse']<>''){
@@ -2108,7 +2100,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 					}
 
 					if($premier_enregistrement==true){
-						//['###Structures_Adresse_Dernier###'] = $fonctionsstructures_row['Adresse'];
+
 						$markerArray_FonctionsStructures_dernier['###Structures_Adresse_Dernier###'] = nl2br($fonctionsstructures_row['Adresse']);
 
 						if($fonctionsstructures_row['Adresse']<>''){
@@ -2161,7 +2153,6 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 					}
 					else{
-						//$markerArray_FonctionsStructures['###FonctionsStructures_DateDebut###'] = $fonctionsstructures_row['DateDebut'];
 
 						$date_explosee = explode("-", $fonctionsstructures_row['DateDebut']);
 
@@ -2179,7 +2170,6 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 
 						if($premier_enregistrement==true){
-							//$markerArray_FonctionsStructures_dernier['###FonctionsStructures_DateDebut_Dernier###'] = $fonctionsstructures_row['DateDebut'];
 
 							$date_explosee = explode("-", $fonctionsstructures_row['DateDebut']);
 
@@ -2220,8 +2210,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 					}
 					else{
-						//$markerArray_FonctionsStructures['###FonctionsStructures_DateFin###'] = $fonctionsstructures_row['DateFin'];
-						
+
 						$date_explosee = explode("-", $fonctionsstructures_row['DateFin']);
 
 						$annee = (int)$date_explosee[0];
@@ -2238,8 +2227,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 
 						if($premier_enregistrement==true){
-							//$markerArray_FonctionsStructures_dernier['###FonctionsStructures_DateFin_Dernier###'] = $fonctionsstructures_row['DateFin'];
-							
+
 							$date_explosee = explode("-", $fonctionsstructures_row['DateFin']);
 
 							$annee = (int)$date_explosee[0];
