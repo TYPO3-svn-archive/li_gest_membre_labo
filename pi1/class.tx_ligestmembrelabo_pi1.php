@@ -1173,7 +1173,6 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			
 			//Le contenu de cette balise est modifié, ci besoin dans la partie conernant l'équipe du membre.
 			$wrappedSubpartContentArray['###MembresSurlignes###'] = array('','');
-			
 
 
 			//**************************************
@@ -1227,12 +1226,6 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 							$wrappedSubpartContentArray['###MembresSurlignes###'] = array($this->lConf['balisedebut'],$this->lConf['balisefin']);
 						}					
 					}
-						
-						
-						
-						
-						
-						
 						
 						
 						
@@ -2003,22 +1996,22 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 							}
 						}
 					}
-					
+
 					$contentPostes .= $this->cObj->substituteMarkerArrayCached($template['postes'],$markerArray_Postes,array(),array());
 					if($premier_enregistrement==true){
 						$contentPostes_dernier .= $this->cObj->substituteMarkerArrayCached($template['postes_dernier'],$markerArray_Postes_dernier,array(),array());
 					}
-					
+
 					$premier_enregistrement=false;
 				}
 
 				$subpartArray_Item['###POSTES###'] = $contentPostes;
 				$subpartArray_Item['###POSTES_DERNIER###'] = $contentPostes_dernier;
 
-		
 
-		
-		
+
+
+
 		//$template['fonctions_structures'] = $this->cObj->getSubpart($template['item'], '###FONCTIONS_STRUCTURES###');
 
 			//**************************************
@@ -2204,7 +2197,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 							}
 						}
 					}
-					
+
 					if($fonctionsstructures_row['DateFin']=='0000-00-00'){
 						$markerArray_FonctionsStructures['###FonctionsStructures_DateFin###'] = $this->lConf['fonctionstructuredatefin'];
 
@@ -2296,8 +2289,8 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 		return $this->pi_wrapInBaseClass($content);
 	}
 
-	
-	
+
+
 }
 
 

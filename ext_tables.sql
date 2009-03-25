@@ -38,33 +38,6 @@ CREATE TABLE tx_ligestmembrelabo_MembreDuLabo (
 );
 
 
-
-
-
-#
-# Table structure for table 'tx_ligestmembrelabo_Exerce'
-#
-CREATE TABLE tx_ligestmembrelabo_Exerce (
-	uid int(11) DEFAULT '0' NOT NULL auto_increment,
-	pid int(11) DEFAULT '0' NOT NULL,
-	tstamp int(11) DEFAULT '0' NOT NULL,
-	crdate int(11) DEFAULT '0' NOT NULL,
-	cruser_id int(11) DEFAULT '0' NOT NULL,
-	deleted tinyint(4) DEFAULT '0' NOT NULL,
-	hidden tinyint(4) DEFAULT '0' NOT NULL,
-	idMembreLabo int(11) DEFAULT '0' NOT NULL,
-	idStructure int(11) DEFAULT '0' NOT NULL,
-	idFonction int(11) DEFAULT '0' NOT NULL,
-	DateDebut date DEFAULT '0000-00-00' NOT NULL,
-	DateFin date DEFAULT '0000-00-00' NOT NULL,
-	
-	#PRIMARY KEY (idMembreLabo, idStructure, idFonction),
-	PRIMARY KEY (uid),
-	KEY parent (pid)
-);
-
-
-
 #
 # Table structure for table 'tx_ligestmembrelabo_Structure'
 #
@@ -109,6 +82,29 @@ CREATE TABLE tx_ligestmembrelabo_Fonction (
 );
 
 
+#
+# Table structure for table 'tx_ligestmembrelabo_Exerce'
+#
+CREATE TABLE tx_ligestmembrelabo_Exerce (
+	uid int(11) DEFAULT '0' NOT NULL auto_increment,
+	pid int(11) DEFAULT '0' NOT NULL,
+	tstamp int(11) DEFAULT '0' NOT NULL,
+	crdate int(11) DEFAULT '0' NOT NULL,
+	cruser_id int(11) DEFAULT '0' NOT NULL,
+	deleted tinyint(4) DEFAULT '0' NOT NULL,
+	hidden tinyint(4) DEFAULT '0' NOT NULL,
+	idMembreLabo int(11) DEFAULT '0' NOT NULL,
+	idStructure int(11) DEFAULT '0' NOT NULL,
+	idFonction int(11) DEFAULT '0' NOT NULL,
+	DateDebut date DEFAULT '0000-00-00' NOT NULL,
+	DateFin date DEFAULT '0000-00-00' NOT NULL,
+	
+	PRIMARY KEY (uid),
+	KEY parent (pid)
+);
+
+
+
 
 #
 # Table structure for table 'tx_ligestmembrelabo_TypePosteWeb'
@@ -134,10 +130,6 @@ CREATE TABLE tx_ligestmembrelabo_TypePosteWeb (
 
 
 
-
-
-
-
 #
 # Table structure for table 'tx_ligestmembrelabo_TypePoste'
 #
@@ -159,7 +151,6 @@ CREATE TABLE tx_ligestmembrelabo_TypePoste (
 	PRIMARY KEY (uid),
 	KEY parent (pid)
 );
-
 
 
 #

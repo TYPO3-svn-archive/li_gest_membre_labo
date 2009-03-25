@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<!-- Ce fichier regroupe les labels concernant la base de données, les formulaires et les options de l'extension  -->
 <T3locallang>
 	<meta type="array">
 		<type>database</type>
 		<description>Language labels for database tables/fields belonging to extension 'li_gest_membre_labo'</description>
 	</meta>
 	<data type="array">
+		<!-- Les labels dans la langue par défaut  -->
 		<languageKey index="default" type="array">
 			<label index="tx_ligestmembrelabo_MembreDuLabo">Member of lab</label>
 			<label index="tx_ligestmembrelabo_MembreDuLabo.nomdusage">lastname for official documents</label>
@@ -220,6 +222,7 @@
 			<label index="tt_content.pi_flexform.sheet_template">Template</label>
 			<label index="tt_content.pi_flexform.template_file_ref">Template file reference</label>
 		</languageKey>
+		<!-- Les labels en français  -->
 		<languageKey index="fr" type="array">
 			<label index="tx_ligestmembrelabo_MembreDuLabo">Membre du labo</label>
 			<label index="tx_ligestmembrelabo_MembreDuLabo.nomdusage">Le nom de famille d'usage de la personne qu'il faut utiliser dans les documents officiels</label>
