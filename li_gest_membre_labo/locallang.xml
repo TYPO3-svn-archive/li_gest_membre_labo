@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<!-- Ce fichier regroupe les principaux labels de description de l'extension  -->
 <T3locallang>
 	<meta type="array">
 		<type>module</type>
 		<description>Language labels for extension 'li_gest_membre_labo'</description>
 	</meta>
 	<data type="array">
+		<!-- Les labels dans la langue par défaut  -->
 		<languageKey index="default" type="array">
 			<label index="pi1_title">Managing Member</label>
 			<label index="pi1_plus_wiz_description">Add a members list</label>
 		</languageKey>
+		<!-- Les labels en français  -->
 		<languageKey index="fr" type="array">
-			<label index="pi1_title">Gestion de membres</label>
-			<label index="pi1_plus_wiz_description">Ajouter une liste de membres</label>
+			<label index="pi1_title">Gestion de membres</label> <!-- Titre de l'extension  -->
+			<label index="pi1_plus_wiz_description">Ajouter une liste de membres</label> <!-- Description de l'extension  -->
 		</languageKey>
 	</data>
 </T3locallang>

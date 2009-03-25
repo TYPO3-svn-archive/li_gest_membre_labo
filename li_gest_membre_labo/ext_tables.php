@@ -1,11 +1,21 @@
 <?php
 if (!defined ('TYPO3_MODE')) 	die ('Access denied.');
 
+// Insertion des classes suplémentaires
 
+// Classe pour la gestion des  dates valides dans les formulaires
 $TYPO3_CONF_VARS['SC_OPTIONS']['tce']['formevals']['tx_ligestmembrelabo_dateValide'] = 'EXT:li_gest_membre_labo/class.tx_ligestmembrelabo_dateValide.php';
+
+// Classe pour la gestion des dates obligatoires dans les formulaires
 $TYPO3_CONF_VARS['SC_OPTIONS']['tce']['formevals']['tx_ligestmembrelabo_dateObligatoire'] = 'EXT:li_gest_membre_labo/class.tx_ligestmembrelabo_dateObligatoire.php';
 
+
+
+// Paramétrage de l'affichage de listes d'enregistrement de la table tx_ligestmembrelabo_MembreDuLabo dans le backend.
+
+// allow MembreDuLabo records on normal pages
 t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_MembreDuLabo');
+// add the MembreDuLabo record to the insert records content element
 t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_MembreDuLabo');
 
 $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
@@ -30,7 +40,11 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 	)
 );
 
+// Paramétrage de l'affichage de listes d'enregistrement de la table tx_ligestmembrelabo_Fonction dans le backend.
+
+// allow Fonction records on normal pages
 t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_Fonction');
+// add the Fonction record to the insert records content element
 t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_Fonction');
 
 $TCA["tx_ligestmembrelabo_Fonction"] = array (
@@ -63,7 +77,11 @@ $TCA["tx_ligestmembrelabo_Fonction"] = array (
 	)
 );
 
+// Paramétrage de l'affichage de listes d'enregistrement de la table tx_ligestmembrelabo_Structure dans le backend.
+
+// allow Structure records on normal pages
 t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_Structure');
+// add the Structure record to the insert records content element
 t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_Structure');
 
 $TCA["tx_ligestmembrelabo_Structure"] = array (
@@ -88,8 +106,11 @@ $TCA["tx_ligestmembrelabo_Structure"] = array (
 	)
 );
 
+// Paramétrage de l'affichage de listes d'enregistrement de la table tx_ligestmembrelabo_Exerce dans le backend.
 
+// allow Exerce records on normal pages
 t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_Exerce');
+// add the Exerce record to the insert records content element
 t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_Exerce');
 
 $TCA["tx_ligestmembrelabo_Exerce"] = array (
@@ -114,7 +135,11 @@ $TCA["tx_ligestmembrelabo_Exerce"] = array (
 	)
 );
 
+// Paramétrage de l'affichage de listes d'enregistrement de la table tx_ligestmembrelabo_TypePosteWeb dans le backend.
+
+// allow TypePosteWeb records on normal pages
 t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_TypePosteWeb');
+// add the TypePosteWeb record to the insert records content element
 t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_TypePosteWeb');
 
 $TCA["tx_ligestmembrelabo_TypePosteWeb"] = array (
@@ -150,9 +175,11 @@ $TCA["tx_ligestmembrelabo_TypePosteWeb"] = array (
 );
 
 
+// Paramétrage de l'affichage de listes d'enregistrement de la table tx_ligestmembrelabo_TypePoste dans le backend.
 
-
+// allow TypePoste records on normal pages
 t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_TypePoste');
+// add the TypePoste record to the insert records content element
 t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_TypePoste');
 
 $TCA["tx_ligestmembrelabo_TypePoste"] = array (
@@ -185,7 +212,11 @@ $TCA["tx_ligestmembrelabo_TypePoste"] = array (
 	)
 );
 
+// Paramétrage de l'affichage de listes d'enregistrement de la table tx_ligestmembrelabo_Possede dans le backend.
+
+// allow Possede records on normal pages
 t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_Possede');
+// add the Possede record to the insert records content element
 t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_Possede');
 
 $TCA["tx_ligestmembrelabo_Possede"] = array (
@@ -210,7 +241,11 @@ $TCA["tx_ligestmembrelabo_Possede"] = array (
 	)
 );
 
+// Paramétrage de l'affichage de listes d'enregistrement de la table tx_ligestmembrelabo_Categorie dans le backend.
+
+// allow Categorie records on normal pages
 t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_Categorie');
+// add the Categorie record to the insert records content element
 t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_Categorie');
 
 $TCA["tx_ligestmembrelabo_Categorie"] = array (
@@ -245,7 +280,11 @@ $TCA["tx_ligestmembrelabo_Categorie"] = array (
 	)
 );
 
+// Paramétrage de l'affichage de listes d'enregistrement de la table tx_ligestmembrelabo_CategorieMembre dans le backend.
+
+// allow CategorieMembre records on normal pages
 t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_CategorieMembre');
+// add the CategorieMembre record to the insert records content element
 t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_CategorieMembre');
 
 $TCA["tx_ligestmembrelabo_CategorieMembre"] = array (
@@ -271,8 +310,11 @@ $TCA["tx_ligestmembrelabo_CategorieMembre"] = array (
 );
 
 
+// Paramétrage de l'affichage de listes d'enregistrement de la table tx_ligestmembrelabo_Equipe dans le backend.
 
+// allow Equipe records on normal pages
 t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_Equipe');
+// add the Equipe record to the insert records content element
 t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_Equipe');
 
 $TCA["tx_ligestmembrelabo_Equipe"] = array (
@@ -305,7 +347,11 @@ $TCA["tx_ligestmembrelabo_Equipe"] = array (
 	)
 );
 
+// Paramétrage de l'affichage de listes d'enregistrement de la table tx_ligestmembrelabo_EstMembreDe dans le backend.
+
+// allow EstMembreDe records on normal pages
 t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_EstMembreDe');
+// add the EstMembreDe record to the insert records content element
 t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_EstMembreDe');
 
 $TCA["tx_ligestmembrelabo_EstMembreDe"] = array (
@@ -330,7 +376,11 @@ $TCA["tx_ligestmembrelabo_EstMembreDe"] = array (
 	)
 );
 
+// Paramétrage de l'affichage de listes d'enregistrement de la table tx_ligestmembrelabo_TypeDiplome dans le backend.
+
+// allow TypeDiplome records on normal pages
 t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_TypeDiplome');
+// add the TypeDiplome record to the insert records content element
 t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_TypeDiplome');
 
 $TCA["tx_ligestmembrelabo_TypeDiplome"] = array (
@@ -363,7 +413,11 @@ $TCA["tx_ligestmembrelabo_TypeDiplome"] = array (
 	)
 );
 
+// Paramétrage de l'affichage de listes d'enregistrement de la table tx_ligestmembrelabo_AObtenu dans le backend.
+
+// allow AObtenu records on normal pages
 t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_AObtenu');
+// add the AObtenu record to the insert records content element
 t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_AObtenu');
 
 $TCA["tx_ligestmembrelabo_AObtenu"] = array (
@@ -388,8 +442,11 @@ $TCA["tx_ligestmembrelabo_AObtenu"] = array (
 	)
 );
 
+// Paramétrage de l'affichage de listes d'enregistrement de la table tx_ligestmembrelabo_PEDR dans le backend.
 
+// allow PEDR records on normal pages
 t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_PEDR');
+// add the PEDR record to the insert records content element
 t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_PEDR');
 
 $TCA["tx_ligestmembrelabo_PEDR"] = array (
@@ -415,16 +472,19 @@ $TCA["tx_ligestmembrelabo_PEDR"] = array (
 );
 
 
-
+// load tt_content to $TCA array
 t3lib_div::loadTCA('tt_content');
+
+// remove some fields from the tt_content content element
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_pi1']='layout,select_key,pages';
 
-$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_pi1']='pi_flexform'; //Ajouté
+// add FlexForm field to tt_content
+$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_pi1']='pi_flexform';
 
-
+// add li_gest_membre_labo to the "insert plugin" content element
 t3lib_extMgm::addPlugin(array('LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.list_type_pi1', $_EXTKEY.'_pi1'),'list_type');
 
-
+// initialize static extension templates
 t3lib_extMgm::addStaticFile($_EXTKEY,"pi1/static/","Managing Member");
 
 // initalize "context sensitive help" (csh)
@@ -444,12 +504,8 @@ t3lib_extMgm::addLLrefForTCAdescr('tx_ligestmembrelabo_AObtenu','EXT:li_gest_mem
 t3lib_extMgm::addLLrefForTCAdescr('tx_ligestmembrelabo_PEDR','EXT:li_gest_membre_labo/csh/ligestmembrelabo_locallang_csh_tx_ligestmembrelabo_PEDR.xml');
 
 
-
-
-
-
-
-t3lib_extMgm::addPiFlexFormValue($_EXTKEY.'_pi1', 'FILE:EXT:li_gest_membre_labo/flexform_ds_pi1.xml'); //Ajouté
+// switch the XML files for the FlexForm
+t3lib_extMgm::addPiFlexFormValue($_EXTKEY.'_pi1', 'FILE:EXT:li_gest_membre_labo/flexform_ds_pi1.xml');
 
 
 if (TYPO3_MODE=="BE")	$TBE_MODULES_EXT["xMOD_db_new_content_el"]["addElClasses"]["tx_ligestmembrelabo_pi1_wizicon"] = t3lib_extMgm::extPath($_EXTKEY).'pi1/class.tx_ligestmembrelabo_pi1_wizicon.php';

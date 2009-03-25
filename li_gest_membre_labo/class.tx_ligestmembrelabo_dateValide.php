@@ -1,16 +1,53 @@
 <?php
+/***************************************************************
+*  Copyright notice
+*
+*  (c) 2009 Bruno Gallet <gallet.bruno@gmail.com>
+*  All rights reserved
+*
+*  This script is part of the TYPO3 project. The TYPO3 project is
+*  free software; you can redistribute it and/or modify
+*  it under the terms of the GNU General Public License as published by
+*  the Free Software Foundation; either version 2 of the License, or
+*  (at your option) any later version.
+*
+*  The GNU General Public License can be found at
+*  http://www.gnu.org/copyleft/gpl.html.
+*
+*  This script is distributed in the hope that it will be useful,
+*  but WITHOUT ANY WARRANTY; without even the implied warranty of
+*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*  GNU General Public License for more details.
+*
+*  This copyright notice MUST APPEAR in all copies of the script!
+***************************************************************/
 
+/**
+ *
+ *   47:  class tx_ligestmembrelabo_dateValide
+ *   53:  function returnFieldJS()
+ *   89:  function evaluateFieldValue($value, $is_in, &$set)
+ *   112: function deevaluateFieldValue($params)
+ *
+ * TOTAL FUNCTIONS: 3
+ *
+ */
+
+ 
 /**
  * Plugin 'Managing Member' for the 'li_gest_membre_labo' extension.
  * Teste de la validité d'une date dans un formulaire
- * @author	Bruno Gallet <gallet.bruno@gmail.com>
- * @package	TYPO3
- * @subpackage	tx_ligestmembrelabo
+ * 
+ * @author Bruno Gallet <gallet.bruno@gmail.com>
+ * @package TYPO3
+ * @subpackage tx_ligestmembrelabo
  */
+ 
+
 class tx_ligestmembrelabo_dateValide {
 
 	/**
-	 * Teste la validité d'une date dans un champ (enfin... à peu prêt... il peut y avoir un problème avec le mois de février....)
+	 * Teste grossièrement la validité d'une date dans un champ (il peut y avoir un problème avec le mois de février....)
 	 * @return Retourne la date de départ ou un message d'erreur si cette date est invalide
 	 */
 	function returnFieldJS() {
@@ -50,6 +87,7 @@ class tx_ligestmembrelabo_dateValide {
 	 * @return Retourne la nouvelle valeur du champ
 	 */
 	function evaluateFieldValue($value, $is_in, &$set) {
+		// Vérification de la date
 		if (!(checkdate(substr($value,5,2),substr($value,8,2),substr($value,0,4)))) {
 			$value = '0000-00-00';
 		}
@@ -73,17 +111,15 @@ class tx_ligestmembrelabo_dateValide {
 	 */
 	function deevaluateFieldValue($params) {
 		$dateTest = $params['value'];
+		// Vérification de la date
 		if (!(checkdate(substr($dateTest,5,2),substr($dateTest,8,2),substr($dateTest,0,4)))) {
 			$dateTest='';
 		}
-		/*else if($dateTest=='0000-00-00')
-		{
-			$dateTest='';
-		}*/
+
 		return $dateTest;
 	}
-	
-	
+
+
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/li_gest_membre_labo/class.tx_ligestmembrelabo_dateValide.php'])	{
