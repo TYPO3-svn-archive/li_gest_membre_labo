@@ -43,17 +43,17 @@ require_once(PATH_t3lib.'class.t3lib_scbase.php');
 class tx_ligestmembrelabo_reload extends t3lib_SCbase {
 
 	// Internal, dynamic:
-	var $include_once=array();	// List of files to include.
+	/// List of files to include.
+	var $include_once=array();	
 
 	// Internal, static:
 	
 		// Internal, static: GPvars
-	var $P;						// Wizard parameters, coming from TCEforms linking to the wizard.
+		/// Wizard parameters, coming from TCEforms linking to the wizard.
+	var $P;						
 
 	/**
-	 * fonction Main permettant de supprimer un enregistrement dans un menu déroulant
-	 *
-	 * @return	[type]		...
+	 * permet de supprimer un enregistrement dans un menu déroulant
 	 */
 	function main()	{
 

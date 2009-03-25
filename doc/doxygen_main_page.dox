@@ -1,0 +1,6 @@
+/// <summary>
+/// @mainpage Gestion de membres
+/// @section s_1 Introduction
+/// 
+/// Cette extension permet de créer une base de données contenant un grand nombre d'informations sur les membres d'un laboratoire d'informatique à partir de formulaires et d'afficher une liste de membres suivant certaines contraintes choisies par lors de la configuration de l'extension.
+/// </summary>
