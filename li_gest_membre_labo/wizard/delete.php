@@ -47,15 +47,22 @@ class tx_ligestmembrelabo_delete extends t3lib_SCbase {
 	var $include_once=array();	// List of files to include.
 
 	// Internal, static:
-	var $table;						// Contient le nom de la table de l'enregistrement que l'on doit supprimer
-	var $uid;						// Contient l'identifiant de l'enregistrement à supprimer
-	var $table_principale;			// Contient le nom de la table d'où provient la suppession
-	var $uid_table_principale;		// Contient l'identifiant de l'enregistrement de la table d'où provient la suppression
-	var $field_table_principale; 	// Contient le champ de la table d'où provient la suppression
+	
+	/// Contient le nom de la table de l'enregistrement que l'on doit supprimer
+	var $table;
+	/// Contient l'identifiant de l'enregistrement à supprimer	
+	var $uid;
+	/// Contient le nom de la table d'où provient la suppession	
+	var $table_principale;
+	/// Contient l'identifiant de l'enregistrement de la table d'où provient la suppression	
+	var $uid_table_principale;
+	/// Contient le champ de la table d'où provient la suppression
+	var $field_table_principale; 	
 	
 	
 		// Internal, static: GPvars
-	var $P;						// Wizard parameters, coming from TCEforms linking to the wizard.
+	/// Wizard parameters, coming from TCEforms linking to the wizard.
+	var $P;						
 
 	/**
 	 * fonction Main permettant de supprimer un enregistrement dans un menu déroulant

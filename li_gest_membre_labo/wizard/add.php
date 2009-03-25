@@ -55,8 +55,11 @@ class tx_ligestmembrelabo_add {
 
 
 		// Internal, static: GPvars
-	var $P;						// Wizard parameters, coming from TCEforms linking to the wizard.
-	var $doClose;				// Boolean; if set, the window will be closed by JavaScript
+		
+		/// Wizard parameters, coming from TCEforms linking to the wizard.
+	var $P;
+		/// Boolean; if set, the window will be closed by JavaScript	
+	var $doClose;				
 
 
 
