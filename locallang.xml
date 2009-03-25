@@ -6,12 +6,12 @@
 		<description>Language labels for extension 'li_gest_membre_labo'</description>
 	</meta>
 	<data type="array">
-		<!-- Les labels dans la langue par défaut  -->
+		<!-- Les labels dans la langue par defaut  -->
 		<languageKey index="default" type="array">
 			<label index="pi1_title">Managing Member</label>
 			<label index="pi1_plus_wiz_description">Add a members list</label>
 		</languageKey>
-		<!-- Les labels en français  -->
+		<!-- Les labels en francais  -->
 		<languageKey index="fr" type="array">
 			<label index="pi1_title">Gestion de membres</label> <!-- Titre de l'extension  -->
 			<label index="pi1_plus_wiz_description">Ajouter une liste de membres</label> <!-- Description de l'extension  -->
