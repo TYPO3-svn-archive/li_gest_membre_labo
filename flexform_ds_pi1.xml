@@ -431,7 +431,7 @@
 									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.formatdate</label>
 									<config>
 										<type>input</type>
-										<default>m/d/Y</default>
+										<default>d/m/Y</default>
 									</config>
 								</TCEforms>
 							</formatdate>
