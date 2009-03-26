@@ -1,3 +1,9 @@
-﻿2009-03-25 Bruno Gallet  <gallet.bruno@gmail.com>
+﻿2009-03-26 Bruno Gallet  <gallet.bruno@gmail.com>
+
+	* Changement de format d'affichage de la date par défaut. Remplacement de m/d/Y par d/m/Y.
+
+2009-03-25 Bruno Gallet  <gallet.bruno@gmail.com>
 
 	* Initial release
+	
+	
