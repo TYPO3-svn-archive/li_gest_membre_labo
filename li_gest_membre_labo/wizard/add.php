@@ -101,6 +101,86 @@ class tx_ligestmembrelabo_add {
 			$table_enregistrement = $this->P['params']['table']; // Table où sera créé l'enregistrement
 			$champ_enregistrement = $this->P['params']['champ']; // Champ que l'on veut préremplir
 			
+			
+			
+			// on vérifie s'il y a bien au moins un enregistrement dans la table que l'on veut lier...
+
+			$tables_a_tester = Array();
+			$tables_a_tester = $this->P['params']['lien'];
+			
+			$enregistrement_possible = false;
+			if ($tables_a_tester == Array()){
+				$enregistrement_possible = true;
+			}
+			$message_erreur = '';
+			$nb_tables = 0;
+			$nb_tables_remplies = 0;
+			
+			if($enregistrement_possible <> true)
+			{
+				$premier = true;
+				foreach ($tables_a_tester as $table_courante)
+				{
+					if($premier == true)
+					{
+						$message_erreur = $table_courante;
+						$premier = false;
+					}
+					else
+					{
+						$message_erreur = $message_erreur.' AND/OR '.$table_courante;
+					}
+				
+					$select_fields_existance_enregistrement = '*';
+					$from_table_existance_enregistrement = $table_courante;
+					$where_clause_existance_enregistrement = 'deleted<>1';
+					$groupBy_existance_enregistrement = '';
+					$orderBy_existance_enregistrement = '';
+					$limit_existance_enregistrement = '';
+					$tryMemcached_existance_enregistrement = '';
+
+					$res_existance_enregistrement = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select_fields_existance_enregistrement, $from_table_existance_enregistrement, $where_clause_existance_enregistrement, $groupBy_existance_enregistrement, $orderBy_existance_enregistrement, $tryMemcached_existance_enregistrement);
+					
+					if($row_existance_enregistrement = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res_existance_enregistrement))
+					{
+						$nb_tables_remplies++;
+					}
+					$nb_tables++;
+
+				}
+
+				if ($nb_tables_remplies == $nb_tables){
+					$enregistrement_possible = true;
+				}
+				
+
+			}
+
+
+			if($enregistrement_possible <> true)
+			{
+				if ($nb_tables ==1){
+					echo '<SCRIPT language="Javascript">
+						<!--
+						alert("'.$message_erreur.' is empty!");
+						// -->
+						</SCRIPT>';
+				}
+				else if ($nb_tables >1){
+					echo '<SCRIPT language="Javascript">
+						<!--
+						alert("'.$message_erreur.' are empty!");
+						// -->
+						</SCRIPT>';
+				}
+
+
+				$this->closeWindow();
+			}
+
+			
+			
+
 			// On créé l'enregisterment avec notre utilisateur courant
 			$tstamp = time();
 			
@@ -129,17 +209,15 @@ class tx_ligestmembrelabo_add {
 			$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select_fields, $from_table, $where_clause, $groupBy, $orderBy, $tryMemcached);
 
 			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
-			
+
 			// Enregistrement à éditer
 			$uid = 0;
 			$uid = intval($row['uid']);
 
-
-			if (is_array($config) && $config['type']=='select' && !$config['MM'] && $config['maxitems']<=1 && $fTable)	{	// SINGLE value:
+			if (is_array($config) && $config['type']=='select' && !$config['MM'] && $config['maxitems']<=1 && $fTable && $enregistrement_possible == true)	{	// SINGLE value:
 				header('Location: '.t3lib_div::locationHeaderUrl($BACK_PATH.'alt_doc.php?returnUrl='.rawurlencode('wizard_edit.php?doClose=1').'&edit['.$fTable.']['.$uid.']=edit'));
-
 			
-			} elseif (is_array($config) && $this->P['currentSelectedValues'] && (($config['type']=='select' && $config['foreign_table']) || ($config['type']=='group' && $config['internal_type']=='db')))	{	// MULTIPLE VALUES:
+			} elseif (is_array($config) && $this->P['currentSelectedValues'] && (($config['type']=='select' && $config['foreign_table']) || ($config['type']=='group' && $config['internal_type']=='db')) && $enregistrement_possible == true)	{	// MULTIPLE VALUES:
 
 					// Init settings:
 				$allowedTables = $config['type']=='group' ? $config['allowed'] : $config['foreign_table'].','.$config['neg_foreign_table'];
@@ -156,7 +234,6 @@ class tx_ligestmembrelabo_add {
 					$recTableUidParts = t3lib_div::revExplode('_',$rec,2);
 					$params.='&edit['.$recTableUidParts[0].']['.$recTableUidParts[1].']=edit';
 				}
-
 					// Redirect to alt_doc.php:
 				header('Location: '.t3lib_div::locationHeaderUrl($BACK_PATH.'alt_doc.php?returnUrl='.rawurlencode('wizard_edit.php?doClose=1').$params));
 			

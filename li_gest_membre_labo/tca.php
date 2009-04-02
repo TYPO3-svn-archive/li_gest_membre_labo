@@ -94,7 +94,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 				"size" => "48",	
 				"max" => "255",	
 				"eval" => "trim",
-				'default' => "Francais"
+				'default' => ""
 			)
 		),
 		"DateArrivee" => Array (		
@@ -202,11 +202,13 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 					"add" => Array(
 						"type" => "popup",
 						"title" => "Create new record",
+						"notNewRecords" => 1,
 						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/add.php",
 						"icon" => "add.gif",
 						"params" => Array(
 							"table"			=> "tx_ligestmembrelabo_EstMembreDe",
-							"champ"			=> "idMembreLabo"
+							"champ"			=> "idMembreLabo",
+							"lien"			=> Array('tx_ligestmembrelabo_Equipe')
 						),
 						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
 					),
@@ -216,6 +218,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 						"title" => "Edit",
 						"script" => "wizard_edit.php",
 						"popup_onlyOpenIfSelected" => 1,
+						"notNewRecords" => 1,
 						"icon" => "edit2.gif",
 						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
 					),
@@ -234,8 +237,8 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 					"reload" => Array(
 						"title" => "Refresh",
 						"type" => "popup",
-						"notNewRecords" => 1,
 						"icon" => "refresh_n.gif",
+						"notNewRecords" => 1,
 						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/reload.php",
 						"JSopenParams" => "height=1,width=1,status=0,menubar=0,scrollbars=1",
 					),
@@ -259,11 +262,13 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 					"add" => Array(
 						"type" => "popup",
 						"title" => "Create new record",
+						"notNewRecords" => 1,
 						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/add.php",
 						"icon" => "add.gif",
 						"params" => Array(
 							"table"			=> "tx_ligestmembrelabo_Possede",
-							"champ"			=> "idMembreLabo"
+							"champ"			=> "idMembreLabo",
+							"lien"			=> Array('tx_ligestmembrelabo_TypePoste')
 						),
 						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
 					),
@@ -272,6 +277,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 						"title" => "Edit",
 						"script" => "wizard_edit.php",
 						"popup_onlyOpenIfSelected" => 1,
+						"notNewRecords" => 1,
 						"icon" => "edit2.gif",
 						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
 					),
@@ -290,8 +296,8 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 					"reload" => Array(
 						"title" => "Refresh",
 						"type" => "popup",
-						"notNewRecords" => 1,
 						"icon" => "refresh_n.gif",
+						"notNewRecords" => 1,
 						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/reload.php",
 						"JSopenParams" => "height=1,width=1,status=0,menubar=0,scrollbars=1",
 					),
@@ -315,11 +321,13 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 					"add" => Array(
 						"type" => "popup",
 						"title" => "Create new record",
+						"notNewRecords" => 1,
 						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/add.php",
 						"icon" => "add.gif",
 						"params" => Array(
 							"table"			=> "tx_ligestmembrelabo_Exerce",
-							"champ"			=> "idMembreLabo"
+							"champ"			=> "idMembreLabo",
+							"lien"			=> Array('tx_ligestmembrelabo_Fonction','tx_ligestmembrelabo_Structure')
 						),
 						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
 					),
@@ -328,6 +336,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 						"title" => "Edit",
 						"script" => "wizard_edit.php",
 						"popup_onlyOpenIfSelected" => 1,
+						"notNewRecords" => 1,
 						"icon" => "edit2.gif",
 						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
 					),
@@ -370,11 +379,13 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 					"add" => Array(
 						"type" => "popup",
 						"title" => "Create new record",
+						"notNewRecords" => 1,
 						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/add.php",
 						"icon" => "add.gif",
 						"params" => Array(
 							"table"			=> "tx_ligestmembrelabo_CategorieMembre",
-							"champ"			=> "idMembreLabo"
+							"champ"			=> "idMembreLabo",
+							"lien"			=> Array('tx_ligestmembrelabo_Categorie')
 						),
 						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
 					),
@@ -383,6 +394,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 						"title" => "Edit",
 						"script" => "wizard_edit.php",
 						"popup_onlyOpenIfSelected" => 1,
+						"notNewRecords" => 1,
 						"icon" => "edit2.gif",
 						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
 					),
@@ -425,11 +437,13 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 					"add" => Array(
 						"type" => "popup",
 						"title" => "Create new record",
+						"notNewRecords" => 1,
 						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/add.php",
 						"icon" => "add.gif",
 						"params" => Array(
 							"table"			=> "tx_ligestmembrelabo_AObtenu",
-							"champ"			=> "idMembreLabo"
+							"champ"			=> "idMembreLabo",
+							"lien"			=> Array('tx_ligestmembrelabo_TypeDiplome')
 						),
 						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
 					),
@@ -438,6 +452,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 						"title" => "Edit",
 						"script" => "wizard_edit.php",
 						"popup_onlyOpenIfSelected" => 1,
+						"notNewRecords" => 1,
 						"icon" => "edit2.gif",
 						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
 					),
@@ -480,6 +495,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 					"add" => Array(
 						"type" => "popup",
 						"title" => "Create new record",
+						"notNewRecords" => 1,
 						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/add.php",
 						"icon" => "add.gif",
 						"params" => Array(
@@ -493,6 +509,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 						"title" => "Edit",
 						"script" => "wizard_edit.php",
 						"popup_onlyOpenIfSelected" => 1,
+						"notNewRecords" => 1,
 						"icon" => "edit2.gif",
 						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
 					),
@@ -661,11 +678,20 @@ $TCA["tx_ligestmembrelabo_Structure"] = array (
 		"Type" => Array (		
 			"exclude" => 1,		
 			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Structure.type",		
-			"config" => Array (
-				"type" => "input",	
-				"size" => "5",	
-				"max" => "1",	
-				"eval" => "trim",
+			'config' => Array (
+				'type' => 'select',
+				'size' => 1,
+				'maxitems' => 1,
+				'items' => Array (
+					Array('LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Structure.type.Composante', 'C'),
+					Array('LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Structure.type.Entreprise', 'N'),
+					Array('LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Structure.type.Etablissement', 'T'),
+					Array('LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Structure.type.Institution', 'I'),
+					Array('LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Structure.type.LaboratoirePrive', 'R'),
+					Array('LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Structure.type.LaboratoirePublic', 'U'),
+					Array('LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Structure.type.Site', 'S')
+				),
+				 'default' => 'C',
 			)
 		),
 		"idStructureParente" => Array (		
@@ -994,7 +1020,7 @@ $TCA["tx_ligestmembrelabo_Possede"] = array (
 		),
 		"idMembreLabo" => Array (		
 			"exclude" => 1,		
-			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Possede.idmembremabo",		
+			"label" => "LLL:EXT:li_gest_membre_labo/locallang_db.xml:tx_ligestmembrelabo_Possede.idmembrelabo",		
 			"config" => Array (
 				"type" => "select",	
 				"foreign_table" => "tx_ligestmembrelabo_MembreDuLabo",	

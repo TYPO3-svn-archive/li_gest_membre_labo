@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Fichier XML permettant de définir l'affichage des options du plugin  -->
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fichier XML permettant de dÃ©finir l'affichage des options du plugin  -->
 <T3DataStructure>
 	<meta>
 		<langDisable>1</langDisable>
 	</meta>
 	<sheets>
-		<!-- Onglet Données: permet de sélectionner des dossiers  -->
+		<!-- Onglet DonnÃ©es: permet de sÃ©lectionner des dossiers  -->
 		<sDEF>
 			<ROOT>
 				<TCEforms>
@@ -13,7 +13,7 @@
 				</TCEforms>
 				<type>array</type>
 				<el>
-					<!-- Zone de sélection de données  -->
+					<!-- Zone de sÃ©lection de donnÃ©es  -->
 					<pid>
 						<TCEforms>
 							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.pid</label>
@@ -31,7 +31,7 @@
 				</el>
 		    </ROOT>
 		</sDEF>
-		<!-- Onglet filtres: permet de sélectionnés les membres à afficher suivant différents paramètres  -->
+		<!-- Onglet filtres: permet de sÃ©lectionnÃ©s les membres Ã  afficher suivant diffÃ©rents paramÃªtres  -->
 		<filtres>
 		    <ROOT>
 				<TCEforms>
@@ -43,7 +43,7 @@
 					<groupelabo>
 						<type>array</type>
 						<el>
-							<!-- Filtrage selon les dates de présence au labo  -->
+							<!-- Filtrage selon les dates de prÃ©sence au labo  -->
 							<datelabo>
 								<TCEforms>
 									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.datelabo</label>
@@ -73,11 +73,11 @@
 						</el>
 					</groupelabo>
 
-					<!-- Regoupement des filtres concernant les équipes  -->
+					<!-- Regoupement des filtres concernant les Ã©quipes  -->
 					<groupeequipe>
 						<type>array</type>
 						<el>
-							<!-- Filtrage des membres selon les équipes sélectionnées  -->
+							<!-- Filtrage des membres selon les Ã©quipes sÃ©lectionnÃ©es  -->
 							<equipe>
 								<TCEforms>
 									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.equipe</label>
@@ -91,7 +91,7 @@
 										</config>
 								</TCEforms>
 							</equipe>
-							<!-- Filtrage selon les dates de présences dans les équipes sélectionnées  -->
+							<!-- Filtrage selon les dates de prÃ©sences dans les Ã©quipes sÃ©lectionnÃ©es  -->
 							<dateequipe>
 								<TCEforms>
 									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.dateequipe</label>
@@ -125,7 +125,7 @@
 					<groupeposte>
 						<type>array</type>
 						<el>
-							<!-- Filtrage des membres selon les postes sélectionnées  -->
+							<!-- Filtrage des membres selon les postes sÃ©lectionnÃ©es  -->
 							<typeposte>
 								<TCEforms>
 									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typeposte</label>
@@ -139,7 +139,7 @@
 										</config>
 								</TCEforms>
 							</typeposte>
-							<!-- Filtrage selon les dates de présences aux postes sélectionnées  -->
+							<!-- Filtrage selon les dates de prÃ©sences aux postes sÃ©lectionnÃ©es  -->
 							<datetypeposte>
 								<TCEforms>
 									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedateposte</label>
@@ -169,11 +169,11 @@
 						</el>
 					</groupeposte>
 
-					<!-- Regoupement des filtres concernant les catégories  -->
+					<!-- Regoupement des filtres concernant les catÃ©gories  -->
 					<groupecategorie>
 						<type>array</type>
 						<el>
-							<!-- Filtrage des membres selon les catégories sélectionnées  -->
+							<!-- Filtrage des membres selon les catÃ©gories sÃ©lectionnÃ©es  -->
 							<categorie>
 								<TCEforms>
 									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.categorie</label>
@@ -187,7 +187,7 @@
 										</config>
 								</TCEforms>
 							</categorie>
-							<!-- Filtrage selon les dates de présences aux catégories sélectionnées  -->
+							<!-- Filtrage selon les dates de prÃ©sences aux catÃ©gories sÃ©lectionnÃ©es  -->
 							<datetypecategorie>
 								<TCEforms>
 									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedatecategorie</label>
@@ -217,11 +217,11 @@
 						</el>
 					</groupecategorie>
 
-					<!-- Regoupement des filtres concernant les catégories  -->
+					<!-- Regoupement des filtres concernant les catÃ©gories  -->
 					<groupestructure>
 						<type>array</type>
 						<el>
-							<!-- Filtrage des membres selon les structures sélectionnées  -->
+							<!-- Filtrage des membres selon les structures sÃ©lectionnÃ©es  -->
 							<structure>
 								<TCEforms>
 									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.structure</label>
@@ -235,7 +235,7 @@
 										</config>
 								</TCEforms>
 							</structure>
-							<!-- Filtrage selon les dates de présences dans une des structures sélectionnées  -->
+							<!-- Filtrage selon les dates de prÃ©sences dans une des structures sÃ©lectionnÃ©es  -->
 							<datetypestructure>
 								<TCEforms>
 									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedatestructure</label>
@@ -269,7 +269,7 @@
 					<groupefonction>
 						<type>array</type>
 						<el>
-							<!-- Filtrage des membres selon les fonctions sélectionnées  -->
+							<!-- Filtrage des membres selon les fonctions sÃ©lectionnÃ©es  -->
 							<fonction>
 								<TCEforms>
 									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.fonction</label>
@@ -283,7 +283,7 @@
 										</config>
 								</TCEforms>
 							</fonction>
-							<!-- Filtrage selon les dates de présences dans une des fonctions sélectionnées  -->
+							<!-- Filtrage selon les dates de prÃ©sences dans une des fonctions sÃ©lectionnÃ©es  -->
 							<datetypefonction>
 								<TCEforms>
 									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.typedatefonction</label>
@@ -317,7 +317,7 @@
 					<groupediplome>
 						<type>array</type>
 						<el>
-							<!-- Filtrage des membres selon les diplomes sélectionnées  -->
+							<!-- Filtrage des membres selon les diplomes sÃ©lectionnÃ©es  -->
 							<diplome>
 								<TCEforms>
 									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.diplome</label>
@@ -565,7 +565,7 @@
 						</el>
 					</groupeaffichagedate>
 					
-					<!-- Regoupement des options d'affichage concernant les rangs des membres dans une équipe -->
+					<!-- Regoupement des options d'affichage concernant les rangs des membres dans une Ã©quipe -->
 					<groupeaffichagerang>
 						<type>array</type>
 						<el>
@@ -638,10 +638,89 @@
 							</genreinconnu>
 						</el>
 					</groupeaffichagegenre>
+					
+					<!-- Regoupement des options d'affichage concernant les types de structures -->
+					<groupeaffichagetype>
+						<type>array</type>
+						<el>
+							<composante>
+								<TCEforms>
+									<exclude>1</exclude>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.type.Composante</label>
+									<config>
+										<type>input</type>
+										<default>Composante</default>
+									</config>
+								</TCEforms>
+							</composante>
+							<entreprise>
+								<TCEforms>
+									<exclude>1</exclude>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.type.Entreprise</label>
+									<config>
+										<type>input</type>
+										<default>Entreprise</default>
+									</config>
+								</TCEforms>
+							</entreprise>
+							<etablissement>
+								<TCEforms>
+									<exclude>1</exclude>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.type.Etablissement</label>
+									<config>
+										<type>input</type>
+										<default>Etablissement</default>
+									</config>
+								</TCEforms>
+							</etablissement>
+							<institution>
+								<TCEforms>
+									<exclude>1</exclude>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.type.Institution</label>
+									<config>
+										<type>input</type>
+										<default>Institution</default>
+									</config>
+								</TCEforms>
+							</institution>
+							<laboratoirePrive>
+								<TCEforms>
+									<exclude>1</exclude>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.type.LaboratoirePrive</label>
+									<config>
+										<type>input</type>
+										<default>Laboratoire PrivÃ©</default>
+									</config>
+								</TCEforms>
+							</laboratoirePrive>
+							<laboratoirePublic>
+								<TCEforms>
+									<exclude>1</exclude>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.type.LaboratoirePublic</label>
+									<config>
+										<type>input</type>
+										<default>Laboratoire Public</default>
+									</config>
+								</TCEforms>
+							</laboratoirePublic>
+							<site>
+								<TCEforms>
+									<exclude>1</exclude>
+									<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.type.Site</label>
+									<config>
+										<type>input</type>
+										<default>Site</default>
+									</config>
+								</TCEforms>
+							</site>
+						</el>
+					</groupeaffichagetype>
+					
+					
 				</el>
 			</ROOT>
 		</affichage>
-		<!-- Onglet séparateurs: permet de définir les différents spérateurs liés aux champs  -->
+		<!-- Onglet sÃ©parateurs: permet de dÃ©finir les diffÃ©rents sÃ©parateurs liÃ©s aux champs  -->
 		<separateurs>
 		    <ROOT>
 				<TCEforms>
@@ -649,7 +728,7 @@
 				</TCEforms>
 				<type>array</type>
 				<el>
-					<!-- Regroupement des séparateurs concernant les membres  -->
+					<!-- Regroupement des sÃ©parateurs concernant les membres  -->
 					<groupeseparateurmembre>
 						<type>array</type>
 						<el>
@@ -836,7 +915,7 @@
 						</el>
 					</groupeseparateurmembre>
 					
-					<!-- Regroupement des séparateurs concernant les équipes  -->
+					<!-- Regroupement des sÃ©parateurs concernant les Ã©quipes  -->
 					<groupeseparateurequipe>
 						<type>array</type>
 						<el>
@@ -893,7 +972,7 @@
 						</el>
 					</groupeseparateurequipe>
 					
-					<!-- Regroupement des séparateurs concernant les dernières équipes  -->
+					<!-- Regroupement des sÃ©parateurs concernant les derniÃ¨res Ã©quipes  -->
 					<groupeseparateurequipedernier>
 						<type>array</type>
 						<el>
@@ -950,7 +1029,7 @@
 						</el>
 					</groupeseparateurequipedernier>
 					
-					<!-- Regroupement des séparateurs concernant les catégories -->
+					<!-- Regroupement des sÃ©parateurs concernant les catÃ©gories -->
 					<groupeseparateurcategorie>
 						<type>array</type>
 						<el>
@@ -987,7 +1066,7 @@
 						</el>
 					</groupeseparateurcategorie>
 					
-					<!-- Regroupement des séparateurs concernant les dernières catégories -->
+					<!-- Regroupement des sÃ©parateurs concernant les derniÃ¨res catÃ©gories -->
 					<groupeseparateurcategoriedernier>
 						<type>array</type>
 						<el>
@@ -1024,7 +1103,7 @@
 						</el>
 					</groupeseparateurcategoriedernier>
 					
-					<!-- Regroupement des séparateurs concernant les diplomes -->
+					<!-- Regroupement des sÃ©parateurs concernant les diplomes -->
 					<groupeseparateurdiplome>
 						<type>array</type>
 						<el>
@@ -1081,7 +1160,7 @@
 						</el>
 					</groupeseparateurdiplome>
 					
-					<!-- Regroupement des séparateurs concernant les derniers diplomes -->
+					<!-- Regroupement des sÃ©parateurs concernant les derniers diplomes -->
 					<groupeseparateurdiplomedernier>
 						<type>array</type>
 						<el>
@@ -1138,7 +1217,7 @@
 						</el>
 					</groupeseparateurdiplomedernier>
 					
-					<!-- Regroupement des séparateurs concernant les postes -->
+					<!-- Regroupement des sÃ©parateurs concernant les postes -->
 					<groupeseparateurposte>
 						<type>array</type>
 						<el>
@@ -1185,7 +1264,7 @@
 						</el>
 					</groupeseparateurposte>
 					
-					<!-- Regroupement des séparateurs concernant les derniers postes -->
+					<!-- Regroupement des sÃ©parateurs concernant les derniers postes -->
 					<groupeseparateurpostedernier>
 						<type>array</type>
 						<el>
@@ -1232,7 +1311,7 @@
 						</el>
 					</groupeseparateurpostedernier>
 					
-					<!-- Regroupement des séparateurs concernant les fonctions et structures -->
+					<!-- Regroupement des sÃ©parateurs concernant les fonctions et structures -->
 					<groupeseparateurfonctionsstructures>
 						<type>array</type>
 						<el>
@@ -1309,7 +1388,7 @@
 						</el>
 					</groupeseparateurfonctionsstructures>
 					
-					<!-- Regroupement des séparateurs concernant les dernières fonctions et structures -->
+					<!-- Regroupement des sÃ©parateurs concernant les derniÃ¨res fonctions et structures -->
 					<groupeseparateurfonctionsstructuresdernier>
 						<type>array</type>
 						<el>
@@ -1388,7 +1467,7 @@
 				</el>
 			</ROOT>
 		</separateurs>
-		<!-- Onglet requête: permet de définir une requête SQL  -->
+		<!-- Onglet requÃªte: permet de dÃ©finir une requÃªte SQL  -->
 		<request>
 		    <ROOT>
 				<TCEforms>
@@ -1396,7 +1475,7 @@
 				</TCEforms>
 				<type>array</type>
 				<el>
-					<!-- Checkbox permettant d'utiliser une requête personnelle ou non  -->
+					<!-- Checkbox permettant d'utiliser une requÃªte personnelle ou non  -->
 					<requete>
 						<TCEforms>
 							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.requete</label>
@@ -1405,7 +1484,7 @@
 							</config>
 						</TCEforms>
 					</requete>
-					<!-- Zone SELECT de la requête  -->
+					<!-- Zone SELECT de la requÃªte  -->
 					<select>
 						<TCEforms>
 							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.select</label>
@@ -1416,7 +1495,7 @@
 							</config>
 						</TCEforms>
 					</select>
-					<!-- Zone FROM de la requête  -->
+					<!-- Zone FROM de la requÃªte  -->
 					<from_table>
 						<TCEforms>
 							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.from_table</label>
@@ -1427,7 +1506,7 @@
 							</config>
 						</TCEforms>
 					</from_table>
-					<!-- Zone WHERE de la requête  -->
+					<!-- Zone WHERE de la requÃªte  -->
 					<where_clause>
 						<TCEforms>
 							<exclude>1</exclude>
@@ -1439,7 +1518,7 @@
 							</config>
 						</TCEforms>
 					</where_clause>
-					<!-- Zone GROUP BY de la requête  -->
+					<!-- Zone GROUP BY de la requÃªte  -->
 					<groupBy>
 						<TCEforms>
 							<exclude>1</exclude>
@@ -1450,7 +1529,7 @@
 							</config>
 						</TCEforms>
 					</groupBy>
-					<!-- Zone ORDER BY de la requête  -->
+					<!-- Zone ORDER BY de la requÃªte  -->
 					<orderBy>
 						<TCEforms>
 							<exclude>1</exclude>
@@ -1461,7 +1540,7 @@
 							</config>
 						</TCEforms>
 					</orderBy>
-					<!-- Zone LIMIT de la requête  -->
+					<!-- Zone LIMIT de la requÃªte  -->
 					<limit>
 						<TCEforms>
 							<exclude>1</exclude>
@@ -1472,7 +1551,7 @@
 							</config>
 						</TCEforms>
 					</limit>
-					<!-- Zone tryMemcached de la requête  -->
+					<!-- Zone tryMemcached de la requÃªte  -->
 					<tryMemcached>
 						<TCEforms>
 							<exclude>1</exclude>
@@ -1486,7 +1565,7 @@
 				</el>
 			</ROOT>
 		</request>
-		<!-- Onglet Gabarit: permet de choisir le gabarit à utiliser  -->
+		<!-- Onglet Gabarit: permet de choisir le gabarit Ã  utiliser  -->
 		<template>
 			<ROOT>
 				<TCEforms>
@@ -1494,7 +1573,7 @@
 				</TCEforms>
 				<type>array</type>
 				<el>
-					<!-- Sélection du gabarit  -->
+					<!-- SÃ©lection du gabarit  -->
 					<template_file>
 						<TCEforms>
 							<label>LLL:EXT:li_gest_membre_labo/locallang_db.xml:tt_content.pi_flexform.template_file_ref</label>

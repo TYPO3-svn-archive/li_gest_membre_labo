@@ -52,7 +52,7 @@ class tx_ligestmembrelabo_delete extends t3lib_SCbase {
 	var $table;
 	/// Contient l'identifiant de l'enregistrement à supprimer	
 	var $uid;
-	/// Contient le nom de la table d'où provient la suppession	
+	/// Contient le nom de la table d'où provient la suppression	
 	var $table_principale;
 	/// Contient l'identifiant de l'enregistrement de la table d'où provient la suppression	
 	var $uid_table_principale;

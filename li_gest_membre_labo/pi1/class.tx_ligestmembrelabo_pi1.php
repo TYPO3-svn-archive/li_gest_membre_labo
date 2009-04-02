@@ -2129,6 +2129,176 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						}
 					}
 
+					
+					
+					
+					
+					if($fonctionsstructures_row['Type']=='C'){ //Composante
+						$markerArray_FonctionsStructures['###Structures_Type###']=$this->lConf['composante'];
+
+						if($this->lConf['composante']<>''){
+							$markerArray_FonctionsStructures['###Structures_Type_Separateur###'] = $this->lConf['separateurStructuresType'];
+						}
+						else{
+							$markerArray_FonctionsStructures['###Structures_Type_Separateur###'] = '';
+						}
+						
+						if($premier_enregistrement==true){
+							$markerArray_FonctionsStructures_dernier['###Structures_Type_Dernier###'] = $this->lConf['composante'];
+							if($this->lConf['composante']<>''){
+								$markerArray_FonctionsStructures_dernier['###Structures_Type_Dernier_Separateur###'] = $this->lConf['separateurStructuresTypedernier'];
+							}
+							else{
+								$markerArray_FonctionsStructures_dernier['###Structures_Type_Dernier_Separateur###'] = '';
+							}
+						}
+					}
+					else if($fonctionsstructures_row['Type']=='N'){ //Entreprise
+						$markerArray_FonctionsStructures['###Structures_Type###']=$this->lConf['entreprise'];
+
+						if($this->lConf['entreprise']<>''){
+							$markerArray_FonctionsStructures['###Structures_Type_Separateur###'] = $this->lConf['separateurStructuresType'];
+						}
+						else{
+							$markerArray_FonctionsStructures['###Structures_Type_Separateur###'] = '';
+						}
+						
+						if($premier_enregistrement==true){
+							$markerArray_FonctionsStructures_dernier['###Structures_Type_Dernier###'] = $this->lConf['entreprise'];
+							if($this->lConf['entreprise']<>''){
+								$markerArray_FonctionsStructures_dernier['###Structures_Type_Dernier_Separateur###'] = $this->lConf['separateurStructuresTypedernier'];
+							}
+							else{
+								$markerArray_FonctionsStructures_dernier['###Structures_Type_Dernier_Separateur###'] = '';
+							}
+						}
+					}
+					else if($fonctionsstructures_row['Type']=='T'){ //Etablissement
+						$markerArray_FonctionsStructures['###Structures_Type###']=$this->lConf['etablissement'];
+
+						if($this->lConf['etablissement']<>''){
+							$markerArray_FonctionsStructures['###Structures_Type_Separateur###'] = $this->lConf['separateurStructuresType'];
+						}
+						else{
+							$markerArray_FonctionsStructures['###Structures_Type_Separateur###'] = '';
+						}
+						
+						if($premier_enregistrement==true){
+							$markerArray_FonctionsStructures_dernier['###Structures_Type_Dernier###'] = $this->lConf['etablissement'];
+							if($this->lConf['etablissement']<>''){
+								$markerArray_FonctionsStructures_dernier['###Structures_Type_Dernier_Separateur###'] = $this->lConf['separateurStructuresTypedernier'];
+							}
+							else{
+								$markerArray_FonctionsStructures_dernier['###Structures_Type_Dernier_Separateur###'] = '';
+							}
+						}
+					}
+					else if($fonctionsstructures_row['Type']=='I'){ //Institution
+						$markerArray_FonctionsStructures['###Structures_Type###']=$this->lConf['institution'];
+
+						if($this->lConf['institution']<>''){
+							$markerArray_FonctionsStructures['###Structures_Type_Separateur###'] = $this->lConf['separateurStructuresType'];
+						}
+						else{
+							$markerArray_FonctionsStructures['###Structures_Type_Separateur###'] = '';
+						}
+						
+						if($premier_enregistrement==true){
+							$markerArray_FonctionsStructures_dernier['###Structures_Type_Dernier###'] = $this->lConf['institution'];
+							if($this->lConf['institution']<>''){
+								$markerArray_FonctionsStructures_dernier['###Structures_Type_Dernier_Separateur###'] = $this->lConf['separateurStructuresTypedernier'];
+							}
+							else{
+								$markerArray_FonctionsStructures_dernier['###Structures_Type_Dernier_Separateur###'] = '';
+							}
+						}
+					}
+					else if($fonctionsstructures_row['Type']=='R'){ //Laboratoire Privé
+						$markerArray_FonctionsStructures['###Structures_Type###']=$this->lConf['laboratoirePrive'];
+
+						if($this->lConf['laboratoirePrive']<>''){
+							$markerArray_FonctionsStructures['###Structures_Type_Separateur###'] = $this->lConf['separateurStructuresType'];
+						}
+						else{
+							$markerArray_FonctionsStructures['###Structures_Type_Separateur###'] = '';
+						}
+						
+						if($premier_enregistrement==true){
+							$markerArray_FonctionsStructures_dernier['###Structures_Type_Dernier###'] = $this->lConf['laboratoirePrive'];
+							if($this->lConf['laboratoirePrive']<>''){
+								$markerArray_FonctionsStructures_dernier['###Structures_Type_Dernier_Separateur###'] = $this->lConf['separateurStructuresTypedernier'];
+							}
+							else{
+								$markerArray_FonctionsStructures_dernier['###Structures_Type_Dernier_Separateur###'] = '';
+							}
+						}
+					}
+					else if($fonctionsstructures_row['Type']=='U'){ //Laboratoire Publique
+						$markerArray_FonctionsStructures['###Structures_Type###']=$this->lConf['laboratoirePublic'];
+
+						if($this->lConf['laboratoirePublic']<>''){
+							$markerArray_FonctionsStructures['###Structures_Type_Separateur###'] = $this->lConf['separateurStructuresType'];
+						}
+						else{
+							$markerArray_FonctionsStructures['###Structures_Type_Separateur###'] = '';
+						}
+						
+						if($premier_enregistrement==true){
+							$markerArray_FonctionsStructures_dernier['###Structures_Type_Dernier###'] = $this->lConf['laboratoirePublic'];
+							if($this->lConf['laboratoirePublic']<>''){
+								$markerArray_FonctionsStructures_dernier['###Structures_Type_Dernier_Separateur###'] = $this->lConf['separateurStructuresTypedernier'];
+							}
+							else{
+								$markerArray_FonctionsStructures_dernier['###Structures_Type_Dernier_Separateur###'] = '';
+							}
+						}
+					}
+					else{ // Site: S
+						$markerArray_FonctionsStructures['###Structures_Type###']=$this->lConf['site'];
+
+						if($this->lConf['site']<>''){
+							$markerArray_FonctionsStructures['###Structures_Type_Separateur###'] = $this->lConf['separateurStructuresType'];
+						}
+						else{
+							$markerArray_FonctionsStructures['###Structures_Type_Separateur###'] = '';
+						}
+						
+						if($premier_enregistrement==true){
+							$markerArray_FonctionsStructures_dernier['###Structures_Type_Dernier###'] = $this->lConf['site'];
+							if($this->lConf['site']<>''){
+								$markerArray_FonctionsStructures_dernier['###Structures_Type_Dernier_Separateur###'] = $this->lConf['separateurStructuresTypedernier'];
+							}
+							else{
+								$markerArray_FonctionsStructures_dernier['###Structures_Type_Dernier_Separateur###'] = '';
+							}
+						}
+					}
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
 					if($fonctionsstructures_row['DateDebut']=='0000-00-00'){
 						$markerArray_FonctionsStructures['###FonctionsStructures_DateDebut###'] = $this->lConf['fonctionstructuredatedebut'];
 						

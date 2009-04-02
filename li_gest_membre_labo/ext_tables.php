@@ -109,9 +109,9 @@ $TCA["tx_ligestmembrelabo_Structure"] = array (
 // Paramétrage de l'affichage de listes d'enregistrement de la table tx_ligestmembrelabo_Exerce dans le backend.
 
 // allow Exerce records on normal pages
-t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_Exerce');
+//t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_Exerce');
 // add the Exerce record to the insert records content element
-t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_Exerce');
+//t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_Exerce');
 
 $TCA["tx_ligestmembrelabo_Exerce"] = array (
 	"ctrl" => array (
@@ -215,9 +215,9 @@ $TCA["tx_ligestmembrelabo_TypePoste"] = array (
 // Paramétrage de l'affichage de listes d'enregistrement de la table tx_ligestmembrelabo_Possede dans le backend.
 
 // allow Possede records on normal pages
-t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_Possede');
+//t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_Possede');
 // add the Possede record to the insert records content element
-t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_Possede');
+//t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_Possede');
 
 $TCA["tx_ligestmembrelabo_Possede"] = array (
 	"ctrl" => array (
@@ -283,9 +283,9 @@ $TCA["tx_ligestmembrelabo_Categorie"] = array (
 // Paramétrage de l'affichage de listes d'enregistrement de la table tx_ligestmembrelabo_CategorieMembre dans le backend.
 
 // allow CategorieMembre records on normal pages
-t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_CategorieMembre');
+//t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_CategorieMembre');
 // add the CategorieMembre record to the insert records content element
-t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_CategorieMembre');
+//t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_CategorieMembre');
 
 $TCA["tx_ligestmembrelabo_CategorieMembre"] = array (
 	"ctrl" => array (
@@ -350,9 +350,9 @@ $TCA["tx_ligestmembrelabo_Equipe"] = array (
 // Paramétrage de l'affichage de listes d'enregistrement de la table tx_ligestmembrelabo_EstMembreDe dans le backend.
 
 // allow EstMembreDe records on normal pages
-t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_EstMembreDe');
+//t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_EstMembreDe');
 // add the EstMembreDe record to the insert records content element
-t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_EstMembreDe');
+//t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_EstMembreDe');
 
 $TCA["tx_ligestmembrelabo_EstMembreDe"] = array (
 	"ctrl" => array (
@@ -416,9 +416,9 @@ $TCA["tx_ligestmembrelabo_TypeDiplome"] = array (
 // Paramétrage de l'affichage de listes d'enregistrement de la table tx_ligestmembrelabo_AObtenu dans le backend.
 
 // allow AObtenu records on normal pages
-t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_AObtenu');
+//t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_AObtenu');
 // add the AObtenu record to the insert records content element
-t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_AObtenu');
+//t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_AObtenu');
 
 $TCA["tx_ligestmembrelabo_AObtenu"] = array (
 	"ctrl" => array (
@@ -445,9 +445,9 @@ $TCA["tx_ligestmembrelabo_AObtenu"] = array (
 // Paramétrage de l'affichage de listes d'enregistrement de la table tx_ligestmembrelabo_PEDR dans le backend.
 
 // allow PEDR records on normal pages
-t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_PEDR');
+//t3lib_extMgm::allowTableOnStandardPages('tx_ligestmembrelabo_PEDR');
 // add the PEDR record to the insert records content element
-t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_PEDR');
+//t3lib_extMgm::addToInsertRecords('tx_ligestmembrelabo_PEDR');
 
 $TCA["tx_ligestmembrelabo_PEDR"] = array (
 	"ctrl" => array (
