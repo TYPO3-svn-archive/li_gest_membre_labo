@@ -183,6 +183,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 	 * Choix de l'équipe
 	 * Cette fonction permet de créer une contrainte concernant le type de poste
 	 * @param $equipe Chaîne de caractères contenant les identifiants des équipes(uid) séparés par des virgules
+	 * @param $typeDate Chaîne de caractère contenant le type de date: Actuels, Anciens ou Tous
 	 * @return Une chaîne de caratères contenant une contrainte à rajouter à une requête
 	 */
 	private function equipe($uid_equipes,$typeDate)
@@ -642,8 +643,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 		if(($this->lConf['requete'])<>true){
 
 
-			// Récupération de tous les membres de l'équipe demandée ayant les postes sélectionnés
-			$code = ''; // Variable contenant le code à afficher
+			// Récupération de tous les membres à afficher
 
 			// Construction de la requête
 			$select = 'DISTINCT tx_ligestmembrelabo_MembreDuLabo.uid AS uidmembre, tx_ligestmembrelabo_MembreDuLabo.*';
@@ -1375,7 +1375,7 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 						else{
 							$markerArray_Equipe['###EstMembreDe_DateDebut_Separateur###'] = '';
 						}
-	
+
 						if($premier_enregistrement==true){
 
 							$date_explosee = explode("-", $equipe_row['DateDebut']);
