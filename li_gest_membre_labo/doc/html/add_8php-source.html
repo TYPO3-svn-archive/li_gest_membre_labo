@@ -94,95 +94,172 @@
 <a name="l00101"></a>00101                         $table_enregistrement = $this-&gt;P['params']['table']; <span class="comment">// Table où sera créé l'enregistrement</span>
 <a name="l00102"></a>00102                         $champ_enregistrement = $this-&gt;P['params']['champ']; <span class="comment">// Champ que l'on veut préremplir</span>
 <a name="l00103"></a>00103                         
-<a name="l00104"></a>00104                         <span class="comment">// On créé l'enregisterment avec notre utilisateur courant</span>
-<a name="l00105"></a>00105                         $tstamp = time();
-<a name="l00106"></a>00106                         
-<a name="l00107"></a>00107                         $insertFields = array(
-<a name="l00108"></a>00108                                 'pid' =&gt; $this-&gt;P['pid'],
-<a name="l00109"></a>00109                                 'tstamp' =&gt; $tstamp,
-<a name="l00110"></a>00110                                 'crdate' =&gt; $tstamp,
-<a name="l00111"></a>00111                                 $champ_enregistrement =&gt; $this-&gt;P['uid']
-<a name="l00112"></a>00112                         );
-<a name="l00113"></a>00113                         
-<a name="l00114"></a>00114                         
-<a name="l00115"></a>00115 
-<a name="l00116"></a>00116                         $res = $GLOBALS['TYPO3_DB']-&gt;exec_INSERTquery($table_enregistrement, $insertFields);
-<a name="l00117"></a>00117 
-<a name="l00118"></a>00118                         <span class="comment">// On recherche l'enregistrement que l'on vient de créer</span>
-<a name="l00119"></a>00119                         
-<a name="l00120"></a>00120                         $select_fields = <span class="charliteral">'*'</span>;
-<a name="l00121"></a>00121                         $from_table = $table_enregistrement;
-<a name="l00122"></a>00122                         $where_clause = '';
-<a name="l00123"></a>00123                         $groupBy = '';
-<a name="l00124"></a>00124                         $orderBy = 'crdate DESC';
-<a name="l00125"></a>00125                         $limit = '';
-<a name="l00126"></a>00126                         $tryMemcached = '';
-<a name="l00127"></a>00127                         
-<a name="l00128"></a>00128                         
-<a name="l00129"></a>00129                         $res = $GLOBALS['TYPO3_DB']-&gt;exec_SELECTquery($select_fields, $from_table, $where_clause, $groupBy, $orderBy, $tryMemcached);
-<a name="l00130"></a>00130 
-<a name="l00131"></a>00131                         $row = $GLOBALS['TYPO3_DB']-&gt;sql_fetch_assoc($res);
-<a name="l00132"></a>00132                         
-<a name="l00133"></a>00133                         <span class="comment">// Enregistrement à éditer</span>
-<a name="l00134"></a>00134                         $uid = 0;
-<a name="l00135"></a>00135                         $uid = intval($row['uid']);
-<a name="l00136"></a>00136 
-<a name="l00137"></a>00137 
-<a name="l00138"></a>00138                         <span class="keywordflow">if</span> (is_array($config) &amp;&amp; $config['type']=='select' &amp;&amp; !$config['MM'] &amp;&amp; $config['maxitems']&lt;=1 &amp;&amp; $fTable)      {       <span class="comment">// SINGLE value:</span>
-<a name="l00139"></a>00139                                 header('Location: '.t3lib_div::locationHeaderUrl(<a class="code" href="add_8php.html#13fae3ad77636d5310aae40cf7394743">$BACK_PATH</a>.'alt_doc.php?returnUrl='.rawurlencode('wizard_edit.php?doClose=1').'&amp;edit['.$fTable.']['.$uid.']=edit'));
-<a name="l00140"></a>00140 
-<a name="l00141"></a>00141                         
-<a name="l00142"></a>00142                         } elseif (is_array($config) &amp;&amp; $this-&gt;P['currentSelectedValues'] &amp;&amp; (($config['type']=='select' &amp;&amp; $config['foreign_table']) || ($config['type']=='group' &amp;&amp; $config['internal_type']=='db')))  {       <span class="comment">// MULTIPLE VALUES:</span>
-<a name="l00143"></a>00143 
-<a name="l00144"></a>00144                                         <span class="comment">// Init settings:</span>
-<a name="l00145"></a>00145                                 $allowedTables = $config['type']=='group' ? $config['allowed'] : $config['foreign_table'].<span class="charliteral">','</span>.$config['neg_foreign_table'];
-<a name="l00146"></a>00146                                 $prependName=1;
-<a name="l00147"></a>00147                                 $params='';
-<a name="l00148"></a>00148 
-<a name="l00149"></a>00149                                         <span class="comment">// Selecting selected values into an array:</span>
-<a name="l00150"></a>00150                                 $dbAnalysis = t3lib_div::makeInstance('t3lib_loadDBGroup');
-<a name="l00151"></a>00151                                 $dbAnalysis-&gt;start($this-&gt;P['currentSelectedValues'],$allowedTables);
-<a name="l00152"></a>00152                                 $value = $dbAnalysis-&gt;getValueArray($prependName);
-<a name="l00153"></a>00153 
-<a name="l00154"></a>00154                                         <span class="comment">// Traverse that array and make parameters for alt_doc.php:</span>
-<a name="l00155"></a>00155                                 <span class="keywordflow">foreach</span>($value as $rec) {
-<a name="l00156"></a>00156                                         $recTableUidParts = t3lib_div::revExplode(<span class="charliteral">'_'</span>,$rec,2);
-<a name="l00157"></a>00157                                         $params.='&amp;edit['.$recTableUidParts[0].']['.$recTableUidParts[1].']=edit';
-<a name="l00158"></a>00158                                 }
+<a name="l00104"></a>00104                         
+<a name="l00105"></a>00105                         
+<a name="l00106"></a>00106                         <span class="comment">// on vérifie s'il y a bien au moins un enregistrement dans la table que l'on veut lier...</span>
+<a name="l00107"></a>00107 
+<a name="l00108"></a>00108                         $tables_a_tester = Array();
+<a name="l00109"></a>00109                         $tables_a_tester = $this-&gt;P['params']['lien'];
+<a name="l00110"></a>00110                         
+<a name="l00111"></a>00111                         $enregistrement_possible = <span class="keyword">false</span>;
+<a name="l00112"></a>00112                         <span class="keywordflow">if</span> ($tables_a_tester == Array()){
+<a name="l00113"></a>00113                                 $enregistrement_possible = <span class="keyword">true</span>;
+<a name="l00114"></a>00114                         }
+<a name="l00115"></a>00115                         $message_erreur = '';
+<a name="l00116"></a>00116                         $nb_tables = 0;
+<a name="l00117"></a>00117                         $nb_tables_remplies = 0;
+<a name="l00118"></a>00118                         
+<a name="l00119"></a>00119                         <span class="keywordflow">if</span>($enregistrement_possible &lt;&gt; <span class="keyword">true</span>)
+<a name="l00120"></a>00120                         {
+<a name="l00121"></a>00121                                 $premier = <span class="keyword">true</span>;
+<a name="l00122"></a>00122                                 <span class="keywordflow">foreach</span> ($tables_a_tester as $table_courante)
+<a name="l00123"></a>00123                                 {
+<a name="l00124"></a>00124                                         <span class="keywordflow">if</span>($premier == <span class="keyword">true</span>)
+<a name="l00125"></a>00125                                         {
+<a name="l00126"></a>00126                                                 $message_erreur = $table_courante;
+<a name="l00127"></a>00127                                                 $premier = <span class="keyword">false</span>;
+<a name="l00128"></a>00128                                         }
+<a name="l00129"></a>00129                                         <span class="keywordflow">else</span>
+<a name="l00130"></a>00130                                         {
+<a name="l00131"></a>00131                                                 $message_erreur = $message_erreur.' AND/OR '.$table_courante;
+<a name="l00132"></a>00132                                         }
+<a name="l00133"></a>00133                                 
+<a name="l00134"></a>00134                                         $select_fields_existance_enregistrement = <span class="charliteral">'*'</span>;
+<a name="l00135"></a>00135                                         $from_table_existance_enregistrement = $table_courante;
+<a name="l00136"></a>00136                                         $where_clause_existance_enregistrement = 'deleted&lt;&gt;1';
+<a name="l00137"></a>00137                                         $groupBy_existance_enregistrement = '';
+<a name="l00138"></a>00138                                         $orderBy_existance_enregistrement = '';
+<a name="l00139"></a>00139                                         $limit_existance_enregistrement = '';
+<a name="l00140"></a>00140                                         $tryMemcached_existance_enregistrement = '';
+<a name="l00141"></a>00141 
+<a name="l00142"></a>00142                                         $res_existance_enregistrement = $GLOBALS['TYPO3_DB']-&gt;exec_SELECTquery($select_fields_existance_enregistrement, $from_table_existance_enregistrement, $where_clause_existance_enregistrement, $groupBy_existance_enregistrement, $orderBy_existance_enregistrement, $tryMemcached_existance_enregistrement);
+<a name="l00143"></a>00143                                         
+<a name="l00144"></a>00144                                         <span class="keywordflow">if</span>($row_existance_enregistrement = $GLOBALS['TYPO3_DB']-&gt;sql_fetch_assoc($res_existance_enregistrement))
+<a name="l00145"></a>00145                                         {
+<a name="l00146"></a>00146                                                 $nb_tables_remplies++;
+<a name="l00147"></a>00147                                         }
+<a name="l00148"></a>00148                                         $nb_tables++;
+<a name="l00149"></a>00149 
+<a name="l00150"></a>00150                                 }
+<a name="l00151"></a>00151 
+<a name="l00152"></a>00152                                 <span class="keywordflow">if</span> ($nb_tables_remplies == $nb_tables){
+<a name="l00153"></a>00153                                         $enregistrement_possible = <span class="keyword">true</span>;
+<a name="l00154"></a>00154                                 }
+<a name="l00155"></a>00155                                 
+<a name="l00156"></a>00156 
+<a name="l00157"></a>00157                         }
+<a name="l00158"></a>00158 
 <a name="l00159"></a>00159 
-<a name="l00160"></a>00160                                         <span class="comment">// Redirect to alt_doc.php:</span>
-<a name="l00161"></a>00161                                 header('Location: '.t3lib_div::locationHeaderUrl(<a class="code" href="add_8php.html#13fae3ad77636d5310aae40cf7394743">$BACK_PATH</a>.'alt_doc.php?returnUrl='.rawurlencode('wizard_edit.php?doClose=1').$params));
-<a name="l00162"></a>00162                         
-<a name="l00163"></a>00163                         } <span class="keywordflow">else</span> {
-<a name="l00164"></a>00164                                 $this-&gt;<a class="code" href="classtx__ligestmembrelabo__add.html#993691c5a1a92de716236b22dbf9c0ea">closeWindow</a>();
-<a name="l00165"></a>00165                         }
-<a name="l00166"></a>00166                 }
-<a name="l00167"></a>00167         }
-<a name="l00168"></a>00168 
-<a name="l00174"></a><a class="code" href="classtx__ligestmembrelabo__add.html#993691c5a1a92de716236b22dbf9c0ea">00174</a>         function <a class="code" href="classtx__ligestmembrelabo__add.html#993691c5a1a92de716236b22dbf9c0ea">closeWindow</a>()  {
-<a name="l00175"></a>00175                 echo '&lt;script language=<span class="stringliteral">"javascript"</span> type=<span class="stringliteral">"text/javascript"</span>&gt;close();&lt;/script&gt;';
-<a name="l00176"></a>00176                 exit;
-<a name="l00177"></a>00177         }
-<a name="l00178"></a>00178 }
-<a name="l00179"></a>00179 
-<a name="l00180"></a>00180 <span class="comment">// Include extension?</span>
-<a name="l00181"></a>00181 <span class="keywordflow">if</span> (defined('TYPO3_MODE') &amp;&amp; <a class="code" href="ext__tables_8php.html#b848e28d54ae068226d017e5bc72f83d">$TYPO3_CONF_VARS</a>[TYPO3_MODE]['XCLASS']['ext/li_gest_membre_labo/wizard/<span class="keyword">add</span>.php'])  {
-<a name="l00182"></a>00182         include_once(<a class="code" href="ext__tables_8php.html#b848e28d54ae068226d017e5bc72f83d">$TYPO3_CONF_VARS</a>[TYPO3_MODE]['XCLASS']['ext/li_gest_membre_labo/wizard/<span class="keyword">add</span>.php']);
-<a name="l00183"></a>00183 }
-<a name="l00184"></a>00184 
-<a name="l00185"></a>00185 
-<a name="l00186"></a>00186 
-<a name="l00187"></a>00187 
-<a name="l00188"></a>00188 
-<a name="l00189"></a>00189 
-<a name="l00190"></a>00190 <span class="comment">// Make instance:</span>
-<a name="l00191"></a>00191 
-<a name="l00192"></a><a class="code" href="add_8php.html#699082124e262e94eb5f67a8e78070a4">00192</a> <a class="code" href="add_8php.html#699082124e262e94eb5f67a8e78070a4">$SOBE</a> = t3lib_div::makeInstance('<a class="code" href="classtx__ligestmembrelabo__add.html">tx_ligestmembrelabo_add</a>');
-<a name="l00193"></a>00193 
-<a name="l00194"></a>00194 <a class="code" href="add_8php.html#699082124e262e94eb5f67a8e78070a4">$SOBE</a>-&gt;init();
-<a name="l00195"></a>00195 <a class="code" href="add_8php.html#699082124e262e94eb5f67a8e78070a4">$SOBE</a>-&gt;main();
-<a name="l00196"></a>00196 ?&gt;
-</pre></div><hr size="1"><address style="text-align: right;"><small>Generated on Wed Mar 25 15:24:06 2009 for Gestion de membres by&nbsp;
+<a name="l00160"></a>00160                         <span class="keywordflow">if</span>($enregistrement_possible &lt;&gt; <span class="keyword">true</span>)
+<a name="l00161"></a>00161                         {
+<a name="l00162"></a>00162                                 <span class="keywordflow">if</span> ($nb_tables ==1){
+<a name="l00163"></a>00163                                         echo '&lt;SCRIPT language=<span class="stringliteral">"Javascript"</span>&gt;
+<a name="l00164"></a>00164                                                 &lt;!--
+<a name="l00165"></a>00165                                                 alert(<span class="stringliteral">"'.$message_erreur.' is empty!"</span>);
+<a name="l00166"></a>00166                                                 <span class="comment">// --&gt;</span>
+<a name="l00167"></a>00167                                                 &lt;/SCRIPT&gt;';
+<a name="l00168"></a>00168                                 }
+<a name="l00169"></a>00169                                 <span class="keywordflow">else</span> <span class="keywordflow">if</span> ($nb_tables &gt;1){
+<a name="l00170"></a>00170                                         echo '&lt;SCRIPT language=<span class="stringliteral">"Javascript"</span>&gt;
+<a name="l00171"></a>00171                                                 &lt;!--
+<a name="l00172"></a>00172                                                 alert(<span class="stringliteral">"'.$message_erreur.' are empty!"</span>);
+<a name="l00173"></a>00173                                                 <span class="comment">// --&gt;</span>
+<a name="l00174"></a>00174                                                 &lt;/SCRIPT&gt;';
+<a name="l00175"></a>00175                                 }
+<a name="l00176"></a>00176 
+<a name="l00177"></a>00177 
+<a name="l00178"></a>00178                                 $this-&gt;<a class="code" href="classtx__ligestmembrelabo__add.html#993691c5a1a92de716236b22dbf9c0ea">closeWindow</a>();
+<a name="l00179"></a>00179                         }
+<a name="l00180"></a>00180 
+<a name="l00181"></a>00181                         
+<a name="l00182"></a>00182                         
+<a name="l00183"></a>00183 
+<a name="l00184"></a>00184                         <span class="comment">// On créé l'enregisterment avec notre utilisateur courant</span>
+<a name="l00185"></a>00185                         $tstamp = time();
+<a name="l00186"></a>00186                         
+<a name="l00187"></a>00187                         $insertFields = array(
+<a name="l00188"></a>00188                                 'pid' =&gt; $this-&gt;P['pid'],
+<a name="l00189"></a>00189                                 'tstamp' =&gt; $tstamp,
+<a name="l00190"></a>00190                                 'crdate' =&gt; $tstamp,
+<a name="l00191"></a>00191                                 $champ_enregistrement =&gt; $this-&gt;P['uid']
+<a name="l00192"></a>00192                         );
+<a name="l00193"></a>00193                         
+<a name="l00194"></a>00194                         
+<a name="l00195"></a>00195 
+<a name="l00196"></a>00196                         $res = $GLOBALS['TYPO3_DB']-&gt;exec_INSERTquery($table_enregistrement, $insertFields);
+<a name="l00197"></a>00197 
+<a name="l00198"></a>00198                         <span class="comment">// On recherche l'enregistrement que l'on vient de créer</span>
+<a name="l00199"></a>00199                         
+<a name="l00200"></a>00200                         $select_fields = <span class="charliteral">'*'</span>;
+<a name="l00201"></a>00201                         $from_table = $table_enregistrement;
+<a name="l00202"></a>00202                         $where_clause = '';
+<a name="l00203"></a>00203                         $groupBy = '';
+<a name="l00204"></a>00204                         $orderBy = 'crdate DESC';
+<a name="l00205"></a>00205                         $limit = '';
+<a name="l00206"></a>00206                         $tryMemcached = '';
+<a name="l00207"></a>00207                         
+<a name="l00208"></a>00208                         
+<a name="l00209"></a>00209                         $res = $GLOBALS['TYPO3_DB']-&gt;exec_SELECTquery($select_fields, $from_table, $where_clause, $groupBy, $orderBy, $tryMemcached);
+<a name="l00210"></a>00210 
+<a name="l00211"></a>00211                         $row = $GLOBALS['TYPO3_DB']-&gt;sql_fetch_assoc($res);
+<a name="l00212"></a>00212 
+<a name="l00213"></a>00213                         <span class="comment">// Enregistrement à éditer</span>
+<a name="l00214"></a>00214                         $uid = 0;
+<a name="l00215"></a>00215                         $uid = intval($row['uid']);
+<a name="l00216"></a>00216 
+<a name="l00217"></a>00217                         <span class="keywordflow">if</span> (is_array($config) &amp;&amp; $config['type']=='select' &amp;&amp; !$config['MM'] &amp;&amp; $config['maxitems']&lt;=1 &amp;&amp; $fTable &amp;&amp; $enregistrement_possible == <span class="keyword">true</span>)  {       <span class="comment">// SINGLE value:</span>
+<a name="l00218"></a>00218                                 header('Location: '.t3lib_div::locationHeaderUrl(<a class="code" href="add_8php.html#13fae3ad77636d5310aae40cf7394743">$BACK_PATH</a>.'alt_doc.php?returnUrl='.rawurlencode('wizard_edit.php?doClose=1').'&amp;edit['.$fTable.']['.$uid.']=edit'));
+<a name="l00219"></a>00219                         
+<a name="l00220"></a>00220                         } elseif (is_array($config) &amp;&amp; $this-&gt;P['currentSelectedValues'] &amp;&amp; (($config['type']=='select' &amp;&amp; $config['foreign_table']) || ($config['type']=='group' &amp;&amp; $config['internal_type']=='db')) &amp;&amp; $enregistrement_possible == <span class="keyword">true</span>)      {       <span class="comment">// MULTIPLE VALUES:</span>
+<a name="l00221"></a>00221 
+<a name="l00222"></a>00222                                         <span class="comment">// Init settings:</span>
+<a name="l00223"></a>00223                                 $allowedTables = $config['type']=='group' ? $config['allowed'] : $config['foreign_table'].<span class="charliteral">','</span>.$config['neg_foreign_table'];
+<a name="l00224"></a>00224                                 $prependName=1;
+<a name="l00225"></a>00225                                 $params='';
+<a name="l00226"></a>00226 
+<a name="l00227"></a>00227                                         <span class="comment">// Selecting selected values into an array:</span>
+<a name="l00228"></a>00228                                 $dbAnalysis = t3lib_div::makeInstance('t3lib_loadDBGroup');
+<a name="l00229"></a>00229                                 $dbAnalysis-&gt;start($this-&gt;P['currentSelectedValues'],$allowedTables);
+<a name="l00230"></a>00230                                 $value = $dbAnalysis-&gt;getValueArray($prependName);
+<a name="l00231"></a>00231 
+<a name="l00232"></a>00232                                         <span class="comment">// Traverse that array and make parameters for alt_doc.php:</span>
+<a name="l00233"></a>00233                                 <span class="keywordflow">foreach</span>($value as $rec) {
+<a name="l00234"></a>00234                                         $recTableUidParts = t3lib_div::revExplode(<span class="charliteral">'_'</span>,$rec,2);
+<a name="l00235"></a>00235                                         $params.='&amp;edit['.$recTableUidParts[0].']['.$recTableUidParts[1].']=edit';
+<a name="l00236"></a>00236                                 }
+<a name="l00237"></a>00237                                         <span class="comment">// Redirect to alt_doc.php:</span>
+<a name="l00238"></a>00238                                 header('Location: '.t3lib_div::locationHeaderUrl(<a class="code" href="add_8php.html#13fae3ad77636d5310aae40cf7394743">$BACK_PATH</a>.'alt_doc.php?returnUrl='.rawurlencode('wizard_edit.php?doClose=1').$params));
+<a name="l00239"></a>00239                         
+<a name="l00240"></a>00240                         } <span class="keywordflow">else</span> {
+<a name="l00241"></a>00241                                 $this-&gt;<a class="code" href="classtx__ligestmembrelabo__add.html#993691c5a1a92de716236b22dbf9c0ea">closeWindow</a>();
+<a name="l00242"></a>00242                         }
+<a name="l00243"></a>00243                 }
+<a name="l00244"></a>00244         }
+<a name="l00245"></a>00245 
+<a name="l00251"></a><a class="code" href="classtx__ligestmembrelabo__add.html#993691c5a1a92de716236b22dbf9c0ea">00251</a>         function <a class="code" href="classtx__ligestmembrelabo__add.html#993691c5a1a92de716236b22dbf9c0ea">closeWindow</a>()  {
+<a name="l00252"></a>00252                 echo '&lt;script language=<span class="stringliteral">"javascript"</span> type=<span class="stringliteral">"text/javascript"</span>&gt;close();&lt;/script&gt;';
+<a name="l00253"></a>00253                 exit;
+<a name="l00254"></a>00254         }
+<a name="l00255"></a>00255 }
+<a name="l00256"></a>00256 
+<a name="l00257"></a>00257 <span class="comment">// Include extension?</span>
+<a name="l00258"></a>00258 <span class="keywordflow">if</span> (defined('TYPO3_MODE') &amp;&amp; <a class="code" href="ext__tables_8php.html#b848e28d54ae068226d017e5bc72f83d">$TYPO3_CONF_VARS</a>[TYPO3_MODE]['XCLASS']['ext/li_gest_membre_labo/wizard/<span class="keyword">add</span>.php'])  {
+<a name="l00259"></a>00259         include_once(<a class="code" href="ext__tables_8php.html#b848e28d54ae068226d017e5bc72f83d">$TYPO3_CONF_VARS</a>[TYPO3_MODE]['XCLASS']['ext/li_gest_membre_labo/wizard/<span class="keyword">add</span>.php']);
+<a name="l00260"></a>00260 }
+<a name="l00261"></a>00261 
+<a name="l00262"></a>00262 
+<a name="l00263"></a>00263 
+<a name="l00264"></a>00264 
+<a name="l00265"></a>00265 
+<a name="l00266"></a>00266 
+<a name="l00267"></a>00267 <span class="comment">// Make instance:</span>
+<a name="l00268"></a>00268 
+<a name="l00269"></a><a class="code" href="add_8php.html#699082124e262e94eb5f67a8e78070a4">00269</a> <a class="code" href="add_8php.html#699082124e262e94eb5f67a8e78070a4">$SOBE</a> = t3lib_div::makeInstance('<a class="code" href="classtx__ligestmembrelabo__add.html">tx_ligestmembrelabo_add</a>');
+<a name="l00270"></a>00270 
+<a name="l00271"></a>00271 <a class="code" href="add_8php.html#699082124e262e94eb5f67a8e78070a4">$SOBE</a>-&gt;init();
+<a name="l00272"></a>00272 <a class="code" href="add_8php.html#699082124e262e94eb5f67a8e78070a4">$SOBE</a>-&gt;main();
+<a name="l00273"></a>00273 ?&gt;
+</pre></div><hr size="1"><address style="text-align: right;"><small>Generated on Wed Apr 8 09:44:41 2009 for Gestion de membres by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.3 </small></address>
 </body>
