@@ -53,7 +53,7 @@ class tx_ligestmembrelabo_dateValide {
 	function returnFieldJS() {
 
 			return "var modif = value;
-				if (modif!='0000-00-00')
+				if (modif!='0000-00-00' && modif!='')
 				{
 					var verif = /^[0-9]{4}[-]{1}[0-9]{2}[-]{1}[0-9]{2}$/;
 					var verifMois = modif.substr(5,2);

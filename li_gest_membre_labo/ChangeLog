@@ -1,4 +1,8 @@
-﻿2009-03-31 Bruno Gallet  <gallet.bruno@gmail.com>
+﻿2009-04-25 Bruno Gallet  <gallet.bruno@gmail.com>
+
+	* Correction d'une erreur dans la fonction rechercherUidLangue de la classe tx_ligestmembrelabo_pi1
+
+2009-03-31 Bruno Gallet  <gallet.bruno@gmail.com>
 
 	* Ajout d'une boîte de sélection dans le formulaire pour le champ "type" de la table structure et modification des options du plugin pour pouvoir modifier l'affichage de ce champ sur le site.
 
