@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<description>CSH for table tx_ligestmembrelabo_MembreDuLabo</description>
+		<type>CSH</type>
+		<csh_table>tx_ligestmembrelabo_MembreDuLabo</csh_table>
+		<fileId>EXT:li_gest_membre_labo/csh/ligestmembrelabo_locallang_csh_tx_ligestmembrelabo_MembreDuLabo.xml</fileId>
+		<labelContext type="array"></labelContext>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+            <label index=".description"></label>
+            <label index=".details"></label>
+            <label index="hidden.description"></label>
+            <label index="hidden.details"></label>
+            <label index="NomDUsage.description"></label>
+            <label index="NomDUsage.details"></label>
+            <label index="NomMaritale.description"></label>
+            <label index="NomMaritale.details"></label>
+            <label index="NomPreMarital.description"></label>
+            <label index="NomPreMarital.details"></label>
+            <label index="Prenom.description"></label>
+            <label index="Prenom.details"></label>
+            <label index="Genre.description"></label>
+            <label index="Genre.details"></label>
+            <label index="DateNaissance.description"></label>
+            <label index="DateNaissance.details"></label>
+            <label index="Nationalite.description"></label>
+            <label index="Nationalite.details"></label>
+            <label index="DateArrivee.description"></label>
+            <label index="DateArrivee.details"></label>
+            <label index="DateSortie.description"></label>
+            <label index="DateSortie.details"></label>
+            <label index="NumINE.description"></label>
+            <label index="NumINE.details"></label>
+            <label index="SectionCNU.description"></label>
+            <label index="SectionCNU.details"></label>
+            <label index="CoordonneesRecherche.description"></label>
+            <label index="CoordonneesRecherche.details"></label>
+            <label index="CoordonneesEnseignement.description"></label>
+            <label index="CoordonneesEnseignement.details"></label>
+            <label index="CoordonneesPersonnelles.description"></label>
+            <label index="CoordonneesPersonnelles.details"></label>
+            <label index="PageWeb.description"></label>
+            <label index="PageWeb.details"></label>
+            <label index="Afficher_Equipe.description"></label>
+            <label index="Afficher_Equipe.details"></label>
+            <label index="Afficher_Possede.description"></label>
+            <label index="Afficher_Possede.details"></label>
+            <label index="Afficher_Exerce.description"></label>
+            <label index="Afficher_Exerce.details"></label>
+            <label index="Afficher_CategorieMembre.description"></label>
+            <label index="Afficher_CategorieMembre.details"></label>
+            <label index="Afficher_AObtenu.description"></label>
+            <label index="Afficher_AObtenu.details"></label>
+		</languageKey>
+		<languageKey index="default" type="array">
+            <label index=".description">Membre du labo</label>
+            <label index="hidden.description">Cette option permet de cacher ou non un enregistrement</label>
+			<label index="hidden.details">Les enregistrements cach&eacute;s seront affich&eacute;s sur le site</label>
+            <label index="NomDUsage.description">Nom de famille d'usage de la personne. Il s'agit de nom le plus employ&eacute; pour d&eacute;signer une personne et qui est utilis&eacute; pour dans les documents officiels</label>
+            <label index="NomDUsage.details">3 balises qui permettent d'afficher ce champ sur une page du site: ###NomDUsage###, ###NOMDUSAGE### et ###InitialeNom### qui permettent respectivement d'afficher le nom tel qu'il a &eacute;t&eacute; saisie, d'afficher le nom en majuscule et d'afficher uniquement la première lettre du nom.</label>
+            <label index="NomMaritale.description">Le nom de famille porté actuellement par le membre (après le dernier mariage)</label>
+            <label index="NomMaritale.details">2 balises qui permettent d'afficher ce champ sur une page du site: ###NomMaritale### et ###NOMMARITALE### qui permettent respectivement d'afficher le nom tel qu'il a été saisie et d'afficher le nom en majuscule.</label>
+            <label index="NomPreMarital.description">Le nom de famille avant tout mariage. Habituellement, ce nom de famille est le même que le nom d'usage pour les homme et est le nom de &quot;jeune-fille&quot; pour les femmes.</label>
+            <label index="NomPreMarital.details">2 balises qui permettent d'afficher ce champ sur une page du site: ###NomPreMarital### et ###NOMPREMARITAL### qui permettent respectivement d'afficher le nom tel qu'il a été saisie et d'afficher le nom en majuscule.</label>
+            <label index="Prenom.description">Prénom du membre</label>
+            <label index="Prenom.details">3 balises qui permettent d'afficher ce champ sur une page du site: ###Prenom###, ###PRENOM### et ###InitialePrenom### qui permettent respectivement d'afficher le prénom tel qu'il a &eacute;t&eacute; saisie, d'afficher le pr&eacute;nom en majuscule et d'afficher uniquement la premi&egrave;re lettre du pr&eacute;nom.</label>
+            <label index="Genre.description">Genre du membre: Homme, Femme</label>
+            <label index="Genre.details">La balise ###Genre### permet d'afficher ce champ sur le site avec les valeurs M (Masculin) ou F (F&eacute;minin)</label>
+            <label index="DateNaissance.description">La date de naissance du membre est &agrave; mettre au format aaaa-mm-jj</label>
+            <label index="DateNaissance.details">Si aucune date n'est indiqu&eacute;e, la date 0000-00-00 sera ins&eacute;r&eacute;e dans la base de donn&eacute;es. Il est possible de personnaliser une date 0000-00-00 dans les options du plugin pour chaque page ou chaque traduction de page. La balise ###DateNaissance### permet d'afficher ce champ sur une page du site. Le format aaaa-mm-jj est l'unique disponible.</label>
+            <label index="Nationalite.description">Nationalit&eacute; du membre</label>
+            <label index="Nationalite.details">2 balises permettent d'afficher ce champ: ce sont les balises ###Nationalite### et ###NATIONALITE### qui permettent respectivement d'afficher la nationalit&eacute; telle qu'elle a &eacute;t&eacute; ins&eacute;r&eacute;e dans la base de données ou de l'afficher en majuscule.</label>
+            <label index="DateArrivee.description"></label>
+            <label index="DateArrivee.details"></label>
+            <label index="DateSortie.description"></label>
+            <label index="DateSortie.details"></label>
+            <label index="NumINE.description"></label>
+            <label index="NumINE.details"></label>
+            <label index="SectionCNU.description"></label>
+            <label index="SectionCNU.details"></label>
+            <label index="CoordonneesRecherche.description"></label>
+            <label index="CoordonneesRecherche.details"></label>
+            <label index="CoordonneesEnseignement.description"></label>
+            <label index="CoordonneesEnseignement.details"></label>
+            <label index="CoordonneesPersonnelles.description"></label>
+            <label index="CoordonneesPersonnelles.details"></label>
+            <label index="PageWeb.description"></label>
+            <label index="PageWeb.details"></label>
+            <label index="Afficher_Equipe.description"></label>
+            <label index="Afficher_Equipe.details"></label>
+            <label index="Afficher_Possede.description"></label>
+            <label index="Afficher_Possede.details"></label>
+            <label index="Afficher_Exerce.description"></label>
+            <label index="Afficher_Exerce.details"></label>
+            <label index="Afficher_CategorieMembre.description"></label>
+            <label index="Afficher_CategorieMembre.details"></label>
+            <label index="Afficher_AObtenu.description"></label>
+            <label index="Afficher_AObtenu.details"></label>
+		</languageKey>
+	</data>
+</T3locallang>

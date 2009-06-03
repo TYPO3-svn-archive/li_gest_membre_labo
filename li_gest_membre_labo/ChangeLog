@@ -1,0 +1,28 @@
+﻿2009-06-01 Bruno Gallet  <gallet.bruno@gmail.com>
+
+	* Correction dans la gestion de l'option "Tous" pour le multilangues
+
+2009-04-25 Bruno Gallet  <gallet.bruno@gmail.com>
+
+	* Correction d'une erreur dans la fonction rechercherUidLangue de la classe tx_ligestmembrelabo_pi1
+
+2009-03-31 Bruno Gallet  <gallet.bruno@gmail.com>
+
+	* Ajout d'une boîte de sélection dans le formulaire pour le champ "type" de la table structure et modification des options du plugin pour pouvoir modifier l'affichage de ce champ sur le site.
+
+2009-03-27 Bruno Gallet  <gallet.bruno@gmail.com>
+
+	* Correction du lien vers un label pour le champ idMembreLabo de la table "possede".
+	* Suppression du "Francais" mis par défaut dans le champ nationalité du formulaire des membres.
+	* Suppression d'ajout d'enregistrement sans passer par le formulaire des membres pour les tables Exerce, Possede, CategorieMembre, EstMembreDe, AObtenu, PEDR
+	* Remplacement de "Gestion de membres" par "Affichage de membres" pour le label afficher lors de l'insertion du plugin.
+
+2009-03-26 Bruno Gallet  <gallet.bruno@gmail.com>
+
+	* Changement de format d'affichage de la date par défaut. Remplacement de m/d/Y par d/m/Y.
+
+2009-03-25 Bruno Gallet  <gallet.bruno@gmail.com>
+
+	* Initial release
+	
+	
