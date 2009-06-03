@@ -649,9 +649,9 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 			// Gestion du nom de l'Equipe
 
 			$equipes = $this->equipe($this->lConf['equipe'],$this->lConf['dateequipe']);
-			$table = $table.', tx_ligestmembrelabo_EstMembreDe, tx_ligestmembrelabo_Equipe';
-			$where = $where.' AND tx_ligestmembrelabo_EstMembreDe.deleted<>1 AND tx_ligestmembrelabo_Equipe.deleted<>1 AND tx_ligestmembrelabo_EstMembreDe.idMembreLabo = tx_ligestmembrelabo_MembreDuLabo.uid AND tx_ligestmembrelabo_EstMembreDe.idEquipe = tx_ligestmembrelabo_Equipe.uid';
 			if($equipes<>""){
+				$table = $table.', tx_ligestmembrelabo_EstMembreDe, tx_ligestmembrelabo_Equipe';
+				$where = $where.' AND tx_ligestmembrelabo_EstMembreDe.deleted<>1 AND tx_ligestmembrelabo_Equipe.deleted<>1 AND tx_ligestmembrelabo_EstMembreDe.idMembreLabo = tx_ligestmembrelabo_MembreDuLabo.uid AND tx_ligestmembrelabo_EstMembreDe.idEquipe = tx_ligestmembrelabo_Equipe.uid';
 				$where = $where.$equipes;
 			}
 			
@@ -674,9 +674,9 @@ class tx_ligestmembrelabo_pi1 extends tslib_pibase {
 
 			// Gestion des types de postes
 			$postes = $this->typeDePoste($this->lConf['typeposte'],$this->lConf['datetypeposte']);
-			$table = $table.', tx_ligestmembrelabo_Possede, tx_ligestmembrelabo_TypePoste, tx_ligestmembrelabo_TypePosteWeb';
-			$where = $where.' AND tx_ligestmembrelabo_Possede.deleted<>1 AND tx_ligestmembrelabo_TypePoste.deleted<>1 AND tx_ligestmembrelabo_TypePosteWeb.deleted<>1 AND tx_ligestmembrelabo_Possede.idMembreLabo = tx_ligestmembrelabo_MembreDuLabo.uid AND tx_ligestmembrelabo_Possede.idTypePoste = tx_ligestmembrelabo_TypePoste.uid AND tx_ligestmembrelabo_TypePoste.idTypePosteWeb = tx_ligestmembrelabo_TypePosteWeb.uid';
 			if($postes<>""){
+				$table = $table.', tx_ligestmembrelabo_Possede, tx_ligestmembrelabo_TypePoste, tx_ligestmembrelabo_TypePosteWeb';
+				$where = $where.' AND tx_ligestmembrelabo_Possede.deleted<>1 AND tx_ligestmembrelabo_TypePoste.deleted<>1 AND tx_ligestmembrelabo_TypePosteWeb.deleted<>1 AND tx_ligestmembrelabo_Possede.idMembreLabo = tx_ligestmembrelabo_MembreDuLabo.uid AND tx_ligestmembrelabo_Possede.idTypePoste = tx_ligestmembrelabo_TypePoste.uid AND tx_ligestmembrelabo_TypePoste.idTypePosteWeb = tx_ligestmembrelabo_TypePosteWeb.uid';
 				$where = $where.$postes;
 			}
 
