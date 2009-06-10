@@ -92,7 +92,7 @@ class tx_ligestmembrelabo_delete extends t3lib_SCbase {
 			echo "L'enregistrement ".$this->uid." de la table ".$this->table." a ete supprime";
 		}
 		
-		
+		/*
 		if($this->table_principale <> '' && $this->field_table_principale <> '' && $this->uid_table_principale<>'')
 		{
 			//On réinitialise à 0, le numéro de l'enregistrement sélectionné pour l'affichage du formulaire de provenance
@@ -101,14 +101,16 @@ class tx_ligestmembrelabo_delete extends t3lib_SCbase {
 			);
 			
 			$query = $GLOBALS['TYPO3_DB']->exec_UPDATEquery($this->table_principale, 'uid='.$this->uid_table_principale, $updateArray);
-		}
+		}*/
 		
 		
 
 		// On réactualise la page d'où on a appelé la suppression et on ferme notre popup
+		//window.opener.location.reload();
+		//window.close();
 		echo '<script>
-			window.opener.location.reload();
-			window.close();
+				window.opener.location.reload();
+				window.close();
 			</script>';
 	}
 

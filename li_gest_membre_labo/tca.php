@@ -239,7 +239,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 				"foreign_table_where" => "AND tx_ligestmembrelabo_EstMembreDe.IdMembreLabo=###THIS_UID### AND tx_ligestmembrelabo_EstMembreDe.IdMembreLabo!=0 ORDER BY tx_ligestmembrelabo_EstMembreDe.uid",
 				"size" => 6,
 				"minitems" => 0,
-				"maxitems" => 1,
+				"maxitems" => 0,
 				"wizards" => Array(
 					"_PADDING" => 2,
 					"_VERTICAL" => 1,
@@ -258,7 +258,6 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 						),
 						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
 					),
-					
 					"edit" => Array(
 						"type" => "popup",
 						"title" => "Edit",
@@ -278,18 +277,8 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 							'table'=>'tx_ligestmembrelabo_EstMembreDe'
 						),
 						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/delete.php",
-						"JSopenParams" => "height=1,width=1,status=0,menubar=0,scrollbars=1",
+						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
 					),
-					/*
-					"reload" => Array(
-						"title" => "Refresh",
-						"type" => "popup",
-						"icon" => "refresh_n.gif",
-						"notNewRecords" => 1,
-						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/reload.php",
-						"JSopenParams" => "height=1,width=1,status=0,menubar=0,scrollbars=1",
-					),*/
-					
 				),
 			),
 		),
@@ -302,7 +291,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 				"foreign_table_where" => "AND tx_ligestmembrelabo_Possede.idMembreLabo=###THIS_UID### AND tx_ligestmembrelabo_Possede.idMembreLabo!=0 ORDER BY tx_ligestmembrelabo_Possede.DateDebut DESC",
 				"size" => 6,
 				"minitems" => 0,
-				"maxitems" => 1,
+				"maxitems" => 0,
 				"wizards" => Array(
 					"_PADDING" => 2,
 					"_VERTICAL" => 1,
@@ -355,7 +344,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 				"foreign_table_where" => "AND tx_ligestmembrelabo_Exerce.IdMembreLabo=###THIS_UID### AND tx_ligestmembrelabo_Exerce.IdMembreLabo!=0 ORDER BY tx_ligestmembrelabo_Exerce.DateDebut DESC",
 				"size" => 6,
 				"minitems" => 0,
-				"maxitems" => 1,
+				"maxitems" => 0,
 				"wizards" => Array(
 					"_PADDING" => 2,
 					"_VERTICAL" => 1,
@@ -407,7 +396,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 				"foreign_table_where" => "AND tx_ligestmembrelabo_CategorieMembre.IdMembreLabo=###THIS_UID### AND tx_ligestmembrelabo_CategorieMembre.IdMembreLabo!=0 ORDER BY tx_ligestmembrelabo_CategorieMembre.DateDebut DESC",
 				"size" => 6,
 				"minitems" => 0,
-				"maxitems" => 1,
+				"maxitems" => 0,
 				"wizards" => Array(
 					"_PADDING" => 2,
 					"_VERTICAL" => 1,
@@ -459,7 +448,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 				"foreign_table_where" => "AND tx_ligestmembrelabo_AObtenu.IdMembreLabo=###THIS_UID### AND tx_ligestmembrelabo_AObtenu.IdMembreLabo!=0 ORDER BY tx_ligestmembrelabo_AObtenu.DateObtention DESC",
 				"size" => 6,
 				"minitems" => 0,
-				"maxitems" => 1,
+				"maxitems" => 0,
 				"wizards" => Array(
 					"_PADDING" => 2,
 					"_VERTICAL" => 1,
@@ -509,7 +498,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 				"foreign_table_where" => "AND tx_ligestmembrelabo_PEDR.IdMembreLabo=###THIS_UID### AND tx_ligestmembrelabo_PEDR.IdMembreLabo!=0 ORDER BY tx_ligestmembrelabo_PEDR.DateDebut DESC",
 				"size" => 6,
 				"minitems" => 0,
-				"maxitems" => 1,
+				"maxitems" => 0,
 				"wizards" => Array(
 					"_PADDING" => 2,
 					"_VERTICAL" => 1,

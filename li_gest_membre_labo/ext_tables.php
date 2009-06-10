@@ -10,7 +10,6 @@ $TYPO3_CONF_VARS['SC_OPTIONS']['tce']['formevals']['tx_ligestmembrelabo_dateVali
 $TYPO3_CONF_VARS['SC_OPTIONS']['tce']['formevals']['tx_ligestmembrelabo_dateObligatoire'] = 'EXT:li_gest_membre_labo/class.tx_ligestmembrelabo_dateObligatoire.php';
 
 
-
 // Paramétrage de l'affichage de listes d'enregistrement de la table tx_ligestmembrelabo_MembreDuLabo dans le backend.
 
 // allow MembreDuLabo records on normal pages
@@ -57,7 +56,7 @@ $TCA["tx_ligestmembrelabo_Fonction"] = array (
 		'crdate'    => 'crdate',
 		'cruser_id' => 'cruser_id',
 		'default_sortby' => "ORDER BY Libelle",	
-		
+
 		'copyAfterDuplFields' => 'sys_language_uid',
 		'useColumnsForDefaultValues' => 'sys_language_uid',
 		'transOrigPointerField' => 'l18n_parent',

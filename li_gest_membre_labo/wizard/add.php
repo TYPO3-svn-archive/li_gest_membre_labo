@@ -98,12 +98,12 @@ class tx_ligestmembrelabo_add {
 			t3lib_div::loadTCA($table);
 			$config = $TCA[$table]['columns'][$field]['config'];
 			$fTable = $this->P['currentValue']<0 ? $config['neg_foreign_table'] : $config['foreign_table'];
-			
+
 			$table_enregistrement = $this->P['params']['table']; // Table où sera créé l'enregistrement
 			$champ_enregistrement = $this->P['params']['champ']; // Champ que l'on veut préremplir
 			$date_prov = $this->P['params']['date_prov']; // Champ de Date que l'on va copier
 			$date_champ = $this->P['params']['date_champ']; // Champ où l'on veut copier la date
-			
+
 			// on vérifie s'il y a bien au moins un enregistrement dans la table que l'on veut lier...
 
 			$tables_a_tester = Array();
@@ -271,7 +271,7 @@ class tx_ligestmembrelabo_add {
 				}
 					// Redirect to alt_doc.php:
 				header('Location: '.t3lib_div::locationHeaderUrl($BACK_PATH.'alt_doc.php?returnUrl='.rawurlencode('wizard_edit.php?doClose=1').$params));
-			
+
 			} else {
 				$this->closeWindow();
 			}
