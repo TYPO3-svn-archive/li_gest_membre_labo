@@ -250,9 +250,11 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 						"script" => t3lib_extMgm::extRelPath("li_gest_membre_labo")."wizard/add.php",
 						"icon" => "add.gif",
 						"params" => Array(
-							"table"			=> "tx_ligestmembrelabo_EstMembreDe",
-							"champ"			=> "idMembreLabo",
-							"lien"			=> Array('tx_ligestmembrelabo_Equipe')
+							"table"			=> "tx_ligestmembrelabo_EstMembreDe", // Table que l'on veut ouvrir
+							"champ"			=> "idMembreLabo", // champ que l'on veut remplir avec l'identifiant de l'enregistrement ouvert
+							"lien"			=> Array('tx_ligestmembrelabo_Equipe'), // Table à tester (vérifier quelle n'est pas vide)
+							"date_prov"		=> 'DateArrivee', // Date que l'on va copier
+							"date_champ"	=> 'DateDebut' // Champ où l'on veut copier la date
 						),
 						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
 					),
@@ -313,7 +315,9 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 						"params" => Array(
 							"table"			=> "tx_ligestmembrelabo_Possede",
 							"champ"			=> "idMembreLabo",
-							"lien"			=> Array('tx_ligestmembrelabo_TypePoste')
+							"lien"			=> Array('tx_ligestmembrelabo_TypePoste'),
+							"date_prov"		=> 'DateArrivee', // Date que l'on va copier
+							"date_champ"	=> 'DateDebut' // Champ où l'on veut copier la date
 						),
 						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
 					),
@@ -364,7 +368,9 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 						"params" => Array(
 							"table"			=> "tx_ligestmembrelabo_Exerce",
 							"champ"			=> "idMembreLabo",
-							"lien"			=> Array('tx_ligestmembrelabo_Fonction','tx_ligestmembrelabo_Structure')
+							"lien"			=> Array('tx_ligestmembrelabo_Fonction','tx_ligestmembrelabo_Structure'),
+							"date_prov"		=> 'DateArrivee', // Date que l'on va copier
+							"date_champ"	=> 'DateDebut' // Champ où l'on veut copier la date
 						),
 						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
 					),
@@ -414,7 +420,9 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 						"params" => Array(
 							"table"			=> "tx_ligestmembrelabo_CategorieMembre",
 							"champ"			=> "idMembreLabo",
-							"lien"			=> Array('tx_ligestmembrelabo_Categorie')
+							"lien"			=> Array('tx_ligestmembrelabo_Categorie'),
+							"date_prov"		=> 'DateArrivee', // Date que l'on va copier
+							"date_champ"	=> 'DateDebut' // Champ où l'on veut copier la date
 						),
 						"JSopenParams" => "height=350,width=580,status=0,menubar=0,scrollbars=1",
 					),

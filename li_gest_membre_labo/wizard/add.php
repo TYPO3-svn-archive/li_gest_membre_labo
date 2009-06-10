@@ -92,6 +92,7 @@ class tx_ligestmembrelabo_add {
 		} else {
 
 				// Initialize:
+			$uid = $this->P['uid'];	
 			$table = $this->P['table'];
 			$field = $this->P['field'];
 			t3lib_div::loadTCA($table);
@@ -100,8 +101,8 @@ class tx_ligestmembrelabo_add {
 			
 			$table_enregistrement = $this->P['params']['table']; // Table où sera créé l'enregistrement
 			$champ_enregistrement = $this->P['params']['champ']; // Champ que l'on veut préremplir
-			
-			
+			$date_prov = $this->P['params']['date_prov']; // Champ de Date que l'on va copier
+			$date_champ = $this->P['params']['date_champ']; // Champ où l'on veut copier la date
 			
 			// on vérifie s'il y a bien au moins un enregistrement dans la table que l'on veut lier...
 
@@ -155,8 +156,7 @@ class tx_ligestmembrelabo_add {
 				
 
 			}
-
-
+			
 			if($enregistrement_possible <> true)
 			{
 				if ($nb_tables ==1){
@@ -179,17 +179,52 @@ class tx_ligestmembrelabo_add {
 			}
 
 			
+			// Ajout d'une date par défaut
 			
+			$date = '';
+
+			
+			if($date_prov!='' && $date_champ!='')
+			{
+				$select_fields_existance_date = '*';
+				$from_table_existance_date = $table;
+				$where_clause_existance_date = 'uid='.$uid.' AND deleted<>1';
+				$groupBy_existance_date = '';
+				$orderBy_existance_date = '';
+				$limit_existance_date = '';
+
+				$res_existance_date = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select_fields_existance_date, $from_table_existance_date, $where_clause_existance_date, $groupBy_existance_date, $orderBy_existance_date, $limit_existance_date);
+
+				if($row_existance_date = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res_existance_date))
+				{
+					$date = $row_existance_date[$date_prov];
+				}
+			}
+
+
 
 			// On créé l'enregisterment avec notre utilisateur courant
 			$tstamp = time();
-			
-			$insertFields = array(
-				'pid' => $this->P['pid'],
-				'tstamp' => $tstamp,
-				'crdate' => $tstamp,
-				$champ_enregistrement => $this->P['uid']
-			);
+
+			if($date != '')
+			{
+				$insertFields = array(
+					'pid' => $this->P['pid'],
+					'tstamp' => $tstamp,
+					'crdate' => $tstamp,
+					$date_champ => $date,
+					$champ_enregistrement => $this->P['uid']
+				);
+			}
+			else
+			{
+				$insertFields = array(
+					'pid' => $this->P['pid'],
+					'tstamp' => $tstamp,
+					'crdate' => $tstamp,
+					$champ_enregistrement => $this->P['uid']
+				);
+			}
 			
 			
 
