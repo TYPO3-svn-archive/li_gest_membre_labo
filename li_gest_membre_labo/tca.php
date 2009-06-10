@@ -236,7 +236,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 			"config" => Array (
 				"type" => "select",
 				"foreign_table" => "tx_ligestmembrelabo_EstMembreDe",	
-				"foreign_table_where" => "AND tx_ligestmembrelabo_EstMembreDe.IdMembreLabo=###THIS_UID### ORDER BY tx_ligestmembrelabo_EstMembreDe.uid",
+				"foreign_table_where" => "AND tx_ligestmembrelabo_EstMembreDe.IdMembreLabo=###THIS_UID### AND tx_ligestmembrelabo_EstMembreDe.IdMembreLabo!=0 ORDER BY tx_ligestmembrelabo_EstMembreDe.uid",
 				"size" => 6,
 				"minitems" => 0,
 				"maxitems" => 1,
@@ -297,7 +297,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 			"config" => Array (
 				"type" => "select",
 				"foreign_table" => "tx_ligestmembrelabo_Possede",	
-				"foreign_table_where" => "AND tx_ligestmembrelabo_Possede.idMembreLabo=###THIS_UID### ORDER BY tx_ligestmembrelabo_Possede.DateDebut DESC",
+				"foreign_table_where" => "AND tx_ligestmembrelabo_Possede.idMembreLabo=###THIS_UID### AND tx_ligestmembrelabo_Possede.idMembreLabo!=0 ORDER BY tx_ligestmembrelabo_Possede.DateDebut DESC",
 				"size" => 6,
 				"minitems" => 0,
 				"maxitems" => 1,
@@ -348,7 +348,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 			"config" => Array (
 				"type" => "select",
 				"foreign_table" => "tx_ligestmembrelabo_Exerce",	
-				"foreign_table_where" => "AND tx_ligestmembrelabo_Exerce.IdMembreLabo=###THIS_UID### ORDER BY tx_ligestmembrelabo_Exerce.DateDebut DESC",
+				"foreign_table_where" => "AND tx_ligestmembrelabo_Exerce.IdMembreLabo=###THIS_UID### AND tx_ligestmembrelabo_Exerce.IdMembreLabo!=0 ORDER BY tx_ligestmembrelabo_Exerce.DateDebut DESC",
 				"size" => 6,
 				"minitems" => 0,
 				"maxitems" => 1,
@@ -398,7 +398,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 			"config" => Array (
 				"type" => "select",
 				"foreign_table" => "tx_ligestmembrelabo_CategorieMembre",	
-				"foreign_table_where" => "AND tx_ligestmembrelabo_CategorieMembre.IdMembreLabo=###THIS_UID### ORDER BY tx_ligestmembrelabo_CategorieMembre.DateDebut DESC",
+				"foreign_table_where" => "AND tx_ligestmembrelabo_CategorieMembre.IdMembreLabo=###THIS_UID### AND tx_ligestmembrelabo_CategorieMembre.IdMembreLabo!=0 ORDER BY tx_ligestmembrelabo_CategorieMembre.DateDebut DESC",
 				"size" => 6,
 				"minitems" => 0,
 				"maxitems" => 1,
@@ -448,7 +448,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 			"config" => Array (
 				"type" => "select",
 				"foreign_table" => "tx_ligestmembrelabo_AObtenu",	
-				"foreign_table_where" => "AND tx_ligestmembrelabo_AObtenu.IdMembreLabo=###THIS_UID### ORDER BY tx_ligestmembrelabo_AObtenu.DateObtention DESC",
+				"foreign_table_where" => "AND tx_ligestmembrelabo_AObtenu.IdMembreLabo=###THIS_UID### AND tx_ligestmembrelabo_AObtenu.IdMembreLabo!=0 ORDER BY tx_ligestmembrelabo_AObtenu.DateObtention DESC",
 				"size" => 6,
 				"minitems" => 0,
 				"maxitems" => 1,
@@ -498,7 +498,7 @@ $TCA["tx_ligestmembrelabo_MembreDuLabo"] = array (
 			"config" => Array (
 				"type" => "select",
 				"foreign_table" => "tx_ligestmembrelabo_PEDR",	
-				"foreign_table_where" => "AND tx_ligestmembrelabo_PEDR.IdMembreLabo=###THIS_UID### ORDER BY tx_ligestmembrelabo_PEDR.DateDebut DESC",
+				"foreign_table_where" => "AND tx_ligestmembrelabo_PEDR.IdMembreLabo=###THIS_UID### AND tx_ligestmembrelabo_PEDR.IdMembreLabo!=0 ORDER BY tx_ligestmembrelabo_PEDR.DateDebut DESC",
 				"size" => 6,
 				"minitems" => 0,
 				"maxitems" => 1,
